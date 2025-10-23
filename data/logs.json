@@ -1,0 +1,5002 @@
+[
+  {
+    "timestamp": "2025-10-22 16:27:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:27:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:27:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:27:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:27:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:27:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:28:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:29:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:30:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:31:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:32:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:33:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:34:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:35:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:36:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:37:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:38:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:39:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:40:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:41:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:42:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:43:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:44:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:45:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:46:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:47:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:48:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:49:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:50:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:51:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:52:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:53:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:54:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:55:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:56:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:57:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:58:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:58:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 16:58:17",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-22 17:33:13",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:29",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:29",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:37",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:37",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:44",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:44",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:53",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:43:53",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:02",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:03",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:10",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:10",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:19",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:19",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:26",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:26",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:34",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:42",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:42",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:51",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:51",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:59",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:44:59",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:07",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:07",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:16",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:16",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:24",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:24",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:33",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:33",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:41",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:51",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:51",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:59",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:45:59",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:07",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:07",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:16",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:16",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:25",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:25",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:33",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:42",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:50",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:50",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:59",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:46:59",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:07",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:07",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:17",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:17",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:25",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:25",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:33",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:33",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:41",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:41",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:49",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:58",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:47:58",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:07",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:07",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:14",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:14",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:22",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:30",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:30",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:38",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:38",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:46",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:46",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:54",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:48:54",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:03",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:11",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:18",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:26",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:26",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:34",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:34",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:41",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:41",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:49",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:58",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:49:58",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:06",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:14",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:14",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:23",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:23",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:31",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:31",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:39",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:39",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:48",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:48",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:50:57",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:05",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:05",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:13",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:13",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:21",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:21",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:29",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:29",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:37",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:45",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:45",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:54",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:51:54",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:52:03",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:52:03",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:52:12",
+    "message": "Failed to submit block #9627",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:52:12",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-22 17:55:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 17:59:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:00:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:03:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:07:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:13:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:22:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:25:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:44:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:48:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:49:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:51:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:53:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:55:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:56:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:58:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 18:59:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:01:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:14:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:20:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:25:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:27:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:29:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:31:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:34:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:37:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:39:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:41:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:42:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:49:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:57:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 19:59:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:01:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:03:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:07:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:10:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:11:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:15:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:22:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:26:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:34:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:36:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:42:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:44:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:48:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:50:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:50:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:53:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:54:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:55:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 20:59:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:00:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:02:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:11:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:13:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:14:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:17:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:18:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:21:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:23:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:32:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:33:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:34:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:39:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:39:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:44:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:49:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:51:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 21:56:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:06:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:09:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:10:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:12:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:17:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:21:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:22:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:26:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:31:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:34:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:40:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:41:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:44:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:50:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:51:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:55:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 22:56:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:00:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:01:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:08:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:18:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:21:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:27:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:30:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:34:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:42:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:44:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:45:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:50:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:52:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-22 23:58:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:04:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:05:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:06:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:11:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:12:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:15:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:18:36",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Trying to submit block to: https://bank.linglin.art/blockchain/add",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Response from https://bank.linglin.art/blockchain/add: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Endpoint https://bank.linglin.art/blockchain/add returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Trying to submit block to: https://bank.linglin.art/blocks",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:00",
+    "message": "Response from https://bank.linglin.art/blocks: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:01",
+    "message": "Endpoint https://bank.linglin.art/blocks returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:01",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:01",
+    "message": "Trying to submit block to: https://bank.linglin.art/block",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:02",
+    "message": "Response from https://bank.linglin.art/block: 200",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:02",
+    "message": "Block #9627 submitted successfully!",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:02",
+    "message": "Block #9627 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:32:02",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:34:17",
+    "message": "Mining interrupted",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:40",
+    "message": "Trying to submit block to: https://bank.linglin.art/blockchain/add",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:41",
+    "message": "Response from https://bank.linglin.art/blockchain/add: 404",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:41",
+    "message": "Endpoint https://bank.linglin.art/blockchain/add returned status: 404",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:41",
+    "message": "Error details: {'error': 'Endpoint not found', 'success': False}",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:41",
+    "message": "Trying to submit block to: https://bank.linglin.art/blocks",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:43",
+    "message": "Response from https://bank.linglin.art/blocks: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:43",
+    "message": "Endpoint https://bank.linglin.art/blocks returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:43",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:43",
+    "message": "Trying to submit block to: https://bank.linglin.art/block",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:44",
+    "message": "Response from https://bank.linglin.art/block: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:44",
+    "message": "Endpoint https://bank.linglin.art/block returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:44",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:44",
+    "message": "Trying to submit block to: https://bank.linglin.art/submit_block",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:44",
+    "message": "Response from https://bank.linglin.art/submit_block: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "Endpoint https://bank.linglin.art/submit_block returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "All submission attempts failed. Saving block locally.",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "Block saved locally: ./data/blocks\\block_9627_1761147345.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "Block #9627 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:35:45",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:05",
+    "message": "Trying to submit block to: https://bank.linglin.art/blockchain/add",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:10",
+    "message": "Response from https://bank.linglin.art/blockchain/add: 502",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:10",
+    "message": "Endpoint https://bank.linglin.art/blockchain/add returned status: 502",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:10",
+    "message": "Response text: <!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\">\n<html><head>\n<title>502 Bad Gateway</title>\n</hea...",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:10",
+    "message": "Trying to submit block to: https://bank.linglin.art/blocks",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:12",
+    "message": "Response from https://bank.linglin.art/blocks: 200",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:12",
+    "message": "Block #9627 submitted successfully!",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:12",
+    "message": "Block #9627 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:36:12",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:20",
+    "message": "Trying to submit block to: https://bank.linglin.art/blockchain/add",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:22",
+    "message": "Response from https://bank.linglin.art/blockchain/add: 404",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:22",
+    "message": "Endpoint https://bank.linglin.art/blockchain/add returned status: 404",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:22",
+    "message": "Error details: {'error': 'Endpoint not found', 'success': False}",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:22",
+    "message": "Trying to submit block to: https://bank.linglin.art/blocks",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:23",
+    "message": "Response from https://bank.linglin.art/blocks: 200",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:23",
+    "message": "Block #9627 submitted successfully!",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:23",
+    "message": "Block #9627 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:37:23",
+    "message": "Block #9627 mined",
+    "type": "success"
+  },
+  {
+    "timestamp": "2025-10-23 00:39:57",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:39:57",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:02",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:07",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:12",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:17",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:22",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:27",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:32",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:37",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_blockchain_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 00:40:44",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 00:57:41",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_mempool_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:05:09",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 01:17:06",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_mempool_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:17:20",
+    "message": "Sync error: 'BlockchainManager' object has no attribute 'get_mempool_with_progress'",
+    "type": "error"
+  },
+  {
+    "timestamp": "2025-10-23 01:32:43",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_mempool_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:36:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:39:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:44:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:45:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:46:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:47:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:55:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 01:57:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:00:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:02:51",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 02:18:03",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'get_mempool_with_progress'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:28:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:34:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:40:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:43:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:45:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:47:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:48:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:54:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 02:57:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:01:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:09:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:10:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:12:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:16:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:19:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:21:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:24:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:30:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:38:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:43:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:45:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:48:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:50:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:52:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:53:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:56:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 03:59:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:05:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:07:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:09:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:17:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:19:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:20:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:22:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:23:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:27:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:28:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:39:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:44:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:45:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:49:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 04:59:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:01:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:07:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:09:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:11:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:14:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:16:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:23:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:25:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:30:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:34:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:34:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:36:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:38:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:43:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:44:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:50:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:53:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 05:55:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:02:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:05:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:07:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:09:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:11:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:13:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:14:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:16:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:19:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:21:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:22:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:25:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:26:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:29:09",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-10-23 06:41:24",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'add_log_message'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:51:43",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'add_log_message'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:54:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 06:56:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:02:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:06:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:08:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:09:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:11:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:22:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:23:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:26:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:34:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:37:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:38:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:49:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:50:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:51:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:52:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:54:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 07:56:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:03:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:04:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:07:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:13:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:14:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:15:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:16:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:17:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:22:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:28:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:31:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:34:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:36:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:41:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:41:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:51:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:55:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:56:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 08:57:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:02:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:03:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:06:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:08:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:12:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:14:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:16:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:22:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:24:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:25:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:29:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:35:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:43:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:45:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:50:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:56:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 09:58:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:03:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:05:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:10:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:13:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:14:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:14:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:16:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:30:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:41:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:44:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 10:51:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:01:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:05:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:08:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:11:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:16:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:16:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:22:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:24:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:25:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:36:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:41:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:49:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:50:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 11:58:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:22:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:31:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:40:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:43:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:45:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:48:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:50:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:51:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:52:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:56:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 12:58:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:03:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:05:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:06:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:12:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:13:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:20:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:23:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:24:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:28:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:29:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:42:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:46:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:49:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:51:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 13:57:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:02:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:17:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:18:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:21:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:24:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:27:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:31:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:35:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:40:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:49:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:50:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:55:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 14:58:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:03:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:04:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:08:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:09:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:13:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:23:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:25:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:31:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:31:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:36:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:39:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:44:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:50:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:52:10",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:53:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 15:57:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:09:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:12:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:15:00",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:17:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:20:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:21:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:24:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:35:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:39:16",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:40:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:46:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:48:14",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:48:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:52:39",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:55:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:56:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 16:58:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:02:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:10:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:11:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:12:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:13:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:16:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:18:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:23:51",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:26:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:28:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:32:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:35:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:40:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:46:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:48:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 17:57:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:00:33",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:10:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:12:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:12:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:14:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:26:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:28:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:29:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:30:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:37:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:38:58",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:40:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:41:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:45:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:47:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:49:50",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:52:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:57:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 18:59:05",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:02:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:04:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:05:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:14:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:16:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:17:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:22:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:24:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:29:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:44:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:45:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:49:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 19:51:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:04:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:05:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:08:42",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:15:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:17:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:20:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:23:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:30:44",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:33:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:41:29",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:47:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:52:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 20:53:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:10:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:11:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:12:30",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:15:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:26:47",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:28:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:30:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:33:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:34:56",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:47:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:50:15",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:54:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:57:45",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 21:59:52",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:00:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:11:01",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:15:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:16:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:19:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:20:37",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:24:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:26:49",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:29:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:42:13",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:43:18",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:48:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:51:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:52:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 22:56:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:00:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:02:02",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:06:34",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:10:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:18:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:25:03",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:31:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:33:04",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:34:27",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:37:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:39:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:49:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:56:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-23 23:58:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:03:06",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:05:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:12:21",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:13:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:20:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:23:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:24:35",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:26:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:29:54",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:34:32",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:35:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:39:20",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:45:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 00:59:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:01:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:03:36",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:11:43",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:14:31",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:16:19",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:19:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:21:38",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:23:17",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:26:11",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:31:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:33:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:39:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:40:28",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:41:46",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:43:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 01:47:09",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:16:25",
+    "message": "Mining error: 'BlockchainManager' object has no attribute 'add_log_message'",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:19:41",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:25:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:27:48",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:30:55",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:41:57",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:43:07",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:45:25",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:46:23",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:52:40",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:53:24",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 02:58:26",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 03:04:22",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 03:06:08",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 03:09:53",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 03:11:12",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-10-24 03:13:59",
+    "message": "Cannot connect to blockchain network",
+    "type": "warning"
+  }
+]
