@@ -9,6 +9,10 @@ from datetime import datetime
 import sys
 import os
 
+# Add luna_lib import
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from luna_lib import LunaLib, SecureDataManager
+
 class DataManager:
     """Manages data storage in ./data/ directory"""
     
@@ -201,6 +205,449 @@ class NodeConfig:
 
 
 class BlockchainManager:
+    """Blockchain manager with LunaLib integration for sync and caching"""
+    
+    def __init__(self, node_url: str, data_manager: DataManager):
+        self.node_url = node_url
+        self.data_manager = data_manager
+        
+        # Initialize LunaLib for blockchain operations
+        self.luna_lib = LunaLib(auto_scan=False)
+        self.blockchain_cache = []
+        self.mempool_cache = []
+        self.last_update_time = 0
+        self.cache_duration = 300  # 5 minutes cache
+        
+        # Load cached data
+        self.load_cached_data()
+        
+    def load_cached_data(self):
+        """Load cached blockchain and mempool data"""
+        self.blockchain_cache = self.data_manager.load_blockchain_cache()
+        self.mempool_cache = self.data_manager.load_mempool_cache()
+        print(f"DEBUG: Loaded {len(self.blockchain_cache)} cached blocks and {len(self.mempool_cache)} cached mempool transactions")
+    
+    def save_cached_data(self):
+        """Save blockchain and mempool data to cache"""
+        self.data_manager.save_blockchain_cache(self.blockchain_cache)
+        self.data_manager.save_mempool_cache(self.mempool_cache)
+
+    def get_blockchain_with_progress(self, progress_callback=None) -> Tuple[List[Dict], bool]:
+        """Get blockchain using LunaLib with progress updates"""
+        try:
+            # Check if cache is still valid
+            current_time = time.time()
+            if (self.blockchain_cache and 
+                current_time - self.last_update_time < self.cache_duration):
+                if progress_callback:
+                    progress_callback(100, "Using cached blockchain data")
+                return self.blockchain_cache, True
+            
+            if progress_callback:
+                progress_callback(0, "Initializing blockchain sync...")
+            
+            # Use LunaLib's blockchain cache for efficient downloading
+            blockchain = []
+            
+            def luna_lib_progress_callback(progress, message):
+                if progress_callback:
+                    progress_callback(progress, message)
+            
+            # Download blockchain using LunaLib's optimized method
+            success = self.download_blockchain_with_progress(luna_lib_progress_callback)
+            
+            if success:
+                # Get blocks from LunaLib cache
+                current_height = self.luna_lib.blockchain_cache.get_highest_cached_height()
+                if current_height >= 0:
+                    blockchain = self.luna_lib.blockchain_cache.get_block_range(0, current_height)
+                
+                # Update cache
+                self.blockchain_cache = blockchain
+                self.last_update_time = current_time
+                self.save_cached_data()
+                
+                if progress_callback:
+                    progress_callback(100, f"Blockchain loaded: {len(blockchain)} blocks")
+                
+                return blockchain, True
+            else:
+                if progress_callback:
+                    progress_callback(0, "Failed to download blockchain")
+                return self.blockchain_cache, False
+                
+        except Exception as e:
+            error_msg = f"Blockchain loading error: {str(e)}"
+            print(f"DEBUG: {error_msg}")
+            if progress_callback:
+                progress_callback(0, error_msg)
+            return self.blockchain_cache, False
+
+    def download_blockchain_with_progress(self, progress_callback=None) -> bool:
+        """Download blockchain using LunaLib's optimized method"""
+        try:
+            if progress_callback:
+                progress_callback(0, "Getting blockchain info...")
+            
+            # Get current blockchain height using optimized endpoint
+            try:
+                response = requests.get("https://bank.linglin.art/blockchain/latest", timeout=10)
+                if response.status_code == 200:
+                    latest_block = response.json()
+                    current_height = latest_block.get('index', 0)
+                else:
+                    # Fallback to full chain but only get length
+                    response = requests.get("https://bank.linglin.art/blockchain", timeout=30)
+                    if response.status_code == 200:
+                        blockchain = response.json()
+                        current_height = len(blockchain) - 1 if blockchain else 0
+                    else:
+                        if progress_callback:
+                            progress_callback(0, f"API error: {response.status_code}")
+                        return False
+            except Exception as e:
+                if progress_callback:
+                    progress_callback(0, f"Network error: {str(e)}")
+                return False
+            
+            if current_height == 0:
+                if progress_callback:
+                    progress_callback(100, "No blocks available")
+                return True
+            
+            # Determine what we need to download
+            cached_height = self.luna_lib.blockchain_cache.get_highest_cached_height()
+            start_height = 0 if cached_height < 0 else cached_height + 1
+            
+            if start_height > current_height:
+                if progress_callback:
+                    progress_callback(100, "Up to date")
+                return True
+            
+            total_blocks = current_height - start_height + 1
+            if progress_callback:
+                progress_callback(0, f"Downloading {start_height} to {current_height} ({total_blocks} blocks)")
+            
+            # Download in batches with progress
+            batch_size = 50
+            downloaded = 0
+            
+            for batch_start in range(start_height, current_height + 1, batch_size):
+                batch_end = min(batch_start + batch_size - 1, current_height)
+                
+                # Update progress
+                downloaded += (batch_end - batch_start + 1)
+                progress = min(99, int((downloaded / total_blocks) * 100))
+                if progress_callback:
+                    progress_callback(progress, f"Downloading blocks {batch_start}-{batch_end}")
+                
+                # Get blocks using range endpoint if available
+                try:
+                    response = requests.get(
+                        f"https://bank.linglin.art/blockchain/range?start={batch_start}&end={batch_end}",
+                        timeout=30
+                    )
+                    if response.status_code == 200:
+                        blocks = response.json()
+                    else:
+                        # Fallback: get full chain and filter
+                        response = requests.get("https://bank.linglin.art/blockchain", timeout=60)
+                        if response.status_code == 200:
+                            full_chain = response.json()
+                            blocks = [block for block in full_chain 
+                                    if batch_start <= block.get('index', 0) <= batch_end]
+                        else:
+                            blocks = []
+                except Exception as e:
+                    print(f"Block range error: {e}")
+                    blocks = []
+                
+                if not blocks:
+                    if progress_callback:
+                        progress_callback(0, f"Failed to download blocks {batch_start}-{batch_end}")
+                    return False
+                
+                # Cache blocks using LunaLib's blockchain cache
+                for block in blocks:
+                    height = block.get('index', batch_start)
+                    block_hash = block.get('hash', '')
+                    self.luna_lib.blockchain_cache.save_block(height, block_hash, block)
+                
+                # Small delay to be nice to the server
+                time.sleep(0.05)
+            
+            if progress_callback:
+                progress_callback(100, "Download complete")
+            return True
+            
+        except Exception as e:
+            print(f"Download error: {e}")
+            if progress_callback:
+                progress_callback(0, f"Error: {str(e)}")
+            return False
+
+    def get_mempool_with_progress(self, progress_callback=None) -> Tuple[List[Dict], bool]:
+        """Get mempool with progress tracking using LunaLib"""
+        try:
+            if progress_callback:
+                progress_callback(0, "Loading mempool...")
+            
+            response = requests.get("https://bank.linglin.art/mempool", timeout=15)
+            if response.status_code == 200:
+                mempool = response.json()
+                
+                # Cache mempool data
+                self.mempool_cache = mempool
+                self.save_cached_data()
+                
+                if progress_callback:
+                    progress_callback(100, f"Loaded {len(mempool)} transactions")
+                return mempool, True
+            else:
+                if progress_callback:
+                    progress_callback(0, f"Mempool error: {response.status_code}")
+                return self.mempool_cache, False
+                
+        except Exception as e:
+            print(f"Mempool error: {e}")
+            if progress_callback:
+                progress_callback(0, f"Error: {str(e)}")
+            return self.mempool_cache, False
+    
+    def get_current_height(self) -> int:
+        """Get current blockchain height"""
+        if self.blockchain_cache:
+            return len(self.blockchain_cache) - 1
+        return 0
+    
+    def get_recent_blocks(self, count: int = 10) -> List[Dict]:
+        """Get recent blocks"""
+        if self.blockchain_cache:
+            return self.blockchain_cache[-count:]
+        return []
+    
+    def get_latest_block(self) -> Optional[Dict]:
+        """Get latest block"""
+        if self.blockchain_cache:
+            return self.blockchain_cache[-1]
+        return None
+    
+    def refresh_data(self):
+        """Force refresh of all data"""
+        self.last_update_time = 0
+        self.blockchain_cache = []
+        self.mempool_cache = []
+        # Also clear LunaLib cache
+        self.luna_lib.blockchain_cache.clear_cache()
+
+
+class Miner:
+    """Miner class with optimized blockchain access"""
+    
+    def __init__(self, config: NodeConfig, data_manager: DataManager,
+                 mining_started_callback=None,
+                 mining_completed_callback=None,
+                 block_mined_callback=None):
+        self.config = config
+        self.data_manager = data_manager
+        self.is_mining = False
+        self.blocks_mined = 0
+        self.total_reward = 0.0
+        self.mining_started_callback = mining_started_callback
+        self.mining_completed_callback = mining_completed_callback
+        self.block_mined_callback = block_mined_callback
+        
+        # Load mining history from storage
+        self.mining_history = self.data_manager.load_mining_history()
+        
+        self.blockchain_manager = BlockchainManager(config.node_url, data_manager)
+        self.current_hash = ""
+        self.current_nonce = 0
+        self.hash_rate = 0
+        self.mining_thread = None
+        self.should_stop_mining = False
+        
+    def start_mining(self):
+        """Start auto-mining"""
+        if self.is_mining:
+            return
+            
+        self.is_mining = True
+        self.should_stop_mining = False
+        if self.mining_started_callback:
+            self.mining_started_callback()
+        
+    def stop_mining(self):
+        """Stop auto-mining"""
+        self.is_mining = False
+        self.should_stop_mining = True
+        
+    def save_mining_history(self):
+        """Save mining history to storage"""
+        self.data_manager.save_mining_history(self.mining_history)
+        
+    def mine_block(self) -> Tuple[bool, str, Optional[Dict]]:
+        """Mine a single block with optimized blockchain access"""
+        try:
+            # Get blockchain data first
+            blockchain, success = self.blockchain_manager.get_blockchain_with_progress()
+            if not success or not blockchain:
+                return False, "Cannot connect to blockchain network", None
+            
+            current_height = len(blockchain) - 1
+            latest_block = blockchain[-1]
+            new_index = latest_block.get('index', 0) + 1
+            
+            # Get mempool transactions
+            mempool, mempool_success = self.blockchain_manager.get_mempool_with_progress()
+            if not mempool_success:
+                mempool = []
+                
+            block = Block(
+                index=new_index,
+                previous_hash=latest_block.get('hash', '0' * 64),
+                timestamp=time.time(),
+                transactions=mempool,
+                miner=self.config.miner_address,
+                difficulty=self.config.difficulty
+            )
+            
+            start_time = time.time()
+            hash_count = 0
+            last_hash_update = start_time
+            
+            # Mine the block
+            target = "0" * self.config.difficulty
+            max_nonce = 100000  # Safety limit
+            
+            while not block.hash.startswith(target):
+                if self.should_stop_mining or block.nonce >= max_nonce:
+                    return False, "Mining interrupted", None
+                    
+                block.nonce += 1
+                block.hash = block.calculate_hash()
+                hash_count += 1
+                self.current_hash = block.hash
+                self.current_nonce = block.nonce
+                
+                # Update hash rate every second
+                current_time = time.time()
+                if current_time - last_hash_update >= 1:
+                    self.hash_rate = hash_count / (current_time - last_hash_update)
+                    hash_count = 0
+                    last_hash_update = current_time
+                
+                if block.nonce % 1000 == 0:
+                    if not self.is_mining:
+                        return False, "Mining interrupted", None
+            
+            mining_time = time.time() - start_time
+            
+            # Successfully mined block
+            self.blocks_mined += 1
+            block_data = block.to_dict()
+            
+            mining_record = {
+                'block_index': new_index,
+                'timestamp': time.time(),
+                'mining_time': mining_time,
+                'difficulty': self.config.difficulty,
+                'nonce': block.nonce,
+                'hash': block.hash,
+                'status': 'success'
+            }
+            self.mining_history.append(mining_record)
+            self.save_mining_history()
+            
+            if self.mining_completed_callback:
+                self.mining_completed_callback(True, f"Block #{new_index} mined successfully")
+            
+            if self.block_mined_callback:
+                self.block_mined_callback(block_data)
+                
+            return True, f"Block #{new_index} mined", block_data
+                
+        except Exception as e:
+            error_msg = f"Mining error: {str(e)}"
+            print(error_msg)
+            return False, error_msg, None
+
+
+
+
+class Block:
+    """Block representation"""
+    def __init__(self, index: int, previous_hash: str, timestamp: float, 
+                 transactions: List[Dict], miner: str, difficulty: int):
+        self.index = index
+        self.previous_hash = previous_hash
+        self.timestamp = timestamp
+        self.transactions = transactions
+        self.miner = miner
+        self.difficulty = difficulty
+        self.nonce = 0
+        self.hash = self.calculate_hash()
+        
+    def calculate_hash(self) -> str:
+        """Calculate block hash"""
+        block_data = f"{self.index}{self.previous_hash}{self.timestamp}{self.transactions}{self.miner}{self.difficulty}{self.nonce}"
+        return hashlib.sha256(block_data.encode()).hexdigest()
+    
+    def mine_block(self) -> bool:
+        """Mine the block (simplified PoW)"""
+        target = "0" * self.difficulty
+        while not self.hash.startswith(target):
+            if self.nonce > 100000:  # Safety limit
+                return False
+            self.nonce += 1
+            self.hash = self.calculate_hash()
+            if self.nonce % 1000 == 0:
+                return False
+        return True
+    
+    def to_dict(self) -> Dict:
+        """Convert block to dictionary"""
+        return {
+            'index': self.index,
+            'previous_hash': self.previous_hash,
+            'timestamp': self.timestamp,
+            'transactions': self.transactions,
+            'miner': self.miner,
+            'difficulty': self.difficulty,
+            'nonce': self.nonce,
+            'hash': self.hash
+        }
+
+
+class NodeConfig:
+    """Node configuration with data persistence"""
+    
+    def __init__(self, data_manager: DataManager):
+        self.data_manager = data_manager
+        self.load_from_storage()
+    
+    def load_from_storage(self):
+        """Load configuration from storage"""
+        settings = self.data_manager.load_settings()
+        self.miner_address = settings.get('miner_address', "LUN_Node_Miner_Default")
+        self.difficulty = settings.get('difficulty', 2)
+        self.auto_mine = settings.get('auto_mine', False)
+        self.node_url = settings.get('node_url', "https://bank.linglin.art")
+        self.mining_interval = settings.get('mining_interval', 30)
+    
+    def save_to_storage(self):
+        """Save configuration to storage"""
+        settings = {
+            'miner_address': self.miner_address,
+            'difficulty': self.difficulty,
+            'auto_mine': self.auto_mine,
+            'node_url': self.node_url,
+            'mining_interval': self.mining_interval
+        }
+        return self.data_manager.save_settings(settings)
+
+
+class BlockchainManager:
     """Blockchain manager with progress tracking and caching"""
     
     def __init__(self, node_url: str, data_manager: DataManager):
@@ -267,14 +714,14 @@ class BlockchainManager:
             if progress_callback:
                 progress_callback(25, "Checking cache...")
             
-            cached_height = self.wallet_core.blockchain_cache.get_highest_cached_height()
+            cached_height = self.wallet.blockchain_cache.get_highest_cached_height()
             start_height = 0 if cached_height < 0 else cached_height + 1
             
             if start_height > current_height:
                 if progress_callback:
                     progress_callback(100, "Cache is up to date")
                 # Return cached blocks
-                return self.wallet_core.blockchain_cache.get_block_range(0, current_height)
+                return self.wallet.blockchain_cache.get_block_range(0, current_height)
 
             total_blocks = current_height - start_height + 1
             if progress_callback:
@@ -328,7 +775,7 @@ class BlockchainManager:
                     for block in blocks:
                         height = block.get('index', batch_start)
                         block_hash = block.get('hash', '')
-                        self.wallet_core.blockchain_cache.save_block(height, block_hash, block)
+                        self.wallet.blockchain_cache.save_block(height, block_hash, block)
                     
                     all_blocks.extend(blocks)
                     
@@ -342,7 +789,7 @@ class BlockchainManager:
             if progress_callback:
                 progress_callback(95, "Finalizing blockchain data...")
             
-            final_blocks = self.wallet_core.blockchain_cache.get_block_range(0, current_height)
+            final_blocks = self.wallet.blockchain_cache.get_block_range(0, current_height)
             
             if progress_callback:
                 progress_callback(100, f"Sync complete: {len(final_blocks)} blocks loaded")
@@ -391,7 +838,7 @@ class BlockchainManager:
                     progress_callback(80, f"Caching {len(mempool)} transactions...")
                 
                 # Cache mempool transactions
-                our_addresses = {wallet['address'].lower() for wallet in self.wallet_core.wallets} if self.wallet_core.wallets else set()
+                our_addresses = {wallet['address'].lower() for wallet in self.wallet.wallets} if self.wallet_.wallets else set()
                 
                 for tx in mempool:
                     tx_hash = tx.get('hash')
@@ -405,7 +852,7 @@ class BlockchainManager:
                             involved_address = from_addr if from_addr in our_addresses else to_addr
                         
                         # Cache the transaction
-                        self.wallet_core.blockchain_cache.save_mempool_tx(tx_hash, tx, involved_address)
+                        self.wallet.blockchain_cache.save_mempool_tx(tx_hash, tx, involved_address)
                 
                 if progress_callback:
                     progress_callback(100, f"Loaded {len(mempool)} mempool transactions")
@@ -830,12 +1277,12 @@ class LunaNode:
         self._log_message("Auto-mining stopped", "info")
     
     def sync_network(self, progress_callback=None) -> Dict:
-        """Sync with network with progress updates"""
+        """Sync with network with progress updates using LunaLib"""
         try:
             if progress_callback:
                 progress_callback(0, "Starting network sync...")
             
-            # Refresh blockchain data
+            # Refresh blockchain data using LunaLib
             blockchain, blockchain_success = self.miner.blockchain_manager.get_blockchain_with_progress(
                 lambda progress, msg: progress_callback(progress // 2, msg) if progress_callback else None
             )
@@ -876,7 +1323,7 @@ class LunaNode:
         return self.logs
     
     def submit_block(self, block_data: Dict) -> bool:
-        """Submit mined block to network - CORRECTED ENDPOINTS"""
+        """Submit mined block to network"""
         try:
             # Use the correct endpoint from app.py
             endpoint = f"{self.config.node_url}/blockchain/submit-block"
@@ -942,16 +1389,6 @@ class LunaNode:
             self._log_message(error_msg, "error")
             # Save block locally as fallback
             return self._save_block_locally(block_data)
-
-    
-                
-        except Exception as e:
-            error_msg = f"Blockchain loading error: {str(e)}"
-            print(f"DEBUG: {error_msg}")
-            if progress_callback:
-                progress_callback(0, error_msg)
-            return self.blockchain_cache, False
-
     
     def _save_block_locally(self, block_data: Dict) -> bool:
         """Save block locally when network submission fails"""
