@@ -132,49 +132,6 @@ class DataManager:
         return []
 
 
-class Block:
-    """Block representation"""
-    def __init__(self, index: int, previous_hash: str, timestamp: float, 
-                 transactions: List[Dict], miner: str, difficulty: int):
-        self.index = index
-        self.previous_hash = previous_hash
-        self.timestamp = timestamp
-        self.transactions = transactions
-        self.miner = miner
-        self.difficulty = difficulty
-        self.nonce = 0
-        self.hash = self.calculate_hash()
-        
-    def calculate_hash(self) -> str:
-        """Calculate block hash"""
-        block_data = f"{self.index}{self.previous_hash}{self.timestamp}{self.transactions}{self.miner}{self.difficulty}{self.nonce}"
-        return hashlib.sha256(block_data.encode()).hexdigest()
-    
-    def mine_block(self) -> bool:
-        """Mine the block (simplified PoW)"""
-        target = "0" * self.difficulty
-        while not self.hash.startswith(target):
-            if self.nonce > 100000:  # Safety limit
-                return False
-            self.nonce += 1
-            self.hash = self.calculate_hash()
-            if self.nonce % 1000 == 0:
-                return False
-        return True
-    
-    def to_dict(self) -> Dict:
-        """Convert block to dictionary"""
-        return {
-            'index': self.index,
-            'previous_hash': self.previous_hash,
-            'timestamp': self.timestamp,
-            'transactions': self.transactions,
-            'miner': self.miner,
-            'difficulty': self.difficulty,
-            'nonce': self.nonce,
-            'hash': self.hash
-        }
-
 
 class NodeConfig:
     """Node configuration with data persistence"""
@@ -204,6 +161,7 @@ class NodeConfig:
         return self.data_manager.save_settings(settings)
 
 
+
 class BlockchainManager:
     """Blockchain manager with LunaLib integration for sync and caching"""
     
@@ -220,7 +178,55 @@ class BlockchainManager:
         
         # Load cached data
         self.load_cached_data()
-        
+    def emergency_validate_block(self, block):
+        """Emergency block validation with detailed diagnostics"""
+        try:
+            print("🚨 EMERGENCY BLOCK VALIDATION ACTIVATED")
+            
+            # 1. Check if block has been tampered with
+            block_copy = block.copy()
+            submitted_hash = block_copy.get('hash')
+            
+            # Remove the hash for recalculation
+            if 'hash' in block_copy:
+                del block_copy['hash']
+            
+            # 2. Verify transaction integrity
+            transactions = block_copy.get('transactions', [])
+            print(f"🔍 Analyzing {len(transactions)} transactions...")
+            
+            for i, tx in enumerate(transactions):
+                print(f"   Transaction {i}: {tx.get('hash', 'NO_HASH')}")
+                if 'signature' not in tx:
+                    print(f"   ❌ Transaction {i} missing signature!")
+                if 'from' not in tx or 'to' not in tx:
+                    print(f"   ❌ Transaction {i} missing from/to addresses!")
+            
+            # 3. Recalculate hash with proper transaction ordering
+            block_string = json.dumps(block_copy, sort_keys=True, separators=(',', ':'), default=str)
+            calculated_hash = hashlib.sha256(block_string.encode()).hexdigest()
+            
+            print(f"📊 HASH COMPARISON:")
+            print(f"   Submitted: {submitted_hash}")
+            print(f"   Calculated: {calculated_hash}")
+            print(f"   Match: {submitted_hash == calculated_hash}")
+            
+            # 4. Check proof-of-work separately
+            if submitted_hash.startswith('0000'):
+                print("✅ Submitted hash HAS required leading zeros")
+            else:
+                print("❌ Submitted hash MISSING leading zeros")
+                
+            if calculated_hash.startswith('0000'):
+                print("✅ Calculated hash HAS required leading zeros")
+            else:
+                print("❌ Calculated hash MISSING leading zeros")
+                
+            return submitted_hash == calculated_hash
+            
+        except Exception as e:
+            print(f"💥 Emergency validation failed: {e}")
+            return False
     def load_cached_data(self):
         """Load cached blockchain and mempool data"""
         self.blockchain_cache = self.data_manager.load_blockchain_cache()
@@ -233,7 +239,7 @@ class BlockchainManager:
         self.data_manager.save_mempool_cache(self.mempool_cache)
 
     def get_blockchain_with_progress(self, progress_callback=None) -> Tuple[List[Dict], bool]:
-        """Get blockchain using LunaLib with progress updates"""
+        """Get blockchain with progress updates"""
         try:
             # Check if cache is still valid
             current_time = time.time()
@@ -244,23 +250,15 @@ class BlockchainManager:
                 return self.blockchain_cache, True
             
             if progress_callback:
-                progress_callback(0, "Initializing blockchain sync...")
+                progress_callback(0, "Connecting to blockchain network...")
             
-            # Use LunaLib's blockchain cache for efficient downloading
-            blockchain = []
-            
-            def luna_lib_progress_callback(progress, message):
+            # Use correct endpoint
+            response = requests.get(f"{self.node_url}/blockchain", timeout=30)
+            if response.status_code == 200:
+                blockchain = response.json()
+                
                 if progress_callback:
-                    progress_callback(progress, message)
-            
-            # Download blockchain using LunaLib's optimized method
-            success = self.download_blockchain_with_progress(luna_lib_progress_callback)
-            
-            if success:
-                # Get blocks from LunaLib cache
-                current_height = self.luna_lib.blockchain_cache.get_highest_cached_height()
-                if current_height >= 0:
-                    blockchain = self.luna_lib.blockchain_cache.get_block_range(0, current_height)
+                    progress_callback(50, f"Processing {len(blockchain)} blocks...")
                 
                 # Update cache
                 self.blockchain_cache = blockchain
@@ -268,12 +266,12 @@ class BlockchainManager:
                 self.save_cached_data()
                 
                 if progress_callback:
-                    progress_callback(100, f"Blockchain loaded: {len(blockchain)} blocks")
+                    progress_callback(100, "Blockchain loaded successfully")
                 
                 return blockchain, True
             else:
                 if progress_callback:
-                    progress_callback(0, "Failed to download blockchain")
+                    progress_callback(0, f"Network error: {response.status_code}")
                 return self.blockchain_cache, False
                 
         except Exception as e:
@@ -574,9 +572,8 @@ class Miner:
 
 
 
-
 class Block:
-    """Block representation"""
+    """Block representation - UPDATED TO MATCH BLOCKCHAIN DAEMON"""
     def __init__(self, index: int, previous_hash: str, timestamp: float, 
                  transactions: List[Dict], miner: str, difficulty: int):
         self.index = index
@@ -589,9 +586,36 @@ class Block:
         self.hash = self.calculate_hash()
         
     def calculate_hash(self) -> str:
-        """Calculate block hash"""
-        block_data = f"{self.index}{self.previous_hash}{self.timestamp}{self.transactions}{self.miner}{self.difficulty}{self.nonce}"
-        return hashlib.sha256(block_data.encode()).hexdigest()
+        """Calculate block hash - EXACTLY MATCHING BLOCKCHAIN DAEMON"""
+        try:
+            # Ensure proper types (EXACTLY like daemon)
+            index = int(self.index)
+            nonce = int(self.nonce)
+            
+            # Allow both float and integer timestamps (EXACTLY like daemon)
+            if isinstance(self.timestamp, float):
+                timestamp = self.timestamp
+            else:
+                timestamp = float(self.timestamp)
+            
+            # Use the EXACT SAME data structure as daemon
+            block_data = {
+                'index': index,
+                'previous_hash': self.previous_hash,
+                'timestamp': timestamp,
+                'transactions': self.transactions,  # Note: NO miner, NO difficulty
+                'nonce': nonce
+            }
+            
+            # Use the EXACT SAME serialization as daemon
+            block_string = json.dumps(block_data, sort_keys=True, separators=(',', ':'))
+            calculated_hash = hashlib.sha256(block_string.encode()).hexdigest()
+            
+            return calculated_hash
+            
+        except Exception as e:
+            print(f"Hash calculation error: {e}")
+            return "0" * 64
     
     def mine_block(self) -> bool:
         """Mine the block (simplified PoW)"""
@@ -600,7 +624,7 @@ class Block:
             if self.nonce > 100000:  # Safety limit
                 return False
             self.nonce += 1
-            self.hash = self.calculate_hash()
+            self.hash = self.calculate_hash()  # This now matches daemon
             if self.nonce % 1000 == 0:
                 return False
         return True
@@ -619,32 +643,6 @@ class Block:
         }
 
 
-class NodeConfig:
-    """Node configuration with data persistence"""
-    
-    def __init__(self, data_manager: DataManager):
-        self.data_manager = data_manager
-        self.load_from_storage()
-    
-    def load_from_storage(self):
-        """Load configuration from storage"""
-        settings = self.data_manager.load_settings()
-        self.miner_address = settings.get('miner_address', "LUN_Node_Miner_Default")
-        self.difficulty = settings.get('difficulty', 2)
-        self.auto_mine = settings.get('auto_mine', False)
-        self.node_url = settings.get('node_url', "https://bank.linglin.art")
-        self.mining_interval = settings.get('mining_interval', 30)
-    
-    def save_to_storage(self):
-        """Save configuration to storage"""
-        settings = {
-            'miner_address': self.miner_address,
-            'difficulty': self.difficulty,
-            'auto_mine': self.auto_mine,
-            'node_url': self.node_url,
-            'mining_interval': self.mining_interval
-        }
-        return self.data_manager.save_settings(settings)
 
 
 class BlockchainManager:
@@ -815,75 +813,36 @@ class BlockchainManager:
                 progress_callback(0, error_msg)
             self.add_log_message(error_msg, "error")
             return []
-    def get_mempool_with_progress(self, progress_callback=None):
+    def add_log_message(self, message: str, msg_type: str = "info"):
+        """Add log message - placeholder method to prevent errors"""
+        print(f"[{msg_type.upper()}] {message}")
+    def get_mempool_with_progress(self, progress_callback=None) -> Tuple[List[Dict], bool]:
         """Get mempool with progress tracking"""
         try:
             if progress_callback:
-                progress_callback(0, "Connecting to mempool...")
+                progress_callback(0, "Loading mempool...")
             
-            # Step 1: Initial connection
-            if progress_callback:
-                progress_callback(20, "Fetching mempool data...")
-            
-            response = requests.get("https://bank.linglin.art/mempool", timeout=15)
-            
-            if progress_callback:
-                progress_callback(60, "Processing transactions...")
-            
+            response = requests.get(f"{self.node_url}/mempool", timeout=15)
             if response.status_code == 200:
                 mempool = response.json()
                 
-                # Step 2: Process and cache transactions
-                if progress_callback:
-                    progress_callback(80, f"Caching {len(mempool)} transactions...")
-                
-                # Cache mempool transactions
-                our_addresses = {wallet['address'].lower() for wallet in self.wallet.wallets} if self.wallet_.wallets else set()
-                
-                for tx in mempool:
-                    tx_hash = tx.get('hash')
-                    if tx_hash:
-                        # Check if this involves our addresses
-                        from_addr = (tx.get('from') or tx.get('sender') or '').lower()
-                        to_addr = (tx.get('to') or tx.get('receiver') or '').lower()
-                        
-                        involved_address = ""
-                        if from_addr in our_addresses or to_addr in our_addresses:
-                            involved_address = from_addr if from_addr in our_addresses else to_addr
-                        
-                        # Cache the transaction
-                        self.wallet.blockchain_cache.save_mempool_tx(tx_hash, tx, involved_address)
+                # Cache mempool data
+                self.mempool_cache = mempool
+                self.save_cached_data()
                 
                 if progress_callback:
-                    progress_callback(100, f"Loaded {len(mempool)} mempool transactions")
-                
-                return mempool
+                    progress_callback(100, f"Loaded {len(mempool)} transactions")
+                return mempool, True
             else:
-                error_msg = f"Mempool error: {response.status_code}"
                 if progress_callback:
-                    progress_callback(0, error_msg)
-                self.add_log_message(error_msg, "warning")
-                return []
+                    progress_callback(0, f"Mempool error: {response.status_code}")
+                return self.mempool_cache, False
                 
-        except requests.exceptions.Timeout:
-            error_msg = "Mempool request timed out"
-            if progress_callback:
-                progress_callback(0, error_msg)
-            self.add_log_message(error_msg, "warning")
-            return []
-        except requests.exceptions.ConnectionError:
-            error_msg = "Cannot connect to mempool server"
-            if progress_callback:
-                progress_callback(0, error_msg)
-            self.add_log_message(error_msg, "warning")
-            return []
         except Exception as e:
-            error_msg = f"Mempool error: {str(e)}"
             print(f"Mempool error: {e}")
             if progress_callback:
-                progress_callback(0, error_msg)
-            self.add_log_message(error_msg, "error")
-            return []
+                progress_callback(0, f"Error: {str(e)}")
+            return self.mempool_cache, False
     
     def get_current_height(self) -> int:
         """Get current blockchain height"""
