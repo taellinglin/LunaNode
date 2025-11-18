@@ -1,4 +1,4 @@
 flet[all]==0.28.3
 requests
 cryptography
-git+https://github.com/taellinglin/LunaLib.git
+lunalib>=1.0.0
