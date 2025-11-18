@@ -1,0 +1,220 @@
+import flet as ft
+from typing import Dict
+
+class Sidebar:
+    def __init__(self, app):
+        self.app = app
+        self.lbl_node_status = ft.Text("Status: Initializing...", size=12, color="#e3f2fd")
+        self.lbl_network_height = ft.Text("Network Height: --", size=10, color="#e3f2fd")
+        self.lbl_difficulty = ft.Text("Difficulty: --", size=10, color="#e3f2fd")
+        self.lbl_blocks_mined = ft.Text("Blocks Mined: --", size=10, color="#e3f2fd")
+        self.lbl_total_reward = ft.Text("Total Reward: --", size=10, color="#e3f2fd")
+        self.lbl_connection = ft.Text("Connection: --", size=10, color="#e3f2fd")
+        self.lbl_uptime = ft.Text("Uptime: --", size=10, color="#e3f2fd")
+        self.lbl_hash_rate = ft.Text("Hash Rate: --", size=12, color="#e3f2fd")
+        self.lbl_current_hash = ft.Text("Current Hash: --", size=10, color="#e3f2fd")
+        self.lbl_nonce = ft.Text("Nonce: --", size=10, color="#e3f2fd")
+        self.progress_mining = ft.ProgressBar(visible=False, color="#00a1ff", bgcolor="#1e3a5c")
+        
+        # Quick action buttons
+        button_style = ft.ButtonStyle(
+            color="#ffffff",
+            bgcolor="#00a1ff",
+            padding=ft.padding.symmetric(horizontal=16, vertical=6),
+            shape=ft.RoundedRectangleBorder(radius=2)
+        )
+        
+        self.btn_start_mining = ft.ElevatedButton(
+            "⛏️ Start Mining",
+            on_click=lambda e: self.app.start_mining(),
+            style=button_style,
+            height=32
+        )
+        
+        self.btn_stop_mining = ft.ElevatedButton(
+            "⏹️ Stop Mining",
+            on_click=lambda e: self.app.stop_mining(),
+            style=button_style,
+            height=32,
+            disabled=True
+        )
+        
+        self.btn_sync = ft.ElevatedButton(
+            "🔄 Sync Network",
+            on_click=lambda e: self.app.sync_network(),
+            style=button_style,
+            height=32
+        )
+        
+        self.btn_single_mine = ft.ElevatedButton(
+            "⚡ Mine Single Block",
+            on_click=lambda e: self.app.mine_single_block(),
+            style=button_style,
+            height=32
+        )
+
+    def create_sidebar(self):
+        """Create the sidebar with node info and quick actions"""
+        sidebar_width = 240
+        
+        node_status = ft.Container(
+            content=ft.Column([
+                ft.Text("🖥️ Node Status", size=14, color="#e3f2fd"),
+                self.lbl_node_status,
+                self.lbl_network_height,
+                self.lbl_difficulty,
+                self.lbl_blocks_mined,
+                self.lbl_total_reward,
+                self.lbl_connection,
+                self.lbl_uptime,
+            ], spacing=4),
+            padding=10,
+            bgcolor="#1a2b3c",
+            border_radius=4,
+            margin=5,
+            width=sidebar_width - 30
+        )
+        
+        quick_actions = ft.Container(
+            content=ft.Column([
+                ft.Text("Quick Actions", size=14, color="#e3f2fd"),
+                self.btn_start_mining,
+                self.btn_stop_mining,
+                self.btn_sync,
+                self.btn_single_mine,
+            ], spacing=8),
+            padding=10,
+            bgcolor="#1a2b3c",
+            border_radius=4,
+            margin=5,
+            width=sidebar_width - 30
+        )
+        
+        mining_stats = ft.Container(
+            content=ft.Column([
+                ft.Text("⛏️ Mining Stats", size=14, color="#e3f2fd"),
+                self.lbl_hash_rate,
+                self.lbl_current_hash,
+                self.lbl_nonce,
+                self.progress_mining
+            ], spacing=6),
+            padding=10,
+            bgcolor="#1a2b3c",
+            border_radius=4,
+            margin=5,
+            width=sidebar_width - 30
+        )
+        
+        app_icon = ft.Container(
+            content=ft.Row([
+                ft.Container(
+                    content=ft.Image(
+                        src="node_icon.svg",
+                        width=64,
+                        height=64,
+                        fit=ft.ImageFit.CONTAIN,
+                        color="#00a1ff",
+                        color_blend_mode=ft.BlendMode.SRC_IN,
+                        error_content=ft.Text("🔵", size=24)
+                    ),
+                    padding=10,
+                    bgcolor="#00000000",
+                    border_radius=4,
+                )
+            ], alignment=ft.MainAxisAlignment.CENTER),
+            padding=10,
+            margin=5,
+            width=sidebar_width - 30
+        )
+        
+        sidebar_content = ft.Column([
+            ft.Container(
+                content=ft.Row([
+                    ft.PopupMenuButton(
+                        content=ft.Text("☰", color="#e3f2fd", size=16),
+                        tooltip="System Menu",
+                        items=[
+                            ft.PopupMenuItem(text="Restore", on_click=lambda e: self.app.restore_from_tray()),
+                            ft.PopupMenuItem(text="Minimize to Tray", on_click=lambda e: self.app.minimize_to_tray()),
+                            ft.PopupMenuItem(),
+                            ft.PopupMenuItem(text="Start Mining", on_click=lambda e: self.app.start_mining()),
+                            ft.PopupMenuItem(text="Stop Mining", on_click=lambda e: self.app.stop_mining()),
+                            ft.PopupMenuItem(text="Sync Network", on_click=lambda e: self.app.sync_network()),
+                            ft.PopupMenuItem(),
+                            ft.PopupMenuItem(text="About", on_click=lambda e: self.app.show_about_dialog()),
+                            ft.PopupMenuItem(text="Exit", on_click=lambda e: self.app.page.window.close()),
+                        ]
+                    ),
+                    ft.Container(
+                        content=ft.Image(
+                            src="node_icon.svg",
+                            width=32,
+                            height=32,
+                            fit=ft.ImageFit.CONTAIN,
+                            color="#00a1ff",
+                            color_blend_mode=ft.BlendMode.SRC_IN,
+                            error_content=ft.Text("🔵", size=16)
+                        ),
+                        margin=ft.margin.only(right=8),
+                    ),
+                    ft.Text("Luna Node", size=24, color="#e3f2fd"),
+                ]),
+                width=sidebar_width - 30,
+                bgcolor="transparent"
+            ),
+            ft.Divider(height=1, color="#1e3a5c"),
+            node_status,
+            ft.Divider(height=1, color="#1e3a5c"),
+            quick_actions,
+            mining_stats,
+            ft.Container(expand=True),
+            app_icon
+        ], spacing=10, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+        
+        return ft.Container(
+            content=sidebar_content,
+            width=sidebar_width,
+            padding=15,
+            bgcolor="#0f1a2a"
+        )
+
+    def update_status(self, status: Dict):
+        """Update sidebar status displays"""
+        self.lbl_node_status.value = f"Status: {'🟢 Running' if status['connection_status'] == 'connected' else '🟡 Disconnected'}"
+        self.lbl_network_height.value = f"Network Height: {status['network_height']}"
+        self.lbl_difficulty.value = f"Difficulty: {status['network_difficulty']}"
+        self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
+        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.2f} LUN"
+        self.lbl_connection.value = f"Connection: {status['connection_status']}"
+        
+        uptime_seconds = int(status['uptime'])
+        hours = uptime_seconds // 3600
+        minutes = (uptime_seconds % 3600) // 60
+        seconds = uptime_seconds % 60
+        self.lbl_uptime.value = f"Uptime: {hours:02d}:{minutes:02d}:{seconds:02d}"
+            
+        # Update mining stats
+        hash_rate = status['current_hash_rate']
+        if hash_rate > 1000000:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000000:.2f} MH/s"
+        elif hash_rate > 1000:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
+        else:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
+            
+        current_hash = status['current_hash']
+        if current_hash:
+            short_hash = current_hash[:16] + "..." if len(current_hash) > 16 else current_hash
+            self.lbl_current_hash.value = f"Current Hash: {short_hash}"
+        else:
+            self.lbl_current_hash.value = "Current Hash: --"
+            
+        self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
+        
+        # Update mining progress
+        is_mining = self.app.node.miner.is_mining if self.app.node else False
+        self.progress_mining.visible = is_mining
+        
+        # Update button states
+        self.btn_start_mining.disabled = is_mining
+        self.btn_stop_mining.disabled = not is_mining
