@@ -1,4 +1,4 @@
 flet[all]==0.28.3
 requests
 cryptography
-lunalib>=1.0.0
+lunalib
