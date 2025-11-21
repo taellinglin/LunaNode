@@ -221,14 +221,13 @@ class Miner:
         
         for tx in transactions:
             if tx.get('type') == 'genesis_bill':
-                # GTX Genesis bill - use lunalib to calculate reward based on denomination and mining time
+                # GTX Genesis bill - use lunalib to calculate reward
                 denomination = tx.get('denomination', 0)
-                # Use lunalib's reward calculation which includes time-based bonuses
                 if self.difficulty_system:
                     # Get difficulty for this bill
                     bill_difficulty = self.difficulty_system.get_bill_difficulty(denomination)
-                    # Use lunalib's reward calculation (includes time bonus, but we'll use avg time)
-                    avg_mining_time = 15.0  # Assume average mining time for reward calculation
+                    # Use average mining time for reward calculation (will be updated with actual time)
+                    avg_mining_time = 15.0
                     bill_reward = self.difficulty_system.calculate_mining_reward(denomination, avg_mining_time)
                     total_reward += bill_reward
                     print(f"GTX Genesis bill reward: {bill_reward} (denomination: {denomination}, difficulty: {bill_difficulty})")
@@ -236,23 +235,19 @@ class Miner:
                     total_reward += denomination
                 
             elif tx.get('type') == 'transaction':
-                # Regular transaction - use lunalib difficulty system for reward calculation
+                # Regular transaction - reward is the fee
                 fee = tx.get('fee', 0)
-                amount = tx.get('amount', 0)
-                
-                if self.difficulty_system:
-                    # Get transaction difficulty from lunalib
-                    tx_difficulty = self.difficulty_system.get_transaction_difficulty(amount)
-                    # Use lunalib's approach: reward = fee * difficulty^exponent
-                    tx_reward = fee * (tx_difficulty ** 1.5)
-                    total_reward += tx_reward
-                    print(f"Transaction reward: {tx_reward} (fee: {fee}, amount: {amount}, difficulty: {tx_difficulty})")
-                else:
-                    total_reward += fee
+                total_reward += fee
+                print(f"Transaction fee reward: {fee}")
+            elif tx.get('type') == 'reward':
+                # Already a reward transaction, just track it
+                reward_amount = tx.get('amount', 0)
+                total_reward += reward_amount
+                print(f"Included reward transaction: {reward_amount}")
         
-        # Minimum reward for empty blocks - use lunalib's base approach
+        # Minimum reward for empty blocks
         if total_reward == 0:
-            total_reward = self.difficulty_system.calculate_mining_reward(1.0, 10.0) if self.difficulty_system else 1.0
+            total_reward = 1.0  # Base reward for empty block
             
         return total_reward
     
@@ -266,41 +261,43 @@ class Miner:
         for tx in transactions:
             if tx.get('type') == 'genesis_bill':
                 denomination = tx.get('denomination', 0)
-                # Use lunalib's bill difficulty calculation
+                # Use lunalib's bill difficulty calculation - 9 tier system
                 tx_difficulty = self.difficulty_system.get_bill_difficulty(denomination) if self.difficulty_system else self.config.difficulty
                 max_difficulty = max(max_difficulty, tx_difficulty)
                 
             elif tx.get('type') == 'transaction':
                 amount = tx.get('amount', 0)
-                # Use lunalib's transaction difficulty calculation
+                # Use lunalib's transaction difficulty calculation - 9 tier system
                 tx_difficulty = self.difficulty_system.get_transaction_difficulty(amount) if self.difficulty_system else self.config.difficulty
                 max_difficulty = max(max_difficulty, tx_difficulty)
+            elif tx.get('type') == 'reward':
+                # Reward transactions have minimal difficulty
+                max_difficulty = max(max_difficulty, 1)
         
-        return max_difficulty
+        # Ensure difficulty is at least the configured minimum
+        return max(max_difficulty, self.config.difficulty)
     
     def mine_block(self) -> Tuple[bool, str, Optional[Dict]]:
-        """Mine a block using lunalib directly - FIXED HEIGHT SYNC"""
+        """Mine a block using lunalib directly - FIXED SYNC"""
         try:
-            # Get current blockchain state using lunalib - FORCE SYNC
-            current_height = self.blockchain_manager.get_blockchain_height()
-            print(f"📊 Current blockchain height: {current_height}")
+            # Get the ACTUAL latest block from server
+            latest_block = self.blockchain_manager.get_latest_block()
             
-            # Get latest block to verify
-            latest_block = self.blockchain_manager.get_block(current_height) if current_height > 0 else None
-            if latest_block:
-                print(f"📊 Latest block hash: {latest_block.get('hash', '')[:16]}...")
+            if not latest_block:
+                print("❌ Could not get latest block from server")
+                return False, "Server connection failed", None
             
-            # Calculate next block index - THIS IS CRITICAL
-            new_index = current_height + 1 # Next block should be at current height
+            # Get the actual current state from the latest block
+            current_index = latest_block.get('index', 0)
+            actual_previous_hash = latest_block.get('hash', '0' * 64)
+            
+            print(f"📊 Server state: Latest block index: {current_index}")
+            print(f"📊 Latest block hash: {actual_previous_hash[:32]}...")
+            
+            # Next block should be current_index + 1
+            new_index = current_index + 1
             print(f"⛏️  Mining next block at index: {new_index}")
-            
-            # Get previous hash
-            if current_height > 0 and latest_block:
-                previous_hash = latest_block.get('hash', '0' * 64)
-            else:
-                previous_hash = '0' * 64  # Genesis block
-                
-            print(f"🔗 Previous hash: {previous_hash[:16]}...")
+            print(f"🔗 Using previous hash: {actual_previous_hash[:32]}...")
             
             # Get mempool transactions
             mempool = self.blockchain_manager.get_mempool()
@@ -321,24 +318,24 @@ class Miner:
                 }
                 mempool = [reward_tx]
             
-            # Calculate block difficulty and reward using lunalib
+            # Calculate block difficulty and reward
             block_difficulty = self._calculate_block_difficulty(mempool)
             total_reward = self._calculate_block_reward(mempool)
             
             print(f"⛏️ Mining block #{new_index} with {len(mempool)} transactions")
             print(f"   Difficulty: {block_difficulty}, Reward: {total_reward}")
             
-            # Create block data WITH CORRECT INDEX
+            # Create block data with CORRECT sync data
             block_data = {
-                'index': new_index,  # This must match server's expected next height
-                'previous_hash': previous_hash,
+                'index': new_index,  # This should match server's expected next index
+                'previous_hash': actual_previous_hash,  # This MUST match server's latest block hash
                 'timestamp': time.time(),
                 'transactions': mempool,
                 'miner': self.config.miner_address,
                 'difficulty': block_difficulty,
                 'nonce': 0,
                 'reward': total_reward,
-                'hash': ''  # Will be set during mining
+                'hash': ''
             }
             
             # Try CUDA mining first if available
@@ -377,10 +374,13 @@ class Miner:
                             self.block_mined_callback(block_data)
                         
                         return True, f"Block #{new_index} mined with CUDA - Reward: {total_reward}", block_data
+                    else:
+                        print(f"CUDA mining returned no result or failed")
+                        
                 except Exception as cuda_error:
-                    print(f"CUDA mining failed: {cuda_error}, falling back to CPU")
+                    print(f"CUDA mining failed: {cuda_error}")
             
-            # Fallback to CPU mining
+            # Fallback to CPU mining - USE SERVER'S HASH CALCULATION
             print("Using CPU mining...")
             start_time = time.time()
             target = "0" * block_difficulty
@@ -389,15 +389,21 @@ class Miner:
             last_hash_update = start_time
             
             while not self.should_stop_mining and nonce < 1000000:
-                block_data['nonce'] = nonce
-                data_string = json.dumps(block_data, sort_keys=True)
-                block_hash = hashlib.sha256(data_string.encode()).hexdigest()
+                # Use the SAME hash calculation as the server
+                block_hash = self.calculate_block_hash(
+                    new_index,
+                    actual_previous_hash,  # USE THE CORRECT PREVIOUS HASH
+                    block_data['timestamp'],
+                    mempool,
+                    nonce
+                )
                 
                 if block_hash.startswith(target):
                     mining_time = time.time() - start_time
                     
                     # Add hash to block data
                     block_data['hash'] = block_hash
+                    block_data['nonce'] = nonce
                     
                     # Record mining history
                     mining_record = {
@@ -446,6 +452,68 @@ class Miner:
             error_msg = f"Mining error: {str(e)}"
             print(f"DEBUG Mining Error: {error_msg}")
             return False, error_msg, None
+    def _prepare_cuda_mining_data(self, block_data):
+        """Prepare block data for CUDA mining by ensuring proper data types"""
+        try:
+            # Create a simplified version for CUDA
+            cuda_data = {
+                'index': int(block_data['index']),
+                'previous_hash': str(block_data['previous_hash']),
+                'timestamp': float(block_data['timestamp']),
+                'miner': str(block_data['miner']),
+                'difficulty': int(block_data['difficulty']),
+                'nonce': int(block_data['nonce']),
+                'reward': float(block_data['reward'])
+            }
+            
+            # Limit transaction data for CUDA to avoid string dtype issues
+            transactions = block_data.get('transactions', [])
+            cuda_data['transactions_count'] = len(transactions)
+            
+            # Only include essential transaction data
+            simplified_txs = []
+            for tx in transactions[:10]:  # Limit to first 10 transactions for CUDA
+                simple_tx = {
+                    'type': str(tx.get('type', '')),
+                    'amount': float(tx.get('amount', 0)),
+                    'timestamp': float(tx.get('timestamp', 0))
+                }
+                simplified_txs.append(simple_tx)
+            
+            cuda_data['transactions'] = simplified_txs
+            return cuda_data
+            
+        except Exception as e:
+            print(f"Error preparing CUDA data: {e}")
+            return block_data  # Fallback to original data
+    def _calculate_final_reward(self, transactions: List[Dict], actual_mining_time: float) -> float:
+        """Calculate final reward using actual mining time"""
+        total_reward = 0.0
+        
+        for tx in transactions:
+            if tx.get('type') == 'genesis_bill':
+                denomination = tx.get('denomination', 0)
+                if self.difficulty_system:
+                    bill_reward = self.difficulty_system.calculate_mining_reward(denomination, actual_mining_time)
+                    total_reward += bill_reward
+                else:
+                    total_reward += denomination
+            elif tx.get('type') == 'transaction':
+                total_reward += tx.get('fee', 0)
+            elif tx.get('type') == 'reward':
+                total_reward += tx.get('amount', 0)
+        
+        # Minimum reward for empty blocks
+        if total_reward == 0:
+            total_reward = 1.0
+            
+        return total_reward
+
+    def calculate_block_hash(self, index, previous_hash, timestamp, transactions, nonce):
+        """Calculate block hash using the SAME method as the server"""
+        import json
+        block_string = f"{index}{previous_hash}{timestamp}{json.dumps(transactions, sort_keys=True)}{nonce}"
+        return hashlib.sha256(block_string.encode()).hexdigest()
 
 class LunaNode:
     """Main Luna Node class using lunalib directly"""

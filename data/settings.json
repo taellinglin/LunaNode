@@ -1,7 +1,7 @@
 {
   "miner_address": "da069337be97ec0094c61cecbecf3018",
-  "difficulty": 2,
-  "auto_mine": false,
+  "difficulty": 5,
+  "auto_mine": true,
   "node_url": "https://bank.linglin.art",
   "mining_interval": 30
 }
