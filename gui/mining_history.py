@@ -1,8 +1,9 @@
-import flet as ft
-import time
-from datetime import datetime, timedelta
-from typing import Dict, List
 import random  # For demo data, remove in production
+from datetime import datetime
+from typing import Dict, List
+
+import flet as ft
+
 
 class MiningHistory:
     def __init__(self, app):

@@ -1,30 +1,18 @@
-import flet as ft
 import threading
 import time
-import requests
-from typing import Dict, List, Optional, Tuple
-import hashlib
-import json
-from datetime import datetime
-import sys
-import os
-from lunalib.core.blockchain import BlockchainManager
-from lunalib.core.crypto import KeyManager
-from lunalib.core.wallet import LunaWallet
-from lunalib.storage.cache import BlockchainCache
-from lunalib.storage.database import WalletDatabase
-from lunalib.storage.encryption import EncryptionManager
-from lunalib.mining.difficulty import DifficultySystem
-from lunalib.mining.cuda_manager import CUDAManager
-from lunalib.gtx.digital_bill import DigitalBill
+from typing import Dict
 
-from utils import LunaNode
-from gui.sidebar import Sidebar
-from gui.main_page import MainPage
-from gui.mining_history import MiningHistory
+import flet as ft
+
 from gui.bills import BillsPage
 from gui.log import LogPage
+from gui.main_page import MainPage
+from gui.mining_history import MiningHistory
 from gui.settings import SettingsPage
+from gui.sidebar import Sidebar
+from utils import LunaNode
+
+
 class LunaNodeApp:
     """Luna Node Application with Blue Theme"""
     

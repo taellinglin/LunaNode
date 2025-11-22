@@ -1,6 +1,7 @@
-import flet as ft
 from datetime import datetime
-from typing import List
+
+import flet as ft
+
 
 class LogPage:
     def __init__(self, app):
