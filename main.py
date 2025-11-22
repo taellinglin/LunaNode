@@ -9,6 +9,7 @@ from datetime import datetime
 import sys
 import os
 from lunalib.core.blockchain import BlockchainManager
+from lunalib.core.mempool import MempoolManager
 from lunalib.core.crypto import KeyManager
 from lunalib.core.wallet import LunaWallet
 from lunalib.storage.cache import BlockchainCache

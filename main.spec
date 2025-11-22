@@ -19,7 +19,7 @@ a = Analysis(
 
 # Force remove any sqlite3 modules
 for module in list(a.scripts):
-    if any(x in str(module).lower() for x in ['pystray', 'systray', 'sqlite']):
+    if any(x in str(module).lower() for x in ['pystray', 'systray']):
         a.scripts.remove(module)
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)

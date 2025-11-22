@@ -37,8 +37,8 @@ class DataManager:
     def save_settings(self, settings: Dict):
         """Save settings to file"""
         try:
-            with open(self.settings_file, 'w') as f:
-                json.dump(settings, f, indent=2)
+            with open(self.settings_file, 'w', encoding='utf-8') as f:
+                json.dump(settings, f, indent=2, ensure_ascii=False)
             return True
         except Exception as e:
             print(f"Error saving settings: {e}")
@@ -48,7 +48,7 @@ class DataManager:
         """Load settings from file"""
         try:
             if os.path.exists(self.settings_file):
-                with open(self.settings_file, 'r') as f:
+                with open(self.settings_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         except Exception as e:
             print(f"Error loading settings: {e}")
@@ -63,8 +63,8 @@ class DataManager:
     def save_mining_history(self, history: List[Dict]):
         """Save mining history to file"""
         try:
-            with open(self.mining_history_file, 'w') as f:
-                json.dump(history, f, indent=2, default=str)
+            with open(self.mining_history_file, 'w', encoding='utf-8') as f:
+                json.dump(history, f, indent=2, default=str, ensure_ascii=False)
             return True
         except Exception as e:
             print(f"Error saving mining history: {e}")
@@ -74,7 +74,7 @@ class DataManager:
         """Load mining history from file"""
         try:
             if os.path.exists(self.mining_history_file):
-                with open(self.mining_history_file, 'r') as f:
+                with open(self.mining_history_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         except Exception as e:
             print(f"Error loading mining history: {e}")
@@ -83,8 +83,8 @@ class DataManager:
     def save_blockchain_cache(self, blockchain: List[Dict]):
         """Save blockchain cache to file"""
         try:
-            with open(self.blockchain_cache_file, 'w') as f:
-                json.dump(blockchain, f, indent=2, default=str)
+            with open(self.blockchain_cache_file, 'w', encoding='utf-8') as f:
+                json.dump(blockchain, f, indent=2, default=str, ensure_ascii=False)
             return True
         except Exception as e:
             print(f"Error saving blockchain cache: {e}")
@@ -94,7 +94,7 @@ class DataManager:
         """Load blockchain cache from file"""
         try:
             if os.path.exists(self.blockchain_cache_file):
-                with open(self.blockchain_cache_file, 'r') as f:
+                with open(self.blockchain_cache_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         except Exception as e:
             print(f"Error loading blockchain cache: {e}")
@@ -103,8 +103,8 @@ class DataManager:
     def save_mempool_cache(self, mempool: List[Dict]):
         """Save mempool cache to file"""
         try:
-            with open(self.mempool_cache_file, 'w') as f:
-                json.dump(mempool, f, indent=2, default=str)
+            with open(self.mempool_cache_file, 'w', encoding='utf-8') as f:
+                json.dump(mempool, f, indent=2, default=str, ensure_ascii=False)
             return True
         except Exception as e:
             print(f"Error saving mempool cache: {e}")
@@ -114,7 +114,7 @@ class DataManager:
         """Load mempool cache from file"""
         try:
             if os.path.exists(self.mempool_cache_file):
-                with open(self.mempool_cache_file, 'r') as f:
+                with open(self.mempool_cache_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         except Exception as e:
             print(f"Error loading mempool cache: {e}")
@@ -123,8 +123,8 @@ class DataManager:
     def save_logs(self, logs: List[Dict]):
         """Save logs to file"""
         try:
-            with open(self.logs_file, 'w') as f:
-                json.dump(logs, f, indent=2, default=str)
+            with open(self.logs_file, 'w', encoding='utf-8') as f:
+                json.dump(logs, f, indent=2, default=str, ensure_ascii=False)
             return True
         except Exception as e:
             print(f"Error saving logs: {e}")
@@ -134,7 +134,7 @@ class DataManager:
         """Load logs from file"""
         try:
             if os.path.exists(self.logs_file):
-                with open(self.logs_file, 'r') as f:
+                with open(self.logs_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
         except Exception as e:
             print(f"Error loading logs: {e}")

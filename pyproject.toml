@@ -49,6 +49,7 @@ hiddenimports = [
     "lunalib",
     "lunalib.core",
     "lunalib.core.blockchain",
+    "lunalib.core.mempool",
     "lunalib.core.crypto", 
     "lunalib.core.wallet",
     "lunalib.storage",
