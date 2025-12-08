@@ -1,6 +1,5 @@
 import flet as ft
-from typing import Dict, Callable
-import threading
+
 
 class SettingsPage:
     def __init__(self, app):

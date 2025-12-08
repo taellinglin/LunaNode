@@ -1,5 +1,5 @@
 import flet as ft
-from typing import Dict
+
 
 class MainPage:
     def __init__(self, app):
