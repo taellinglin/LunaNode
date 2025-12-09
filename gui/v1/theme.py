@@ -41,6 +41,9 @@ class Colors:
     BORDER = "#1e2433"
     DIVIDER = "#1a1f2e"
 
+    # Icon
+    NAVBAR_ICON = "#ffffff"
+
 
 class Spacing:
     """Spacing constants"""

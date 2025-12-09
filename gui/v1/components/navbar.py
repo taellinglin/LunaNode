@@ -4,6 +4,8 @@ NavBar Component - Declarative with hooks
 from dataclasses import dataclass
 
 import flet as ft
+from flet import IconData, Icons
+from sphinx.ext.todo import Todo
 
 from ..theme import Colors, Spacing, Typography, Layout
 
@@ -12,14 +14,16 @@ from ..theme import Colors, Spacing, Typography, Layout
 class NavBarTab:
     label: str
     page: str
+    icon: IconData
 
-
+# TODO: Replace icons
+# List of icons here: https://fonts.google.com/icons
 tabs = [
-    NavBarTab(label="Mining", page="mining"),
-    NavBarTab(label="Bills", page="bills"),
-    NavBarTab(label="Stats", page="stats"),
-    NavBarTab(label="Settings", page="settings"),
-    NavBarTab(label="Log", page="log")
+    NavBarTab(label="Mining", page="mining", icon=Icons.CONSTRUCTION_ROUNDED),
+    NavBarTab(label="Bills", page="bills", icon=Icons.CURRENCY_BITCOIN),
+    NavBarTab(label="Stats", page="stats", icon=Icons.QUERY_STATS),
+    NavBarTab(label="Settings", page="settings", icon=Icons.SETTINGS),
+    NavBarTab(label="Log", page="log", icon=Icons.NOTE)
 ]
 
 
@@ -38,11 +42,19 @@ def NavBar(current_page: NavBarTab, on_navigate):
             ft.Container(
                 content=ft.Column(
                     controls=[
-                        ft.Text(
-                            tab.label,
-                            size=Typography.SIZE_MD,
-                            color=Colors.PRIMARY if is_active else Colors.TEXT_SECONDARY,
-                            weight=ft.FontWeight.W_500 if is_active else ft.FontWeight.NORMAL
+                        ft.Row(
+                            controls=[
+                                ft.Icon(
+                                    tab.icon,
+                                    color=Colors.PRIMARY if is_active else Colors.TEXT_SECONDARY
+                                ),
+                                ft.Text(
+                                    tab.label,
+                                    size=Typography.SIZE_MD,
+                                    color=Colors.PRIMARY if is_active else Colors.TEXT_SECONDARY,
+                                    weight=ft.FontWeight.W_500 if is_active else ft.FontWeight.NORMAL
+                                ),
+                            ]
                         ),
                         ft.Container(
                             height=2,
