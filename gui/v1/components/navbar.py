@@ -2,28 +2,37 @@
 NavBar Component - Declarative with hooks
 """
 from dataclasses import dataclass
+from enum import Enum
 
 import flet as ft
 from flet import IconData, Icons, CrossAxisAlignment
 
 from ..theme import Colors, Spacing, Typography, Layout
 
+class AppPage(Enum):
+    MINING = 1
+    BILLS = 2
+    STATS = 3
+    SETTINGS = 4
+    LOG = 5
 
 @dataclass
 class NavBarTab:
     label: str
-    page: str
+    page: AppPage
     icon: IconData
+
+
 
 
 # TODO: Replace icons
 # List of icons here: https://fonts.google.com/icons
 tabs = [
-    NavBarTab(label="Mining", page="mining", icon=Icons.CONSTRUCTION_ROUNDED),
-    NavBarTab(label="Bills", page="bills", icon=Icons.CURRENCY_BITCOIN),
-    NavBarTab(label="Stats", page="stats", icon=Icons.QUERY_STATS),
-    NavBarTab(label="Settings", page="settings", icon=Icons.SETTINGS),
-    NavBarTab(label="Log", page="log", icon=Icons.NOTE)
+    NavBarTab(label="Mining", page=AppPage.MINING, icon=Icons.CONSTRUCTION_ROUNDED),
+    NavBarTab(label="Bills", page=AppPage.BILLS, icon=Icons.CURRENCY_BITCOIN),
+    NavBarTab(label="Stats", page=AppPage.STATS, icon=Icons.QUERY_STATS),
+    NavBarTab(label="Settings", page=AppPage.SETTINGS, icon=Icons.SETTINGS),
+    NavBarTab(label="Log", page=AppPage.LOG, icon=Icons.NOTE)
 ]
 
 
