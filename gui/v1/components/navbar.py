@@ -1,33 +1,45 @@
 """
 NavBar Component - Declarative with hooks
 """
+from dataclasses import dataclass
+
 import flet as ft
+
 from ..theme import Colors, Spacing, Typography, Layout
 
+
+@dataclass
+class NavBarTab:
+    label: str
+    page: str
+
+
+tabs = [
+    NavBarTab(label="Mining", page="mining"),
+    NavBarTab(label="Bills", page="bills"),
+    NavBarTab(label="Stats", page="stats"),
+    NavBarTab(label="Settings", page="settings"),
+    NavBarTab(label="Log", page="log")
+]
+
+
 @ft.component
-def NavBar(current_page: str, on_navigate):
+def NavBar(current_page: NavBarTab, on_navigate):
     """
     Top navigation bar with tabs
     Pure functional component - UI = f(current_page, on_navigate)
     """
-    tabs = [
-        {"label": "Mining", "page": "mining"},
-        {"label": "Bills", "page": "bills"},
-        {"label": "Stats", "page": "stats"},
-        {"label": "Settings", "page": "settings"},
-        {"label": "Log", "page": "log"},
-    ]
 
     # Create tab buttons
     tab_buttons = []
     for tab in tabs:
-        is_active = current_page == tab["page"]
+        is_active = current_page == tab
         tab_buttons.append(
             ft.Container(
                 content=ft.Column(
                     controls=[
                         ft.Text(
-                            tab["label"],
+                            tab.label,
                             size=Typography.SIZE_MD,
                             color=Colors.PRIMARY if is_active else Colors.TEXT_SECONDARY,
                             weight=ft.FontWeight.W_500 if is_active else ft.FontWeight.NORMAL
@@ -41,7 +53,7 @@ def NavBar(current_page: str, on_navigate):
                     spacing=0,
                     horizontal_alignment=ft.CrossAxisAlignment.START
                 ),
-                on_click=lambda _, p=tab["page"]: on_navigate(p),
+                on_click=lambda _, p=tab: on_navigate(p),
                 padding=0
             )
         )

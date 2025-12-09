@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 
 import flet as ft
-from .components.navbar import NavBar
+from .components.navbar import NavBar, NavBarTab, tabs
 from .pages.stats_page import StatsPage
 from .theme import Colors, Layout
 
 
 @dataclass
 class NavBarState(ft.Observable):
-    current_page: str
+    current_page: NavBarTab
 
     def select(self, page):
         self.current_page = page
@@ -17,7 +17,7 @@ class NavBarState(ft.Observable):
 
 @ft.component
 def App():
-    navbar_state, _ = ft.use_state(NavBarState(current_page="stats"))
+    navbar_state, _ = ft.use_state(NavBarState(current_page=tabs[2]))
 
     # Initialize state for StatsPage
     node_status, set_node_status = ft.use_state({
