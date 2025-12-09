@@ -4,8 +4,7 @@ NavBar Component - Declarative with hooks
 from dataclasses import dataclass
 
 import flet as ft
-from flet import IconData, Icons
-from sphinx.ext.todo import Todo
+from flet import IconData, Icons, CrossAxisAlignment
 
 from ..theme import Colors, Spacing, Typography, Layout
 
@@ -15,6 +14,7 @@ class NavBarTab:
     label: str
     page: str
     icon: IconData
+
 
 # TODO: Replace icons
 # List of icons here: https://fonts.google.com/icons
@@ -58,12 +58,13 @@ def NavBar(current_page: NavBarTab, on_navigate):
                         ),
                         ft.Container(
                             height=2,
+                            width=40,
                             bgcolor=Colors.PRIMARY if is_active else "transparent",
                             margin=ft.Margin.only(top=Spacing.MD)
                         )
                     ],
                     spacing=0,
-                    horizontal_alignment=ft.CrossAxisAlignment.START
+                    horizontal_alignment=CrossAxisAlignment.CENTER
                 ),
                 on_click=lambda _, p=tab: on_navigate(p),
                 padding=0
