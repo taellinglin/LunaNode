@@ -1,55 +1,5 @@
 [
   {
-    "timestamp": "2025-11-21 19:16:51",
-    "message": "Block #581 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:17:38",
-    "message": "Block #582 submitted successfully!",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:17:38",
-    "message": "Block #582 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:17:38",
-    "message": "Error processing mined block: ",
-    "type": "error"
-  },
-  {
-    "timestamp": "2025-11-21 19:17:38",
-    "message": "Block #582 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:18:23",
-    "message": "Block #583 submitted successfully!",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:18:23",
-    "message": "Block #583 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:18:23",
-    "message": "Error processing mined block: ",
-    "type": "error"
-  },
-  {
-    "timestamp": "2025-11-21 19:18:23",
-    "message": "Block #583 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-11-21 19:19:02",
-    "message": "Block #584 submitted successfully!",
-    "type": "success"
-  },
-  {
     "timestamp": "2025-11-21 19:19:02",
     "message": "Block #584 submitted successfully",
     "type": "success"
@@ -4998,5 +4948,55 @@
     "timestamp": "2025-11-21 23:40:55",
     "message": "Block #799 mined - Reward: 1.0",
     "type": "success"
+  },
+  {
+    "timestamp": "2025-12-08 17:25:19",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:25:27",
+    "message": "Server connection failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-12-08 17:27:13",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:27:17",
+    "message": "Server connection failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-12-08 17:57:03",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:57:45",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:57:51",
+    "message": "Server connection failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2025-12-08 17:58:37",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:59:46",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2025-12-08 17:59:51",
+    "message": "Server connection failed",
+    "type": "warning"
   }
 ]

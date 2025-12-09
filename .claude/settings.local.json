@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(pip show:*)",
-      "Bash(pip freeze:*)"
+      "Bash(pip freeze:*)",
+      "WebFetch(domain:horn-pouch-02005604.figma.site)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(python:*)",
+      "Bash(find:*)",
+      "Bash(timeout 15 python:*)",
+      "Bash(timeout 20 python:*)",
+      "Bash(timeout 5 python:*)",
+      "Bash(timeout 10 python:*)",
+      "Bash(timeout 8 python:*)"
     ],
     "deny": [],
     "ask": []
