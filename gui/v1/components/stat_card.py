@@ -2,11 +2,12 @@
 Stat Card Component - Declarative with hooks
 """
 import flet as ft
+from flet import IconData
+
 from ..theme import Colors, Spacing, Typography
 
 
-
-def stat_card(icon: str, icon_color: str, label: str, value: str):
+def stat_card(icon: IconData, icon_color: str, label: str, value: str):
     """
     A card displaying a statistic with an icon, label, and value
     Pure functional component using hooks
@@ -42,7 +43,7 @@ def stat_card(icon: str, icon_color: str, label: str, value: str):
         bgcolor=Colors.BG_CARD,
         padding=Spacing.LG,
         border_radius=8,
-        border=ft.border.all(1, Colors.BORDER),
+        border=ft.Border.all(1, Colors.BORDER),
         height=100,
         expand=True
     )

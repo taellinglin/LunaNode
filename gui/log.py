@@ -25,7 +25,7 @@ class LogPage:
         log_content = ft.Container(
             content=self.log_output,
             expand=True,
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=3,
             padding=10,
             bgcolor="#0f1a2a"

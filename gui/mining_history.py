@@ -41,7 +41,7 @@ class MiningHistory:
                 ft.Container(
                     content=self.stats_content,
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=3,
                     padding=10,
                     bgcolor="#0f1a2a"
@@ -258,7 +258,7 @@ class MiningHistory:
             padding=15,
             margin=3,
             bgcolor="#0f1a2a",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 6, "sm": 4, "md": 3, "lg": 2}
         )
@@ -286,7 +286,7 @@ class MiningHistory:
             padding=15,
             margin=3,
             bgcolor="#0f1a2a",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 6, "sm": 4, "md": 3, "lg": 3}
         )

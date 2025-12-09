@@ -60,7 +60,7 @@ def bar_chart_card(title: str, data: list, color: str, max_value: float = None):
         bgcolor=Colors.BG_CARD,
         padding=Spacing.LG,
         border_radius=8,
-        border=ft.border.all(1, Colors.BORDER),
+        border=ft.Border.all(1, Colors.BORDER),
         height=200,
         expand=True
     )

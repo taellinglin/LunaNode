@@ -22,7 +22,7 @@ class SettingsPage:
                         self.settings_content,
                     ], scroll=ft.ScrollMode.ADAPTIVE),
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=8,
                     padding=15,
                     bgcolor="#0f1a2a"
@@ -143,7 +143,7 @@ class SettingsPage:
             padding=20,
             bgcolor="#1a2b3c",
             border_radius=8,
-            border=ft.border.all(1, "#2d4a6c")
+            border=ft.Border.all(1, "#2d4a6c")
         )
 
     def _create_network_settings(self):
@@ -204,7 +204,7 @@ class SettingsPage:
             padding=20,
             bgcolor="#1a2b3c",
             border_radius=8,
-            border=ft.border.all(1, "#2d4a6c")
+            border=ft.Border.all(1, "#2d4a6c")
         )
 
     def _create_performance_settings(self):
@@ -283,7 +283,7 @@ class SettingsPage:
             padding=20,
             bgcolor="#1a2b3c",
             border_radius=8,
-            border=ft.border.all(1, "#2d4a6c")
+            border=ft.Border.all(1, "#2d4a6c")
         )
 
     def _create_wallet_settings(self):
@@ -353,7 +353,7 @@ class SettingsPage:
             padding=20,
             bgcolor="#1a2b3c",
             border_radius=8,
-            border=ft.border.all(1, "#2d4a6c")
+            border=ft.Border.all(1, "#2d4a6c")
         )
 
     def _create_advanced_settings(self):
@@ -420,7 +420,7 @@ class SettingsPage:
             padding=20,
             bgcolor="#1a2b3c",
             border_radius=8,
-            border=ft.border.all(1, "#2d4a6c")
+            border=ft.Border.all(1, "#2d4a6c")
         )
 
     def _create_action_buttons(self):

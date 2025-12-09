@@ -85,7 +85,7 @@ def create_card_style(bgcolor=None, padding=None, border_radius=None):
         "bgcolor": bgcolor or Colors.BG_CARD,
         "padding": padding or Spacing.LG,
         "border_radius": border_radius or Layout.CARD_RADIUS,
-        "border": ft.border.all(1, Colors.BORDER)
+        "border": ft.Border.all(1, Colors.BORDER)
     }
 
 
@@ -100,5 +100,5 @@ def create_button_style(bgcolor=None, color=None):
             ft.ControlState.DEFAULT: color or Colors.TEXT_PRIMARY,
         },
         shape=ft.RoundedRectangleBorder(radius=Layout.BUTTON_RADIUS),
-        padding=ft.padding.symmetric(horizontal=Spacing.LG, vertical=Spacing.MD),
+        padding=ft.Padding.symmetric(horizontal=Spacing.LG, vertical=Spacing.MD),
     )

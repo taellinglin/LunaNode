@@ -47,7 +47,7 @@ class BillsPage:
                 ft.Container(
                     content=ft.ListView([self.bills_table], expand=True),
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=3
                 )
             ], expand=True),

@@ -350,7 +350,7 @@ class LunaNodeApp:
             left=240,
             top=0,
             bgcolor="#0f1a2a",
-            border=ft.border.only(left=ft.BorderSide(4, "#1e3a5c")),
+            border=ft.Border.only(left=ft.BorderSide(4, "#1e3a5c")),
             animate_position=ft.Animation(300, "easeOut"),
             padding=20,
         )

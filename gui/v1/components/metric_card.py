@@ -2,11 +2,13 @@
 Metric Card Component - Declarative with hooks
 """
 import flet as ft
+from flet import IconData
+
 from ..theme import Colors, Spacing, Typography
 
 
 
-def metric_card(icon: str, label: str, value: str, percentage: float, color: str):
+def metric_card(icon: IconData, label: str, value: str, percentage: float, color: str):
     """
     A card displaying a system metric with progress bar
     Pure functional component
@@ -49,7 +51,7 @@ def metric_card(icon: str, label: str, value: str, percentage: float, color: str
         bgcolor=Colors.BG_CARD,
         padding=Spacing.LG,
         border_radius=8,
-        border=ft.border.all(1, Colors.BORDER),
+        border=ft.Border.all(1, Colors.BORDER),
         height=100,
         expand=True
     )

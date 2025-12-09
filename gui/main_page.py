@@ -22,7 +22,7 @@ class MainPage:
                 ft.Container(
                     content=self.mining_stats,
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=3,
                     padding=10,
                     bgcolor="#0f1a2a"
@@ -223,7 +223,7 @@ class MainPage:
             padding=15,
             margin=3,
             bgcolor="#1a2b3c",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 12, "sm": 6, "md": 4, "lg": 3}
         )

@@ -77,13 +77,13 @@ def donut_chart(title: str, sections: list):
                                             width=70,
                                             height=70,
                                             bgcolor=sections[0]["color"] if len(sections) > 0 else Colors.TEXT_MUTED,
-                                            border_radius=ft.border_radius.only(top_left=80)
+                                            border_radius=ft.BorderRadius.only(top_left=80)
                                         ),
                                         ft.Container(
                                             width=70,
                                             height=70,
                                             bgcolor=sections[2]["color"] if len(sections) > 2 else Colors.TEXT_MUTED,
-                                            border_radius=ft.border_radius.only(bottom_left=80)
+                                            border_radius=ft.BorderRadius.only(bottom_left=80)
                                         ),
                                     ],
                                     spacing=0
@@ -94,13 +94,13 @@ def donut_chart(title: str, sections: list):
                                             width=70,
                                             height=70,
                                             bgcolor=sections[1]["color"] if len(sections) > 1 else Colors.TEXT_MUTED,
-                                            border_radius=ft.border_radius.only(top_right=80)
+                                            border_radius=ft.BorderRadius.only(top_right=80)
                                         ),
                                         ft.Container(
                                             width=70,
                                             height=70,
                                             bgcolor=sections[3]["color"] if len(sections) > 3 else sections[2]["color"] if len(sections) > 2 else Colors.TEXT_MUTED,
-                                            border_radius=ft.border_radius.only(bottom_right=80)
+                                            border_radius=ft.BorderRadius.only(bottom_right=80)
                                         ),
                                     ],
                                     spacing=0
@@ -167,7 +167,7 @@ def donut_chart(title: str, sections: list):
         bgcolor=Colors.BG_CARD,
         padding=Spacing.LG,
         border_radius=8,
-        border=ft.border.all(1, Colors.BORDER),
+        border=ft.Border.all(1, Colors.BORDER),
         height=320,
         expand=True
     )

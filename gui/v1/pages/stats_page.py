@@ -53,7 +53,7 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                             weight=ft.FontWeight.BOLD
                         ),
                         ft.Container(expand=True),
-                        ft.ElevatedButton(
+                        ft.Button(
                             "Refresh Stats",
                             icon=ft.Icons.REFRESH,
                             style=create_button_style(),
