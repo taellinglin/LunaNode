@@ -6,8 +6,8 @@ from flet import IconData
 
 from ..theme import Colors, Spacing, Typography
 
-
-def stat_card(icon: IconData, icon_color: str, label: str, value: str):
+@ft.component
+def StatsCard(icon: IconData, icon_color: str, label: str, value: str, value_color=Colors.TEXT_PRIMARY):
     """
     A card displaying a statistic with an icon, label, and value
     Pure functional component using hooks
@@ -32,18 +32,18 @@ def stat_card(icon: IconData, icon_color: str, label: str, value: str):
                 # Value
                 ft.Text(
                     value,
-                    size=Typography.SIZE_HEADING,
-                    color=Colors.TEXT_PRIMARY,
-                    weight=ft.FontWeight.BOLD
+                    size=Typography.SIZE_TITLE,
+                    color=value_color,
+                    weight=ft.FontWeight.W_400
                 )
             ],
             spacing=0,
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN
         ),
-        bgcolor=Colors.BG_CARD,
+        bgcolor=Colors.TRANSPARENT,
         padding=Spacing.LG,
         border_radius=8,
-        border=ft.Border.all(1, Colors.BORDER),
-        height=100,
+        border=ft.Border.all(2, Colors.BORDER),
+        # height=100,
         expand=True
     )

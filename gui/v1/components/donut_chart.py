@@ -5,8 +5,8 @@ import flet as ft
 from ..theme import Colors, Spacing, Typography
 
 
-
-def donut_chart(title: str, sections: list):
+@ft.component
+def DonutChart(title: str, sections: list):
     """
     A donut chart visualization with legend
     sections: list of dicts [{"value": 35, "color": "#0099ff", "label": "CPU: 35%"}]

@@ -12,6 +12,7 @@ class Colors:
     BG_CARD = "#1a1f2e"  # Card/container background
     BG_SIDEBAR = "#0F1821"  # Sidebar background
     BG_HOVER = "#1e2433"  # Hover state
+    TRANSPARENT = "transparent"
 
     # Primary & Accents
     PRIMARY = "#00d9ff"  # Cyan accent

@@ -2,11 +2,12 @@
 Stats Page - Declarative with hooks
 """
 import flet as ft
-from ..theme import Colors, Spacing, Typography, create_button_style
-from ..components.stat_card import stat_card
+
+from ..components.donut_chart import DonutChart
 from ..components.metric_card import metric_card
-from ..components.donut_chart import donut_chart
-from ..components.bar_chart import bar_chart_card
+from ..components.stat_card import StatsCard
+from ..theme import Colors, Spacing, Typography, create_button_style
+
 
 @ft.component
 def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refresh):
@@ -48,7 +49,7 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                     controls=[
                         ft.Text(
                             "Mining Performance & Statistics",
-                            size=Typography.SIZE_HEADING,
+                            size=Typography.SIZE_TITLE,
                             color=Colors.TEXT_PRIMARY,
                             weight=ft.FontWeight.BOLD
                         ),
@@ -64,92 +65,63 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                 ),
                 ft.Container(height=Spacing.XL),
 
-                # Stat cards - Row 1
                 ft.Row(
+                    vertical_alignment=ft.CrossAxisAlignment.START,
                     controls=[
-                        stat_card(
-                            icon=ft.Icons.GRID_VIEW,
-                            icon_color=Colors.CHART_BLUE,
-                            label="Blocks Mined",
-                            value=str(node_status.get("blocks_mined", 0))
-                        ),
-                        stat_card(
-                            icon=ft.Icons.CHECK_CIRCLE,
-                            icon_color=Colors.SUCCESS,
-                            label="Success Rate",
-                            value=f"{mining_stats.get('success_rate', 0):.0f}%"
-                        ),
-                        stat_card(
-                            icon=ft.Icons.FLASH_ON,
-                            icon_color=Colors.WARNING,
-                            label="Hash Rate",
-                            value=f"{mining_stats.get('hash_rate', 0):.0f} H/s"
-                        ),
-                    ],
-                    spacing=Spacing.LG,
-                    expand=True
-                ),
-
-                # Stat cards - Row 2
-                ft.Row(
-                    controls=[
-                        stat_card(
-                            icon=ft.Icons.SCHEDULE,
-                            icon_color=Colors.SUCCESS,
-                            label="Avg Time",
-                            value=f"{mining_stats.get('avg_time', 0):.2f}s"
-                        ),
-                        stat_card(
-                            icon=ft.Icons.BAR_CHART,
-                            icon_color=Colors.CHART_PURPLE,
-                            label="Total Attempts",
-                            value=str(mining_stats.get("total_attempts", 0))
-                        ),
-                        stat_card(
-                            icon=ft.Icons.EMOJI_EVENTS,
-                            icon_color=Colors.CHART_YELLOW,
-                            label="Total Reward",
-                            value=f"{node_status.get('total_reward', 0):.2f} LUN"
-                        ),
-                    ],
-                    spacing=Spacing.LG,
-                    expand=True
-                ),
-                ft.Container(height=Spacing.XL),
-
-                # Donut charts
-                ft.Row(
-                    controls=[
-                        donut_chart(title="Resource Usage Distribution", sections=resource_sections),
-                        donut_chart(title="Block Distribution", sections=block_sections)
-                    ],
-                    spacing=Spacing.LG,
-                    expand=True
-                ),
-                ft.Container(height=Spacing.XL),
-
-                # Trend charts
-                ft.Row(
-                    controls=[
-                        bar_chart_card(
-                            title="Hash Rate Trend",
-                            data=hash_rate_data,
-                            color=Colors.CHART_BLUE
-                        ),
-                        bar_chart_card(
-                            title="Success Rate Trend",
-                            data=success_rate_data,
-                            color=Colors.CHART_BLUE,
-                            max_value=100
-                        ),
-                        bar_chart_card(
-                            title="Mining Time Trend",
-                            data=mining_time_data,
-                            color=Colors.CHART_YELLOW
-                        )
-                    ],
-                    spacing=Spacing.LG,
-                    expand=True
+                        ft.Container(expand=True,
+                                     content=ft.GridView(
+                                         runs_count=2,
+                                         child_aspect_ratio=2.0,
+                                         controls=[
+                                             StatsCard(
+                                                 icon=ft.Icons.GRID_VIEW,
+                                                 icon_color=Colors.CHART_BLUE,
+                                                 label="Blocks Mined",
+                                                 value=str(node_status.get("blocks_mined", 0)),
+                                                 value_color=Colors.CHART_BLUE
+                                             ),
+                                             StatsCard(
+                                                 icon=ft.Icons.CHECK_CIRCLE,
+                                                 icon_color=Colors.SUCCESS,
+                                                 label="Success Rate",
+                                                 value=f"{mining_stats.get('success_rate', 0):.0f}%",
+                                                 value_color=Colors.CHART_GREEN
+                                             ),
+                                             StatsCard(
+                                                 icon=ft.Icons.FLASH_ON,
+                                                 icon_color=Colors.WARNING,
+                                                 label="Hash Rate",
+                                                 value=f"{mining_stats.get('hash_rate', 0):.0f} H/s",
+                                                 value_color=Colors.CHART_ORANGE
+                                             ),
+                                             StatsCard(
+                                                 icon=ft.Icons.SCHEDULE,
+                                                 icon_color=Colors.SUCCESS,
+                                                 label="Avg Time",
+                                                 value=f"{mining_stats.get('avg_time', 0):.2f}s",
+                                                 value_color=Colors.SUCCESS
+                                             ),
+                                             StatsCard(
+                                                 icon=ft.Icons.BAR_CHART,
+                                                 icon_color=Colors.CHART_PURPLE,
+                                                 label="Total Attempts",
+                                                 value=str(mining_stats.get("total_attempts", 0)),
+                                                 value_color=Colors.CHART_PURPLE
+                                             ),
+                                             StatsCard(
+                                                 icon=ft.Icons.EMOJI_EVENTS,
+                                                 icon_color=Colors.CHART_YELLOW,
+                                                 label="Total Reward",
+                                                 value=f"{node_status.get('total_reward', 0):.2f} LUN",
+                                                 value_color=Colors.CHART_YELLOW
+                                             ),
+                                         ]
+                                     )),
+                        ft.Container(expand=True, content=DonutChart(title="Resource Usage Distribution",
+                                                                     sections=resource_sections), ),
+                        ft.Container(expand=True,
+                                     content=DonutChart(title="Block Distribution", sections=block_sections))
+                    ]
                 ),
                 ft.Container(height=Spacing.XL),
 
