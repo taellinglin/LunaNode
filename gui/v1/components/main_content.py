@@ -1,8 +1,11 @@
 import flet as ft
 
 from gui.v1.components.navbar import AppPage
-from gui.v1.pages import StatsPage
-from gui.v1.theme import Colors
+from gui.v1.pages.bills_page import BillsPage
+from gui.v1.pages.log_page import LogPage
+from gui.v1.pages.settings_page import SettingsPage
+from gui.v1.pages.stats_page import StatsPage
+from gui.v1.pages.mining_page import MiningPage
 
 # Initialize state for StatsPage
 node_status = {
@@ -47,9 +50,9 @@ def handle_refresh():
 def MainContent(current_page: AppPage):
     match current_page:
         case AppPage.MINING:
-            return ft.Text('Mining', color=Colors.TEXT_PRIMARY)
+            return MiningPage()
         case AppPage.BILLS:
-            return ft.Text('Bills', color=Colors.TEXT_PRIMARY)
+            return BillsPage()
         case AppPage.STATS:
             return StatsPage(
                 node_status=node_status,
@@ -58,6 +61,6 @@ def MainContent(current_page: AppPage):
                 on_refresh=handle_refresh
             )
         case AppPage.SETTINGS:
-            return ft.Text('Settings', color=Colors.TEXT_PRIMARY)
+            return SettingsPage()
         case AppPage.LOG:
-            return ft.Text('Log', color=Colors.TEXT_PRIMARY)
+            return LogPage()
