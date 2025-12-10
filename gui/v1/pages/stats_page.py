@@ -4,7 +4,7 @@ Stats Page - Declarative with hooks
 import flet as ft
 
 from ..components.donut_chart import DonutChart
-from ..components.metric_card import metric_card
+from ..components.metric_card import MetricCard
 from ..components.stat_card import StatsCard
 from ..theme import Colors, Spacing, Typography, create_button_style
 
@@ -63,10 +63,10 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN
                 ),
-                ft.Container(height=Spacing.XL),
 
                 ft.Row(
                     vertical_alignment=ft.CrossAxisAlignment.START,
+                    intrinsic_height=True,
                     controls=[
                         ft.Container(expand=True,
                                      content=ft.GridView(
@@ -117,39 +117,37 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                                              ),
                                          ]
                                      )),
-                        ft.Container(expand=True, content=DonutChart(title="Resource Usage Distribution",
-                                                                     sections=resource_sections), ),
-                        ft.Container(expand=True,
-                                     content=DonutChart(title="Block Distribution", sections=block_sections))
+                        DonutChart(title="Resource Usage Distribution",
+                                   sections=resource_sections),
+                        DonutChart(title="Block Distribution", sections=block_sections)
                     ]
                 ),
-                ft.Container(height=Spacing.XL),
 
                 # System metrics
                 ft.Row(
                     controls=[
-                        metric_card(
+                        MetricCard(
                             icon=ft.Icons.MEMORY,
                             label="CPU Usage",
                             value=f"{mining_stats.get('cpu_usage', 0):.0f}%",
                             percentage=mining_stats.get("cpu_usage", 0),
                             color=Colors.CHART_BLUE
                         ),
-                        metric_card(
+                        MetricCard(
                             icon=ft.Icons.STORAGE,
                             label="Memory Usage",
                             value=f"{mining_stats.get('memory_usage', 0):.0f}%",
                             percentage=mining_stats.get("memory_usage", 0),
                             color=Colors.CHART_PINK
                         ),
-                        metric_card(
+                        MetricCard(
                             icon=ft.Icons.COMPUTER,
                             label="GPU Usage",
                             value=f"{mining_stats.get('gpu_usage', 0):.0f}%",
                             percentage=mining_stats.get("gpu_usage", 0),
                             color=Colors.SUCCESS
                         ),
-                        metric_card(
+                        MetricCard(
                             icon=ft.Icons.WIFI,
                             label="Network Latency",
                             value=f"{mining_stats.get('network_latency', 0)}ms",
@@ -161,7 +159,7 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                     expand=True
                 )
             ],
-            spacing=0,
+            spacing=Spacing.XL,
             scroll=ft.ScrollMode.AUTO,
             expand=True
         ),

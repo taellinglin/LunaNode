@@ -7,8 +7,8 @@ from flet import IconData
 from ..theme import Colors, Spacing, Typography
 
 
-
-def metric_card(icon: IconData, label: str, value: str, percentage: float, color: str):
+@ft.component
+def MetricCard(icon: IconData, label: str, value: str, percentage: float, color: str):
     """
     A card displaying a system metric with progress bar
     Pure functional component

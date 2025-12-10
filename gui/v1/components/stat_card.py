@@ -28,7 +28,6 @@ def StatsCard(icon: IconData, icon_color: str, label: str, value: str, value_col
                     ],
                     spacing=Spacing.SM
                 ),
-                ft.Container(height=Spacing.SM),
                 # Value
                 ft.Text(
                     value,
@@ -37,7 +36,7 @@ def StatsCard(icon: IconData, icon_color: str, label: str, value: str, value_col
                     weight=ft.FontWeight.W_400
                 )
             ],
-            spacing=0,
+            spacing=Spacing.SM,
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN
         ),
         bgcolor=Colors.TRANSPARENT,

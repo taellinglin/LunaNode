@@ -12,7 +12,9 @@
       "Bash(timeout 20 python:*)",
       "Bash(timeout 5 python:*)",
       "Bash(timeout 10 python:*)",
-      "Bash(timeout 8 python:*)"
+      "Bash(timeout 8 python:*)",
+      "WebFetch(domain:flet.dev)",
+      "WebFetch(domain:docs.flet.dev)"
     ],
     "deny": [],
     "ask": []
