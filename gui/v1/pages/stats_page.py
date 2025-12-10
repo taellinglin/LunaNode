@@ -3,6 +3,7 @@ Stats Page - Declarative with hooks
 """
 import flet as ft
 
+from ..components import BarChartCard
 from ..components.donut_chart import DonutChart
 from ..components.metric_card import MetricCard
 from ..components.stat_card import StatsCard
@@ -120,6 +121,14 @@ def StatsPage(node_status: dict, mining_stats: dict, chart_data: dict, on_refres
                         DonutChart(title="Resource Usage Distribution",
                                    sections=resource_sections),
                         DonutChart(title="Block Distribution", sections=block_sections)
+                    ]
+                ),
+
+                ft.Row(
+                    controls=[
+                        BarChartCard(title="Hash Rate Trend", data=hash_rate_data, color=Colors.CHART_BLUE),
+                        BarChartCard(title="Success Rate Trend", data=success_rate_data, color=Colors.CHART_GREEN),
+                        BarChartCard(title="Mining Time Trend", data=mining_time_data, color=Colors.CHART_YELLOW),
                     ]
                 ),
 

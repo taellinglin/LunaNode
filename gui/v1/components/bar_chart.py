@@ -2,33 +2,79 @@
 Bar Chart Component - Declarative with hooks
 """
 import flet as ft
+import flet_charts as fch
 from ..theme import Colors, Spacing, Typography
 
 
-
-def bar_chart_card(title: str, data: list, color: str, max_value: float = None):
+@ft.component
+def BarChartCard(title: str, data: list, color: str, max_value: float = None):
     """
-    A card containing a bar chart for trend visualization
+    A card containing a bar chart for trend visualization using flet_charts.BarChart
     data: list of values for the bars
     """
-    # Determine max value
+    # Determine max value for chart scaling
     chart_max = max_value or (max(data) * 1.2 if data and any(v > 0 for v in data) else 100)
 
-    # Create bars
-    bars = []
+    # Handle empty data
     display_data = data if data and any(v > 0 for v in data) else [1] * 20
     bar_color = color if data and any(v > 0 for v in data) else Colors.BG_HOVER
 
-    for value in display_data:
-        normalized_height = (value / chart_max * 100) if chart_max > 0 else 10
-        bars.append(
-            ft.Container(
-                width=8,
-                height=max(4, normalized_height),
-                bgcolor=bar_color,
-                border_radius=2
+    # Create BarChartGroups with BarChartRods
+    bar_groups = []
+    for index, value in enumerate(display_data):
+        bar_groups.append(
+            fch.BarChartGroup(
+                x=index,
+                rods=[
+                    fch.BarChartRod(
+                        from_y=0,
+                        to_y=value,
+                        width=8,
+                        color=bar_color,
+                        border_radius=ft.BorderRadius(2, 2, 0, 0),
+                        tooltip=str(value)
+                    )
+                ]
             )
         )
+
+    # Create the bar chart
+    chart = fch.BarChart(
+        groups=bar_groups,
+        baseline_y=0,
+        max_y=chart_max,
+        interactive=True,
+        bgcolor=Colors.BG_DARK,
+        expand=True,
+        # Hide axes for cleaner look
+        left_axis=fch.ChartAxis(
+            label_size=0,
+        ),
+        bottom_axis=fch.ChartAxis(
+            label_size=0,
+        ),
+        # Remove grid lines
+        horizontal_grid_lines=fch.ChartGridLines(
+            interval=chart_max,
+            color="transparent",
+            width=0,
+        ),
+        vertical_grid_lines=fch.ChartGridLines(
+            interval=1,
+            color="transparent",
+            width=0,
+        ),
+    )
+
+    # Chart container
+    chart_container = ft.Container(
+        content=chart,
+        bgcolor=Colors.BG_DARK,
+        padding=Spacing.MD,
+        border_radius=4,
+        expand=True,
+        height=120
+    )
 
     return ft.Container(
         content=ft.Column(
@@ -40,19 +86,7 @@ def bar_chart_card(title: str, data: list, color: str, max_value: float = None):
                     weight=ft.FontWeight.W_500
                 ),
                 ft.Container(height=Spacing.SM),
-                ft.Container(
-                    content=ft.Row(
-                        controls=bars,
-                        spacing=4,
-                        alignment=ft.MainAxisAlignment.SPACE_EVENLY,
-                        vertical_alignment=ft.CrossAxisAlignment.END
-                    ),
-                    bgcolor=Colors.BG_DARK,
-                    padding=Spacing.MD,
-                    border_radius=4,
-                    expand=True,
-                    height=120
-                )
+                chart_container
             ],
             spacing=0,
             expand=True
