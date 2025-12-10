@@ -76,4 +76,9 @@ def App():
 
 def main(page: ft.Page):
     page.padding = 0.0
+    page.window.min_width = 1280
+    page.window.width = 1280
+    page.window.min_height = 1000
+    page.window.height = 1280
+    page.window.full_screen = True
     page.render(App)
