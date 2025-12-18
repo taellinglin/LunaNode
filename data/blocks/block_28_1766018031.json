@@ -1,0 +1,26 @@
+{
+  "index": 28,
+  "previous_hash": "000074d02424059daa3bc322eb3fcce972c75c98fdd2ab7b8adca7d464bef3e4",
+  "timestamp": 1766018030.9627411,
+  "transactions": [
+    {
+      "back_serial": "",
+      "bill_type": "GTX_Genesis",
+      "denomination": 10000000.0,
+      "front_serial": "GTX10000000_1766018005708_6934cfb3",
+      "hash": "daca02e0ea25c8fd687662314b4ce137a156472527834b9abd2bb1b3bcaa95cf",
+      "issued_to": "Sanny&LingLin",
+      "metadata_hash": "8e53ab9bff2338c26de9f85e53806f7b63bdd7e8db9fd7365ab362ffb57cfacd",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsOg1CaGuMsGdeMfBF32l\nINVCRBV42zv9XdnZ7u2queMymxQ1w5pysaO93Ef/VuP6STryicQ5Zpo4JDC9KaTD\n0s7w+yj8f5yZ4cQ+N0OXNnG7dZEDZstHBlD3ML2Qz7ML+whYZLTzyyqo/Q0IRmcR\nHDtBgcU+z0S9nwRnwl7H8lSntbuY5W9yIqzYefepG9td5KuJRhhEdiJuj+aKBECE\nNUmoiadM4dgURoKoVVLtvfzmzF1CtLJE9JbaYb5n0Qe6y4WkEzN+Q8oYRK7D5GNf\nMucB+JLjxX5VVtvVmUBQbx6qbphe04e6zkn/aww+iu+Bqs74oX/tEuWzvXXTyJp0\nWwIDAQAB\n-----END PUBLIC KEY-----\n",
+      "serial_number": "SN-bknSeCBOKdfBSQ-giI",
+      "signature": "o2Mwyobw/d5i1Y9OdSVe+DZkiebwK2/5zmeJLAUQSOdqmKUGhiDDW3/ux1T121Kwifl9EMoBJG7uxXYxelaTkSG7cDW2XKXHrTT+0YloJPcYuG4Ipe2GVPVWsfl+uph7P2ycQw68/kJW7WrBt5e4mZb5WrUDpCLMl4/A9sq8lbUOrn1bz+/GJ61YsOd2ycpaFm9eBknetkkBDcI1G3Kg/Fbk/zcRpIlMnLa2SBC7AGlEbqK40a3tAzOIXmv4aiLX5nf8Bn0Cf4Qma/qGGl8e1uzMO9iMvo+cb10QrmSGZlG9ZsHM4bTny1v8Z54dksmuiGs3c8CAJEP/pTsLYjLguw==",
+      "timestamp": 1766018005.7831419,
+      "type": "GTX_Genesis"
+    }
+  ],
+  "miner": "2a53c957713b6ade727659375437eda9",
+  "difficulty": 4,
+  "nonce": 16992,
+  "reward": 1.0,
+  "hash": "00002988758d5dbbf021a40b99d613c62e45507b691a0f230dbc1e1f8ff2bbd0"
+}

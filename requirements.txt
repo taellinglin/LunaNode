@@ -1,4 +1,6 @@
 flet[all]==0.28.3
+flet-desktop
+flet-cli
 requests
 cryptography
 lunalib

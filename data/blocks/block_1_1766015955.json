@@ -1,0 +1,26 @@
+{
+  "index": 1,
+  "previous_hash": "dd63669313ed48c2327d1fa5432346aa409b658e4ba536edcf373935f10c23c3",
+  "timestamp": 1766015954.043546,
+  "transactions": [
+    {
+      "back_serial": "",
+      "bill_type": "GTX_Genesis",
+      "denomination": 1.0,
+      "front_serial": "GTX1_1766015952262_94ed1e74",
+      "hash": "b2c98eef498178c089cc7aaa2fd95d1e1ba811609adc328b1a7865dff1e6cd90",
+      "issued_to": "YisenLingLin",
+      "metadata_hash": "7ac80006f847792cb649071970e7e6c87d2a7d7348d26dc72cfa61b35b358198",
+      "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvnsslqpdUNXML3YXEb0y\n+kjjtD4aX1zlu4XfbiYHG0AUQbp1mf6dxD2ocjq/iY9NUG0Wm0DQg42sRy/c+xRq\n3AyvCamKHmZX/v9SxD+XYMuVuGGeV1FLdxPdFjBiSJi7Xw1LF7JyDlsD50DsEoGd\nYreaDcOSKI7N3ZZ0JdIuus9uOGAR5GPAsq8Y4ZyTcJucstFlX6T3uG3ZLobNC3kG\n/SFYtqCh+cRNYa4ba8ud+X8xejmpo/DPZ9D4z/FVrmphDJ8gdQ8HIUDQJ5j9c33X\n+1/otqbkun8lFj05hSMlfS2nCUtBUpe0T8+qyjFlzez6f/POOslRGumeIIic2FdD\nqwIDAQAB\n-----END PUBLIC KEY-----\n",
+      "serial_number": "SN-9D4YSNK1gSKKBw-3Os",
+      "signature": "DD8PER+O/6Xzz7fnPThbHQn1ncS4NvYHJpa/q0dsDmDThQDsROvt7ehGXzKPQ9X9ZoiYC3xpDBQ7ruj96mfOZaZ1/XzWwCaTRzFV/SgqHdlKC41G/zgvTN9BnpeR/r1tzT3kCowVg9nEY4JtOCT5UVnbPGd7zRI2+HXIlvCGnE5qIK25DY72ha9qaHivq24R5RU2BOJSV9aZrk/pFluX5Md2vZ3kUNnOWh6czx9Z026FFsRI3efAQCGtH0ppmAFGpl+tNuf/muC11fFA5x5XcJMhu9HUpu/is8ySI0cgFWdz4GaZeVaG/zoxoffJ+63iUgV0M1EufoxXP+N+V9wroA==",
+      "timestamp": 1766015952.3575675,
+      "type": "GTX_Genesis"
+    }
+  ],
+  "miner": "2a53c957713b6ade727659375437eda9",
+  "difficulty": 4,
+  "nonce": 193554,
+  "reward": 1.0,
+  "hash": "0000334fa1e724f1bfd4b8eaaba6c7db75276799be43869f468cbadfa284a8e9"
+}

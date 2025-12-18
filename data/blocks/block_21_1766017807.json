@@ -1,0 +1,22 @@
+{
+  "index": 21,
+  "previous_hash": "000027db56386f989a2b70c125e94f883443286a2aa3ba47062f85fab3cec60e",
+  "timestamp": 1766017804.419537,
+  "transactions": [
+    {
+      "type": "reward",
+      "from": "network",
+      "to": "2a53c957713b6ade727659375437eda9",
+      "amount": 1.0,
+      "timestamp": 1766017804.419537,
+      "block_height": 21,
+      "hash": "reward_21_1766017804",
+      "description": "Empty block mining reward"
+    }
+  ],
+  "miner": "2a53c957713b6ade727659375437eda9",
+  "difficulty": 4,
+  "nonce": 30855,
+  "reward": 1.0,
+  "hash": "0000bbfce044c47db93787d966308d50f9ecb9330c2baed8028e231135c2fa83"
+}

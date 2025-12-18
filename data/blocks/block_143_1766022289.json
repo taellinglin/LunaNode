@@ -1,0 +1,27 @@
+{
+  "index": 143,
+  "previous_hash": "0000da53670ec4f3d6729d3b0f62ae90b9a6160b16a07a8ad8300e110fecbe78",
+  "timestamp": 1766022286.5106773,
+  "transactions": [
+    {
+      "amount": 13.0,
+      "fee": 1e-05,
+      "from": "2a53c957713b6ade727659375437eda9",
+      "hash": "606242660410c4f28a1bcacbb8a4b31ed555a801afa643c31eb03146c461fb88",
+      "memo": "",
+      "nonce": 1766022266588,
+      "priority": "normal",
+      "public_key": "pub_74affbf10635a536efbf56c040c18f6d",
+      "signature": "ef7dcefca24ac072d99c2a70ea1846e77d9dd4485c8ec33057273913b012c0e1",
+      "timestamp": 1766022266.5880642,
+      "to": "8e0bca1d2651a7fc6e9bd73beadbddc7",
+      "type": "transfer",
+      "version": "1.0"
+    }
+  ],
+  "miner": "2a53c957713b6ade727659375437eda9",
+  "difficulty": 4,
+  "nonce": 311914,
+  "reward": 1.0,
+  "hash": "0000b735efc2176c7e1fb6f0664d959dd9eabefbcc6b563e44747f6f6f448074"
+}

@@ -1,0 +1,27 @@
+{
+  "index": 59,
+  "previous_hash": "000006d8922584b4ec8e5c0902e94da23cf64e75955178de238865469f3a1267",
+  "timestamp": 1766019622.3597386,
+  "transactions": [
+    {
+      "amount": 13.0,
+      "fee": 1e-05,
+      "from": "2a53c957713b6ade727659375437eda9",
+      "hash": "4775a95aa9ad15565e7393cb3b2253dd09525f7e0f6f7039ce797ee8baa547af",
+      "memo": "Meow",
+      "nonce": 1766019595337,
+      "priority": "normal",
+      "public_key": "pub_74affbf10635a536efbf56c040c18f6d",
+      "signature": "5800e67266f511a20a9e1c6f42eb0aacc325bd603d8a0784b5c8892e94cd9641",
+      "timestamp": 1766019595.3378205,
+      "to": "8e0bca1d2651a7fc6e9bd73beadbddc7",
+      "type": "transfer",
+      "version": "1.0"
+    }
+  ],
+  "miner": "2a53c957713b6ade727659375437eda9",
+  "difficulty": 4,
+  "nonce": 53888,
+  "reward": 1.0,
+  "hash": "000004c9c51a68b51f8319e40e8692877f7829ec662ac9ae04303a699066124f"
+}

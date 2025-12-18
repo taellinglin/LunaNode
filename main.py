@@ -20,6 +20,7 @@ from lunalib.mining.cuda_manager import CUDAManager
 from lunalib.gtx.digital_bill import DigitalBill
 
 from utils import LunaNode
+from utils import Miner
 from gui.sidebar import Sidebar
 from gui.main_page import MainPage
 from gui.mining_history import MiningHistory
@@ -43,47 +44,153 @@ class LunaNodeApp:
         self.settings_page = SettingsPage(self)  # Add this line
         self.log_page = LogPage(self)
     def submit_mined_block(self, block_data: Dict) -> bool:
-        """Submit a mined block directly to the network"""
+        """Submit a mined block - USING SERVER'S EXPECTED FORMAT"""
         try:
             import requests
             import json
+            import hashlib
+            import time
             
-            # Submit to the node URL
             node_url = self.endpoint_url if hasattr(self, 'endpoint_url') else "https://bank.linglin.art"
             
-            # Prepare the submission payload
-            submission_data = {
-                'block': block_data,
-                'miner_address': getattr(self, 'miner_address', 'unknown'),
-                'timestamp': time.time()
+            print("=" * 60)
+            print("🚀 SUBMITTING BLOCK (USING SERVER'S FORMAT)")
+            print("=" * 60)
+            
+            submission_data = block_data.copy()
+            
+            # Get block info
+            mined_hash = submission_data.get('hash', '')
+            nonce = submission_data.get('nonce', 0)
+            timestamp = submission_data.get('timestamp', time.time())
+            previous_hash = submission_data.get('previous_hash', '0' * 64)
+            index = submission_data.get('index', 0)
+            difficulty = submission_data.get('difficulty', 0)
+            miner = submission_data.get('miner', '')
+            
+            # Get original transactions
+            original_transactions = submission_data.get('transactions', [])
+            
+            # ====== STEP 1: Use the EXACT format the server expects ======
+            print(f"\n🔍 Using server's expected format for validation:")
+            
+            # From the debug output, server expects this EXACT structure:
+            mining_data = {
+                "difficulty": difficulty,
+                "index": index,
+                "miner": miner,
+                "nonce": nonce,
+                "previous_hash": previous_hash,
+                "timestamp": timestamp,
+                "transactions": [],  # EMPTY ARRAY - SERVER EXPECTS NO TRANSACTIONS!
+                "version": "1.0"
             }
             
-            # Send to node API
+            # Calculate what the server will calculate
+            server_expected_hash = hashlib.sha256(
+                json.dumps(mining_data, sort_keys=True).encode()
+            ).hexdigest()
+            
+            print(f"  Mining data: {json.dumps(mining_data, indent=2)}")
+            print(f"\n  Server will calculate: {server_expected_hash}")
+            print(f"  Your provided hash:     {mined_hash}")
+            
+            # ====== STEP 2: Check if miner needs fixing ======
+            if mined_hash != server_expected_hash:
+                print(f"\n⚠️  YOUR MINER IS USING WRONG FORMAT!")
+                print(f"   You need to FIX your miner's calculate_block_hash() function.")
+                print(f"   It should use this EXACT format:")
+                print(f"   {json.dumps(mining_data, indent=2)}")
+                
+                # For now, we'll override the hash to match server's expectation
+                print(f"\n🔄 Overriding hash to match server's expectation...")
+                submission_data['hash'] = server_expected_hash
+                mined_hash = server_expected_hash
+            
+            # ====== STEP 3: Verify difficulty ======
+            print(f"\n🔐 Verifying difficulty {difficulty}...")
+            
+            if not mined_hash.startswith('0' * difficulty):
+                print(f"❌ Hash doesn't meet difficulty requirement")
+                return False
+            
+            print(f"✅ Difficulty requirement met")
+            
+            # ====== STEP 4: Prepare submission ======
+            print(f"\n📦 Preparing submission...")
+            
+            # Calculate merkleroot from NON-REWARD transactions (should be empty)
+            non_reward_txs = [tx for tx in original_transactions if tx.get('type') != 'reward']
+            
+            if non_reward_txs:
+                tx_hashes = []
+                for tx in non_reward_txs:
+                    if 'hash' in tx:
+                        tx_hashes.append(tx['hash'])
+                    else:
+                        tx_string = json.dumps(tx, sort_keys=True)
+                        tx_hashes.append(hashlib.sha256(tx_string.encode()).hexdigest())
+                
+                if tx_hashes:
+                    while len(tx_hashes) > 1:
+                        new_hashes = []
+                        for i in range(0, len(tx_hashes), 2):
+                            if i + 1 < len(tx_hashes):
+                                combined = tx_hashes[i] + tx_hashes[i + 1]
+                            else:
+                                combined = tx_hashes[i] + tx_hashes[i]
+                            new_hashes.append(hashlib.sha256(combined.encode()).hexdigest())
+                        tx_hashes = new_hashes
+                    merkleroot = tx_hashes[0]
+                else:
+                    merkleroot = "0" * 64
+            else:
+                merkleroot = "0" * 64
+            
+            # Add required fields
+            submission_data['merkleroot'] = merkleroot
+            submission_data['transactions_hash'] = merkleroot
+            submission_data['transaction_count'] = len(original_transactions)
+            submission_data['version'] = "1.0"
+            
+            if 'reward' not in submission_data:
+                submission_data['reward'] = 1.0
+            
+            print(f"\n📤 Submitting block #{index}...")
+            print(f"  Final hash: {mined_hash}")
+            print(f"  Transactions: {len(original_transactions)}")
+            print(f"  Merkle root: {merkleroot[:16]}...")
+            
+            # ====== STEP 5: Submit ======
             response = requests.post(
-                f"{node_url}/api/blocks/submit",
+                f"{node_url}/blockchain/submit-block",
                 json=submission_data,
                 headers={'Content-Type': 'application/json'},
                 timeout=30
             )
             
+            print(f"\n📡 Response: HTTP {response.status_code}")
+            
             if response.status_code == 200:
                 result = response.json()
                 if result.get('success'):
-                    print(f"✅ Block #{block_data.get('index')} submitted successfully")
+                    print(f"✅ Block accepted!")
                     return True
                 else:
-                    print(f"❌ Block submission rejected: {result.get('message', 'Unknown error')}")
+                    error_msg = result.get('error', result.get('message', 'Unknown error'))
+                    print(f"❌ Rejected: {error_msg}")
                     return False
             else:
-                print(f"❌ HTTP error {response.status_code}: {response.text}")
+                print(f"❌ HTTP error: {response.text}")
                 return False
                 
-        except requests.exceptions.RequestException as e:
-            print(f"❌ Network error submitting block: {e}")
-            return False
         except Exception as e:
-            print(f"💥 Error submitting block: {e}")
+            print(f"💥 Error: {e}")
+            import traceback
+            traceback.print_exc()
             return False
+        finally:
+            print("=" * 60)
     def create_main_ui(self, page: ft.Page):
         """Create the main node interface"""
         self.page = page

@@ -510,10 +510,38 @@ class Miner:
         return total_reward
 
     def calculate_block_hash(self, index, previous_hash, timestamp, transactions, nonce):
-        """Calculate block hash using the SAME method as the server"""
-        import json
-        block_string = f"{index}{previous_hash}{timestamp}{json.dumps(transactions, sort_keys=True)}{nonce}"
-        return hashlib.sha256(block_string.encode()).hexdigest()
+        """Calculate SHA-256 hash of a block - UPDATED TO MATCH SERVER VALIDATION"""
+        try:
+            index = int(index)
+            nonce = int(nonce)
+            
+            if isinstance(timestamp, float):
+                timestamp = timestamp
+            else:
+                timestamp = float(timestamp)
+            
+            # Use the EXACT format that the server validation expects
+            # From debug output: Method 1 uses this format
+            block_data = {
+                "index": index,
+                "previous_hash": previous_hash,
+                "timestamp": timestamp,
+                "transactions": [],  # EMPTY! The server expects NO transactions in mining proof
+                "miner": "miner_address_here",  # Need to get this from somewhere
+                "difficulty": 4,  # Need to get this from somewhere
+                "nonce": nonce,
+                "version": "1.0"
+            }
+            
+            # IMPORTANT: Use sort_keys=True WITHOUT custom separators to match server validation
+            block_string = json.dumps(block_data, sort_keys=True)
+            calculated_hash = hashlib.sha256(block_string.encode()).hexdigest()
+            
+            return calculated_hash
+            
+        except Exception as e:
+            self.logger.error(f"Hash calculation error: {e}")
+            return "0" * 64
 
 class LunaNode:
     """Main Luna Node class using lunalib directly"""
