@@ -2176,5 +2176,27 @@
     "method": "cpu",
     "reward": 1.0,
     "status": "success"
+  },
+  {
+    "block_index": 192,
+    "timestamp": 1766025743.4108348,
+    "mining_time": 0.25604724884033203,
+    "difficulty": 4,
+    "nonce": 19970,
+    "hash": "0000aeddafa7fd2b9e781b754d5ff2d4083479d303ee5e91fccb8da67dac5e58",
+    "method": "cpu",
+    "reward": 1.0,
+    "status": "success"
+  },
+  {
+    "block_index": 193,
+    "timestamp": 1766025774.5552084,
+    "mining_time": 0.13929271697998047,
+    "difficulty": 4,
+    "nonce": 21646,
+    "hash": "00004d9696b042a9566679bda80ff56afd20a87bf8de92ff93a809c6c8607045",
+    "method": "cpu",
+    "reward": 1.0,
+    "status": "success"
   }
 ]
