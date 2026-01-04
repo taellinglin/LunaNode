@@ -1,6 +1,6 @@
 {
   "miner_address": "LUN_C73cNQy1pRqwnjFfkn8nyxNtVbWMm8eiva",
-  "difficulty": 6,
+  "difficulty": 4,
   "auto_mine": true,
   "node_url": "https://bank.linglin.art",
   "mining_interval": 30

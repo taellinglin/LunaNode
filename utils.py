@@ -294,9 +294,10 @@ class Miner:
             print(f"📊 Server state: Latest block index: {current_index}")
             print(f"📊 Latest block hash: {actual_previous_hash[:32]}...")
             
-            # Next block should be current_index + 1
-            new_index = current_index + 1
-            print(f"⛏️  Mining next block at index: {new_index}")
+            # サーバーは現在のインデックスを期待している（次のインデックスではない）
+            # Server expects the current index (not the next index)
+            new_index = current_index
+            print(f"⛏️  Mining block at index: {new_index} (server's expected format)")
             print(f"🔗 Using previous hash: {actual_previous_hash[:32]}...")
             
             # Get mempool transactions
