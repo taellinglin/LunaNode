@@ -196,6 +196,12 @@ class Miner:
         self.mining_thread = None
         self.should_stop_mining = False
         
+        # Mempool monitoring
+        self.mempool_monitor_thread = None
+        self.cached_mempool = []
+        self.last_mempool_check = 0
+        self.mempool_check_interval = 5  # Check every 5 seconds for new transactions
+        
     def start_mining(self):
         """Start auto-mining"""
         if self.is_mining:
@@ -203,6 +209,10 @@ class Miner:
             
         self.is_mining = True
         self.should_stop_mining = False
+        
+        # Start mempool monitoring
+        self._start_mempool_monitor()
+        
         if self.mining_started_callback:
             self.mining_started_callback()
         
@@ -211,9 +221,62 @@ class Miner:
         self.is_mining = False
         self.should_stop_mining = True
         
+        # Stop mempool monitoring
+        self._stop_mempool_monitor()
+        
     def save_mining_history(self):
         """Save mining history to storage"""
         self.data_manager.save_mining_history(self.mining_history)
+    
+    def _start_mempool_monitor(self):
+        """Start background thread to monitor mempool for new transactions"""
+        if self.mempool_monitor_thread and self.mempool_monitor_thread.is_alive():
+            return
+        
+        def monitor_mempool():
+            """Continuously monitor mempool for new transactions"""
+            print("🔍 Starting mempool monitor...")
+            while self.is_mining and not self.should_stop_mining:
+                try:
+                    current_time = time.time()
+                    if current_time - self.last_mempool_check >= self.mempool_check_interval:
+                        new_mempool = self.blockchain_manager.get_mempool()
+                        if new_mempool:
+                            # Check if there are new transactions
+                            old_count = len(self.cached_mempool)
+                            self.cached_mempool = new_mempool
+                            new_count = len(self.cached_mempool)
+                            if new_count > old_count:
+                                print(f"📬 New transactions detected! {old_count} → {new_count}")
+                            elif new_count < old_count:
+                                print(f"📤 Transactions processed: {old_count} → {new_count}")
+                        self.last_mempool_check = current_time
+                    time.sleep(1)  # Check every second if it's time to update
+                except Exception as e:
+                    print(f"Mempool monitor error: {e}")
+                    time.sleep(5)  # Wait a bit on error
+            print("🔍 Mempool monitor stopped")
+        
+        self.mempool_monitor_thread = threading.Thread(target=monitor_mempool, daemon=True)
+        self.mempool_monitor_thread.start()
+    
+    def _stop_mempool_monitor(self):
+        """Stop mempool monitoring thread"""
+        if self.mempool_monitor_thread and self.mempool_monitor_thread.is_alive():
+            # Thread will stop when is_mining becomes False
+            pass
+    
+    def _get_fresh_mempool(self):
+        """Get the freshest mempool data - always fetch from server"""
+        try:
+            # Always fetch fresh data from server before mining
+            mempool = self.blockchain_manager.get_mempool()
+            self.cached_mempool = mempool if mempool else []
+            self.last_mempool_check = time.time()
+            return self.cached_mempool
+        except Exception as e:
+            print(f"Error fetching mempool: {e}")
+            return self.cached_mempool  # Return cached if fetch fails
     
     def _calculate_block_reward(self, transactions: List[Dict]) -> float:
         """Calculate total reward based on transactions in the block using lunalib"""
@@ -294,15 +357,14 @@ class Miner:
             print(f"📊 Server state: Latest block index: {current_index}")
             print(f"📊 Latest block hash: {actual_previous_hash[:32]}...")
             
-            # サーバーは現在のインデックスを期待している（次のインデックスではない）
-            # Server expects the current index (not the next index)
-            new_index = current_index
-            print(f"⛏️  Mining block at index: {new_index} (server's expected format)")
+            # Next block should be current_index + 1
+            new_index = current_index + 1
+            print(f"⛏️  Mining block at index: {new_index} (next block after {current_index})")
             print(f"🔗 Using previous hash: {actual_previous_hash[:32]}...")
             
-            # Get mempool transactions
-            mempool = self.blockchain_manager.get_mempool()
-            print(f"📦 Mempool has {len(mempool)} transactions available")
+            # Get fresh mempool transactions (always fetch latest)
+            mempool = self._get_fresh_mempool()
+            print(f"📦 Mempool has {len(mempool)} transactions available (freshly fetched)")
             
             # If no transactions in mempool, create at least one reward transaction
             if not mempool:
@@ -396,7 +458,9 @@ class Miner:
                     actual_previous_hash,  # USE THE CORRECT PREVIOUS HASH
                     block_data['timestamp'],
                     mempool,
-                    nonce
+                    nonce,
+                    self.config.miner_address,
+                    block_difficulty
                 )
                 
                 if block_hash.startswith(target):
@@ -405,6 +469,40 @@ class Miner:
                     # Add hash to block data
                     block_data['hash'] = block_hash
                     block_data['nonce'] = nonce
+                    
+                    # DEBUG: Print the exact block structure we're submitting
+                    print(f"\n{'='*60}")
+                    print(f"🔍 DEBUG: Block mined successfully!")
+                    print(f"{'='*60}")
+                    print(f"Block structure being submitted:")
+                    
+                    # The mining hash format (what we calculated)
+                    mining_format = {
+                        "difficulty": block_difficulty,
+                        "index": new_index,
+                        "miner": self.config.miner_address,
+                        "nonce": nonce,
+                        "previous_hash": actual_previous_hash,
+                        "timestamp": block_data['timestamp'],
+                        "transactions": [],
+                        "version": "1.0"
+                    }
+                    print(f"\n1. Mining hash calculation (empty transactions):")
+                    print(f"   {json.dumps(mining_format, sort_keys=True)}")
+                    mining_hash_check = hashlib.sha256(json.dumps(mining_format, sort_keys=True).encode()).hexdigest()
+                    print(f"   Hash: {mining_hash_check}")
+                    print(f"   Match: {'✅' if mining_hash_check == block_hash else '❌'}")
+                    
+                    # The full block structure (what we're sending)
+                    print(f"\n2. Full block structure (with {len(mempool)} transactions):")
+                    print(f"   Index: {new_index}")
+                    print(f"   Previous: {actual_previous_hash[:32]}...")
+                    print(f"   Difficulty: {block_difficulty}")
+                    print(f"   Miner: {self.config.miner_address}")
+                    print(f"   Nonce: {nonce}")
+                    print(f"   Hash: {block_hash}")
+                    print(f"   Transactions: {len(mempool)}")
+                    print(f"{'='*60}\n")
                     
                     # Record mining history
                     mining_record = {
@@ -510,7 +608,7 @@ class Miner:
             
         return total_reward
 
-    def calculate_block_hash(self, index, previous_hash, timestamp, transactions, nonce):
+    def calculate_block_hash(self, index, previous_hash, timestamp, transactions, nonce, miner_address=None, difficulty=None):
         """Calculate SHA-256 hash of a block - UPDATED TO MATCH SERVER VALIDATION"""
         try:
             index = int(index)
@@ -521,16 +619,22 @@ class Miner:
             else:
                 timestamp = float(timestamp)
             
+            # Use actual values or fallback to config
+            if miner_address is None:
+                miner_address = self.config.miner_address
+            if difficulty is None:
+                difficulty = self.config.difficulty
+            
             # Use the EXACT format that the server validation expects
             # From debug output: Method 1 uses this format
             block_data = {
+                "difficulty": int(difficulty),
                 "index": index,
-                "previous_hash": previous_hash,
+                "miner": str(miner_address),
+                "nonce": nonce,
+                "previous_hash": str(previous_hash),
                 "timestamp": timestamp,
                 "transactions": [],  # EMPTY! The server expects NO transactions in mining proof
-                "miner": "miner_address_here",  # Need to get this from somewhere
-                "difficulty": 4,  # Need to get this from somewhere
-                "nonce": nonce,
                 "version": "1.0"
             }
             
@@ -541,7 +645,7 @@ class Miner:
             return calculated_hash
             
         except Exception as e:
-            self.logger.error(f"Hash calculation error: {e}")
+            print(f"Hash calculation error: {e}")
             return "0" * 64
 
 class LunaNode:
@@ -732,10 +836,12 @@ class LunaNode:
                 success, message = self.mine_single_block()
                 if success:
                     self._log_message(message, "success")
+                    # After successful mining, check immediately for new transactions
+                    time.sleep(2)  # Short delay to avoid hammering the server
                 else:
                     self._log_message(message, "warning")
-                
-                time.sleep(self.config.mining_interval)
+                    # On failure, wait the configured interval before retrying
+                    time.sleep(self.config.mining_interval)
         
         self.miner.mining_thread = threading.Thread(target=mining_loop, daemon=True)
         self.miner.mining_thread.start()

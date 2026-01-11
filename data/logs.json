@@ -1,2145 +1,5 @@
 [
   {
-    "timestamp": "2025-12-17 23:30:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:30:41",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:31:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:31:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:32:12",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:32:43",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:33:13",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:33:44",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:34:14",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:34:44",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:35:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:35:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:36:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:36:46",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:37:16",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:37:46",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:38:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:38:47",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:39:18",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:39:48",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:40:18",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:40:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:41:19",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:41:50",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:42:20",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:42:50",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:43:21",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:43:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:44:21",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:44:52",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:45:22",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:45:52",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:46:23",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:46:53",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:47:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:47:54",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:48:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:48:55",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:49:26",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:49:56",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:50:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:50:57",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:51:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:51:58",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:52:28",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:52:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:53:29",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:53:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:54:30",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:55:00",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:55:31",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:56:01",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:56:31",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:57:02",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:57:32",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:58:02",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:58:33",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:59:03",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-17 23:59:33",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:00:04",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:00:34",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:01:05",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:01:35",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:02:06",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:02:36",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:03:06",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:03:37",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:04:07",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:04:38",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:05:08",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:05:38",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:06:09",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:06:39",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:07:09",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:07:40",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:08:10",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:08:40",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:09:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:09:41",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:10:12",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:10:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:11:13",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:11:43",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:12:14",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:12:44",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:13:14",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:13:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:14:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:14:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:15:16",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:15:46",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:16:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:16:47",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:17:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:17:48",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:18:18",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:18:48",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:19:19",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:19:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:20:19",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:20:50",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:21:20",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:21:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:22:21",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:22:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:23:22",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:23:52",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:24:23",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:24:53",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:25:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:25:54",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:26:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:26:55",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:27:25",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:27:56",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:28:26",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:28:57",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:29:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:29:58",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:30:28",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:30:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:31:29",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:32:00",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:32:30",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:33:00",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:33:31",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:34:02",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:34:32",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:35:03",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:35:33",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:36:03",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:36:34",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:37:04",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:37:35",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:38:05",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:38:36",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:39:06",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:39:36",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:40:07",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:40:37",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:41:08",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:41:38",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:42:09",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:42:39",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:43:10",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:43:40",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:44:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:44:41",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:45:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:45:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:46:12",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:46:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:47:13",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:47:43",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:48:14",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:48:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:49:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:49:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:50:16",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:50:46",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:51:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:51:47",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:52:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:52:48",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:53:18",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:53:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:54:19",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:54:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:55:20",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:55:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:56:21",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:56:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:57:22",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:57:52",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:58:23",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:58:53",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:59:23",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 00:59:54",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:00:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:00:55",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:01:25",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:01:55",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:02:26",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:02:56",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:03:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:03:57",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:04:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:04:58",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:05:28",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:05:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:06:29",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:06:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:07:30",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:08:00",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:08:33",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:09:03",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:09:34",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:10:04",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:10:34",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:11:05",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:11:35",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:12:06",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:12:36",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:13:07",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:13:37",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:14:07",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:14:38",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:15:08",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:15:38",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:16:09",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:16:39",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:17:10",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:17:40",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:18:10",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:18:41",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:19:11",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:19:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:20:12",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:20:42",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:21:13",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:21:43",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:22:14",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:22:44",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:23:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:23:45",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:24:15",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:24:46",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:25:16",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:25:47",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:26:17",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:26:48",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:27:18",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:27:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:28:19",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:28:49",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:29:20",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:29:50",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:30:20",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:30:51",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:31:21",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:31:52",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:32:22",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:32:53",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:33:23",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:33:54",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:34:24",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:34:55",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:35:25",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:35:56",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:36:26",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:36:57",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:37:27",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:37:57",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:38:28",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:38:58",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:39:29",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:39:59",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:40:29",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:41:00",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:41:31",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:42:01",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:42:32",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:43:02",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:43:32",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 01:44:03",
-    "message": "Mining error: [Errno 22] Invalid argument",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:08",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:10",
-    "message": "Block #439 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:10",
-    "message": "Block saved locally: ./data/blocks\\block_439_1766079070.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:10",
-    "message": "Block #439 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:10",
-    "message": "Block #439 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:16",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:22",
-    "message": "Difficulty updated to: 6",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:31:43",
-    "message": "Wallet address updated to: LUN_CDqe5zrAmtE5FCFWucaXtHTf62QMXFkNTp",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:32:45",
-    "message": "Wallet address updated to: LUN_C73cNQy1pRqwnjFfkn8nyxNtVbWMm8eiva",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:33:12",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-18 11:33:22",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:34:02",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:34:41",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:35:21",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:36:01",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:36:40",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:37:19",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:37:58",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:38:37",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:39:16",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:39:55",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:40:36",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:41:16",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:41:55",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:42:34",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:43:12",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:43:51",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:44:31",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:45:11",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:45:51",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:46:29",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-18 11:47:05",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:35:49",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:35:56",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:36:17",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:36:20",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:36:25",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:36:33",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:37:04",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:37:17",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:37:47",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:38:03",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:38:32",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:38:47",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:39:14",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:39:30",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:39:56",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:40:14",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:40:39",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:40:56",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:41:23",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:41:40",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:42:05",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:42:22",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:42:47",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:08",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:28",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:28",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:30",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:38",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:50",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:52",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:52",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:52",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:52",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:53",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:53",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:53",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:53",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:53",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:54",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:54",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:54",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:43:54",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:12",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:16",
-    "message": "Difficulty updated to: 65",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:17",
-    "message": "Difficulty updated to: 6",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:17",
-    "message": "Difficulty updated to: 5",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:18",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:19",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:54",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:56",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:56",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767159896.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:56",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:44:56",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:45:33",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:11",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:11",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767159971.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:11",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:11",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:47",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:48",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160008.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:48",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:46:48",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:47:30",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:48:04",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:48:04",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160084.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:48:04",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:48:04",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:48:47",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:18",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:18",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160158.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:18",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:18",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:53",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:53",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160193.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:53",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:49:53",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:50:35",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:12",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:12",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160272.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:12",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:12",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:43",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:43",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160303.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:43",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:51:43",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:52:15",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:52:15",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160335.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:52:15",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:52:15",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:52:58",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:53:32",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:53:32",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160412.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:53:32",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:53:32",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:05",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:05",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160445.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:05",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:05",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:41",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:41",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160481.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:41",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:54:41",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:16",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:17",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160517.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:17",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:17",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:51",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:51",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160551.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:51",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:55:51",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:56:34",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:57:16",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:57:58",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:57:58",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160678.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 13:57:58",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:57:58",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 13:58:41",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 13:59:27",
-    "message": "Mining timeout - no solution found",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 14:00:01",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 14:00:01",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160801.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 14:00:01",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 14:00:01",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 14:00:42",
-    "message": "Server connection failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:12",
-    "message": "Auto-mining stopped",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:43",
-    "message": "Auto-mining started",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:46",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:46",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160906.json",
-    "type": "info"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:46",
-    "message": "Block #3228 submitted successfully",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 14:01:46",
-    "message": "Block #3228 mined - Reward: 1.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2025-12-31 14:02:25",
-    "message": "Block #3228 submission failed",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2025-12-31 14:02:25",
-    "message": "Block saved locally: ./data/blocks\\block_3228_1767160945.json",
-    "type": "info"
-  },
-  {
     "timestamp": "2025-12-31 14:02:25",
     "message": "Block #3228 submitted successfully",
     "type": "success"
@@ -4997,6 +2857,2146 @@
   {
     "timestamp": "2026-01-05 04:01:51",
     "message": "Block #2081 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:03",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:06",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:06",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162626.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:06",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:06",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:41",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:41",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162661.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:41",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:17:41",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:16",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:16",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162696.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:16",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:16",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:49",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:49",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162729.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:49",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:18:49",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:22",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:22",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162762.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:22",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:22",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:54",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:54",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162794.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:54",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:19:54",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:26",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:26",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162826.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:26",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:26",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:59",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:59",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162859.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:59",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:20:59",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:21:33",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:21:33",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162893.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:21:33",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:21:33",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:05",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:05",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162925.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:05",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:05",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:37",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:37",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162957.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:37",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:22:37",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:08",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:08",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768162988.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:08",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:08",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:40",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:40",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163020.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:40",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:23:41",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:13",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:13",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163053.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:13",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:13",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:47",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:47",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163087.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:47",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:24:47",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:19",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:19",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163119.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:19",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:19",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:51",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:51",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163151.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:51",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:25:51",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:22",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:22",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163182.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:22",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:22",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:55",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:55",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163215.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:55",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:26:55",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:27:27",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:27:27",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163247.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:27:27",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:27:27",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:02",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:02",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163282.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:02",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:02",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:36",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:36",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163316.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:36",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:28:36",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:09",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:09",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163349.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:09",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:09",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:42",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:42",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163382.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:42",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:29:42",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:14",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:14",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163414.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:14",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:14",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:46",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:46",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163446.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:46",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:30:46",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:19",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:19",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163479.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:19",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:19",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:52",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:52",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163512.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:52",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:31:52",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:24",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:24",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163544.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:24",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:24",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:56",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:56",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163576.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:56",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:32:56",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:33:28",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:33:28",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163608.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:33:28",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:33:28",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:01",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:01",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163641.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:01",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:01",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:33",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:33",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163673.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:33",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:34:33",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:04",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:04",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163704.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:04",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:04",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:36",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:36",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163736.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:36",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:35:36",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:11",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:11",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163771.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:11",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:11",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:45",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:45",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163805.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:45",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:36:45",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:18",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:18",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163838.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:18",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:18",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:49",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:49",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163869.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:49",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:37:49",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:23",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:23",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163903.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:23",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:23",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:54",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:54",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163934.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:54",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:38:54",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:26",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:26",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163966.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:26",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:26",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:59",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:59",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768163999.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:59",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:39:59",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:40:32",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:40:32",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164032.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:40:32",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:40:32",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:05",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:05",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164065.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:05",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:05",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:36",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:36",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164096.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:36",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:41:36",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:08",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:08",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164128.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:08",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:08",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:40",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:40",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164160.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:40",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:42:40",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:48",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:50",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:50",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164290.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:50",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:50",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:53",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:53",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164293.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:53",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:53",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:57",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:57",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164297.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:57",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:44:57",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:00",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:00",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164300.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:00",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:00",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:05",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:05",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164305.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:05",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:05",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:09",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:09",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164309.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:09",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:09",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:12",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:12",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164312.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:12",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:12",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:15",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:15",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164315.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:15",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:15",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:18",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:18",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164318.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:18",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:19",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:22",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:22",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164322.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:22",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:22",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:25",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:25",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164325.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:25",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:25",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:28",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:28",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164328.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:28",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:29",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:32",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:32",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164332.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:32",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:32",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:36",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:36",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164336.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:36",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:36",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:40",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:41",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164341.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:41",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:41",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:45",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:45",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164345.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:45",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:45",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:49",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:49",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164349.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:49",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:49",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:52",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:52",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164352.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:52",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:53",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:56",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:56",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164356.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:56",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:45:56",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:00",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:00",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164360.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:00",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:00",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:04",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:04",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164364.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:04",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:04",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:08",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:08",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164368.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:08",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:08",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:13",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:13",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164373.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:13",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:13",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:17",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:17",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164377.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:17",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:17",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:22",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:22",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164382.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:22",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:22",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:26",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:26",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164386.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:26",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:27",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:30",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:30",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164390.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:30",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:30",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:34",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:34",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164394.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:34",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:34",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:44",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:49",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:49",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164409.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:49",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:49",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:52",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:52",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164412.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:52",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:52",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:55",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:55",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164415.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:55",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:55",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:59",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:59",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164419.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:59",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:46:59",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:02",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:02",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164422.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:02",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:02",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:05",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:05",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164425.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:05",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:06",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:09",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:09",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164429.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:09",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:09",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:14",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:14",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164434.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:14",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:14",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:18",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:18",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164438.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:18",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:18",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:22",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:22",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164442.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:22",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:22",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:27",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:27",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164447.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:27",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:27",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:31",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:31",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164451.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:31",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:31",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:36",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:36",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164456.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:36",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:36",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:41",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:41",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164461.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:41",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:41",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:44",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:44",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164464.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:44",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:44",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:48",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:48",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164468.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:48",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:48",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:54",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:54",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164474.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:54",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:54",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:59",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:59",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164479.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:59",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:47:59",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:02",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:02",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164482.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:02",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:02",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:07",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:07",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164487.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:07",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:07",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:13",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:13",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164493.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:13",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:13",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:17",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:17",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164497.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:17",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:17",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:21",
+    "message": "Block #3171 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:21",
+    "message": "Block saved locally: ./data/blocks\\block_3171_1768164501.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:21",
+    "message": "Block #3171 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:21",
+    "message": "Block #3171 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:42",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:45",
+    "message": "Block #3172 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:45",
+    "message": "Block saved locally: ./data/blocks\\block_3172_1768164525.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:45",
+    "message": "Block #3172 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:45",
+    "message": "Block #3172 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:49",
+    "message": "Block #3173 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:49",
+    "message": "Block saved locally: ./data/blocks\\block_3173_1768164529.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:49",
+    "message": "Block #3173 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:49",
+    "message": "Block #3173 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:54",
+    "message": "Block #3174 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:54",
+    "message": "Block saved locally: ./data/blocks\\block_3174_1768164534.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:54",
+    "message": "Block #3174 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:48:54",
+    "message": "Block #3174 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:00",
+    "message": "Block #3175 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:00",
+    "message": "Block saved locally: ./data/blocks\\block_3175_1768164540.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:00",
+    "message": "Block #3175 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:00",
+    "message": "Block #3175 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:04",
+    "message": "Block #3176 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:04",
+    "message": "Block saved locally: ./data/blocks\\block_3176_1768164544.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:04",
+    "message": "Block #3176 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:04",
+    "message": "Block #3176 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:09",
+    "message": "Block #3177 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:09",
+    "message": "Block saved locally: ./data/blocks\\block_3177_1768164549.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:09",
+    "message": "Block #3177 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:09",
+    "message": "Block #3177 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:14",
+    "message": "Block #3178 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:14",
+    "message": "Block saved locally: ./data/blocks\\block_3178_1768164554.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:14",
+    "message": "Block #3178 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 04:49:14",
+    "message": "Block #3178 mined - Reward: 1.0",
     "type": "success"
   }
 ]
