@@ -1,13 +1,37 @@
 import flet as ft
 import threading
 import time
-import requests
-from typing import Dict, List, Optional, Tuple
-import hashlib
-import json
-from datetime import datetime
-import sys
 import os
+import json
+import shutil
+from datetime import datetime
+import base64
+from typing import Dict, List, Optional, Tuple
+import sqlite3
+from pathlib import Path
+import certifi
+import requests
+import PIL
+import lunalib
+import sys
+
+# Import unified balance utilities (if needed)
+from utils import LunaNode, Miner
+
+# Ensure cache directory exists
+cache_dir = Path.home() / "AppData" / "Local" / "lunalib" / "cache"
+cache_dir.mkdir(parents=True, exist_ok=True)
+os.environ['LUNALIB_CACHE_DIR'] = str(cache_dir)
+
+# Import GUI modules
+from gui.sidebar import Sidebar
+from gui.main_page import MainPage
+from gui.mining_history import MiningHistory
+from gui.bills import BillsPage
+from gui.log import LogPage
+from gui.settings import SettingsPage
+
+# Import lunalib components
 from lunalib.core.blockchain import BlockchainManager
 from lunalib.core.mempool import MempoolManager
 from lunalib.core.crypto import KeyManager
@@ -19,14 +43,12 @@ from lunalib.mining.difficulty import DifficultySystem
 from lunalib.mining.cuda_manager import CUDAManager
 from lunalib.gtx.digital_bill import DigitalBill
 
-from utils import LunaNode
-from utils import Miner
-from gui.sidebar import Sidebar
-from gui.main_page import MainPage
-from gui.mining_history import MiningHistory
-from gui.bills import BillsPage
-from gui.log import LogPage
-from gui.settings import SettingsPage
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller bundle."""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 class LunaNodeApp:
     """Luna Node Application with Blue Theme"""
     
@@ -218,6 +240,8 @@ class LunaNodeApp:
         
         self.initialize_node_async()
         
+        print("[DEBUG] create_main_ui completed")
+        
     def create_main_layout(self):
         """Create the main layout with sidebar and content area"""
         sidebar = self.sidebar.create_sidebar()
@@ -230,23 +254,33 @@ class LunaNodeApp:
         )
         
     def create_main_content(self):
-        """Create the main content area with tabs"""
+        print("[DEBUG] create_main_content called")
+        tab_labels = [
+            ft.Tab(label="⛏️ Mining"),
+            ft.Tab(label="💰 Bills"),
+            ft.Tab(label="📊 Stats"),
+            ft.Tab(label="⚙️ Settings"),
+            ft.Tab(label="📋 Log"),
+        ]
+        tab_contents = [
+            self.main_page.create_mining_tab(),
+            self.bills_page.create_bills_tab(),
+            self.mining_history.create_history_tab(),
+            self.settings_page.create_settings_tab(),
+            self.log_page.create_log_tab(),
+        ]
+        tab_bar = ft.TabBar(tabs=tab_labels)
+        tab_bar_view = ft.TabBarView(controls=tab_contents, expand=True)
         tabs = ft.Tabs(
+            length=5,
+            content=ft.Column([
+                tab_bar,
+                tab_bar_view
+            ], expand=True),
             selected_index=0,
-            on_change=self.on_tab_change,
-            tabs=[
-                ft.Tab(text="⛏️ Mining", content=self.main_page.create_mining_tab()),
-                ft.Tab(text="💰 Bills", content=self.bills_page.create_bills_tab()),
-                ft.Tab(text="📊 Stats", content=self.mining_history.create_history_tab()),
-                ft.Tab(text="⚙️ Settings", content=self.settings_page.create_settings_tab()),
-                ft.Tab(text="📋 Log", content=self.log_page.create_log_tab()),
-            ],
-            expand=True,
-            label_color="#00a1ff",
-            unselected_label_color="#466994",
-            indicator_color="#00a1ff"
+            expand=True
         )
-        
+        print("[DEBUG] Tabs created")
         return ft.Container(
             content=tabs,
             expand=True,
@@ -258,12 +292,16 @@ class LunaNodeApp:
         """Handle tab changes"""
         self.current_tab_index = e.control.selected_index
         if self.current_tab_index == 0:
+            print("[DEBUG] Mining tab selected: updating mining stats")
             self.main_page.update_mining_stats()
         elif self.current_tab_index == 1:
+            print("[DEBUG] Bills tab selected: updating bills content")
             self.bills_page.update_bills_content()
         elif self.current_tab_index == 2:
+            print("[DEBUG] Stats tab selected: updating history content")
             self.mining_history.update_history_content()
         elif self.current_tab_index == 3:  # Settings tab
+            print("[DEBUG] Settings tab selected: updating settings content")
             self.settings_page.update_settings_content()
             
     def on_window_event(self, e):
@@ -340,8 +378,12 @@ class LunaNodeApp:
         self.add_log_message("Luna Node initialized successfully", "success")
         self.add_log_message("Loaded data from ./data/ directory", "info")
         self.update_status_display()
-        # Remove this line: self.main_page.update_settings_content()  # This causes the AttributeError
-        
+        # Refresh settings tab so it shows real settings after node is ready
+        if hasattr(self, "settings_page"):
+            try:
+                self.settings_page.update_settings_content()
+            except Exception as e:
+                print(f"[DEBUG] settings_page.update_settings_content() failed: {e}")
         self.start_status_updates()
         
     def start_status_updates(self):
@@ -408,7 +450,7 @@ class LunaNodeApp:
         """Sync with network with progress indicator"""
         if self.node:
             # Create progress dialog
-            progress_bar = ft.ProgressBar(width=400, color="#00a1ff", bgcolor="#1e3a5c")
+            progress_bar = ft.ProgressBar(width=400, color="#00a1ff", bgcolor="#1e3f5c")
             progress_text = ft.Text("Starting sync...", color="#e3f2fd")
             
             progress_dialog = ft.AlertDialog(
@@ -529,11 +571,16 @@ class LunaNodeApp:
 
 
 def main(page: ft.Page):
-    """Main application entry point"""
+    print("main() started")
     try:
         app = LunaNodeApp()
+        print("LunaNodeApp created")
         app.create_main_ui(page)
+        print("[DEBUG] create_main_ui completed")
     except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Exception: {e}")
         error_dialog = ft.AlertDialog(
             title=ft.Text("Application Error"),
             content=ft.Text(f"Failed to initialize Luna Node:\n{str(e)}"),
@@ -544,6 +591,7 @@ def main(page: ft.Page):
         page.dialog = error_dialog
         error_dialog.open = True
         page.update()
+        print("Error dialog shown")
 
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)

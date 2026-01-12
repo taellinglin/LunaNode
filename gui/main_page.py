@@ -22,7 +22,7 @@ class MainPage:
                 ft.Container(
                     content=self.mining_stats,
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=3,
                     padding=10,
                     bgcolor="#0f1a2a"
@@ -35,11 +35,11 @@ class MainPage:
         """Create mining control buttons"""
         button_style = ft.ButtonStyle(
             color="#ffffff",
-            padding=ft.padding.symmetric(horizontal=20, vertical=12),
+            padding=ft.Padding.symmetric(horizontal=20, vertical=12),
             shape=ft.RoundedRectangleBorder(radius=4)
         )
         
-        self.start_mining_btn = ft.ElevatedButton(
+        self.start_mining_btn = ft.Button(
             "⛏️ Start Mining",
             on_click=lambda e: self.app.start_mining(),
             style=button_style,
@@ -47,7 +47,7 @@ class MainPage:
             height=40
         )
         
-        self.stop_mining_btn = ft.ElevatedButton(
+        self.stop_mining_btn = ft.Button(
             "⏹️ Stop Mining",
             on_click=lambda e: self.app.stop_mining(),
             style=button_style,
@@ -56,7 +56,7 @@ class MainPage:
             disabled=True
         )
         
-        self.single_mine_btn = ft.ElevatedButton(
+        self.single_mine_btn = ft.Button(
             "⚡ Mine Single Block",
             on_click=lambda e: self.app.mine_single_block(),
             style=button_style,
@@ -64,7 +64,7 @@ class MainPage:
             height=40
         )
         
-        self.sync_btn = ft.ElevatedButton(
+        self.sync_btn = ft.Button(
             "🔄 Sync Network",
             on_click=lambda e: self.app.sync_network(),
             style=button_style,
@@ -223,7 +223,7 @@ class MainPage:
             padding=15,
             margin=3,
             bgcolor="#1a2b3c",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 12, "sm": 6, "md": 4, "lg": 3}
         )

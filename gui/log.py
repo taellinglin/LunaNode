@@ -9,13 +9,13 @@ class LogPage:
 
     def create_log_tab(self):
         """Create log tab"""
-        clear_button = ft.ElevatedButton(
+        clear_button = ft.Button(
             "Clear Log",
             on_click=lambda e: self.clear_log(),
             style=ft.ButtonStyle(
                 color="#ffffff",
                 bgcolor="#00a1ff",
-                padding=ft.padding.symmetric(horizontal=16, vertical=10),
+                padding=ft.Padding.symmetric(horizontal=16, vertical=10),
                 shape=ft.RoundedRectangleBorder(radius=3)
             ),
             height=38
@@ -24,7 +24,7 @@ class LogPage:
         log_content = ft.Container(
             content=self.log_output,
             expand=True,
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=3,
             padding=10,
             bgcolor="#0f1a2a"

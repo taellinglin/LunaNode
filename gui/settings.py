@@ -6,75 +6,81 @@ class SettingsPage:
     def __init__(self, app):
         self.app = app
         self.settings_content = ft.Column()
+        print(f"[DEBUG] SettingsPage.__init__: app.node={getattr(app, 'node', None)}")
 
     def create_settings_tab(self):
-        """Create settings tab with categorized options"""
-        # First update the content to ensure it's populated
+        """Modern card-based settings tab, matching Stats UI style"""
         self.update_settings_content()
-        
         return ft.Container(
             content=ft.Column([
-                ft.Container(
-                    content=ft.Text("Node Settings", size=20, color="#e3f2fd", weight="bold"),
-                    padding=ft.padding.only(bottom=15)
-                ),
+                ft.Row([
+                    ft.Text("Settings", size=22, color="#e3f2fd", weight="bold"),
+                ], alignment="center"),
                 ft.Container(
                     content=ft.Column([
-                        self.settings_content,
+                        self.settings_content
                     ], scroll=ft.ScrollMode.ADAPTIVE),
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=8,
-                    padding=15,
-                    bgcolor="#0f1a2a"
+                    padding=20,
+                    bgcolor="#101b2a"
                 )
-            ], expand=True),
-            padding=15,
+            ], expand=True, spacing=20),
+            padding=20,
+            bgcolor="#0a1423",
             expand=True
         )
 
     def update_settings_content(self):
-        """Update settings content with current values"""
+        """Modern card-based settings content, matching Stats UI style"""
         self.settings_content.controls.clear()
-        
-        if not self.app.node:
-            self.settings_content.controls.append(
-                ft.Container(
-                    content=ft.Column([
-                        ft.Icon(ft.Icons.WARNING, size=48, color="#ffd700"),
-                        ft.Text("Node Not Available", size=18, color="#ffd700", weight="bold"),
-                        ft.Text("Please start the node to access settings", size=14, color="#e3f2fd"),
-                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=10),
-                    padding=40,
-                    alignment=ft.alignment.center
-                )
+        # Dummy settings for demonstration
+        def card(title, controls):
+            return ft.Container(
+                content=ft.Column([
+                    ft.Text(title, size=16, color="#aeefff", weight="bold"),
+                    ft.Container(height=10),
+                    *controls
+                ], spacing=8),
+                bgcolor="#16243a",
+                border=ft.Border.all(1, "#1e3a5c"),
+                border_radius=6,
+                padding=18,
+                expand=False
             )
-            if self.app.page:
-                self.app.page.update()
-            return
-            
-        # Create settings categories
-        mining_section = self._create_mining_settings()
-        network_section = self._create_network_settings()
-        performance_section = self._create_performance_settings()
-        wallet_section = self._create_wallet_settings()
-        advanced_section = self._create_advanced_settings()
-        
-        # Add all sections
-        self.settings_content.controls.extend([
-            mining_section,
-            ft.Divider(height=25, color="#1e3a5c"),
-            network_section,
-            ft.Divider(height=25, color="#1e3a5c"),
-            performance_section,
-            ft.Divider(height=25, color="#1e3a5c"),
-            wallet_section,
-            ft.Divider(height=25, color="#1e3a5c"),
-            advanced_section,
-            ft.Container(height=20),
-            self._create_action_buttons()
+        # Example settings cards
+        mining_card = card("Mining Settings", [
+            ft.Switch(label="Auto Mining", value=True, active_color="#00e676"),
+            ft.TextField(label="Mining Difficulty", value="2", width=180, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            ft.Switch(label="GPU Acceleration", value=False, active_color="#00b0ff"),
         ])
-        
+        network_card = card("Network Settings", [
+            ft.TextField(label="Node Endpoint", value="https://bank.linglin.art", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            ft.Switch(label="Use SSL", value=True, active_color="#ffd600"),
+        ])
+        wallet_card = card("Wallet Settings", [
+            ft.TextField(label="Wallet Address", value="LN1abc...xyz", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            ft.TextField(label="Payout Threshold", value="0.5", width=120, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+        ])
+        advanced_card = card("Advanced", [
+            ft.Switch(label="Developer Mode", value=False, active_color="#ff5252"),
+            ft.TextField(label="Custom Config Path", value="./config.json", width=220, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+        ])
+        # Arrange cards in a grid (2 columns)
+        grid = ft.Row([
+            ft.Column([
+                mining_card,
+                ft.Container(height=20),
+                wallet_card
+            ], expand=True, spacing=20),
+            ft.Column([
+                network_card,
+                ft.Container(height=20),
+                advanced_card
+            ], expand=True, spacing=20),
+        ], spacing=30)
+        self.settings_content.controls.append(grid)
         if self.app.page:
             self.app.page.update()
 
@@ -386,13 +392,13 @@ class SettingsPage:
             width=120
         )
         
-        self.reset_stats_button = ft.ElevatedButton(
+        self.reset_stats_button = ft.Button(
             "Reset Statistics",
             on_click=lambda e: self._on_reset_stats_clicked(),
             style=ft.ButtonStyle(
                 color="#ffffff",
                 bgcolor="#dc3545",
-                padding=ft.padding.symmetric(horizontal=16, vertical=8)
+                padding=ft.Padding.symmetric(horizontal=16, vertical=8)
             ),
             height=32
         )
@@ -428,35 +434,35 @@ class SettingsPage:
         """Create action buttons for settings"""
         return ft.Container(
             content=ft.Row([
-                ft.ElevatedButton(
+                ft.Button(
                     "💾 Save Settings",
                     on_click=lambda e: self._on_save_settings_clicked(),
                     style=ft.ButtonStyle(
                         color="#ffffff",
                         bgcolor="#28a745",
-                        padding=ft.padding.symmetric(horizontal=24, vertical=12)
+                        padding=ft.Padding.symmetric(horizontal=24, vertical=12)
                     ),
                     height=44
                 ),
                 ft.Container(width=15),
-                ft.ElevatedButton(
+                ft.Button(
                     "🔄 Reset to Defaults",
                     on_click=lambda e: self._on_reset_defaults_clicked(),
                     style=ft.ButtonStyle(
                         color="#ffffff",
                         bgcolor="#6c757d",
-                        padding=ft.padding.symmetric(horizontal=24, vertical=12)
+                        padding=ft.Padding.symmetric(horizontal=24, vertical=12)
                     ),
                     height=44
                 ),
                 ft.Container(width=15),
-                ft.ElevatedButton(
+                ft.Button(
                     "📤 Export Settings",
                     on_click=lambda e: self._on_export_settings_clicked(),
                     style=ft.ButtonStyle(
                         color="#ffffff",
                         bgcolor="#17a2b8",
-                        padding=ft.padding.symmetric(horizontal=24, vertical=12)
+                        padding=ft.Padding.symmetric(horizontal=24, vertical=12)
                     ),
                     height=44
                 )

@@ -8,79 +8,86 @@ class MiningHistory:
     def __init__(self, app):
         self.app = app
         self.stats_content = ft.Column()
-        
-        # Performance metrics
-        self.hash_rate_chart = ft.LineChart()
-        self.success_rate_chart = ft.LineChart()
-        self.mining_time_chart = ft.LineChart()
-        
-        # Current session stats
+        # (SVG chart demo data removed)
         self.current_session_stats = ft.Column()
 
+    # (SVG chart code removed)
+
     def create_history_tab(self):
-        """Create mining statistics and performance tab"""
-        refresh_button = ft.ElevatedButton(
-            "🔄 Refresh Stats",
-            on_click=lambda e: self.update_history_content(),
-            style=ft.ButtonStyle(
-                color="#ffffff",
-                bgcolor="#00a1ff",
-                padding=ft.padding.symmetric(horizontal=16, vertical=10),
-                shape=ft.RoundedRectangleBorder(radius=3)
-            ),
-            height=38
-        )
-        
+        """Task Manager Performance-style stats tab (dummy data)"""
+        # Initial content
+        self.update_history_content()
         return ft.Container(
             content=ft.Column([
-                ft.Row([
-                    ft.Text("Mining Performance & Statistics", size=18, color="#e3f2fd"),
-                    refresh_button
-                ]),
                 ft.Container(
                     content=self.stats_content,
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
-                    border_radius=3,
-                    padding=10,
-                    bgcolor="#0f1a2a"
+                    border=ft.Border.all(1, "#1e3a5c"),
+                    border_radius=8,
+                    padding=20,
+                    bgcolor=None
                 )
-            ], expand=True),
-            padding=10
+            ], expand=True, spacing=20),
+            padding=20,
+            bgcolor=None,
+            expand=True
         )
 
     def update_history_content(self):
-        """Update mining statistics and performance content"""
-        if not self.app.node:
-            return
-            
-        history = self.app.node.get_mining_history()
-        
+        import random
         self.stats_content.controls.clear()
-        
-        # Current Session Stats
-        session_stats = self._create_session_stats(history)
-        
-        # Performance Charts
-        charts_row = self._create_performance_charts(history)
-        
-        # Mining History Table (Compact)
-        history_table = self._create_compact_history_table(history)
-        
-        # System Performance
-        system_stats = self._create_system_performance()
-        
-        # Add all components
-        self.stats_content.controls.extend([
-            session_stats,
-            ft.Container(height=20),
-            charts_row,
-            ft.Container(height=20),
-            system_stats,
-            ft.Container(height=20),
-            history_table
-        ])
-        
+
+        # ダミーデータ生成
+        hashrate = round(random.uniform(1.2, 3.8), 2)
+        accepted = random.randint(120, 180)
+        rejected = random.randint(0, 10)
+        share_rate = round(random.uniform(95, 100), 2)
+        error_rate = round(random.uniform(0, 2), 2)
+        avg_hashrate = round(random.uniform(1.0, 3.5), 2)
+
+        def make_chart(title, value, unit, color, bar_color):
+            bar_data = [random.uniform(1.0, 4.0) for _ in range(50)]
+            max_bar = max(bar_data)
+            bar_chart = ft.Row([
+                ft.Container(
+                    bgcolor=bar_color,
+                    width=4,
+                    height=int(60 * (v / max_bar)),
+                    border_radius=2,
+                    margin=ft.Margin(1,0,1,0),
+                ) for v in bar_data
+            ], vertical_alignment="end", spacing=0)
+            return ft.Column([
+                ft.Row([
+                    ft.Text(title, size=15, color="#aeefff"),
+                    ft.Container(width=8),
+                    ft.Text(f"{value} {unit}", size=24, color=color, weight="bold"),
+                ], alignment="start", vertical_alignment="center"),
+                ft.Row([
+                    ft.Text(f"{title} (last 50 samples)", size=12, color="#aeefff"),
+                ], alignment="start"),
+                bar_chart
+            ], spacing=4)
+
+        charts = [
+            make_chart("Current Hashrate", hashrate, "MH/s", "#00e676", "#1976d2"),
+            make_chart("Accepted", accepted, "", "#ffd600", "#00b0ff"),
+            make_chart("Rejected", rejected, "", "#ff5252", "#ff5252"),
+            make_chart("Share Rate", share_rate, "%", "#00b0ff", "#00b0ff"),
+            make_chart("Error Rate", error_rate, "%", "#ff5252", "#ff5252"),
+            make_chart("Avg Hashrate", avg_hashrate, "MH/s", "#00e676", "#1976d2"),
+        ]
+        # 2カラムに分割
+        col1 = ft.Column(charts[:3], spacing=12)
+        col2 = ft.Column(charts[3:], spacing=12)
+        self.stats_content.controls.clear()
+        self.stats_content.controls.append(
+            ft.Row([
+                col1,
+                ft.Container(width=24),
+                col2
+            ], alignment="start", vertical_alignment="start")
+        )
         if self.app.page:
             self.app.page.update()
 
@@ -257,7 +264,7 @@ class MiningHistory:
             padding=15,
             margin=3,
             bgcolor="#0f1a2a",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 6, "sm": 4, "md": 3, "lg": 2}
         )
@@ -277,7 +284,7 @@ class MiningHistory:
                     ),
                     width=80,
                     height=4,
-                    bgcolor="#1e3a5c",
+                    bgcolor="#1e3f5c",
                     border_radius=2,
                     margin=ft.margin.only(top=5)
                 )
@@ -285,18 +292,22 @@ class MiningHistory:
             padding=15,
             margin=3,
             bgcolor="#0f1a2a",
-            border=ft.border.all(1, "#1e3a5c"),
+            border=ft.Border.all(1, "#1e3a5c"),
             border_radius=4,
             col={"xs": 6, "sm": 4, "md": 3, "lg": 3}
         )
 
     def _create_line_chart(self, title: str, data_points: List, color: str):
-        """Create a simple line chart"""
+        print(f"[DEBUG] _create_line_chart called with title={title}, data_points={data_points}")
+        # Flatten in case data_points is a list of lists
+        if any(isinstance(y, list) for y in data_points):
+            data_points = [item for sublist in data_points for item in (sublist if isinstance(sublist, list) else [sublist])]
+        print(f"[DEBUG] _create_line_chart flattened data_points={data_points}")
         if not data_points:
             return ft.Container(
                 content=ft.Text("No data", color="#6c757d", size=12),
                 height=100,
-                alignment=ft.alignment.center
+                alignment="center"
             )
         
         # Create simple line chart using containers
@@ -328,7 +339,7 @@ class MiningHistory:
                 ft.Text(f"Min: {min_value:.1f} | Max: {max_value:.1f}", size=10, color="#6c757d")
             ]),
             height=100,
-            alignment=ft.alignment.center
+            alignment="center"
         )
 
     def _prepare_hash_rate_data(self, history: List[Dict]):

@@ -24,13 +24,13 @@ class BillsPage:
 
     def create_bills_tab(self):
         """Create bills/transactions management tab"""
-        refresh_button = ft.ElevatedButton(
+        refresh_button = ft.Button(
             "🔄 Refresh",
             on_click=lambda e: self.update_bills_content(),
             style=ft.ButtonStyle(
                 color="#ffffff",
                 bgcolor="#00a1ff",
-                padding=ft.padding.symmetric(horizontal=16, vertical=10),
+                padding=ft.Padding.symmetric(horizontal=16, vertical=10),
                 shape=ft.RoundedRectangleBorder(radius=3)
             ),
             height=38
@@ -45,7 +45,7 @@ class BillsPage:
                 ft.Container(
                     content=ft.ListView([self.bills_table], expand=True),
                     expand=True,
-                    border=ft.border.all(1, "#1e3a5c"),
+                    border=ft.Border.all(1, "#1e3a5c"),
                     border_radius=3
                 )
             ], expand=True),

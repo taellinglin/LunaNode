@@ -1,4 +1,4 @@
-flet[all]==0.28.3
+flet
 flet-desktop
 flet-cli
 requests

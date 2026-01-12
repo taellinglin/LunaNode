@@ -1,5 +1,5 @@
 [build-system]
-requires = ["pyinstaller", "flet", "setuptools", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -17,152 +17,63 @@ dependencies = [
     "lunalib>=1.0.0",
     "requests>=2.25.0",
     "cryptography>=3.4.0",
-    "pillow>=8.0.0",
+    "pillow",
+    "certifi"
 ]
 
 [project.urls]
 Homepage = "https://linglin.art"
 Documentation = "https://bank.linglin.art"
 
+[project.scripts]
+LunaNode = "main:main"
+
 [tool.pyinstaller]
 main-file = "main.py"
-console = false
+console = true
 name = "LunaNode"
 upx = true
 icon = "./node_icon.ico"
-onefile = false
-clean_build = true
-noconfirm = true
-
-# Include all necessary binaries
 binaries = []
-
-# Include data files
 datas = [
-    {path = "*.py", dest = "."},
     {path = "gui/*.py", dest = "gui"},
+    {path = "assets/**", dest = "assets"},
+    {path = "data/**", dest = "data"},
+    {path = "images/**", dest = "images"},
     {path = "utils.py", dest = "."},
 ]
-
-# Include all lunalib modules and submodules
 hiddenimports = [
     "lunalib",
-    "lunalib.core",
     "lunalib.core.blockchain",
     "lunalib.core.mempool",
-    "lunalib.core.crypto", 
-    "lunalib.core.wallet",
-    "lunalib.storage",
-    "lunalib.storage.cache",
-    "lunalib.storage.database",
-    "lunalib.storage.encryption",
-    "lunalib.mining",
-    "lunalib.mining.difficulty",
-    "lunalib.mining.cuda_manager",
-    "lunalib.mining.miner",
-    "lunalib.gtx",
-    "lunalib.gtx.digital_bill",
     "lunalib.transactions",
     "lunalib.transactions.transactions",
-    
-    # GUI modules
-    "gui.sidebar",
-    "gui.main_page", 
-    "gui.mining_history",
-    "gui.bills",
-    "gui.log",
-    "gui.settings",
-    
-    # Standard library modules that might be dynamically imported
-    "hashlib",
-    "json",
-    "datetime",
-    "threading",
-    "time",
-    "sys",
-    "os",
-    "typing",
-    
-    # Third-party dependencies
-    "flet",
-    "flet.core",
-    "flet.animation",
-    "flet.border",
-    "flet.buttons",
-    "flet.canvas",
-    "flet.control",
-    "flet.control_event",
-    "flet.gradients",
-    "flet.icons",
-    "flet.margin",
-    "flet.padding",
-    "flet.transform",
+    "lunalib.mining",
+    "lunalib.mining.miner",
+    "lunalib.core",
+    "lunalib.core.wallet",
     "requests",
     "qrcode",
     "PIL",
-    "PIL.Image",
-    "PIL.ImageDraw",
-    "PIL.ImageFont",
+    "PIL._imaging",
+    "certifi",
+    "lunalib.storage",
+    "lunalib.storage.cache",
+    "lunalib.storage.database",
+    "lunalib.mining.difficulty",
+    "lunalib.gtx",
+    "cryptography.hazmat.bindings._rust",
+    "cryptography.hazmat.bindings._openssl",
 ]
-
-# Exclude unnecessary packages to reduce size
 excludes = [
     "tkinter",
     "test",
     "unittest",
     "pydoc",
     "distutils",
-    "email",
-    "html",
-    "http",
-    "xml",
-    "xmlrpc",
-    "pytest",
-    "setuptools",
-    "pip",
-    "wheel",
-    "Cython",
+    "pystray"
 ]
+version-file = "version_info.txt"
 
-# Runtime hooks
-hooks = []
-
-# Runtime configuration
-runtime-hooks = []
-
-# Additional PyInstaller options
-noarchive = false
-optimize = 2
-strip = true
-pathex = ["."]
-
-# Windows specific
 [tool.pyinstaller.windows]
 target_arch = "x64"
-version-file = "version_info.txt"
-uac_admin = false
-
-# macOS specific
-[tool.pyinstaller.macos]
-bundle_identifier = "com.linglin.lunanode"
-
-# Linux specific
-[tool.pyinstaller.linux]
-appname = "lunanode"
-
-# Additional analysis settings
-analysis-level = "verbose"
-
-# Package collection settings
-packages = [
-    "lunalib",
-    "flet",
-    "qrcode",
-    "PIL",
-]
-
-# Hook paths for custom hooks
-hook-dir = "hooks"
-
-# Additional import tracking
-import-tracker = true

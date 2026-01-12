@@ -20,18 +20,18 @@ class Sidebar:
         button_style = ft.ButtonStyle(
             color="#ffffff",
             bgcolor="#00a1ff",
-            padding=ft.padding.symmetric(horizontal=16, vertical=6),
+            padding=ft.Padding.symmetric(horizontal=16, vertical=6),
             shape=ft.RoundedRectangleBorder(radius=2)
         )
         
-        self.btn_start_mining = ft.ElevatedButton(
+        self.btn_start_mining = ft.Button(
             "⛏️ Start Mining",
             on_click=lambda e: self.app.start_mining(),
             style=button_style,
             height=32
         )
         
-        self.btn_stop_mining = ft.ElevatedButton(
+        self.btn_stop_mining = ft.Button(
             "⏹️ Stop Mining",
             on_click=lambda e: self.app.stop_mining(),
             style=button_style,
@@ -39,14 +39,14 @@ class Sidebar:
             disabled=True
         )
         
-        self.btn_sync = ft.ElevatedButton(
+        self.btn_sync = ft.Button(
             "🔄 Sync Network",
             on_click=lambda e: self.app.sync_network(),
             style=button_style,
             height=32
         )
         
-        self.btn_single_mine = ft.ElevatedButton(
+        self.btn_single_mine = ft.Button(
             "⚡ Mine Single Block",
             on_click=lambda e: self.app.mine_single_block(),
             style=button_style,
@@ -112,7 +112,7 @@ class Sidebar:
                         src="node_icon.svg",
                         width=64,
                         height=64,
-                        fit=ft.ImageFit.CONTAIN,
+                        fit="contain",
                         color="#00a1ff",
                         color_blend_mode=ft.BlendMode.SRC_IN,
                         error_content=ft.Text("🔵", size=24)
@@ -134,15 +134,15 @@ class Sidebar:
                         content=ft.Text("☰", color="#e3f2fd", size=16),
                         tooltip="System Menu",
                         items=[
-                            ft.PopupMenuItem(text="Restore", on_click=lambda e: self.app.restore_from_tray()),
-                            ft.PopupMenuItem(text="Minimize to Tray", on_click=lambda e: self.app.minimize_to_tray()),
+                            ft.PopupMenuItem(content=ft.Text("Restore"), on_click=lambda e: self.app.restore_from_tray()),
+                            ft.PopupMenuItem(content=ft.Text("Minimize to Tray"), on_click=lambda e: self.app.minimize_to_tray()),
                             ft.PopupMenuItem(),
-                            ft.PopupMenuItem(text="Start Mining", on_click=lambda e: self.app.start_mining()),
-                            ft.PopupMenuItem(text="Stop Mining", on_click=lambda e: self.app.stop_mining()),
-                            ft.PopupMenuItem(text="Sync Network", on_click=lambda e: self.app.sync_network()),
+                            ft.PopupMenuItem(content=ft.Text("Start Mining"), on_click=lambda e: self.app.start_mining()),
+                            ft.PopupMenuItem(content=ft.Text("Stop Mining"), on_click=lambda e: self.app.stop_mining()),
+                            ft.PopupMenuItem(content=ft.Text("Sync Network"), on_click=lambda e: self.app.sync_network()),
                             ft.PopupMenuItem(),
-                            ft.PopupMenuItem(text="About", on_click=lambda e: self.app.show_about_dialog()),
-                            ft.PopupMenuItem(text="Exit", on_click=lambda e: self.app.page.window.close()),
+                            ft.PopupMenuItem(content=ft.Text("About"), on_click=lambda e: self.app.show_about_dialog()),
+                            ft.PopupMenuItem(content=ft.Text("Exit"), on_click=lambda e: self.app.page.window.close()),
                         ]
                     ),
                     ft.Container(
@@ -150,12 +150,12 @@ class Sidebar:
                             src="node_icon.svg",
                             width=32,
                             height=32,
-                            fit=ft.ImageFit.CONTAIN,
+                            fit="contain",
                             color="#00a1ff",
                             color_blend_mode=ft.BlendMode.SRC_IN,
                             error_content=ft.Text("🔵", size=16)
                         ),
-                        margin=ft.margin.only(right=8),
+                        margin=ft.Margin.only(right=8),
                     ),
                     ft.Text("Luna Node", size=24, color="#e3f2fd"),
                 ]),
