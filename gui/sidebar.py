@@ -186,13 +186,13 @@ class Sidebar:
         self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
         self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.2f} LUN"
         self.lbl_connection.value = f"Connection: {status['connection_status']}"
-        
+
         uptime_seconds = int(status['uptime'])
         hours = uptime_seconds // 3600
         minutes = (uptime_seconds % 3600) // 60
         seconds = uptime_seconds % 60
         self.lbl_uptime.value = f"Uptime: {hours:02d}:{minutes:02d}:{seconds:02d}"
-            
+
         # Update mining stats
         hash_rate = status['current_hash_rate']
         if hash_rate > 1000000:
@@ -201,20 +201,20 @@ class Sidebar:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
-            
+
         current_hash = status['current_hash']
         if current_hash:
             short_hash = current_hash[:16] + "..." if len(current_hash) > 16 else current_hash
             self.lbl_current_hash.value = f"Current Hash: {short_hash}"
         else:
             self.lbl_current_hash.value = "Current Hash: --"
-            
+
         self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
-        
+
         # Update mining progress
         is_mining = self.app.node.miner.is_mining if self.app.node else False
         self.progress_mining.visible = is_mining
-        
+
         # Update button states
         self.btn_start_mining.disabled = is_mining
         self.btn_stop_mining.disabled = not is_mining

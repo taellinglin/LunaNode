@@ -35,51 +35,53 @@ class SettingsPage:
     def update_settings_content(self):
         """Modern card-based settings content, matching Stats UI style"""
         self.settings_content.controls.clear()
-        # Dummy settings for demonstration
-        def card(title, controls):
+
+
+        def stat_style_card(icon, title, controls, color):
             return ft.Container(
                 content=ft.Column([
-                    ft.Text(title, size=16, color="#aeefff", weight="bold"),
-                    ft.Container(height=10),
+                    ft.Row([
+                        ft.Text(icon, size=18, color=color),
+                        ft.Text(title, size=14, color="#e3f2fd", weight=ft.FontWeight.BOLD, expand=True),
+                    ], spacing=5),
+                    ft.Container(height=8),
                     *controls
-                ], spacing=8),
-                bgcolor="#16243a",
+                ], spacing=6),
+                padding=15,
+                margin=3,
+                bgcolor="#1a2b3c",
                 border=ft.Border.all(1, "#1e3a5c"),
-                border_radius=6,
-                padding=18,
-                expand=False
+                border_radius=4,
+                col={"xs": 12, "sm": 12, "md": 12, "lg": 12}
             )
-        # Example settings cards
-        mining_card = card("Mining Settings", [
-            ft.Switch(label="Auto Mining", value=True, active_color="#00e676"),
-            ft.TextField(label="Mining Difficulty", value="2", width=180, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-            ft.Switch(label="GPU Acceleration", value=False, active_color="#00b0ff"),
-        ])
-        network_card = card("Network Settings", [
-            ft.TextField(label="Node Endpoint", value="https://bank.linglin.art", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+
+        # Load values from config if available
+        config = self.app.node.config if self.app.node else None
+        mining_card = stat_style_card("⛏️", "Mining Settings", [
+            ft.Switch(label="Auto Mining", value=config.auto_mine if config else True, active_color="#00e676"),
+            ft.TextField(label="Mining Difficulty", value=str(config.difficulty) if config else "2", width=180, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            ft.Switch(label="GPU Acceleration", value=self.app.node.cuda_available if self.app.node else False, active_color="#00b0ff"),
+        ], "#00a1ff")
+        network_card = stat_style_card("🌐", "Network Settings", [
+            ft.TextField(label="Node Endpoint", value=config.node_url if config else "https://bank.linglin.art", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
             ft.Switch(label="Use SSL", value=True, active_color="#ffd600"),
-        ])
-        wallet_card = card("Wallet Settings", [
-            ft.TextField(label="Wallet Address", value="LN1abc...xyz", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+        ], "#17a2b8")
+        wallet_card = stat_style_card("💰", "Wallet Settings", [
+            ft.TextField(label="Wallet Address", value=config.miner_address if config else "LN1abc...xyz", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
             ft.TextField(label="Payout Threshold", value="0.5", width=120, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-        ])
-        advanced_card = card("Advanced", [
+        ], "#ffc107")
+        advanced_card = stat_style_card("🔧", "Advanced", [
             ft.Switch(label="Developer Mode", value=False, active_color="#ff5252"),
             ft.TextField(label="Custom Config Path", value="./config.json", width=220, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-        ])
-        # Arrange cards in a grid (2 columns)
-        grid = ft.Row([
-            ft.Column([
-                mining_card,
-                ft.Container(height=20),
-                wallet_card
-            ], expand=True, spacing=20),
-            ft.Column([
-                network_card,
-                ft.Container(height=20),
-                advanced_card
-            ], expand=True, spacing=20),
-        ], spacing=30)
+        ], "#6c757d")
+
+        # Arrange cards in a ResponsiveRow grid, each card 100% width
+        grid = ft.ResponsiveRow([
+            mining_card,
+            network_card,
+            wallet_card,
+            advanced_card
+        ], spacing=10)
         self.settings_content.controls.append(grid)
         if self.app.page:
             self.app.page.update()

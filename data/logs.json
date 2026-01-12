@@ -1,309 +1,5002 @@
 [
   {
-    "timestamp": "2026-01-12 10:31:21",
+    "timestamp": "2026-01-12 11:43:12",
+    "message": "Block #4721 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:13",
+    "message": "Block saved locally: ./data/blocks\\block_4721_1768189393.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:13",
+    "message": "Block #4721 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:13",
+    "message": "Block #4721 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:18",
+    "message": "Block #4722 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:18",
+    "message": "Block saved locally: ./data/blocks\\block_4722_1768189398.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:18",
+    "message": "Block #4722 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:18",
+    "message": "Block #4722 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:24",
+    "message": "Block #4723 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:24",
+    "message": "Block saved locally: ./data/blocks\\block_4723_1768189404.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:24",
+    "message": "Block #4723 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:24",
+    "message": "Block #4723 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:29",
+    "message": "Block #4724 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:29",
+    "message": "Block saved locally: ./data/blocks\\block_4724_1768189409.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:29",
+    "message": "Block #4724 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:29",
+    "message": "Block #4724 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:35",
+    "message": "Block #4725 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:35",
+    "message": "Block saved locally: ./data/blocks\\block_4725_1768189415.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:35",
+    "message": "Block #4725 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:35",
+    "message": "Block #4725 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:41",
+    "message": "Block #4726 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:41",
+    "message": "Block saved locally: ./data/blocks\\block_4726_1768189421.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:41",
+    "message": "Block #4726 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:41",
+    "message": "Block #4726 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:43:58",
     "message": "Auto-mining started",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:24",
-    "message": "Block #4647 submission failed",
+    "timestamp": "2026-01-12 11:44:00",
+    "message": "Block #4727 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:24",
-    "message": "Block saved locally: ./data/blocks\\block_4647_1768185084.json",
+    "timestamp": "2026-01-12 11:44:00",
+    "message": "Block saved locally: ./data/blocks\\block_4727_1768189440.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:24",
-    "message": "Block #4647 submitted successfully",
+    "timestamp": "2026-01-12 11:44:00",
+    "message": "Block #4727 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:24",
-    "message": "Block #4647 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:01",
+    "message": "Block #4727 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:28",
-    "message": "Block #4648 submission failed",
+    "timestamp": "2026-01-12 11:44:06",
+    "message": "Block #4728 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:28",
-    "message": "Block saved locally: ./data/blocks\\block_4648_1768185088.json",
+    "timestamp": "2026-01-12 11:44:06",
+    "message": "Block saved locally: ./data/blocks\\block_4728_1768189446.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:28",
-    "message": "Block #4648 submitted successfully",
+    "timestamp": "2026-01-12 11:44:06",
+    "message": "Block #4728 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:29",
-    "message": "Block #4648 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:06",
+    "message": "Block #4728 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:33",
-    "message": "Block #4649 submission failed",
+    "timestamp": "2026-01-12 11:44:10",
+    "message": "Block #4729 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:33",
-    "message": "Block saved locally: ./data/blocks\\block_4649_1768185093.json",
+    "timestamp": "2026-01-12 11:44:10",
+    "message": "Block saved locally: ./data/blocks\\block_4729_1768189450.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:33",
-    "message": "Block #4649 submitted successfully",
+    "timestamp": "2026-01-12 11:44:10",
+    "message": "Block #4729 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:33",
-    "message": "Block #4649 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:11",
+    "message": "Block #4729 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:37",
-    "message": "Block #4650 submission failed",
+    "timestamp": "2026-01-12 11:44:17",
+    "message": "Block #4730 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:37",
-    "message": "Block saved locally: ./data/blocks\\block_4650_1768185097.json",
+    "timestamp": "2026-01-12 11:44:17",
+    "message": "Block saved locally: ./data/blocks\\block_4730_1768189457.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:37",
-    "message": "Block #4650 submitted successfully",
+    "timestamp": "2026-01-12 11:44:17",
+    "message": "Block #4730 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:37",
-    "message": "Block #4650 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:17",
+    "message": "Block #4730 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:41",
-    "message": "Block #4651 submission failed",
+    "timestamp": "2026-01-12 11:44:28",
+    "message": "Block #4731 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:41",
-    "message": "Block saved locally: ./data/blocks\\block_4651_1768185101.json",
+    "timestamp": "2026-01-12 11:44:28",
+    "message": "Block saved locally: ./data/blocks\\block_4731_1768189468.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:41",
-    "message": "Block #4651 submitted successfully",
+    "timestamp": "2026-01-12 11:44:28",
+    "message": "Block #4731 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:41",
-    "message": "Block #4651 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:29",
+    "message": "Block #4731 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:48",
-    "message": "Block #4652 submission failed",
+    "timestamp": "2026-01-12 11:44:40",
+    "message": "Block #4732 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:48",
-    "message": "Block saved locally: ./data/blocks\\block_4652_1768185108.json",
+    "timestamp": "2026-01-12 11:44:40",
+    "message": "Block saved locally: ./data/blocks\\block_4732_1768189480.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:48",
-    "message": "Block #4652 submitted successfully",
+    "timestamp": "2026-01-12 11:44:40",
+    "message": "Block #4732 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:48",
-    "message": "Block #4652 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:41",
+    "message": "Block #4732 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:54",
-    "message": "Block #4653 submission failed",
+    "timestamp": "2026-01-12 11:44:47",
+    "message": "Block #4733 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:54",
-    "message": "Block saved locally: ./data/blocks\\block_4653_1768185114.json",
+    "timestamp": "2026-01-12 11:44:47",
+    "message": "Block saved locally: ./data/blocks\\block_4733_1768189487.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:54",
-    "message": "Block #4653 submitted successfully",
+    "timestamp": "2026-01-12 11:44:47",
+    "message": "Block #4733 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:54",
-    "message": "Block #4653 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:47",
+    "message": "Block #4733 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:59",
-    "message": "Block #4654 submission failed",
+    "timestamp": "2026-01-12 11:44:53",
+    "message": "Block #4734 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:31:59",
-    "message": "Block saved locally: ./data/blocks\\block_4654_1768185119.json",
+    "timestamp": "2026-01-12 11:44:53",
+    "message": "Block saved locally: ./data/blocks\\block_4734_1768189493.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:31:59",
-    "message": "Block #4654 submitted successfully",
+    "timestamp": "2026-01-12 11:44:53",
+    "message": "Block #4734 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:31:59",
-    "message": "Block #4654 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:53",
+    "message": "Block #4734 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:05",
-    "message": "Block #4655 submission failed",
+    "timestamp": "2026-01-12 11:44:59",
+    "message": "Block #4735 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:05",
-    "message": "Block saved locally: ./data/blocks\\block_4655_1768185125.json",
+    "timestamp": "2026-01-12 11:44:59",
+    "message": "Block saved locally: ./data/blocks\\block_4735_1768189499.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:05",
-    "message": "Block #4655 submitted successfully",
+    "timestamp": "2026-01-12 11:44:59",
+    "message": "Block #4735 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:05",
-    "message": "Block #4655 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:44:59",
+    "message": "Block #4735 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:10",
-    "message": "Block #4656 submission failed",
+    "timestamp": "2026-01-12 11:45:05",
+    "message": "Block #4736 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:10",
-    "message": "Block saved locally: ./data/blocks\\block_4656_1768185130.json",
+    "timestamp": "2026-01-12 11:45:05",
+    "message": "Block saved locally: ./data/blocks\\block_4736_1768189505.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:10",
-    "message": "Block #4656 submitted successfully",
+    "timestamp": "2026-01-12 11:45:05",
+    "message": "Block #4736 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:10",
-    "message": "Block #4656 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:05",
+    "message": "Block #4736 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:16",
-    "message": "Block #4657 submission failed",
+    "timestamp": "2026-01-12 11:45:11",
+    "message": "Block #4737 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:16",
-    "message": "Block saved locally: ./data/blocks\\block_4657_1768185136.json",
+    "timestamp": "2026-01-12 11:45:11",
+    "message": "Block saved locally: ./data/blocks\\block_4737_1768189511.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:16",
-    "message": "Block #4657 submitted successfully",
+    "timestamp": "2026-01-12 11:45:11",
+    "message": "Block #4737 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:16",
-    "message": "Block #4657 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:12",
+    "message": "Block #4737 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:22",
-    "message": "Block #4658 submission failed",
+    "timestamp": "2026-01-12 11:45:20",
+    "message": "Block #4738 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:22",
-    "message": "Block saved locally: ./data/blocks\\block_4658_1768185142.json",
+    "timestamp": "2026-01-12 11:45:20",
+    "message": "Block saved locally: ./data/blocks\\block_4738_1768189520.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:22",
-    "message": "Block #4658 submitted successfully",
+    "timestamp": "2026-01-12 11:45:20",
+    "message": "Block #4738 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:22",
-    "message": "Block #4658 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:20",
+    "message": "Block #4738 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:26",
-    "message": "Block #4659 submission failed",
+    "timestamp": "2026-01-12 11:45:27",
+    "message": "Block #4739 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:26",
-    "message": "Block saved locally: ./data/blocks\\block_4659_1768185146.json",
+    "timestamp": "2026-01-12 11:45:27",
+    "message": "Block saved locally: ./data/blocks\\block_4739_1768189527.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:26",
-    "message": "Block #4659 submitted successfully",
+    "timestamp": "2026-01-12 11:45:27",
+    "message": "Block #4739 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:26",
-    "message": "Block #4659 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:27",
+    "message": "Block #4739 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:32",
-    "message": "Block #4660 submission failed",
+    "timestamp": "2026-01-12 11:45:32",
+    "message": "Block #4740 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:32",
-    "message": "Block saved locally: ./data/blocks\\block_4660_1768185152.json",
+    "timestamp": "2026-01-12 11:45:32",
+    "message": "Block saved locally: ./data/blocks\\block_4740_1768189532.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:32",
-    "message": "Block #4660 submitted successfully",
+    "timestamp": "2026-01-12 11:45:32",
+    "message": "Block #4740 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:32",
-    "message": "Block #4660 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:32",
+    "message": "Block #4740 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:38",
-    "message": "Block #4661 submission failed",
+    "timestamp": "2026-01-12 11:45:38",
+    "message": "Block #4741 submission failed",
     "type": "warning"
   },
   {
-    "timestamp": "2026-01-12 10:32:38",
-    "message": "Block saved locally: ./data/blocks\\block_4661_1768185158.json",
+    "timestamp": "2026-01-12 11:45:38",
+    "message": "Block saved locally: ./data/blocks\\block_4741_1768189538.json",
     "type": "info"
   },
   {
-    "timestamp": "2026-01-12 10:32:38",
-    "message": "Block #4661 submitted successfully",
+    "timestamp": "2026-01-12 11:45:38",
+    "message": "Block #4741 submitted successfully",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:38",
-    "message": "Block #4661 mined - Reward: 1.0",
+    "timestamp": "2026-01-12 11:45:38",
+    "message": "Block #4741 mined - Reward: 1.0",
     "type": "success"
   },
   {
-    "timestamp": "2026-01-12 10:32:42",
-    "message": 
+    "timestamp": "2026-01-12 11:45:44",
+    "message": "Block #4742 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:44",
+    "message": "Block saved locally: ./data/blocks\\block_4742_1768189544.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:44",
+    "message": "Block #4742 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:44",
+    "message": "Block #4742 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:53",
+    "message": "Block #4743 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:53",
+    "message": "Block saved locally: ./data/blocks\\block_4743_1768189553.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:53",
+    "message": "Block #4743 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:53",
+    "message": "Block #4743 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:59",
+    "message": "Block #4744 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:45:59",
+    "message": "Block saved locally: ./data/blocks\\block_4744_1768189559.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:00",
+    "message": "Block #4744 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:00",
+    "message": "Block #4744 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:06",
+    "message": "Block #4745 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:06",
+    "message": "Block saved locally: ./data/blocks\\block_4745_1768189566.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:06",
+    "message": "Block #4745 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:07",
+    "message": "Block #4745 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:12",
+    "message": "Block #4746 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:12",
+    "message": "Block saved locally: ./data/blocks\\block_4746_1768189572.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:12",
+    "message": "Block #4746 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:12",
+    "message": "Block #4746 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:20",
+    "message": "Block #4747 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:20",
+    "message": "Block saved locally: ./data/blocks\\block_4747_1768189580.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:20",
+    "message": "Block #4747 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:20",
+    "message": "Block #4747 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:24",
+    "message": "Block #4748 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:24",
+    "message": "Block saved locally: ./data/blocks\\block_4748_1768189584.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:24",
+    "message": "Block #4748 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:24",
+    "message": "Block #4748 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:31",
+    "message": "Block #4749 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:31",
+    "message": "Block saved locally: ./data/blocks\\block_4749_1768189591.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:31",
+    "message": "Block #4749 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:31",
+    "message": "Block #4749 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:36",
+    "message": "Block #4750 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:36",
+    "message": "Block saved locally: ./data/blocks\\block_4750_1768189596.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:36",
+    "message": "Block #4750 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:37",
+    "message": "Block #4750 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:42",
+    "message": "Block #4751 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:42",
+    "message": "Block saved locally: ./data/blocks\\block_4751_1768189602.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:42",
+    "message": "Block #4751 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:43",
+    "message": "Block #4751 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:48",
+    "message": "Block #4752 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:48",
+    "message": "Block saved locally: ./data/blocks\\block_4752_1768189608.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:48",
+    "message": "Block #4752 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:49",
+    "message": "Block #4752 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:56",
+    "message": "Block #4753 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:56",
+    "message": "Block saved locally: ./data/blocks\\block_4753_1768189616.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:56",
+    "message": "Block #4753 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:46:56",
+    "message": "Block #4753 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:03",
+    "message": "Block #4754 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:03",
+    "message": "Block saved locally: ./data/blocks\\block_4754_1768189623.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:03",
+    "message": "Block #4754 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:03",
+    "message": "Block #4754 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:10",
+    "message": "Block #4755 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:10",
+    "message": "Block saved locally: ./data/blocks\\block_4755_1768189630.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:10",
+    "message": "Block #4755 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:11",
+    "message": "Block #4755 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:18",
+    "message": "Block #4756 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:18",
+    "message": "Block saved locally: ./data/blocks\\block_4756_1768189638.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:18",
+    "message": "Block #4756 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:19",
+    "message": "Block #4756 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:24",
+    "message": "Block #4757 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:24",
+    "message": "Block saved locally: ./data/blocks\\block_4757_1768189644.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:24",
+    "message": "Block #4757 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:25",
+    "message": "Block #4757 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:31",
+    "message": "Block #4758 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:31",
+    "message": "Block saved locally: ./data/blocks\\block_4758_1768189651.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:31",
+    "message": "Block #4758 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:32",
+    "message": "Block #4758 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:40",
+    "message": "Block #4759 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:40",
+    "message": "Block saved locally: ./data/blocks\\block_4759_1768189660.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:40",
+    "message": "Block #4759 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:41",
+    "message": "Block #4759 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:49",
+    "message": "Block #4760 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:49",
+    "message": "Block saved locally: ./data/blocks\\block_4760_1768189669.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:49",
+    "message": "Block #4760 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:49",
+    "message": "Block #4760 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:55",
+    "message": "Block #4761 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:55",
+    "message": "Block saved locally: ./data/blocks\\block_4761_1768189675.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:55",
+    "message": "Block #4761 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:47:56",
+    "message": "Block #4761 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:03",
+    "message": "Block #4762 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:03",
+    "message": "Block saved locally: ./data/blocks\\block_4762_1768189683.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:03",
+    "message": "Block #4762 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:04",
+    "message": "Block #4762 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:09",
+    "message": "Block #4763 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:10",
+    "message": "Block saved locally: ./data/blocks\\block_4763_1768189689.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:10",
+    "message": "Block #4763 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:10",
+    "message": "Block #4763 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:16",
+    "message": "Block #4764 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:16",
+    "message": "Block saved locally: ./data/blocks\\block_4764_1768189696.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:17",
+    "message": "Block #4764 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:17",
+    "message": "Block #4764 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:22",
+    "message": "Block #4765 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:22",
+    "message": "Block saved locally: ./data/blocks\\block_4765_1768189702.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:22",
+    "message": "Block #4765 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:23",
+    "message": "Block #4765 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:28",
+    "message": "Block #4766 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:28",
+    "message": "Block saved locally: ./data/blocks\\block_4766_1768189708.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:29",
+    "message": "Block #4766 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:29",
+    "message": "Block #4766 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:36",
+    "message": "Block #4767 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:36",
+    "message": "Block saved locally: ./data/blocks\\block_4767_1768189716.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:36",
+    "message": "Block #4767 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:37",
+    "message": "Block #4767 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:43",
+    "message": "Block #4768 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:44",
+    "message": "Block saved locally: ./data/blocks\\block_4768_1768189724.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:44",
+    "message": "Block #4768 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:44",
+    "message": "Block #4768 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:52",
+    "message": "Block #4769 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:52",
+    "message": "Block saved locally: ./data/blocks\\block_4769_1768189732.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:52",
+    "message": "Block #4769 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:53",
+    "message": "Block #4769 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:59",
+    "message": "Block #4770 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:59",
+    "message": "Block saved locally: ./data/blocks\\block_4770_1768189739.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:59",
+    "message": "Block #4770 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:48:59",
+    "message": "Block #4770 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:05",
+    "message": "Block #4771 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:05",
+    "message": "Block saved locally: ./data/blocks\\block_4771_1768189745.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:05",
+    "message": "Block #4771 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:06",
+    "message": "Block #4771 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:12",
+    "message": "Block #4772 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:13",
+    "message": "Block saved locally: ./data/blocks\\block_4772_1768189753.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:13",
+    "message": "Block #4772 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:13",
+    "message": "Block #4772 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:18",
+    "message": "Block #4773 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:18",
+    "message": "Block saved locally: ./data/blocks\\block_4773_1768189758.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:19",
+    "message": "Block #4773 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:19",
+    "message": "Block #4773 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:24",
+    "message": "Block #4774 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:24",
+    "message": "Block saved locally: ./data/blocks\\block_4774_1768189764.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:24",
+    "message": "Block #4774 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:25",
+    "message": "Block #4774 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:31",
+    "message": "Block #4775 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:32",
+    "message": "Block saved locally: ./data/blocks\\block_4775_1768189772.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:32",
+    "message": "Block #4775 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:32",
+    "message": "Block #4775 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:42",
+    "message": "Block #4776 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:42",
+    "message": "Block saved locally: ./data/blocks\\block_4776_1768189782.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 11:49:43",
+    "message": "Block #4776 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:36",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:39",
+    "message": "Block #4777 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:39",
+    "message": "Block saved locally: ./data/blocks\\block_4777_1768190739.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:39",
+    "message": "Block #4777 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:39",
+    "message": "Block #4777 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:43",
+    "message": "Block #4778 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:43",
+    "message": "Block saved locally: ./data/blocks\\block_4778_1768190743.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:43",
+    "message": "Block #4778 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:44",
+    "message": "Block #4778 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:49",
+    "message": "Block #4779 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:49",
+    "message": "Block saved locally: ./data/blocks\\block_4779_1768190749.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:49",
+    "message": "Block #4779 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:49",
+    "message": "Block #4779 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:54",
+    "message": "Block #4780 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:54",
+    "message": "Block saved locally: ./data/blocks\\block_4780_1768190754.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:54",
+    "message": "Block #4780 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:05:55",
+    "message": "Block #4780 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:01",
+    "message": "Block #4781 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:01",
+    "message": "Block saved locally: ./data/blocks\\block_4781_1768190761.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:01",
+    "message": "Block #4781 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:01",
+    "message": "Block #4781 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:09",
+    "message": "Block #4782 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:09",
+    "message": "Block saved locally: ./data/blocks\\block_4782_1768190769.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:09",
+    "message": "Block #4782 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:09",
+    "message": "Block #4782 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:14",
+    "message": "Block #4783 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:14",
+    "message": "Block saved locally: ./data/blocks\\block_4783_1768190774.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:14",
+    "message": "Block #4783 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:15",
+    "message": "Block #4783 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:20",
+    "message": "Block #4784 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:20",
+    "message": "Block saved locally: ./data/blocks\\block_4784_1768190780.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:20",
+    "message": "Block #4784 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:21",
+    "message": "Block #4784 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:27",
+    "message": "Block #4785 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:27",
+    "message": "Block saved locally: ./data/blocks\\block_4785_1768190787.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:27",
+    "message": "Block #4785 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:27",
+    "message": "Block #4785 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:34",
+    "message": "Block #4786 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:34",
+    "message": "Block saved locally: ./data/blocks\\block_4786_1768190794.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:34",
+    "message": "Block #4786 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:34",
+    "message": "Block #4786 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:41",
+    "message": "Block #4787 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:41",
+    "message": "Block saved locally: ./data/blocks\\block_4787_1768190801.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:41",
+    "message": "Block #4787 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:41",
+    "message": "Block #4787 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:47",
+    "message": "Block #4788 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:47",
+    "message": "Block saved locally: ./data/blocks\\block_4788_1768190807.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:47",
+    "message": "Block #4788 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:47",
+    "message": "Block #4788 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:54",
+    "message": "Block #4789 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:55",
+    "message": "Block saved locally: ./data/blocks\\block_4789_1768190815.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:55",
+    "message": "Block #4789 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:06:55",
+    "message": "Block #4789 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:02",
+    "message": "Block #4790 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:02",
+    "message": "Block saved locally: ./data/blocks\\block_4790_1768190822.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:02",
+    "message": "Block #4790 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:02",
+    "message": "Block #4790 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:08",
+    "message": "Block #4791 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:08",
+    "message": "Block saved locally: ./data/blocks\\block_4791_1768190828.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:08",
+    "message": "Block #4791 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:08",
+    "message": "Block #4791 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:15",
+    "message": "Block #4792 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:15",
+    "message": "Block saved locally: ./data/blocks\\block_4792_1768190835.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:15",
+    "message": "Block #4792 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:15",
+    "message": "Block #4792 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:24",
+    "message": "Block #4793 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:24",
+    "message": "Block saved locally: ./data/blocks\\block_4793_1768190844.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:24",
+    "message": "Block #4793 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:24",
+    "message": "Block #4793 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:30",
+    "message": "Block #4794 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:30",
+    "message": "Block saved locally: ./data/blocks\\block_4794_1768190850.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:30",
+    "message": "Block #4794 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:31",
+    "message": "Block #4794 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:36",
+    "message": "Block #4795 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:36",
+    "message": "Block saved locally: ./data/blocks\\block_4795_1768190856.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:36",
+    "message": "Block #4795 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:36",
+    "message": "Block #4795 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:43",
+    "message": "Block #4796 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:43",
+    "message": "Block saved locally: ./data/blocks\\block_4796_1768190863.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:43",
+    "message": "Block #4796 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:43",
+    "message": "Block #4796 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:56",
+    "message": "Block #4797 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:56",
+    "message": "Block saved locally: ./data/blocks\\block_4797_1768190876.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:56",
+    "message": "Block #4797 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:07:56",
+    "message": "Block #4797 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:03",
+    "message": "Block #4798 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:03",
+    "message": "Block saved locally: ./data/blocks\\block_4798_1768190883.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:03",
+    "message": "Block #4798 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:04",
+    "message": "Block #4798 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:11",
+    "message": "Block #4799 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:11",
+    "message": "Block saved locally: ./data/blocks\\block_4799_1768190891.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:11",
+    "message": "Block #4799 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:08:12",
+    "message": "Block #4799 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:42",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:45",
+    "message": "Block #4800 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:45",
+    "message": "Block saved locally: ./data/blocks\\block_4800_1768191765.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:45",
+    "message": "Block #4800 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:45",
+    "message": "Block #4800 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:51",
+    "message": "Block #4801 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:51",
+    "message": "Block saved locally: ./data/blocks\\block_4801_1768191771.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:51",
+    "message": "Block #4801 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:22:51",
+    "message": "Block #4801 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:30:52",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:30:55",
+    "message": "Block #4802 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:30:55",
+    "message": "Block saved locally: ./data/blocks\\block_4802_1768192255.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:30:55",
+    "message": "Block #4802 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:30:55",
+    "message": "Block #4802 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:00",
+    "message": "Block #4803 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:00",
+    "message": "Block saved locally: ./data/blocks\\block_4803_1768192260.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:00",
+    "message": "Block #4803 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:00",
+    "message": "Block #4803 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:06",
+    "message": "Block #4804 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:06",
+    "message": "Block saved locally: ./data/blocks\\block_4804_1768192266.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:06",
+    "message": "Block #4804 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:06",
+    "message": "Block #4804 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:11",
+    "message": "Block #4805 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:11",
+    "message": "Block saved locally: ./data/blocks\\block_4805_1768192271.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:11",
+    "message": "Block #4805 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:12",
+    "message": "Block #4805 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:17",
+    "message": "Block #4806 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:17",
+    "message": "Block saved locally: ./data/blocks\\block_4806_1768192277.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:17",
+    "message": "Block #4806 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:17",
+    "message": "Block #4806 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:21",
+    "message": "Block #4807 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:21",
+    "message": "Block saved locally: ./data/blocks\\block_4807_1768192281.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:21",
+    "message": "Block #4807 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:22",
+    "message": "Block #4807 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:27",
+    "message": "Block #4808 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:27",
+    "message": "Block saved locally: ./data/blocks\\block_4808_1768192287.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:27",
+    "message": "Block #4808 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:31:28",
+    "message": "Block #4808 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:10",
+    "message": "Auto-mining started",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:13",
+    "message": "Block #4809 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:13",
+    "message": "Block saved locally: ./data/blocks\\block_4809_1768192933.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:13",
+    "message": "Block #4809 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:14",
+    "message": "Block #4809 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:19",
+    "message": "Block #4810 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:19",
+    "message": "Block saved locally: ./data/blocks\\block_4810_1768192939.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:19",
+    "message": "Block #4810 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:20",
+    "message": "Block #4810 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:26",
+    "message": "Block #4811 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:26",
+    "message": "Block saved locally: ./data/blocks\\block_4811_1768192946.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:26",
+    "message": "Block #4811 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:26",
+    "message": "Block #4811 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:31",
+    "message": "Block #4812 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:31",
+    "message": "Block saved locally: ./data/blocks\\block_4812_1768192951.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:31",
+    "message": "Block #4812 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:31",
+    "message": "Block #4812 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:36",
+    "message": "Block #4813 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:36",
+    "message": "Block saved locally: ./data/blocks\\block_4813_1768192956.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:36",
+    "message": "Block #4813 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:36",
+    "message": "Block #4813 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:42",
+    "message": "Block #4814 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:42",
+    "message": "Block saved locally: ./data/blocks\\block_4814_1768192962.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:42",
+    "message": "Block #4814 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:43",
+    "message": "Block #4814 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:48",
+    "message": "Block #4815 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:48",
+    "message": "Block saved locally: ./data/blocks\\block_4815_1768192968.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:48",
+    "message": "Block #4815 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:49",
+    "message": "Block #4815 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:54",
+    "message": "Block #4816 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:54",
+    "message": "Block saved locally: ./data/blocks\\block_4816_1768192974.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:54",
+    "message": "Block #4816 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:54",
+    "message": "Block #4816 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:59",
+    "message": "Block #4817 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:59",
+    "message": "Block saved locally: ./data/blocks\\block_4817_1768192979.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:59",
+    "message": "Block #4817 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:42:59",
+    "message": "Block #4817 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:05",
+    "message": "Block #4818 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:05",
+    "message": "Block saved locally: ./data/blocks\\block_4818_1768192985.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:05",
+    "message": "Block #4818 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:05",
+    "message": "Block #4818 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:11",
+    "message": "Block #4819 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:11",
+    "message": "Block saved locally: ./data/blocks\\block_4819_1768192991.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:11",
+    "message": "Block #4819 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:11",
+    "message": "Block #4819 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:18",
+    "message": "Block #4820 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:18",
+    "message": "Block saved locally: ./data/blocks\\block_4820_1768192998.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:18",
+    "message": "Block #4820 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:18",
+    "message": "Block #4820 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:24",
+    "message": "Block #4821 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:24",
+    "message": "Block saved locally: ./data/blocks\\block_4821_1768193004.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:24",
+    "message": "Block #4821 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:24",
+    "message": "Block #4821 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:29",
+    "message": "Block #4822 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:29",
+    "message": "Block saved locally: ./data/blocks\\block_4822_1768193009.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:29",
+    "message": "Block #4822 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:30",
+    "message": "Block #4822 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:35",
+    "message": "Block #4823 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:35",
+    "message": "Block saved locally: ./data/blocks\\block_4823_1768193015.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:35",
+    "message": "Block #4823 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:35",
+    "message": "Block #4823 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:41",
+    "message": "Block #4824 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:41",
+    "message": "Block saved locally: ./data/blocks\\block_4824_1768193021.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:41",
+    "message": "Block #4824 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:42",
+    "message": "Block #4824 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:47",
+    "message": "Block #4825 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:47",
+    "message": "Block saved locally: ./data/blocks\\block_4825_1768193027.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:47",
+    "message": "Block #4825 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:47",
+    "message": "Block #4825 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:53",
+    "message": "Block #4826 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:53",
+    "message": "Block saved locally: ./data/blocks\\block_4826_1768193033.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:53",
+    "message": "Block #4826 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:53",
+    "message": "Block #4826 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:59",
+    "message": "Block #4827 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:59",
+    "message": "Block saved locally: ./data/blocks\\block_4827_1768193039.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:43:59",
+    "message": "Block #4827 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:00",
+    "message": "Block #4827 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:07",
+    "message": "Block #4828 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:07",
+    "message": "Block saved locally: ./data/blocks\\block_4828_1768193047.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:07",
+    "message": "Block #4828 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:07",
+    "message": "Block #4828 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:14",
+    "message": "Block #4829 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:14",
+    "message": "Block saved locally: ./data/blocks\\block_4829_1768193054.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:14",
+    "message": "Block #4829 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:14",
+    "message": "Block #4829 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:20",
+    "message": "Block #4830 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:20",
+    "message": "Block saved locally: ./data/blocks\\block_4830_1768193060.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:20",
+    "message": "Block #4830 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:20",
+    "message": "Block #4830 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:26",
+    "message": "Block #4831 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:26",
+    "message": "Block saved locally: ./data/blocks\\block_4831_1768193066.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:26",
+    "message": "Block #4831 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:26",
+    "message": "Block #4831 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:33",
+    "message": "Block #4832 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:33",
+    "message": "Block saved locally: ./data/blocks\\block_4832_1768193073.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:33",
+    "message": "Block #4832 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:33",
+    "message": "Block #4832 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:38",
+    "message": "Block #4833 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:38",
+    "message": "Block saved locally: ./data/blocks\\block_4833_1768193078.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:38",
+    "message": "Block #4833 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:38",
+    "message": "Block #4833 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:44",
+    "message": "Block #4834 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:44",
+    "message": "Block saved locally: ./data/blocks\\block_4834_1768193084.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:44",
+    "message": "Block #4834 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:45",
+    "message": "Block #4834 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:49",
+    "message": "Block #4835 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:50",
+    "message": "Block saved locally: ./data/blocks\\block_4835_1768193090.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:50",
+    "message": "Block #4835 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:50",
+    "message": "Block #4835 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:56",
+    "message": "Block #4836 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:56",
+    "message": "Block saved locally: ./data/blocks\\block_4836_1768193096.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:56",
+    "message": "Block #4836 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:44:56",
+    "message": "Block #4836 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:04",
+    "message": "Block #4837 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:04",
+    "message": "Block saved locally: ./data/blocks\\block_4837_1768193104.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:04",
+    "message": "Block #4837 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:04",
+    "message": "Block #4837 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:11",
+    "message": "Block #4838 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:11",
+    "message": "Block saved locally: ./data/blocks\\block_4838_1768193111.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:11",
+    "message": "Block #4838 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:12",
+    "message": "Block #4838 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:18",
+    "message": "Block #4839 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:18",
+    "message": "Block saved locally: ./data/blocks\\block_4839_1768193118.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:18",
+    "message": "Block #4839 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:18",
+    "message": "Block #4839 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:24",
+    "message": "Block #4840 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:24",
+    "message": "Block saved locally: ./data/blocks\\block_4840_1768193124.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:24",
+    "message": "Block #4840 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:25",
+    "message": "Block #4840 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:32",
+    "message": "Block #4841 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:32",
+    "message": "Block saved locally: ./data/blocks\\block_4841_1768193132.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:32",
+    "message": "Block #4841 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:33",
+    "message": "Block #4841 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:40",
+    "message": "Block #4842 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:40",
+    "message": "Block saved locally: ./data/blocks\\block_4842_1768193140.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:40",
+    "message": "Block #4842 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:41",
+    "message": "Block #4842 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:47",
+    "message": "Block #4843 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:47",
+    "message": "Block saved locally: ./data/blocks\\block_4843_1768193147.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:47",
+    "message": "Block #4843 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:47",
+    "message": "Block #4843 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:54",
+    "message": "Block #4844 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:54",
+    "message": "Block saved locally: ./data/blocks\\block_4844_1768193154.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:54",
+    "message": "Block #4844 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:45:55",
+    "message": "Block #4844 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:00",
+    "message": "Block #4845 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:00",
+    "message": "Block saved locally: ./data/blocks\\block_4845_1768193160.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:00",
+    "message": "Block #4845 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:00",
+    "message": "Block #4845 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:07",
+    "message": "Block #4846 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:07",
+    "message": "Block saved locally: ./data/blocks\\block_4846_1768193167.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:07",
+    "message": "Block #4846 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:08",
+    "message": "Block #4846 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:13",
+    "message": "Block #4847 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:14",
+    "message": "Block saved locally: ./data/blocks\\block_4847_1768193174.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:14",
+    "message": "Block #4847 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:14",
+    "message": "Block #4847 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:22",
+    "message": "Block #4848 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:22",
+    "message": "Block saved locally: ./data/blocks\\block_4848_1768193182.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:22",
+    "message": "Block #4848 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:22",
+    "message": "Block #4848 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:28",
+    "message": "Block #4849 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:28",
+    "message": "Block saved locally: ./data/blocks\\block_4849_1768193188.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:28",
+    "message": "Block #4849 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:29",
+    "message": "Block #4849 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:35",
+    "message": "Block #4850 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:35",
+    "message": "Block saved locally: ./data/blocks\\block_4850_1768193195.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:35",
+    "message": "Block #4850 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:36",
+    "message": "Block #4850 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:43",
+    "message": "Block #4851 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:43",
+    "message": "Block saved locally: ./data/blocks\\block_4851_1768193203.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:43",
+    "message": "Block #4851 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:44",
+    "message": "Block #4851 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:51",
+    "message": "Block #4852 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:51",
+    "message": "Block saved locally: ./data/blocks\\block_4852_1768193211.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:51",
+    "message": "Block #4852 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:46:52",
+    "message": "Block #4852 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:00",
+    "message": "Block #4853 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:00",
+    "message": "Block saved locally: ./data/blocks\\block_4853_1768193220.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:00",
+    "message": "Block #4853 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:01",
+    "message": "Block #4853 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:08",
+    "message": "Block #4854 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:08",
+    "message": "Block saved locally: ./data/blocks\\block_4854_1768193228.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:08",
+    "message": "Block #4854 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:09",
+    "message": "Block #4854 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:16",
+    "message": "Block #4855 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:16",
+    "message": "Block saved locally: ./data/blocks\\block_4855_1768193236.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:17",
+    "message": "Block #4855 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:17",
+    "message": "Block #4855 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:28",
+    "message": "Block #4856 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:28",
+    "message": "Block saved locally: ./data/blocks\\block_4856_1768193248.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:28",
+    "message": "Block #4856 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:29",
+    "message": "Block #4856 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:35",
+    "message": "Block #4857 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:35",
+    "message": "Block saved locally: ./data/blocks\\block_4857_1768193255.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:35",
+    "message": "Block #4857 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:36",
+    "message": "Block #4857 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:44",
+    "message": "Block #4858 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:44",
+    "message": "Block saved locally: ./data/blocks\\block_4858_1768193264.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:44",
+    "message": "Block #4858 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:45",
+    "message": "Block #4858 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:53",
+    "message": "Block #4859 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:53",
+    "message": "Block saved locally: ./data/blocks\\block_4859_1768193273.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:53",
+    "message": "Block #4859 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:53",
+    "message": "Block #4859 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:59",
+    "message": "Block #4860 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:59",
+    "message": "Block saved locally: ./data/blocks\\block_4860_1768193279.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:59",
+    "message": "Block #4860 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:47:59",
+    "message": "Block #4860 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:10",
+    "message": "Block #4861 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:10",
+    "message": "Block saved locally: ./data/blocks\\block_4861_1768193290.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:10",
+    "message": "Block #4861 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:11",
+    "message": "Block #4861 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:21",
+    "message": "Block #4862 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:21",
+    "message": "Block saved locally: ./data/blocks\\block_4862_1768193301.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:21",
+    "message": "Block #4862 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:22",
+    "message": "Block #4862 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:31",
+    "message": "Block #4863 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:32",
+    "message": "Block saved locally: ./data/blocks\\block_4863_1768193311.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:32",
+    "message": "Block #4863 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:32",
+    "message": "Block #4863 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:40",
+    "message": "Block #4864 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:40",
+    "message": "Block saved locally: ./data/blocks\\block_4864_1768193320.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:40",
+    "message": "Block #4864 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:41",
+    "message": "Block #4864 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:47",
+    "message": "Block #4865 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:47",
+    "message": "Block saved locally: ./data/blocks\\block_4865_1768193327.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:48",
+    "message": "Block #4865 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:48",
+    "message": "Block #4865 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:58",
+    "message": "Block #4866 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:58",
+    "message": "Block saved locally: ./data/blocks\\block_4866_1768193338.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:58",
+    "message": "Block #4866 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:48:59",
+    "message": "Block #4866 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:07",
+    "message": "Block #4867 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:07",
+    "message": "Block saved locally: ./data/blocks\\block_4867_1768193347.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:07",
+    "message": "Block #4867 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:08",
+    "message": "Block #4867 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:16",
+    "message": "Block #4868 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:17",
+    "message": "Block saved locally: ./data/blocks\\block_4868_1768193357.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:17",
+    "message": "Block #4868 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:17",
+    "message": "Block #4868 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:26",
+    "message": "Block #4869 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:26",
+    "message": "Block saved locally: ./data/blocks\\block_4869_1768193366.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:26",
+    "message": "Block #4869 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:27",
+    "message": "Block #4869 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:35",
+    "message": "Block #4870 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:36",
+    "message": "Block saved locally: ./data/blocks\\block_4870_1768193376.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:36",
+    "message": "Block #4870 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:38",
+    "message": "Block #4870 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:46",
+    "message": "Block #4871 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:46",
+    "message": "Block saved locally: ./data/blocks\\block_4871_1768193386.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:46",
+    "message": "Block #4871 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:49:48",
+    "message": "Block #4871 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:00",
+    "message": "Block #4872 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:00",
+    "message": "Block saved locally: ./data/blocks\\block_4872_1768193400.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:00",
+    "message": "Block #4872 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:01",
+    "message": "Block #4872 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:14",
+    "message": "Block #4873 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:14",
+    "message": "Block saved locally: ./data/blocks\\block_4873_1768193414.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:14",
+    "message": "Block #4873 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:15",
+    "message": "Block #4873 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:24",
+    "message": "Block #4874 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:24",
+    "message": "Block saved locally: ./data/blocks\\block_4874_1768193424.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:24",
+    "message": "Block #4874 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:25",
+    "message": "Block #4874 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:34",
+    "message": "Block #4875 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:34",
+    "message": "Block saved locally: ./data/blocks\\block_4875_1768193434.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:34",
+    "message": "Block #4875 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:35",
+    "message": "Block #4875 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:42",
+    "message": "Block #4876 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:43",
+    "message": "Block saved locally: ./data/blocks\\block_4876_1768193443.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:43",
+    "message": "Block #4876 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:44",
+    "message": "Block #4876 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:57",
+    "message": "Block #4877 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:58",
+    "message": "Block saved locally: ./data/blocks\\block_4877_1768193457.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:58",
+    "message": "Block #4877 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:50:58",
+    "message": "Block #4877 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:07",
+    "message": "Block #4878 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:07",
+    "message": "Block saved locally: ./data/blocks\\block_4878_1768193467.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:07",
+    "message": "Block #4878 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:08",
+    "message": "Block #4878 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:16",
+    "message": "Block #4879 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:16",
+    "message": "Block saved locally: ./data/blocks\\block_4879_1768193476.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:17",
+    "message": "Block #4879 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:19",
+    "message": "Block #4879 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:26",
+    "message": "Block #4880 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:26",
+    "message": "Block saved locally: ./data/blocks\\block_4880_1768193486.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:26",
+    "message": "Block #4880 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:27",
+    "message": "Block #4880 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:37",
+    "message": "Block #4881 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:37",
+    "message": "Block saved locally: ./data/blocks\\block_4881_1768193497.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:37",
+    "message": "Block #4881 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:37",
+    "message": "Block #4881 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:46",
+    "message": "Block #4882 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:46",
+    "message": "Block saved locally: ./data/blocks\\block_4882_1768193506.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:46",
+    "message": "Block #4882 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:47",
+    "message": "Block #4882 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:56",
+    "message": "Block #4883 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:56",
+    "message": "Block saved locally: ./data/blocks\\block_4883_1768193516.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:57",
+    "message": "Block #4883 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:51:57",
+    "message": "Block #4883 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:05",
+    "message": "Block #4884 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:05",
+    "message": "Block saved locally: ./data/blocks\\block_4884_1768193525.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:06",
+    "message": "Block #4884 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:06",
+    "message": "Block #4884 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:14",
+    "message": "Block #4885 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:14",
+    "message": "Block saved locally: ./data/blocks\\block_4885_1768193534.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:14",
+    "message": "Block #4885 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:16",
+    "message": "Block #4885 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:24",
+    "message": "Block #4886 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:24",
+    "message": "Block saved locally: ./data/blocks\\block_4886_1768193544.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:24",
+    "message": "Block #4886 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:24",
+    "message": "Block #4886 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:31",
+    "message": "Block #4887 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:31",
+    "message": "Block saved locally: ./data/blocks\\block_4887_1768193551.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:31",
+    "message": "Block #4887 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:33",
+    "message": "Block #4887 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:42",
+    "message": "Block #4888 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:43",
+    "message": "Block saved locally: ./data/blocks\\block_4888_1768193562.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:43",
+    "message": "Block #4888 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:45",
+    "message": "Block #4888 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:53",
+    "message": "Block #4889 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:53",
+    "message": "Block saved locally: ./data/blocks\\block_4889_1768193573.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:53",
+    "message": "Block #4889 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:52:54",
+    "message": "Block #4889 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:07",
+    "message": "Block #4890 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:07",
+    "message": "Block saved locally: ./data/blocks\\block_4890_1768193587.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:07",
+    "message": "Block #4890 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:08",
+    "message": "Block #4890 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:18",
+    "message": "Block #4891 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:19",
+    "message": "Block saved locally: ./data/blocks\\block_4891_1768193599.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:19",
+    "message": "Block #4891 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:21",
+    "message": "Block #4891 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:30",
+    "message": "Block #4892 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:30",
+    "message": "Block saved locally: ./data/blocks\\block_4892_1768193610.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:30",
+    "message": "Block #4892 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:31",
+    "message": "Block #4892 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:47",
+    "message": "Block #4893 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:47",
+    "message": "Block saved locally: ./data/blocks\\block_4893_1768193627.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:48",
+    "message": "Block #4893 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:53:50",
+    "message": "Block #4893 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:02",
+    "message": "Block #4894 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:02",
+    "message": "Block saved locally: ./data/blocks\\block_4894_1768193642.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:03",
+    "message": "Block #4894 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:05",
+    "message": "Block #4894 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:19",
+    "message": "Block #4895 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:19",
+    "message": "Block saved locally: ./data/blocks\\block_4895_1768193659.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:19",
+    "message": "Block #4895 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:19",
+    "message": "Block #4895 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:27",
+    "message": "Block #4896 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:27",
+    "message": "Block saved locally: ./data/blocks\\block_4896_1768193667.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:27",
+    "message": "Block #4896 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:28",
+    "message": "Block #4896 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:39",
+    "message": "Block #4897 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:39",
+    "message": "Block saved locally: ./data/blocks\\block_4897_1768193679.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:39",
+    "message": "Block #4897 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:40",
+    "message": "Block #4897 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:49",
+    "message": "Block #4898 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:50",
+    "message": "Block saved locally: ./data/blocks\\block_4898_1768193690.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:50",
+    "message": "Block #4898 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:54:52",
+    "message": "Block #4898 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:03",
+    "message": "Block #4899 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:04",
+    "message": "Block saved locally: ./data/blocks\\block_4899_1768193704.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:04",
+    "message": "Block #4899 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:05",
+    "message": "Block #4899 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:20",
+    "message": "Block #4900 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:20",
+    "message": "Block saved locally: ./data/blocks\\block_4900_1768193720.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:20",
+    "message": "Block #4900 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:20",
+    "message": "Block #4900 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:33",
+    "message": "Block #4901 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:33",
+    "message": "Block saved locally: ./data/blocks\\block_4901_1768193733.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:33",
+    "message": "Block #4901 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:34",
+    "message": "Block #4901 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:52",
+    "message": "Block #4902 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:53",
+    "message": "Block saved locally: ./data/blocks\\block_4902_1768193753.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:53",
+    "message": "Block #4902 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:55:54",
+    "message": "Block #4902 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:18",
+    "message": "Block #4903 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:18",
+    "message": "Block saved locally: ./data/blocks\\block_4903_1768193778.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:19",
+    "message": "Block #4903 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:19",
+    "message": "Block #4903 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:34",
+    "message": "Block #4904 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:34",
+    "message": "Block saved locally: ./data/blocks\\block_4904_1768193794.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:35",
+    "message": "Block #4904 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:38",
+    "message": "Block #4904 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:53",
+    "message": "Block #4905 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:53",
+    "message": "Block saved locally: ./data/blocks\\block_4905_1768193813.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:53",
+    "message": "Block #4905 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:56:54",
+    "message": "Block #4905 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:13",
+    "message": "Block #4906 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:14",
+    "message": "Block saved locally: ./data/blocks\\block_4906_1768193834.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:14",
+    "message": "Block #4906 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:16",
+    "message": "Block #4906 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:36",
+    "message": "Block #4907 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:36",
+    "message": "Block saved locally: ./data/blocks\\block_4907_1768193856.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:37",
+    "message": "Block #4907 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:38",
+    "message": "Block #4907 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:50",
+    "message": "Block #4908 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:50",
+    "message": "Block saved locally: ./data/blocks\\block_4908_1768193870.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:50",
+    "message": "Block #4908 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:57:52",
+    "message": "Block #4908 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:10",
+    "message": "Block #4909 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:11",
+    "message": "Block saved locally: ./data/blocks\\block_4909_1768193891.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:12",
+    "message": "Block #4909 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:14",
+    "message": "Block #4909 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:29",
+    "message": "Block #4910 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:29",
+    "message": "Block saved locally: ./data/blocks\\block_4910_1768193909.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:29",
+    "message": "Block #4910 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:29",
+    "message": "Block #4910 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:49",
+    "message": "Block #4911 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:50",
+    "message": "Block saved locally: ./data/blocks\\block_4911_1768193930.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:50",
+    "message": "Block #4911 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:58:51",
+    "message": "Block #4911 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:04",
+    "message": "Block #4912 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:04",
+    "message": "Block saved locally: ./data/blocks\\block_4912_1768193944.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:05",
+    "message": "Block #4912 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:06",
+    "message": "Block #4912 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:27",
+    "message": "Block #4913 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:28",
+    "message": "Block saved locally: ./data/blocks\\block_4913_1768193967.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:28",
+    "message": "Block #4913 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:29",
+    "message": "Block #4913 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:46",
+    "message": "Block #4914 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:47",
+    "message": "Block saved locally: ./data/blocks\\block_4914_1768193987.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:47",
+    "message": "Block #4914 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 12:59:49",
+    "message": "Block #4914 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:01",
+    "message": "Block #4915 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:02",
+    "message": "Block saved locally: ./data/blocks\\block_4915_1768194002.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:02",
+    "message": "Block #4915 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:03",
+    "message": "Block #4915 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:20",
+    "message": "Block #4916 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:20",
+    "message": "Block saved locally: ./data/blocks\\block_4916_1768194020.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:20",
+    "message": "Block #4916 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:21",
+    "message": "Block #4916 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:42",
+    "message": "Block #4917 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:43",
+    "message": "Block saved locally: ./data/blocks\\block_4917_1768194043.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:43",
+    "message": "Block #4917 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:00:44",
+    "message": "Block #4917 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:03",
+    "message": "Block #4918 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:04",
+    "message": "Block saved locally: ./data/blocks\\block_4918_1768194064.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:04",
+    "message": "Block #4918 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:08",
+    "message": "Block #4918 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:21",
+    "message": "Block #4919 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:21",
+    "message": "Block saved locally: ./data/blocks\\block_4919_1768194081.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:21",
+    "message": "Block #4919 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:22",
+    "message": "Block #4919 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:36",
+    "message": "Block #4920 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:36",
+    "message": "Block saved locally: ./data/blocks\\block_4920_1768194096.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:36",
+    "message": "Block #4920 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:38",
+    "message": "Block #4920 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:56",
+    "message": "Block #4921 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:56",
+    "message": "Block saved locally: ./data/blocks\\block_4921_1768194116.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:57",
+    "message": "Block #4921 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:01:59",
+    "message": "Block #4921 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:15",
+    "message": "Block #4922 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:15",
+    "message": "Block saved locally: ./data/blocks\\block_4922_1768194135.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:16",
+    "message": "Block #4922 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:17",
+    "message": "Block #4922 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:37",
+    "message": "Block #4923 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:37",
+    "message": "Block saved locally: ./data/blocks\\block_4923_1768194157.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:37",
+    "message": "Block #4923 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:39",
+    "message": "Block #4923 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:58",
+    "message": "Block #4924 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:58",
+    "message": "Block saved locally: ./data/blocks\\block_4924_1768194178.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:02:58",
+    "message": "Block #4924 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:00",
+    "message": "Block #4924 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:14",
+    "message": "Block #4925 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:14",
+    "message": "Block saved locally: ./data/blocks\\block_4925_1768194194.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:14",
+    "message": "Block #4925 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:15",
+    "message": "Block #4925 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:39",
+    "message": "Block #4926 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:39",
+    "message": "Block saved locally: ./data/blocks\\block_4926_1768194219.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:40",
+    "message": "Block #4926 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:03:42",
+    "message": "Block #4926 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:01",
+    "message": "Block #4927 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:01",
+    "message": "Block saved locally: ./data/blocks\\block_4927_1768194241.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:02",
+    "message": "Block #4927 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:05",
+    "message": "Block #4927 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:22",
+    "message": "Block #4928 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:22",
+    "message": "Block saved locally: ./data/blocks\\block_4928_1768194262.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:23",
+    "message": "Block #4928 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:23",
+    "message": "Block #4928 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:42",
+    "message": "Block #4929 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:43",
+    "message": "Block saved locally: ./data/blocks\\block_4929_1768194282.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:43",
+    "message": "Block #4929 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:04:47",
+    "message": "Block #4929 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:04",
+    "message": "Block #4930 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:05",
+    "message": "Block saved locally: ./data/blocks\\block_4930_1768194304.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:05",
+    "message": "Block #4930 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:08",
+    "message": "Block #4930 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:31",
+    "message": "Block #4931 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:31",
+    "message": "Block saved locally: ./data/blocks\\block_4931_1768194331.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:31",
+    "message": "Block #4931 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:33",
+    "message": "Block #4931 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:57",
+    "message": "Block #4932 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:58",
+    "message": "Block saved locally: ./data/blocks\\block_4932_1768194358.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:05:58",
+    "message": "Block #4932 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:00",
+    "message": "Block #4932 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:16",
+    "message": "Block #4933 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:17",
+    "message": "Block saved locally: ./data/blocks\\block_4933_1768194377.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:18",
+    "message": "Block #4933 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:31",
+    "message": "Block #4933 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:55",
+    "message": "Block #4934 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:55",
+    "message": "Block saved locally: ./data/blocks\\block_4934_1768194415.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:06:57",
+    "message": "Block #4934 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:01",
+    "message": "Block #4934 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:34",
+    "message": "Block #4935 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:34",
+    "message": "Block saved locally: ./data/blocks\\block_4935_1768194454.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:34",
+    "message": "Block #4935 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:36",
+    "message": "Block #4935 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:57",
+    "message": "Block #4936 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:58",
+    "message": "Block saved locally: ./data/blocks\\block_4936_1768194478.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:07:59",
+    "message": "Block #4936 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:05",
+    "message": "Block #4936 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:28",
+    "message": "Block #4937 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:28",
+    "message": "Block saved locally: ./data/blocks\\block_4937_1768194508.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:29",
+    "message": "Block #4937 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:31",
+    "message": "Block #4937 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:57",
+    "message": "Block #4938 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:57",
+    "message": "Block saved locally: ./data/blocks\\block_4938_1768194537.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:08:58",
+    "message": "Block #4938 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:09:00",
+    "message": "Block #4938 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:09:41",
+    "message": "Block #4939 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:09:41",
+    "message": "Block saved locally: ./data/blocks\\block_4939_1768194581.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:09:41",
+    "message": "Block #4939 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:09:44",
+    "message": "Block #4939 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:10",
+    "message": "Block #4940 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:10",
+    "message": "Block saved locally: ./data/blocks\\block_4940_1768194610.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:11",
+    "message": "Block #4940 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:13",
+    "message": "Block #4940 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:40",
+    "message": "Block #4941 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:41",
+    "message": "Block saved locally: ./data/blocks\\block_4941_1768194641.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:41",
+    "message": "Block #4941 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:10:51",
+    "message": "Block #4941 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:11:29",
+    "message": "Block #4942 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:11:29",
+    "message": "Block saved locally: ./data/blocks\\block_4942_1768194689.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:11:29",
+    "message": "Block #4942 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:11:31",
+    "message": "Block #4942 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:05",
+    "message": "Block #4943 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:05",
+    "message": "Block saved locally: ./data/blocks\\block_4943_1768194725.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:05",
+    "message": "Block #4943 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:06",
+    "message": "Block #4943 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:28",
+    "message": "Block #4944 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:29",
+    "message": "Block saved locally: ./data/blocks\\block_4944_1768194748.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:29",
+    "message": "Block #4944 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:32",
+    "message": "Block #4944 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:55",
+    "message": "Block #4945 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:55",
+    "message": "Block saved locally: ./data/blocks\\block_4945_1768194775.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:12:56",
+    "message": "Block #4945 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:00",
+    "message": "Block #4945 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:21",
+    "message": "Block #4946 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:21",
+    "message": "Block saved locally: ./data/blocks\\block_4946_1768194801.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:22",
+    "message": "Block #4946 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:23",
+    "message": "Block #4946 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:53",
+    "message": "Block #4947 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:53",
+    "message": "Block saved locally: ./data/blocks\\block_4947_1768194833.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:54",
+    "message": "Block #4947 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:13:58",
+    "message": "Block #4947 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:30",
+    "message": "Block #4948 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:31",
+    "message": "Block saved locally: ./data/blocks\\block_4948_1768194871.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:31",
+    "message": "Block #4948 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:33",
+    "message": "Block #4948 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:57",
+    "message": "Block #4949 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:57",
+    "message": "Block saved locally: ./data/blocks\\block_4949_1768194897.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:14:58",
+    "message": "Block #4949 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:15:09",
+    "message": "Block #4949 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:15:30",
+    "message": "Block #4950 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:15:30",
+    "message": "Block saved locally: ./data/blocks\\block_4950_1768194930.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:15:31",
+    "message": "Block #4950 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:15:34",
+    "message": "Block #4950 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:02",
+    "message": "Block #4951 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:02",
+    "message": "Block saved locally: ./data/blocks\\block_4951_1768194962.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:03",
+    "message": "Block #4951 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:06",
+    "message": "Block #4951 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:44",
+    "message": "Block #4952 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:45",
+    "message": "Block saved locally: ./data/blocks\\block_4952_1768195004.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:45",
+    "message": "Block #4952 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:16:47",
+    "message": "Block #4952 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:17:19",
+    "message": "Block #4953 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:17:20",
+    "message": "Block saved locally: ./data/blocks\\block_4953_1768195039.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:17:21",
+    "message": "Block #4953 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:17:26",
+    "message": "Block #4953 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:01",
+    "message": "Block #4954 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:01",
+    "message": "Block saved locally: ./data/blocks\\block_4954_1768195081.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:01",
+    "message": "Block #4954 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:04",
+    "message": "Block #4954 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:33",
+    "message": "Block #4955 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:34",
+    "message": "Block saved locally: ./data/blocks\\block_4955_1768195114.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:35",
+    "message": "Block #4955 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:18:42",
+    "message": "Block #4955 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:19:16",
+    "message": "Block #4956 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:19:17",
+    "message": "Block saved locally: ./data/blocks\\block_4956_1768195157.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:19:17",
+    "message": "Block #4956 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:19:22",
+    "message": "Block #4956 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:00",
+    "message": "Block #4957 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:00",
+    "message": "Block saved locally: ./data/blocks\\block_4957_1768195200.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:01",
+    "message": "Block #4957 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:04",
+    "message": "Block #4957 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:32",
+    "message": "Block #4958 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:33",
+    "message": "Block saved locally: ./data/blocks\\block_4958_1768195233.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:34",
+    "message": "Block #4958 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:20:42",
+    "message": "Block #4958 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:11",
+    "message": "Block #4959 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:11",
+    "message": "Block saved locally: ./data/blocks\\block_4959_1768195271.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:12",
+    "message": "Block #4959 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:16",
+    "message": "Block #4959 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:50",
+    "message": "Block #4960 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:51",
+    "message": "Block saved locally: ./data/blocks\\block_4960_1768195311.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:21:51",
+    "message": "Block #4960 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:22:05",
+    "message": "Block #4960 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:22:43",
+    "message": "Block #4961 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:22:44",
+    "message": "Block saved locally: ./data/blocks\\block_4961_1768195363.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:22:44",
+    "message": "Block #4961 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:22:47",
+    "message": "Block #4961 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:23:29",
+    "message": "Block #4962 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:23:30",
+    "message": "Block saved locally: ./data/blocks\\block_4962_1768195410.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:23:31",
+    "message": "Block #4962 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:23:36",
+    "message": "Block #4962 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:24:11",
+    "message": "Block #4963 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:24:12",
+    "message": "Block saved locally: ./data/blocks\\block_4963_1768195452.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:24:13",
+    "message": "Block #4963 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:24:23",
+    "message": "Block #4963 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:11",
+    "message": "Block #4964 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:12",
+    "message": "Block saved locally: ./data/blocks\\block_4964_1768195512.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:13",
+    "message": "Block #4964 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:17",
+    "message": "Block #4964 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:58",
+    "message": "Block #4965 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:59",
+    "message": "Block saved locally: ./data/blocks\\block_4965_1768195559.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:25:59",
+    "message": "Block #4965 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:26:01",
+    "message": "Block #4965 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:26:58",
+    "message": "Block #4966 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:27:01",
+    "message": "Block saved locally: ./data/blocks\\block_4966_1768195621.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:27:02",
+    "message": "Block #4966 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:27:23",
+    "message": "Block #4966 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:28:18",
+    "message": "Block #4967 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:28:19",
+    "message": "Block saved locally: ./data/blocks\\block_4967_1768195699.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:28:22",
+    "message": "Block #4967 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:28:38",
+    "message": "Block #4967 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:29:25",
+    "message": "Block #4968 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:29:25",
+    "message": "Block saved locally: ./data/blocks\\block_4968_1768195765.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:29:26",
+    "message": "Block #4968 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:29:44",
+    "message": "Block #4968 mined - Reward: 1.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:30:36",
+    "message": "Block #4969 submission failed",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-12 13:30:37",
+    "message": "Block saved locally: ./data/blocks\\block_4969_1768195837.json",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-12 13:30:37",
+    "message": "Block #4969 submitted successfully",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-12 13:30:42",
+    "message": "Block #4969 mined - Reward: 1.0",
+    "type": "success"
+  }
+]

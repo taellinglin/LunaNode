@@ -30,7 +30,7 @@ LunaNode = "main:main"
 
 [tool.pyinstaller]
 main-file = "main.py"
-console = true
+console = false
 name = "LunaNode"
 upx = true
 icon = "./node_icon.ico"

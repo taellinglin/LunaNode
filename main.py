@@ -497,8 +497,12 @@ class LunaNodeApp:
             
     def save_settings(self):
         """Save all settings"""
-        self.add_log_message("Settings saved to ./data/settings.json", "success")
-        self.show_snack_bar("Settings saved successfully")
+        if self.node and hasattr(self.node, 'config'):
+            self.node.config.save_to_storage()
+            self.add_log_message("Settings saved to ./data/settings.json", "success")
+            self.show_snack_bar("Settings saved successfully")
+        else:
+            self.add_log_message("Settings could not be saved: node or config missing", "error")
         
     def update_history_content(self):
         """Update history content"""

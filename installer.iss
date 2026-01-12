@@ -45,31 +45,16 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 6.1; Check: not IsAdminInstallMode
 
 [Files]
-; Main executable
-Source: "build\windows\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+; Copy all files and subdirectories from build\windows to the install directory
+Source: "build\\windows\\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
-; DLL files
-Source: "build\windows\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-
-; Directories
-Source: "build\windows\DLLs\*"; DestDir: "{app}\DLLs"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "build\windows\Lib\*"; DestDir: "{app}\Lib"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "build\windows\site-packages\*"; DestDir: "{app}\site-packages"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "build\windows\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs onlyifdoesntexist
-
-; Assets
+; Additional assets and documentation outside build/windows
 Source: "assets\*"; DestDir: "{app}\assets"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "font.ttf"; DestDir: "{app}"; Flags: ignoreversion
-
-; Icons
 Source: "{#MyAppIcon}"; DestDir: "{app}"; Flags: ignoreversion
-
-; Documentation
 Source: "README.md"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "LICENSE"; DestDir: "{app}"; Flags: ignoreversion
-
-; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcon}"
