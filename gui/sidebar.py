@@ -7,11 +7,14 @@ class Sidebar:
         self.lbl_node_status = ft.Text("Status: Initializing...", size=12, color="#e3f2fd")
         self.lbl_network_height = ft.Text("Network Height: --", size=10, color="#e3f2fd")
         self.lbl_difficulty = ft.Text("Difficulty: --", size=10, color="#e3f2fd")
+        self.lbl_mining_difficulty = ft.Text("Mining Difficulty: --", size=10, color="#00e676")
         self.lbl_blocks_mined = ft.Text("Blocks Mined: --", size=10, color="#e3f2fd")
         self.lbl_total_reward = ft.Text("Total Reward: --", size=10, color="#e3f2fd")
         self.lbl_connection = ft.Text("Connection: --", size=10, color="#e3f2fd")
+        self.lbl_p2p_status = ft.Text("P2P: --", size=10, color="#e3f2fd")
         self.lbl_uptime = ft.Text("Uptime: --", size=10, color="#e3f2fd")
         self.lbl_hash_rate = ft.Text("Hash Rate: --", size=12, color="#e3f2fd")
+        self.lbl_mining_method = ft.Text("Method: --", size=10, color="#e3f2fd")
         self.lbl_current_hash = ft.Text("Current Hash: --", size=10, color="#e3f2fd")
         self.lbl_nonce = ft.Text("Nonce: --", size=10, color="#e3f2fd")
         self.progress_mining = ft.ProgressBar(visible=False, color="#00a1ff", bgcolor="#1e3a5c")
@@ -63,9 +66,11 @@ class Sidebar:
                 self.lbl_node_status,
                 self.lbl_network_height,
                 self.lbl_difficulty,
+                self.lbl_mining_difficulty,
                 self.lbl_blocks_mined,
                 self.lbl_total_reward,
                 self.lbl_connection,
+                self.lbl_p2p_status,
                 self.lbl_uptime,
             ], spacing=4),
             padding=10,
@@ -94,6 +99,7 @@ class Sidebar:
             content=ft.Column([
                 ft.Text("⛏️ Mining Stats", size=14, color="#e3f2fd"),
                 self.lbl_hash_rate,
+                self.lbl_mining_method,
                 self.lbl_current_hash,
                 self.lbl_nonce,
                 self.progress_mining
@@ -182,10 +188,21 @@ class Sidebar:
         """Update sidebar status displays"""
         self.lbl_node_status.value = f"Status: {'🟢 Running' if status['connection_status'] == 'connected' else '🟡 Disconnected'}"
         self.lbl_network_height.value = f"Network Height: {status['network_height']}"
-        self.lbl_difficulty.value = f"Difficulty: {status['network_difficulty']}"
+        self.lbl_difficulty.value = f"Network Difficulty: {status['network_difficulty']}"
+        self.lbl_mining_difficulty.value = f"Mining Difficulty: {status.get('mining_difficulty', '--')}"
         self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
-        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.2f} LUN"
+        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.2f} LKC"
         self.lbl_connection.value = f"Connection: {status['connection_status']}"
+        
+        # Update P2P status
+        p2p_connected = status.get('p2p_connected', False)
+        p2p_peers = status.get('p2p_peers', 0)
+        if p2p_connected:
+            self.lbl_p2p_status.value = f"P2P: 🟢 {p2p_peers} peers"
+            self.lbl_p2p_status.color = "#00e676"
+        else:
+            self.lbl_p2p_status.value = "P2P: 🔴 Offline"
+            self.lbl_p2p_status.color = "#ff5252"
 
         uptime_seconds = int(status['uptime'])
         hours = uptime_seconds // 3600
@@ -195,12 +212,22 @@ class Sidebar:
 
         # Update mining stats
         hash_rate = status['current_hash_rate']
+        mining_method = status.get('mining_method', 'CPU')
+        
         if hash_rate > 1000000:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000000:.2f} MH/s"
         elif hash_rate > 1000:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
+        
+        # Show mining method with color indicator
+        if mining_method == 'CUDA':
+            self.lbl_mining_method.value = f"Method: 🟢 {mining_method}"
+            self.lbl_mining_method.color = "#00e676"
+        else:
+            self.lbl_mining_method.value = f"Method: 🔵 {mining_method}"
+            self.lbl_mining_method.color = "#00a1ff"
 
         current_hash = status['current_hash']
         if current_hash:

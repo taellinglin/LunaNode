@@ -4,3 +4,4 @@ flet-cli
 requests
 cryptography
 lunalib
+cupy-cuda12x

@@ -46,6 +46,11 @@ class LogPage:
 
     def add_log_message(self, message: str, msg_type: str = "info"):
         """Add message to log"""
+        try:
+            message = message.encode('utf-8').decode('utf-8')  # Ensure UTF-8 encoding
+        except UnicodeEncodeError:
+            message = "[Invalid Unicode Character]"
+
         color_map = {
             "info": "#17a2b8",
             "success": "#28a745", 

@@ -178,7 +178,7 @@ luna-node/
    - Data retention
    - Statistics reset
 
-## 📊 Dashboard Features
+##  Dashboard Features
 
 ### Mining Tab
 - Real-time mining controls (Start/Stop/Single Block/Sync)

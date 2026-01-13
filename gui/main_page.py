@@ -142,7 +142,7 @@ class MainPage:
         # Create detailed stats cards
         stats_grid = ft.ResponsiveRow([
             self._create_detailed_stat_card(
-                "📊 Network Height", 
+                " Network Height", 
                 f"{status['network_height']}", 
                 "Current blockchain height",
                 "#00a1ff"
@@ -150,8 +150,14 @@ class MainPage:
             self._create_detailed_stat_card(
                 "🎯 Network Difficulty", 
                 f"{status['network_difficulty']}", 
-                "Current mining difficulty",
+                "Network's current difficulty",
                 "#17a2b8"
+            ),
+            self._create_detailed_stat_card(
+                "⚙️ Mining Difficulty", 
+                f"{status.get('mining_difficulty', '--')}", 
+                "Your configured difficulty",
+                "#00e676"
             ),
             self._create_detailed_stat_card(
                 "⛏️ Blocks Mined", 
@@ -161,7 +167,7 @@ class MainPage:
             ),
             self._create_detailed_stat_card(
                 "💰 Total Reward", 
-                f"{status['total_reward']:.2f} LUN", 
+                f"{status['total_reward']:.2f} LKC", 
                 "Accumulated mining rewards",
                 "#ffc107"
             ),

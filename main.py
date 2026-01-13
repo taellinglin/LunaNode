@@ -14,9 +14,13 @@ import requests
 import PIL
 import lunalib
 import sys
+from lunalib.mining.miner import Miner as LunaLibMiner
+from lunalib.mining.cuda_manager import CUDAManager
+from lunalib.mining.difficulty import DifficultySystem
+from utils import DataManager, NodeConfig
 
 # Import unified balance utilities (if needed)
-from utils import LunaNode, Miner
+from utils import LunaNode
 
 # Ensure cache directory exists
 cache_dir = Path.home() / "AppData" / "Local" / "lunalib" / "cache"
@@ -63,8 +67,17 @@ class LunaNodeApp:
         self.main_page = MainPage(self)
         self.mining_history = MiningHistory(self)
         self.bills_page = BillsPage(self)
-        self.settings_page = SettingsPage(self)  # Add this line
+        self.settings_page = SettingsPage(self)
         self.log_page = LogPage(self)
+
+        # Initialize LunaLib Miner with NodeConfig and DataManager
+        from utils import DataManager, NodeConfig
+
+        data_manager = DataManager()
+        config = NodeConfig(data_manager)
+
+        self.miner = LunaLibMiner(config, data_manager)
+
     def submit_mined_block(self, block_data: Dict) -> bool:
         """Submit a mined block - USING SERVER'S EXPECTED FORMAT"""
         try:
@@ -346,6 +359,9 @@ class LunaNodeApp:
         """Initialize node in background thread"""
         def init_thread():
             try:
+                # Debugging LunaNode initialization
+                print("[DEBUG] Initializing LunaNode")
+                
                 self.node = LunaNode(
                     log_callback=self.add_log_message,
                     new_bill_callback=lambda bill: self.add_log_message(f"New bill mined: {bill}", "success"),
@@ -377,7 +393,29 @@ class LunaNodeApp:
         """Called when node is successfully initialized"""
         self.add_log_message("Luna Node initialized successfully", "success")
         self.add_log_message("Loaded data from ./data/ directory", "info")
-        self.update_status_display()
+        
+        # Debugging DataManager and NodeConfig initialization
+        print("[DEBUG] Initializing DataManager")
+        data_manager = DataManager()
+        print("[DEBUG] DataManager initialized:", data_manager)
+
+        print("[DEBUG] Initializing NodeConfig")
+        config = NodeConfig(data_manager)
+        print("[DEBUG] NodeConfig initialized:", config)
+
+        # Debugging DataManager instance
+        print("[DEBUG] Type of data_manager before load_mining_history:", type(data_manager))
+        print("[DEBUG] Value of data_manager before load_mining_history:", data_manager)
+
+        # Debugging mining_history_file path
+        #print("[DEBUG] DataManager.mining_history_file:", data_manager.mining_history_file)
+        print("[DEBUG] Type of data_manager before calling load_mining_history:", type(data_manager))
+        print("[DEBUG] Value of data_manager before calling load_mining_history:", data_manager)
+
+        # Load mining history using DataManager
+        #mining_history = data_manager.load_mining_history()
+        #print("[DEBUG] Loaded mining history:", mining_history)
+        
         # Refresh settings tab so it shows real settings after node is ready
         if hasattr(self, "settings_page"):
             try:
@@ -385,6 +423,11 @@ class LunaNodeApp:
             except Exception as e:
                 print(f"[DEBUG] settings_page.update_settings_content() failed: {e}")
         self.start_status_updates()
+        
+        # Debugging LunaNode instance after initialization
+        print("[DEBUG] LunaNode instance after initialization:", self.node)
+        print("[DEBUG] Type of self.node.data_manager:", type(self.node.data_manager))
+        print("[DEBUG] Value of self.node.data_manager:", self.node.data_manager)
         
     def start_status_updates(self):
         """Start periodic status updates"""
@@ -438,14 +481,13 @@ class LunaNodeApp:
             self.add_log_message("Auto-mining stopped", "info")
             
     def mine_single_block(self):
-        """Mine a single block"""
-        if self.node:
-            def mine_thread():
-                success, message = self.node.mine_single_block()
-                self.page.run_thread(lambda: self.add_log_message(message, "success" if success else "warning"))
-                
-            threading.Thread(target=mine_thread, daemon=True).start()
-            
+        """Mine a single block using LunaLib"""
+        result = self.miner.mine_block()
+        if result.success:
+            self.add_log_message(f"Block mined successfully: {result.block_data}", "success")
+        else:
+            self.add_log_message(f"Mining failed: {result.error_message}", "error")
+        
     def sync_network(self):
         """Sync with network with progress indicator"""
         if self.node:

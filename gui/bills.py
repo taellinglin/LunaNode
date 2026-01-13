@@ -106,7 +106,7 @@ class BillsPage:
         # Add to table
         for bill in mined_bills[:50]:  # Show last 50 bills
             timestamp = datetime.fromtimestamp(bill['timestamp']).strftime("%Y-%m-%d %H:%M:%S")
-            amount = f"{bill['amount']:.2f} LUN"
+            amount = f"{bill['amount']:.2f} LKC"
             
             # Determine type color and icon
             if bill['type'] == 'mining_reward':
@@ -144,7 +144,7 @@ class BillsPage:
                 ft.Container(
                     content=ft.Column([
                         ft.Text("Total Mined", size=12, color="#e3f2fd"),
-                        ft.Text(f"{total_reward:.2f} LUN", size=16, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                        ft.Text(f"{total_reward:.2f} LKC", size=16, color="#00a1ff", weight=ft.FontWeight.BOLD),
                     ]),
                     padding=15,
                     bgcolor="#1a2b3c",

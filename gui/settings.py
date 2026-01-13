@@ -57,18 +57,60 @@ class SettingsPage:
 
         # Load values from config if available
         config = self.app.node.config if self.app.node else None
+        
+        # Create controls with event handlers
+        self.auto_mining_switch = ft.Switch(
+            label="Auto Mining", 
+            value=config.auto_mine if config else True, 
+            active_color="#00e676",
+            on_change=lambda e: self._on_auto_mining_changed(e.control.value)
+        )
+        self.difficulty_field = ft.TextField(
+            label="Mining Difficulty", 
+            value=str(config.difficulty) if config else "2", 
+            width=180, 
+            bgcolor="#0a1423", 
+            color="#e3f2fd", 
+            border_color="#1e3a5c",
+            on_change=lambda e: self._on_difficulty_changed(e.control.value)
+        )
+        self.gpu_switch = ft.Switch(
+            label="GPU Acceleration", 
+            value=config.use_gpu if config else False, 
+            active_color="#00b0ff",
+            on_change=lambda e: self._on_gpu_acceleration_changed(e.control.value)
+        )
+        self.node_url_field = ft.TextField(
+            label="Node Endpoint", 
+            value=config.node_url if config else "https://bank.linglin.art", 
+            width=320, 
+            bgcolor="#0a1423", 
+            color="#e3f2fd", 
+            border_color="#1e3a5c",
+            on_change=lambda e: self._on_node_url_changed(e.control.value)
+        )
+        self.wallet_field = ft.TextField(
+            label="Wallet Address", 
+            value=config.miner_address if config else "LN1abc...xyz", 
+            width=320, 
+            bgcolor="#0a1423", 
+            color="#e3f2fd", 
+            border_color="#1e3a5c",
+            on_change=lambda e: self._on_wallet_address_changed(e.control.value)
+        )
+        
         mining_card = stat_style_card("⛏️", "Mining Settings", [
-            ft.Switch(label="Auto Mining", value=config.auto_mine if config else True, active_color="#00e676"),
-            ft.TextField(label="Mining Difficulty", value=str(config.difficulty) if config else "2", width=180, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-            ft.Switch(label="GPU Acceleration", value=self.app.node.cuda_available if self.app.node else False, active_color="#00b0ff"),
+            self.auto_mining_switch,
+            self.difficulty_field,
+            self.gpu_switch,
         ], "#00a1ff")
         network_card = stat_style_card("🌐", "Network Settings", [
-            ft.TextField(label="Node Endpoint", value=config.node_url if config else "https://bank.linglin.art", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            self.node_url_field,
             ft.Switch(label="Use SSL", value=True, active_color="#ffd600"),
         ], "#17a2b8")
         wallet_card = stat_style_card("💰", "Wallet Settings", [
-            ft.TextField(label="Wallet Address", value=config.miner_address if config else "LN1abc...xyz", width=320, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-            ft.TextField(label="Payout Threshold", value="0.5", width=120, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
+            self.wallet_field,
+            ft.TextField(label="Payout Threshold", value="20", width=120, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
         ], "#ffc107")
         advanced_card = stat_style_card("🔧", "Advanced", [
             ft.Switch(label="Developer Mode", value=False, active_color="#ff5252"),
@@ -119,7 +161,7 @@ class SettingsPage:
         
         self.gpu_acceleration_switch = ft.Switch(
             label="GPU Acceleration",
-            value=self.app.node.cuda_available if self.app.node else False,
+            value=self.app.node.config.use_gpu if self.app.node and self.app.node.config else False,
             on_change=lambda e: self._on_gpu_acceleration_changed(e.control.value),
             active_color="#00a1ff"
         )
@@ -479,18 +521,53 @@ class SettingsPage:
 
     def _on_difficulty_changed(self, value: str):
         if self.app.node and value.isdigit():
-            self.app.node.update_difficulty(int(value))
+            new_difficulty = int(value)
+            
+            # Clamp difficulty between 1 and 9
+            if new_difficulty < 1:
+                new_difficulty = 1
+            elif new_difficulty > 9:
+                new_difficulty = 9
+                self.app.add_log_message("Maximum difficulty is 9", "warning")
+            
+            # Update the field to show clamped value
+            if hasattr(self, 'difficulty_field') and self.difficulty_field:
+                self.difficulty_field.value = str(new_difficulty)
+            
+            self.app.node.update_difficulty(new_difficulty)
+            
+            # Update sidebar display immediately
+            if hasattr(self.app, 'sidebar') and self.app.sidebar:
+                self.app.sidebar.lbl_mining_difficulty.value = f"Mining Difficulty: {new_difficulty}"
+            
+            # Update main page live statistics
+            if hasattr(self.app, 'main_page') and self.app.main_page:
+                self.app.main_page.update_mining_stats()
+            
+            # Show confirmation message
+            self.app.add_log_message(f"Mining difficulty updated to {new_difficulty} and saved to config", "info")
+            
+            if self.app.page:
+                self.app.page.update()
 
     def _on_mining_interval_changed(self, value: str):
         if self.app.node and value.isdigit():
             self.app.node.update_mining_interval(int(value))
 
     def _on_gpu_acceleration_changed(self, value: bool):
-        self.app.add_log_message(f"GPU acceleration {'enabled' if value else 'disabled'}", "info")
+        if self.app.node:
+            self.app.node.toggle_gpu_acceleration(value)
+        else:
+            self.app.add_log_message(f"GPU acceleration {'enabled' if value else 'disabled'} (will apply on restart)", "info")
 
     def _on_node_url_changed(self, value: str):
         if self.app.node:
             self.app.node.update_node_url(value)
+
+    def _on_wallet_address_changed(self, value: str):
+        if self.app.node and value:
+            self.app.node.update_wallet_address(value)
+            self.app.add_log_message(f"Wallet address updated and saved", "info")
 
     def _on_network_timeout_changed(self, value: str):
         if value.isdigit():
