@@ -64,6 +64,11 @@ hiddenimports = [
     "lunalib.gtx",
     "cryptography.hazmat.bindings._rust",
     "cryptography.hazmat.bindings._openssl",
+    "cupy",
+    "cupy.cuda",
+    "cupy.cuda.runtime",
+    "cupy.cuda.memory",
+    "cupy.cuda.device"
 ]
 excludes = [
     "tkinter",

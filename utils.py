@@ -236,9 +236,12 @@ class LunaNode:
         # Peer list for P2P networking
         self.peers = []
         
-        # Initialize BlockchainManager and MempoolManager first
+        # Use LunaLib managers for blockchain management
         self.blockchain_manager = BlockchainManager(endpoint_url=self.config.node_url)
         self.mempool_manager = MempoolManager([self.config.node_url])
+        
+        # Initialize DifficultySystem for reward calculation
+        self.difficulty_system = DifficultySystem()
         
         # Initialize LunaLib Miner (uses config, data_manager signature)
         self.miner = LunaLibMiner(self.config, self.data_manager)
@@ -252,26 +255,10 @@ class LunaNode:
             self.miner.auto_submit = False
         
         # Initialize HybridBlockchainClient for P2P networking (optional, non-blocking)
+        # NOTE: Disabled due to lunalib using incorrect endpoints
         self.p2p_client = None
-        if P2P_AVAILABLE:
-            try:
-                self.p2p_client = HybridBlockchainClient(
-                    self.config.node_url,
-                    self.blockchain_manager,
-                    self.mempool_manager
-                )
-                # Start P2P in background - don't block on failures
-                try:
-                    self.p2p_client.start()
-                    print("[DEBUG] P2P HybridBlockchainClient started")
-                except Exception as e:
-                    print(f"[DEBUG] P2P start warning (non-critical): {e}")
-                
-                # Try to fetch peers - non-blocking, failures are OK
-                threading.Thread(target=self._fetch_peers_from_daemon, daemon=True).start()
-            except Exception as e:
-                print(f"[DEBUG] P2P client initialization skipped: {e}")
-                self.p2p_client = None
+        # P2P functionality handled manually via _fetch_peers_from_daemon
+        threading.Thread(target=self._fetch_peers_from_daemon, daemon=True).start()
         
         # Set CUDA availability based on config and miner's CUDA status
         cuda_available = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
@@ -480,7 +467,12 @@ class LunaNode:
             
             if success and block_data:
                 block_index = block_data.get('index', 'unknown')
-                reward = block_data.get('reward', 1.0)
+                # Calculate correct reward based on difficulty: BASE_REWARD * 10^(difficulty-1)
+                block_difficulty = block_data.get('difficulty', self.config.difficulty)
+                if not block_difficulty or block_difficulty < 1:
+                    block_difficulty = self.config.difficulty
+                reward = 1.0 * (10 ** (block_difficulty - 1))  # Correct reward formula
+                block_data['reward'] = reward  # Update block data with correct reward
                 nonce = block_data.get('nonce', 0)
                 block_hash = block_data.get('hash', '')
                 mining_time = time.time() - mining_start
@@ -638,35 +630,132 @@ class LunaNode:
                     except Exception as e:
                         print(f"[DEBUG] Could not get previous hash: {e}")
             
-            # Fix reward calculation: server expects BASE_REWARD * difficulty
-            # BASE_REWARD is 1.0, so reward = 1.0 * difficulty
-            block_difficulty = block_data.get('difficulty', 1)
-            expected_reward = 1.0 * block_difficulty  # BASE_REWARD = 1.0
+            # Get difficulty - prefer block's difficulty, fall back to config
+            block_difficulty = block_data.get('difficulty')
+            if not block_difficulty or block_difficulty < 1:
+                block_difficulty = self.config.difficulty
+                block_data['difficulty'] = block_difficulty
             
-            # Update block reward if it doesn't match expected
-            current_reward = block_data.get('reward', 1.0)
-            if current_reward != expected_reward:
-                print(f"[DEBUG] Fixing reward: {current_reward} -> {expected_reward} (difficulty={block_difficulty})")
-                block_data['reward'] = expected_reward
+            # Reward calculation: BASE_REWARD * 10^(difficulty-1)
+            # Difficulty 1 = 1, Difficulty 2 = 10, Difficulty 5 = 10000, Difficulty 9 = 100000000
+            BASE_REWARD = 1.0
+            expected_reward = BASE_REWARD * (10 ** (block_difficulty - 1))
+            
+            print(f"[DEBUG] Expected reward for difficulty {block_difficulty}: {expected_reward}")
+            
+            # CRITICAL: Set block-level reward field
+            block_data['reward'] = expected_reward
+            
+            # Ensure miner address is set
+            if 'miner' not in block_data:
+                block_data['miner'] = self.config.miner_address
+            
+            # Add version if missing
+            if 'version' not in block_data:
+                block_data['version'] = '1.0'
+            
+            # Debug: Log all block keys to find reward transaction location
+            print(f"[DEBUG] Block data keys: {list(block_data.keys())}")
+            
+            # FIX 1: Check for 'reward_transaction' field (separate from transactions list)
+            if 'reward_transaction' in block_data:
+                print(f"[DEBUG] Found 'reward_transaction' field, fixing amount...")
+                block_data['reward_transaction']['amount'] = expected_reward
+                block_data['reward_transaction']['to'] = self.config.miner_address
+            
+            # FIX 2: Check for 'reward_tx' field
+            if 'reward_tx' in block_data:
+                print(f"[DEBUG] Found 'reward_tx' field, fixing amount...")
+                block_data['reward_tx']['amount'] = expected_reward
+                block_data['reward_tx']['to'] = self.config.miner_address
+            
+            # FIX 3: Check for 'coinbase' or 'coinbase_tx' field
+            for field in ['coinbase', 'coinbase_tx', 'mining_reward']:
+                if field in block_data:
+                    print(f"[DEBUG] Found '{field}' field, fixing amount...")
+                    if isinstance(block_data[field], dict):
+                        block_data[field]['amount'] = expected_reward
+                        block_data[field]['to'] = self.config.miner_address
+            
+            # FIX 4: Process transactions list
+            transactions = block_data.get('transactions', [])
+            print(f"[DEBUG] Original transactions count: {len(transactions)}")
+            
+            # Find and fix reward transaction in list
+            fixed_transactions = []
+            found_reward_tx = False
+            
+            for i, tx in enumerate(transactions):
+                is_reward = (
+                    tx.get('type') == 'reward' or
+                    tx.get('type') == 'mining_reward' or
+                    tx.get('from') == 'network' or
+                    tx.get('from') == 'coinbase' or
+                    tx.get('from') == 'system' or
+                    tx.get('from') == '' or
+                    tx.get('from') is None or
+                    'reward' in str(tx.get('hash', '')).lower()
+                )
                 
-                # Also fix reward transaction amount in transactions list
-                for tx in block_data.get('transactions', []):
-                    if tx.get('type') == 'reward':
-                        tx['amount'] = expected_reward
+                if is_reward:
+                    # Create fixed reward transaction
+                    fixed_tx = tx.copy()
+                    fixed_tx['type'] = 'reward'
+                    fixed_tx['from'] = 'network'
+                    fixed_tx['to'] = self.config.miner_address
+                    fixed_tx['amount'] = expected_reward
+                    fixed_transactions.append(fixed_tx)
+                    found_reward_tx = True
+                    print(f"[DEBUG] Fixed reward tx in transactions list: amount={expected_reward}")
+                else:
+                    fixed_transactions.append(tx)
+            
+            # If no reward tx found in list, create one
+            if not found_reward_tx:
+                print(f"[DEBUG] No reward tx in transactions list, creating one...")
+                reward_tx = {
+                    'type': 'reward',
+                    'from': 'network',
+                    'to': self.config.miner_address,
+                    'amount': expected_reward,
+                    'timestamp': block_data.get('timestamp', time.time()),
+                    'block_height': block_data.get('index'),
+                    'hash': f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}",
+                    'description': 'Mining reward'
+                }
+                fixed_transactions.append(reward_tx)
+            
+            block_data['transactions'] = fixed_transactions
+            
+            # FIX 5: Also set reward_transaction field explicitly (server might expect it)
+            block_data['reward_transaction'] = {
+                'type': 'reward',
+                'from': 'network',
+                'to': self.config.miner_address,
+                'amount': expected_reward,
+                'timestamp': block_data.get('timestamp', time.time()),
+                'block_height': block_data.get('index'),
+                'hash': f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}",
+                'description': 'Mining reward'
+            }
+            
+            # Debug: Verify all reward amounts are correct before submission
+            print(f"[DEBUG] Final verification:")
+            print(f"[DEBUG]   block_data['reward'] = {block_data.get('reward')}")
+            print(f"[DEBUG]   block_data['reward_transaction']['amount'] = {block_data.get('reward_transaction', {}).get('amount')}")
+            print(f"[DEBUG]   transactions count = {len(block_data.get('transactions', []))}")
+            for i, tx in enumerate(block_data.get('transactions', [])):
+                if tx.get('type') == 'reward' or tx.get('from') == 'network':
+                    print(f"[DEBUG]   transactions[{i}] reward amount = {tx.get('amount')}")
             
             # Debug: Log block structure before submission
             print(f"[DEBUG] Submitting block #{block_data.get('index')}")
-            print(f"[DEBUG] Block keys: {list(block_data.keys())}")
-            print(f"[DEBUG] previous_hash: {block_data.get('previous_hash', 'MISSING')[:20]}...")
             print(f"[DEBUG] difficulty: {block_difficulty}, reward: {block_data.get('reward')}")
             
             # Try multiple submission endpoints via direct HTTP
             endpoints = [
-                f"{self.config.node_url}/api/blockchain/submit",
-                f"{self.config.node_url}/api/block/submit", 
-                f"{self.config.node_url}/api/blocks/submit",
-                f"{self.config.node_url}/api/mine/submit",
-                f"{self.config.node_url}/submit_block",
+                f"{self.config.node_url}/blockchain/submit-block",
+                f"{self.config.node_url}/debug/validate-block-format",
             ]
             
             for endpoint in endpoints:
@@ -702,6 +791,11 @@ class LunaNode:
                         continue  # Try next endpoint
                     else:
                         print(f"[DEBUG] HTTP {response.status_code} from {endpoint}")
+                        try:
+                            error_data = response.json()
+                            print(f"[DEBUG] Error response: {error_data}")
+                        except:
+                            print(f"[DEBUG] Error text: {response.text[:200]}")
                         continue
                         
                 except requests.exceptions.RequestException as e:
@@ -765,7 +859,7 @@ class LunaNode:
             except Exception as e:
                 print(f"[DEBUG] Error stopping P2P client: {e}")
         
-        # Reinitialize managers with new URL
+        # Reinitialize managers with new URL (use LunaLib managers)
         self.blockchain_manager = BlockchainManager(endpoint_url=new_url)
         self.mempool_manager = MempoolManager([new_url])
         
@@ -776,21 +870,10 @@ class LunaNode:
         if hasattr(self.miner, 'auto_submit'):
             self.miner.auto_submit = False
         
-        # Reinitialize P2P client
-        if P2P_AVAILABLE:
-            try:
-                self.p2p_client = HybridBlockchainClient(
-                    new_url,
-                    self.blockchain_manager,
-                    self.mempool_manager
-                )
-                self.p2p_client.start()
-                self._fetch_peers_from_daemon()
-                self._log_message(f"Node URL updated to: {new_url} (P2P reconnected)", "info")
-            except Exception as e:
-                self._log_message(f"Node URL updated but P2P failed: {e}", "warning")
-        else:
-            self._log_message(f"Node URL updated to: {new_url}", "info")
+        # Reinitialize P2P (manual fetch only, no lunalib P2P)
+        self.p2p_client = None
+        self._fetch_peers_from_daemon()
+        self._log_message(f"Node URL updated to: {new_url}", "info")
     
     def update_mining_interval(self, new_interval: int):
         """Update mining interval"""
@@ -845,26 +928,38 @@ class LunaNode:
     
     def get_p2p_status(self) -> Dict:
         """Get P2P network status"""
-        if not self.p2p_client:
+        try:
+            # Get peer count from our local list (manually fetched from daemon)
+            peer_count = len(self.peers) if self.peers else 0
+            
+            # If we have peers, consider P2P as connected (even without p2p_client)
+            if peer_count > 0:
+                return {
+                    'connected': True,
+                    'peers': peer_count,
+                    'peer_list': self.peers[:10],
+                    'status': 'connected'
+                }
+            
+            # No peers but p2p_client exists
+            if self.p2p_client:
+                if hasattr(self.p2p_client, 'peers') and self.p2p_client.peers:
+                    peer_count = len(self.p2p_client.peers)
+                return {
+                    'connected': self.p2p_client.is_running if hasattr(self.p2p_client, 'is_running') else True,
+                    'peers': peer_count,
+                    'peer_list': self.peers[:10],
+                    'status': 'connected' if peer_count > 0 else 'no peers'
+                }
+            
+            # No p2p_client and no peers - show as offline
             return {
                 'connected': False,
                 'peers': 0,
                 'peer_list': [],
-                'status': 'P2P not available'
+                'status': 'no peers available'
             }
-        
-        try:
-            # Get peers from client or our local list
-            peer_count = len(self.peers) if self.peers else 0
-            if hasattr(self.p2p_client, 'peers') and self.p2p_client.peers:
-                peer_count = len(self.p2p_client.peers)
-                
-            return {
-                'connected': self.p2p_client.is_running if hasattr(self.p2p_client, 'is_running') else True,
-                'peers': peer_count,
-                'peer_list': self.peers[:10],  # Return first 10 peers
-                'status': 'connected'
-            }
+            
         except Exception as e:
             return {
                 'connected': False,
@@ -879,8 +974,6 @@ class LunaNode:
             # Try common P2P daemon endpoints with short timeout
             endpoints = [
                 f"{self.config.node_url}/api/peers",
-                f"{self.config.node_url}/peers",
-                f"{self.config.node_url}/api/p2p/peers",
             ]
             
             for endpoint in endpoints:
@@ -926,45 +1019,61 @@ class LunaNode:
             'peer_list': self.peers[:10]
         }
     
-    def register_as_peer(self, my_address: str = None, my_port: int = None) -> bool:
-        """Register this node as a peer with the daemon (optional, may not be supported)"""
+    def register_as_peer(self, peer_url: str = None) -> bool:
+        """
+        Register this node as a peer with the daemon.
+        Note: This requires a publicly accessible URL - local IPs won't work.
+        
+        Args:
+            peer_url: Your public peer URL (e.g., 'https://mynode.example.com:8545')
+                     If not provided, registration will be skipped.
+        """
+        if not peer_url:
+            print("[DEBUG] Peer registration skipped - no public URL provided")
+            print("[DEBUG] To register, provide a publicly accessible URL")
+            return False
+        
         try:
-            # Get local address if not provided
-            if not my_address:
-                try:
-                    hostname = socket.gethostname()
-                    my_address = socket.gethostbyname(hostname)
-                except:
-                    my_address = "127.0.0.1"
-            
-            if not my_port:
-                my_port = 8545  # Default P2P port
+            # Validate URL format
+            if not peer_url.startswith(('http://', 'https://')):
+                peer_url = f"https://{peer_url}"
             
             # Try to register with daemon
             endpoints = [
                 f"{self.config.node_url}/api/peers/register",
-                f"{self.config.node_url}/peers/register",
             ]
             
             registration_data = {
-                'address': my_address,
-                'port': my_port,
-                'node_type': 'miner',
-                'version': '1.0.0'
+                'peer_url': peer_url
             }
             
             for endpoint in endpoints:
                 try:
-                    response = requests.post(endpoint, json=registration_data, timeout=5)
+                    response = requests.post(endpoint, json=registration_data, timeout=10)
+                    
                     if response.status_code in [200, 201]:
-                        print(f"[DEBUG] Registered as peer: {my_address}:{my_port}")
+                        print(f"[DEBUG] Registered as peer: {peer_url}")
+                        self._log_message(f"Registered as peer: {peer_url}", "success")
                         return True
-                except:
+                    elif response.status_code == 400:
+                        try:
+                            error_data = response.json()
+                            error_msg = error_data.get('error', error_data.get('message', 'Unknown error'))
+                        except:
+                            error_msg = response.text or 'Bad request'
+                        print(f"[DEBUG] Registration rejected (400): {error_msg}")
+                        self._log_message(f"Peer registration failed: {error_msg}", "warning")
+                        # 400 means the server understood but rejected - don't try other endpoints
+                        return False
+                    else:
+                        print(f"[DEBUG] Registration HTTP {response.status_code}")
+                        
+                except requests.exceptions.RequestException as e:
+                    print(f"[DEBUG] Registration to {endpoint} failed: {e}")
                     continue
             
-            # Registration not supported - this is OK
             return False
             
         except Exception as e:
-            print(f"[DEBUG] Peer registration skipped: {e}")
+            print(f"[DEBUG] Peer registration error: {e}")
             return False
