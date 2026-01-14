@@ -4,6 +4,8 @@ flet-cli
 requests
 cryptography
 lunalib
+numpy
+fastrlock
 
 # CuPy - Choose ONE based on your CUDA version:
 # CUDA 12.x (RTX 40 series, newer GPUs)
@@ -14,3 +16,4 @@ cupy-cuda12x
 # cupy-cuda102
 # CPU-only (no GPU)
 # cupy
+tqdm
