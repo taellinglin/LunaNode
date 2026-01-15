@@ -1,8 +1,9 @@
 import flet as ft
 import time
+import random
+import traceback
 from datetime import datetime, timedelta
 from typing import Dict, List
-import random  # For demo data, remove in production
 
 class MiningHistory:
     def __init__(self, app):
@@ -35,8 +36,6 @@ class MiningHistory:
 
     def update_history_content(self):
         try:
-            import random
-            
             # Clear existing controls
             self.stats_content.controls.clear()
 
@@ -102,7 +101,6 @@ class MiningHistory:
                 print("[DEBUG] Page not available yet, stats content created but not updated")
         except Exception as e:
             print(f"[ERROR] Failed to update stats content: {e}")
-            import traceback
             traceback.print_exc()
             # Show error message to user
             self.stats_content.controls.clear()
