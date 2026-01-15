@@ -34,62 +34,92 @@ class MiningHistory:
         )
 
     def update_history_content(self):
-        import random
-        self.stats_content.controls.clear()
+        try:
+            import random
+            
+            # Clear existing controls
+            self.stats_content.controls.clear()
 
-        # ダミーデータ生成
-        hashrate = round(random.uniform(1.2, 3.8), 2)
-        accepted = random.randint(120, 180)
-        rejected = random.randint(0, 10)
-        share_rate = round(random.uniform(95, 100), 2)
-        error_rate = round(random.uniform(0, 2), 2)
-        avg_hashrate = round(random.uniform(1.0, 3.5), 2)
+            # ダミーデータ生成
+            hashrate = round(random.uniform(1.2, 3.8), 2)
+            accepted = random.randint(120, 180)
+            rejected = random.randint(0, 10)
+            share_rate = round(random.uniform(95, 100), 2)
+            error_rate = round(random.uniform(0, 2), 2)
+            avg_hashrate = round(random.uniform(1.0, 3.5), 2)
 
-        def make_chart(title, value, unit, color, bar_color):
-            bar_data = [random.uniform(1.0, 4.0) for _ in range(50)]
-            max_bar = max(bar_data)
-            bar_chart = ft.Row([
+            def make_chart(title, value, unit, color, bar_color):
+                bar_data = [random.uniform(1.0, 4.0) for _ in range(50)]
+                max_bar = max(bar_data)
+                bar_chart = ft.Row([
+                    ft.Container(
+                        bgcolor=bar_color,
+                        width=4,
+                        height=int(60 * (v / max_bar)),
+                        border_radius=2,
+                        margin=ft.Margin(1,0,1,0),
+                    ) for v in bar_data
+                ], vertical_alignment="end", spacing=0)
+                return ft.Column([
+                    ft.Row([
+                        ft.Text(title, size=15, color="#aeefff"),
+                        ft.Container(width=8),
+                        ft.Text(f"{value} {unit}", size=24, color=color, weight="bold"),
+                    ], alignment="start", vertical_alignment="center"),
+                    ft.Row([
+                        ft.Text(f"{title} (last 50 samples)", size=12, color="#aeefff"),
+                    ], alignment="start"),
+                    bar_chart
+                ], spacing=4)
+
+            charts = [
+                make_chart("Current Hashrate", hashrate, "MH/s", "#00e676", "#1976d2"),
+                make_chart("Accepted", accepted, "", "#ffd600", "#00b0ff"),
+                make_chart("Rejected", rejected, "", "#ff5252", "#ff5252"),
+                make_chart("Share Rate", share_rate, "%", "#00b0ff", "#00b0ff"),
+                make_chart("Error Rate", error_rate, "%", "#ff5252", "#ff5252"),
+                make_chart("Avg Hashrate", avg_hashrate, "MH/s", "#00e676", "#1976d2"),
+            ]
+            
+            # 2カラムに分割
+            col1 = ft.Column(charts[:3], spacing=12)
+            col2 = ft.Column(charts[3:], spacing=12)
+            
+            # Append the new content
+            self.stats_content.controls.append(
+                ft.Row([
+                    col1,
+                    ft.Container(width=24),
+                    col2
+                ], alignment="start", vertical_alignment="start")
+            )
+            
+            # Update the page if it's available
+            if self.app.page:
+                self.app.page.update()
+                print("[DEBUG] Stats content updated successfully")
+            else:
+                print("[DEBUG] Page not available yet, stats content created but not updated")
+        except Exception as e:
+            print(f"[ERROR] Failed to update stats content: {e}")
+            import traceback
+            traceback.print_exc()
+            # Show error message to user
+            self.stats_content.controls.clear()
+            self.stats_content.controls.append(
                 ft.Container(
-                    bgcolor=bar_color,
-                    width=4,
-                    height=int(60 * (v / max_bar)),
-                    border_radius=2,
-                    margin=ft.Margin(1,0,1,0),
-                ) for v in bar_data
-            ], vertical_alignment="end", spacing=0)
-            return ft.Column([
-                ft.Row([
-                    ft.Text(title, size=15, color="#aeefff"),
-                    ft.Container(width=8),
-                    ft.Text(f"{value} {unit}", size=24, color=color, weight="bold"),
-                ], alignment="start", vertical_alignment="center"),
-                ft.Row([
-                    ft.Text(f"{title} (last 50 samples)", size=12, color="#aeefff"),
-                ], alignment="start"),
-                bar_chart
-            ], spacing=4)
-
-        charts = [
-            make_chart("Current Hashrate", hashrate, "MH/s", "#00e676", "#1976d2"),
-            make_chart("Accepted", accepted, "", "#ffd600", "#00b0ff"),
-            make_chart("Rejected", rejected, "", "#ff5252", "#ff5252"),
-            make_chart("Share Rate", share_rate, "%", "#00b0ff", "#00b0ff"),
-            make_chart("Error Rate", error_rate, "%", "#ff5252", "#ff5252"),
-            make_chart("Avg Hashrate", avg_hashrate, "MH/s", "#00e676", "#1976d2"),
-        ]
-        # 2カラムに分割
-        col1 = ft.Column(charts[:3], spacing=12)
-        col2 = ft.Column(charts[3:], spacing=12)
-        self.stats_content.controls.clear()
-        self.stats_content.controls.append(
-            ft.Row([
-                col1,
-                ft.Container(width=24),
-                col2
-            ], alignment="start", vertical_alignment="start")
-        )
-        if self.app.page:
-            self.app.page.update()
+                    content=ft.Text(
+                        f"Error loading stats: {str(e)}", 
+                        color="#ff5252", 
+                        size=14
+                    ),
+                    padding=20,
+                    bgcolor="#1a2b3c",
+                    border_radius=4
+                )
+            )
+            if self.app.page:
+                self.app.page.update()
 
     def _create_session_stats(self, history: List[Dict]):
         """Create current session statistics"""
