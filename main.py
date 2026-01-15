@@ -278,7 +278,8 @@ class LunaNodeApp:
                 tab_bar_view
             ], expand=True),
             selected_index=0,
-            expand=True
+            expand=True,
+            on_change=self.on_tab_change
         )
         print("[DEBUG] Tabs created")
         return ft.Container(
