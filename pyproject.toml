@@ -97,7 +97,8 @@ hiddenimports = [
     "numpy.core._multiarray_umath",
     "numpy._core",
     "numpy._core._multiarray_umath",
-    "tqdm"
+    "tqdm",
+    "rich"
 ]
 excludes = [
     "tkinter",

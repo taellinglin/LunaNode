@@ -310,8 +310,10 @@ class Block:
         while not self.hash.startswith(target):
             self.nonce += 1
             self.hash = self.calculate_hash()
-            if self.nonce % 1000 == 0:  # Check for interruption
-                return False
+            # Check for interruption every 1000 nonces
+            if self.nonce % 1000 == 0:
+                if hasattr(self, 'should_stop') and self.should_stop:
+                    return False
         return True
     
     def to_dict(self) -> Dict:

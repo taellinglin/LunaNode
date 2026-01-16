@@ -40,6 +40,9 @@ print(f"[BUILD] Detected CUDA version: {cuda_version}")
 hidden_imports = [
     'flet', 'lunalib', 'requests', 
     'certifi', 'certifi.core', 'certifi.__main__',
+    'tqdm',
+    'tqdm.auto',
+    'tqdm.std',
 ]
 
 # Add cupy imports based on CUDA version

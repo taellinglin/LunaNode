@@ -6,12 +6,37 @@ class MainPage:
         self.app = app
         self.mining_stats = ft.Column()
         self.mining_controls = ft.Column()
+        self.loading = True
+        self.stats_panel = ft.Container(
+            content=ft.Column([]),
+            visible=False,
+            bgcolor= "#00000000",
+            padding=10,
+            border_radius=4
+        )
+        # 統計用属性の初期化
+        self.cpu_hashrate = 0.0
+        self.gpu_hashrate = 0.0
+        self.mined_blocks = 0
+        self.rejected_blocks = 0
+        print(f"[DEBUG] __init__: stats_panel.content={self.stats_panel.content}")
     def update_settings_content(self):
         """Update settings content - delegate to settings page"""
         if hasattr(self, 'settings_page') and self.settings_page:
             self.settings_page.update_settings_content()
     def create_mining_tab(self):
         """Create mining progress tab with controls and stats"""
+        self.loading_ring = ft.ProgressRing(color="#00a1ff", width=72, height=72, visible=self.loading)
+        print(f"[DEBUG] create_mining_tab: stats_panel.content={self.stats_panel.content}")
+        # stats_panelは常に配置し、ローディング中はvisible=False
+        stats_panel_box = self.stats_panel
+        loading_box = None
+        if self.loading:
+            loading_box = ft.Row([
+                ft.Container(expand=True),
+                self.loading_ring,
+                ft.Container(expand=True)
+            ], alignment="center", expand=True)
         return ft.Container(
             content=ft.Column([
                 ft.Text("Mining Dashboard", size=18, color="#e3f2fd"),
@@ -19,15 +44,11 @@ class MainPage:
                 self._create_mining_controls(),
                 ft.Container(height=20),
                 ft.Text("Live Statistics", size=16, color="#e3f2fd"),
-                ft.Container(
-                    content=self.mining_stats,
-                    expand=True,
-                    border=ft.Border.all(1, "#1e3a5c"),
-                    border_radius=3,
-                    padding=10,
-                    bgcolor="#0f1a2a"
-                )
-            ], expand=True),
+                stats_panel_box,
+                loading_box if self.loading else None,
+                ft.Container(height=25),
+            ], alignment=ft.MainAxisAlignment.START, expand=True),
+            expand=True,
             padding=10
         )
 
@@ -56,21 +77,6 @@ class MainPage:
             disabled=True
         )
         
-        self.single_mine_btn = ft.Button(
-            "⚡ Mine Single Block",
-            on_click=lambda e: self.app.mine_single_block(),
-            style=button_style,
-            bgcolor="#17a2b8",
-            height=40
-        )
-        
-        self.sync_btn = ft.Button(
-            "🔄 Sync Network",
-            on_click=lambda e: self.app.sync_network(),
-            style=button_style,
-            bgcolor="#6c757d",
-            height=40
-        )
         
         # Status indicator
         self.mining_status = ft.Container(
@@ -96,12 +102,8 @@ class MainPage:
                         ft.Row([
                             self.start_mining_btn,
                             self.stop_mining_btn
-                        ]),
-                        ft.Container(height=10),
-                        ft.Row([
-                            self.single_mine_btn,
-                            self.sync_btn
                         ])
+                        # Mine Single BlockとSync Networkボタンは削除
                     ]),
                     col={"sm": 12, "md": 8}
                 ),
@@ -121,12 +123,68 @@ class MainPage:
     def update_mining_stats(self):
         """Update mining statistics tab"""
         if not self.app.node:
-            return
-            
+            self.loading = True
+            if hasattr(self, 'loading_ring'):
+                self.loading_ring.visible = True
+            if self.app.page:
+                self.app.page.update()
+            return  # ここで必ずreturnし、status未定義で以降に進まない
         status = self.app.node.get_status()
-        
-        self.mining_stats.controls.clear()
-        
+        # データ取得できたらローディング非表示
+        if self.loading:
+            self.loading = False
+            if hasattr(self, 'loading_ring'):
+                self.loading_ring.visible = False
+            self.stats_panel.visible = True
+        # 2x4のテーブル状タイル（ラベル＋値）で統計を表示
+        stat_items = [
+            ("Network Height", f"{status['network_height']}", "#00a1ff"),
+            ("Network Difficulty", f"{status['network_difficulty']}", "#17a2b8"),
+            ("Blocks Mined", f"{status['blocks_mined']}", "#28a745"),
+            ("Total Reward", f"{status['total_reward']:.2f} LKC", "#ffc107"),
+            ("Hash Rate", f"{self._format_hash_rate(status['current_hash_rate'])}", "#00a1ff"),
+            ("Success Rate", f"{status['success_rate']:.1f}%", "#28a745" if status['success_rate'] > 50 else "#ffc107"),
+            ("Avg Mining Time", f"{status['avg_mining_time']:.2f}s", "#17a2b8"),
+            ("Uptime", f"{self._format_uptime(status['uptime'])}", "#6c757d"),
+        ]
+        table_rows = []
+        for i in range(2):
+            row_cells = []
+            for j in range(4):
+                idx = i * 4 + j
+                label, value, color = stat_items[idx]
+                row_cells.append(
+                    ft.Container(
+                        content=ft.Column([
+                            ft.Text(label, size=13, color="#e3f2fd"),
+                            ft.Text(value, size=20, weight=ft.FontWeight.BOLD, color=color),
+                        ], alignment=ft.MainAxisAlignment.CENTER),
+                        padding=ft.padding.all(16),
+                        bgcolor="#1a2b3c",
+                        border_radius=1,
+                        # alignment指定を削除
+                        expand=True
+                    )
+                )
+            table_rows.append(ft.Row(row_cells, alignment=ft.MainAxisAlignment.CENTER, expand=True, spacing=18))
+        stats_table = ft.Column(table_rows, alignment=ft.MainAxisAlignment.CENTER, expand=True, spacing=18)
+        self.stats_panel.content = ft.Container(
+            content=stats_table,
+            padding=ft.padding.symmetric(vertical=16, horizontal=16),
+            bgcolor="#03111f",
+            border_radius=8,
+            expand=True,
+            shadow=ft.BoxShadow(blur_radius=16, color="#00000044", offset=ft.Offset(0, 4)),
+        )
+        self.stats_panel.visible = True
+        if self.app.page:
+            self.app.page.update()
+        status = self.app.node.get_status()
+        # 必要な統計値をセット
+        self.cpu_hashrate = status.get('cpu_hashrate', 0.0)
+        self.gpu_hashrate = status.get('gpu_hashrate', 0.0)
+        self.mined_blocks = status.get('blocks_mined', 0)
+        self.rejected_blocks = status.get('rejected_blocks', 0)
         # Update mining status indicator
         if self.app.node.miner.is_mining:
             self.mining_status.content.controls[0].bgcolor = "#28a745"  # Green
@@ -138,7 +196,6 @@ class MainPage:
             self.mining_status.content.controls[1].value = "Mining Stopped"
             self.start_mining_btn.disabled = False
             self.stop_mining_btn.disabled = True
-        
         # Create detailed stats cards
         stats_grid = ft.ResponsiveRow([
             self._create_detailed_stat_card(
@@ -208,11 +265,7 @@ class MainPage:
                 "#6c757d"
             ),
         ])
-        
-        self.mining_stats.controls.append(stats_grid)
-        
-        if self.app.page:
-            self.app.page.update()
+        # duplicate stats panel rendering removed to keep style consistent
 
     def _create_detailed_stat_card(self, title: str, value: str, description: str, color: str):
         """Create a detailed statistics card with description"""

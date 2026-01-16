@@ -1,10 +1,21 @@
 import flet as ft
+
+# Compatibility shim for older Flet versions without HitTestBehavior
+if not hasattr(ft, "HitTestBehavior"):
+    class _HitTestBehavior:
+        OPAQUE = None
+    ft.HitTestBehavior = _HitTestBehavior()
 from typing import Dict, List
 from datetime import datetime
 import time
+
 class BillsPage:
     def __init__(self, app):
+        import os
+        import json
         self.app = app
+        self.cache_file = os.path.join(os.path.dirname(__file__), '../data/bills_cache.json')
+        self.bills_cache = self.load_bills_cache()
         self.bills_content = ft.Column()
         self.bills_table = ft.DataTable(
             columns=[
@@ -21,43 +32,314 @@ class BillsPage:
             horizontal_lines=ft.BorderSide(1, "#1e3a5c"),
             bgcolor="#0f1a2a",
         )
+        # UI部品を先に初期化
+        self.bill_tiles = ft.GridView(
+            expand=True,
+            runs_count=2,
+            max_extent=180,
+            child_aspect_ratio=16/8,
+            spacing=12,
+            run_spacing=12,
+            controls=[]
+        )
+        self.tx_cards = ft.Column([], expand=True, spacing=8)
+        # その後で内容を更新
+        
+
+
+    def load_bills_cache(self):
+        import os
+        import json
+        if not os.path.exists(self.cache_file):
+            return {'mined_blocks': [], 'thumbnails': {}, 'banknotes': {}}
+        try:
+            with open(self.cache_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[DEBUG] Failed to load bills cache: {e}")
+            return {'mined_blocks': [], 'thumbnails': {}, 'banknotes': {}}
+
+    def save_bills_cache(self):
+        import json
+        try:
+            with open(self.cache_file, 'w', encoding='utf-8') as f:
+                json.dump(self.bills_cache, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[DEBUG] Failed to save bills cache: {e}")
 
     def create_bills_tab(self):
-        """Create bills/transactions management tab"""
-        refresh_button = ft.Button(
-            "🔄 Refresh",
-            on_click=lambda e: self.update_bills_content(),
-            style=ft.ButtonStyle(
-                color="#ffffff",
-                bgcolor="#00a1ff",
-                padding=ft.Padding.symmetric(horizontal=16, vertical=10),
-                shape=ft.RoundedRectangleBorder(radius=3)
-            ),
-            height=38
-        )
-        
+        """Create bills/transactions management tab (split view)"""
+        # 上部: PNGサムネイルタイル（16:6アスペクト比）
+        # レイアウト（上下分割、各50%）
         return ft.Container(
             content=ft.Column([
                 ft.Row([
-                    ft.Text("Mined Bills & Transactions", size=16, color="#e3f2fd"),
-                    refresh_button
+                    ft.Text("Banknotes", size=16, color="#e3f2fd"),
                 ]),
+                ft.Divider(height=8, color="#1e3a5c"),
+                ft.Row([
+                    ft.Container(
+                        content=self.bill_tiles,
+                        bgcolor="#0f1a2a",
+                        border_radius=6,
+                        padding=10,
+                        expand=True,
+                        height=None,
+                        width=None,
+                    ),
+                    # 右側に何も置かない
+                ], expand=True),
+                ft.Divider(height=12, color="#1e3a5c"),
+                ft.Text("Mined Blocks", size=14, color="#e3f2fd"),
                 ft.Container(
-                    content=ft.ListView([self.bills_table], expand=True),
+                    content=self.tx_cards,
+                    bgcolor="#0f1a2a",
+                    border_radius=6,
+                    padding=10,
                     expand=True,
-                    border=ft.Border.all(1, "#1e3a5c"),
-                    border_radius=3
-                )
+                    width=float('inf'),
+                    height=None,
+                ),
             ], expand=True),
             padding=10
         )
 
     def update_bills_content(self):
-        """Update bills/transactions content"""
-        if not self.app.node:
+        """Update bills/transactions content (tiles + cards)"""
+        txs = []
+        # ここでtxやtx_hashは未定義なので何もせず、以降のforループで処理する
+        # PNGサムネイルタイル生成: GTX_Genesisトランザクションのハッシュを使う
+        if not self.app or not getattr(self.app, 'node', None):
             return
-            
-        self.bills_table.rows.clear()
+        mining_history = self.app.node.get_mining_history()
+        print("[DEBUG] mining_history:", mining_history)
+        gtx_hashes = []
+        new_blocks = []
+        # 既存キャッシュからロード
+        cached_blocks = set(self.bills_cache.get('mined_blocks', []))
+        cached_thumbnails = self.bills_cache.get('thumbnails', {})
+        cached_banknotes = self.bills_cache.get('banknotes', {})
+        # 新規マイニング分だけ取得
+        for record in mining_history:
+            if record.get('status') == 'success' and record.get('block_index') is not None:
+                if record['block_index'] in cached_blocks:
+                    block_index = record['block_index']
+                    # 既存キャッシュからGTXハッシュを追加
+                    for tx_hash in cached_thumbnails.get(str(block_index), []):
+                        gtx_hashes.append(tx_hash)
+                else:
+                    block = None
+                    try:
+                        block = self.app.node.blockchain_manager.get_block(block_index)
+                    except Exception as e:
+                        print(f"[DEBUG] Failed to get block {block_index}: {e}")
+                    print(f"[DEBUG] block {block_index}: {block}")
+                    if block and 'transactions' in block:
+                        print(f"[DEBUG] block {block_index} transactions: {block['transactions']}")
+                        block_gtx_hashes = []
+                        for tx in block['transactions']:
+                            if isinstance(tx, dict) and tx.get('type') == 'GTX_Genesis' and tx.get('hash'):
+                                gtx_hashes.append(tx['hash'])
+                                block_gtx_hashes.append(tx['hash'])
+                                # banknote情報もキャッシュ
+                                cached_banknotes[tx['hash']] = tx
+                        # サムネイルキャッシュ
+                        cached_thumbnails[str(block_index)] = block_gtx_hashes
+                        new_blocks.append(block_index)
+        # キャッシュ更新
+        if new_blocks:
+            self.bills_cache['mined_blocks'] = list(set(list(cached_blocks) + new_blocks))
+            self.bills_cache['thumbnails'] = cached_thumbnails
+            self.bills_cache['banknotes'] = cached_banknotes
+            self.save_bills_cache()
+        print(f"[DEBUG] gtx_genesis hashes: {gtx_hashes}")
+        # --- キャッシュからのサムネイル・ブロック情報が存在する場合、必ずUIに反映 ---
+        # サムネイル描画
+        self.bill_tiles.controls.clear()
+        cached_thumbnails = self.bills_cache.get('thumbnails', {})
+        cached_banknotes = self.bills_cache.get('banknotes', {})
+        tiles = []
+        for block_index, tx_hashes in cached_thumbnails.items():
+            if not tx_hashes:
+                continue  # 空リストはスキップ
+            for tx_hash in tx_hashes:
+                tx = cached_banknotes.get(tx_hash)
+                if not tx:
+                    continue  # banknote情報がなければスキップ
+                # front/back両方のサムネイルURLを用意
+                # frontは常にtransaction-thumbnailで確実に表示し、backはserial_idがあればmatchingを使う
+                serial_id = tx.get('serial_id') or tx.get('serial_number')
+                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
+                if serial_id:
+                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                else:
+                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
+                front_src = f"{img_url_front}&flip=front"
+                back_src = f"{img_url_back}&flip=back"
+                owner = tx.get('issued_to', '')
+                amount = tx.get('denomination', '')
+                if not tx_hash:
+                    continue
+
+                # サムネイル下部にOwner/Amountラベル
+                label_row = ft.Container(
+                    content=ft.Row([
+                        ft.Text(str(owner), size=8, color="#b0bec5", weight=ft.FontWeight.W_400),
+                        ft.Text(f"{amount}", size=8, color="#ffd600", weight=ft.FontWeight.W_400),
+                    ], spacing=4, alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                    padding=ft.padding.only(top=2),
+                )
+
+                # 単一のImageのsrcを切り替える方法でホバー表示を更新
+                img_main = ft.Image(
+                    src=front_src,
+                    width=160,
+                    height=60,
+                    fit="contain",
+                    border_radius=8,
+                    gapless_playback=False,
+                    error_content=ft.Text("No image", size=8, color="#789")
+                )
+                content = ft.Column([
+                    img_main,
+                    label_row
+                ], spacing=2)
+
+                if serial_id:
+                    fullview_url = f"https://bank.linglin.art/banknote-viewer/{serial_id}"
+                else:
+                    fullview_url = f"https://bank.linglin.art/transaction/{tx_hash}"
+
+                def set_hover(hovered, img=img_main, _tx_hash=tx_hash):
+                    img.src = back_src if hovered else front_src
+                    img.update()
+                    if self.bill_tiles:
+                        self.bill_tiles.update()
+
+                def on_hover(e, _tx_hash=tx_hash):
+                    data = getattr(e, "data", None)
+                    data_str = str(data).lower()
+                    print(
+                        f"[DEBUG] hover: tx={_tx_hash} data={data} front={front_src} back={back_src}"
+                    )
+                    if data_str == "true":
+                        set_hover(True)
+                    elif data_str == "false":
+                        set_hover(False)
+
+                def on_tap_open(e, url=fullview_url, _tx_hash=tx_hash):
+                    has_page = bool(self.app.page)
+                    print(f"[DEBUG] click banknote: tx={_tx_hash} url={url} page={has_page}")
+                    try:
+                        if self.app.page and hasattr(self.app.page, "launch_url"):
+                            self.app.page.launch_url(url)
+                        import webbrowser
+                        webbrowser.open(url)
+                    except Exception as ex:
+                        print(f"[DEBUG] click banknote failed: {ex}")
+
+                tile = ft.Container(
+                    content=content,
+                    bgcolor="#162a3a",
+                    border_radius=8,
+                    padding=4,
+                    on_click=on_tap_open,
+                    on_hover=on_hover,
+                    url=fullview_url,
+                    ink=True,
+                )
+                tiles.append(tile)
+        self.bill_tiles.controls.extend(tiles)
+        self.bill_tiles.scroll = ft.ScrollMode.AUTO
+        # Mined blocks履歴もキャッシュから
+        txs = []
+        cached_blocks = self.bills_cache.get('mined_blocks', [])
+        mining_history = self.app.node.get_mining_history() if self.app.node else []
+        history_by_block = {r.get('block_index'): r for r in mining_history if r.get('status') == 'success'}
+        for block_index in cached_blocks:
+            info = history_by_block.get(block_index)
+            if not info:
+                continue
+            block_hash = info.get('hash', '')
+            nonce = info.get('nonce', '')
+            mine_time = info.get('timestamp', 0)
+            mining_time = info.get('mining_time', None)
+            tx_count = info.get('transactions', None)
+            if isinstance(tx_count, list):
+                tx_count = len(tx_count)
+            elif tx_count is None:
+                tx_count = 'N/A'
+            else:
+                tx_count = str(tx_count)
+            method = info.get('method', '').lower()
+            tag = None
+            if method == 'cuda' or method == 'gpu':
+                tag = ft.Container(
+                    content=ft.Text("GPU", color="#fff", size=10, weight=ft.FontWeight.BOLD),
+                    bgcolor="#28a745", border_radius=4, padding=ft.Padding(4,2,4,2), margin=ft.Margin(right=8)
+                )
+            elif method == 'cpu':
+                tag = ft.Container(
+                    content=ft.Text("CPU", color="#fff", size=10, weight=ft.FontWeight.BOLD),
+                    bgcolor="#007bff", border_radius=4, padding=ft.Padding(4,2,4,2), margin=ft.Margin(right=8)
+                )
+            else:
+                tag = ft.Container()
+            base_url = "https://bank.linglin.art"
+            block_url = f"{base_url}/block/{block_index}"
+            reward = info.get('reward', None)
+            reward_text = ft.Text(f"Reward: {reward}", size=10, color="#ffd600") if reward else None
+            block_details = [
+                ft.Text(f"Block: {block_index}", size=12, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text(f"Hash: {block_hash}", size=10, color="#00ff37"),
+                ft.Text(f"Nonce: {nonce}", size=10, color="#e3f2fd"),
+                ft.Text(f"Mine Time: {datetime.fromtimestamp(mine_time).strftime('%Y-%m-%d %H:%M:%S') if mine_time else ''}", size=10, color="#e3f2fd"),
+                ft.Text(f"Tx Count: {tx_count}", size=10, color="#e3f2fd"),
+            ]
+            if reward_text:
+                block_details.append(reward_text)
+            def open_block_url(e, url=block_url, _block=block_index):
+                has_page = bool(self.app.page)
+                print(f"[DEBUG] click view block: block={_block} url={url} page={has_page}")
+                try:
+                    if self.app.page and hasattr(self.app.page, "launch_url"):
+                        self.app.page.launch_url(url)
+                    import webbrowser
+                    webbrowser.open(url)
+                except Exception as ex:
+                    print(f"[DEBUG] click view block failed: {ex}")
+
+            view_button = ft.Container(
+                content=ft.Text("View Block", color="#ffffff", size=12),
+                bgcolor="#00a1ff",
+                padding=ft.padding.symmetric(horizontal=12, vertical=6),
+                border_radius=2,
+                on_click=open_block_url,
+                url=block_url,
+                ink=True,
+            )
+            card = ft.Container(
+                content=ft.Row([
+                    tag,
+                    ft.Column(block_details, spacing=2, expand=True),
+                    view_button,
+                ]),
+                bgcolor="#1a2b3c",
+                border_radius=6,
+                padding=8,
+                margin=ft.Margin.only(bottom=4),
+                width=float('inf'),
+            )
+            txs.append(card)
+        self.tx_cards.controls = list(txs)
+        self.tx_cards.scroll = ft.ScrollMode.AUTO
+        if self.app.page:
+            self.app.page.update()
+        self.tx_cards.controls.clear()
+        self.tx_cards.controls.extend(txs)
+        self.tx_cards.scroll = ft.ScrollMode.AUTO
+        if self.app.page:
+            self.app.page.update()
         
         # Get mining rewards from history
         mining_history = self.app.node.get_mining_history()
@@ -83,7 +365,7 @@ class BillsPage:
             if self.app.node and self.app.node.miner:
                 # Get transactions for our address
                 address = self.app.node.config.miner_address
-                transactions = self.app.node.miner.blockchain_manager.scan_transactions_for_address(address)
+                transactions = self.app.node.scan_transactions_for_address_cached(address)
                 
                 for tx in transactions:
                     bill = {

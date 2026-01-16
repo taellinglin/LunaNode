@@ -3,6 +3,7 @@ from typing import Dict
 
 class Sidebar:
     def __init__(self, app):
+        self.stats_update_timer = None
         self.app = app
         self.lbl_node_status = ft.Text("Status: Initializing...", size=12, color="#e3f2fd")
         self.lbl_network_height = ft.Text("Network Height: --", size=10, color="#e3f2fd")
@@ -41,22 +42,41 @@ class Sidebar:
             height=32,
             disabled=True
         )
-        
-        self.btn_sync = ft.Button(
-            "🔄 Sync Network",
-            on_click=lambda e: self.app.sync_network(),
-            style=button_style,
-            height=32
-        )
-        
-        self.btn_single_mine = ft.Button(
-            "⚡ Mine Single Block",
-            on_click=lambda e: self.app.mine_single_block(),
-            style=button_style,
-            height=32
-        )
+    
+    def _start_stats_update_timer(self):
+        # 既存タイマーがあれば停止
+        if self.stats_update_timer:
+            self.stats_update_timer.cancel()
+        import threading
+        def update_loop():
+            while True:
+                import time
+                time.sleep(5)
+                if hasattr(self.app, 'sidebar_tab_open') and not self.app.sidebar_tab_open:
+                    break
+                self.update_stats_tab()
+        self.stats_update_timer = threading.Thread(target=update_loop, daemon=True)
+        self.stats_update_timer.start()
 
+    def update_stats_tab(self):
+        # 最新のノード統計値でmining_statsを更新
+        if not hasattr(self.app, 'node') or not self.app.node:
+            return
+        status = self.app.node.get_status()
+        hash_rate = status['current_hash_rate']
+        mining_method = status.get('mining_method', 'CPU')
+        current_hash = status['current_hash']
+        nonce = status.get('nonce', '--')
+        self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.2f} H/s"
+        self.lbl_mining_method.value = f"Method: {mining_method}"
+        self.lbl_current_hash.value = f"Current Hash: {current_hash}"
+        self.lbl_nonce.value = f"Nonce: {nonce}"
+        if self.app.page:
+            self.app.page.update()
     def create_sidebar(self):
+        # サイドバー表示時にstats自動更新タイマーを開始
+        self._start_stats_update_timer()
+        
         """Create the sidebar with node info and quick actions"""
         sidebar_width = 240
         
@@ -85,8 +105,6 @@ class Sidebar:
                 ft.Text("Quick Actions", size=14, color="#e3f2fd"),
                 self.btn_start_mining,
                 self.btn_stop_mining,
-                self.btn_sync,
-                self.btn_single_mine,
             ], spacing=8),
             padding=10,
             bgcolor="#1a2b3c",

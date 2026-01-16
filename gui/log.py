@@ -6,6 +6,18 @@ class LogPage:
     def __init__(self, app):
         self.app = app
         self.log_output = ft.Column(scroll=ft.ScrollMode.ALWAYS)
+        # ログファイル（logs.json）を読み込んで初期表示
+        try:
+            logs = self.app.data_manager.load_logs()
+            for entry in logs:
+                msg = entry.get("message", "")
+                msg_type = entry.get("type", "info")
+                timestamp = entry.get("timestamp", None)
+                if timestamp:
+                    msg = f"[{timestamp}] {msg}"
+                self.add_log_message(msg, msg_type)
+        except Exception as e:
+            self.add_log_message(f"[ERROR] ログの読み込み失敗: {e}", "error")
 
     def create_log_tab(self):
         """Create log tab"""
