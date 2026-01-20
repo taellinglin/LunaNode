@@ -1,0 +1,38 @@
+# Ignore Python cache and build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+.venv/
+venv/
+
+# Ignore build outputs
+build/
+dist/
+*.spec
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore user data
+*.log
+*.sqlite3
+*.db
+
+# Ignore site-packages (if present in workspace)
+site-packages/
+
+# Ignore data and temp files
+data/
+storage/data/temp/
+
+# Ignore assets if not needed in build
+# assets/
+
+# Ignore IDE/project files
+.vscode/
+.idea/
+*.iml
