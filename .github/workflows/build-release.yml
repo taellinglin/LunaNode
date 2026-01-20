@@ -47,7 +47,8 @@ jobs:
       - name: Package Windows build
         run: |
           $tag = $env:GITHUB_REF_NAME
-          Compress-Archive -Path build\windows\* -DestinationPath "build\LunaNode-$tag-Windows.zip" -Force
+          $zipName = "LunaNode-$tag-Windows.zip"
+          Compress-Archive -Path build\windows\* -DestinationPath "build\$zipName" -Force
         shell: powershell
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4
@@ -116,6 +117,7 @@ jobs:
         run: |
           cd build
           tag="${GITHUB_REF_NAME}"
+          rm -f linux.zip
           zip -r "LunaNode-${tag}-Linux.zip" linux
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
@@ -146,7 +148,7 @@ jobs:
             if ! gh release view "$tag" >/dev/null 2>&1; then
               gh release create "$tag" --title "LunaNode-$tag" --notes "Automated release"
             fi
-            for f in build/*.zip; do
+            for f in build/LunaNode-*.zip; do
               [ -f "$f" ] || continue
               size=$(stat -c%s "$f")
               if [ "$size" -gt 2147483648 ]; then
