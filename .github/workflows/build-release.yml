@@ -45,13 +45,15 @@ jobs:
       - name: Build Windows binary
         run: flet build windows
       - name: Package Windows build
-        run: Compress-Archive -Path build\windows\* -DestinationPath build\windows.zip -Force
+        run: |
+          $tag = $env:GITHUB_REF_NAME
+          Compress-Archive -Path build\windows\* -DestinationPath "build\LunaNode-$tag-Windows.zip" -Force
         shell: powershell
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
-          path: build/LunaNode-v1.0.0-Windows.zip
+          path: build/LunaNode-*-Windows.zip
 
   build-macos:
     runs-on: macos-latest
@@ -77,12 +79,13 @@ jobs:
       - name: Package macOS build
         run: |
           cd build
-          zip -r LunaNode-v1.0.0-Macos.zip macos
+          tag="${GITHUB_REF_NAME}"
+          zip -r "LunaNode-${tag}-Macos.zip" macos
       - name: Upload macOS Artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos
-          path: build/LunaNode-v1.0.0-Macos.zip
+          path: build/LunaNode-*-Macos.zip
 
   build-linux:
     runs-on: ubuntu-latest
@@ -112,12 +115,13 @@ jobs:
       - name: Package Linux build
         run: |
           cd build
-          zip -r LunaNode-v1.0.0-Linux.zip linux
+          tag="${GITHUB_REF_NAME}"
+          zip -r "LunaNode-${tag}-Linux.zip" linux
       - name: Upload Linux Artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux
-          path: build/LunaNode-v1.0.0-Linux.zip
+          path: build/LunaNode-*-Linux.zip
 
   release:
     needs: [build-windows, build-macos, build-linux]
@@ -136,14 +140,21 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           retry_on: error
-          working_directory: ${{ github.workspace }}
           command: |
             set -euo pipefail
             tag="${GITHUB_REF_NAME}"
             if ! gh release view "$tag" >/dev/null 2>&1; then
               gh release create "$tag" --title "LunaNode-$tag" --notes "Automated release"
             fi
-            gh release upload "$tag" build/*.zip --clobber
+            for f in build/*.zip; do
+              [ -f "$f" ] || continue
+              size=$(stat -c%s "$f")
+              if [ "$size" -gt 2147483648 ]; then
+                echo "Skipping $f (size ${size} > 2GB release limit)"
+                continue
+              fi
+              gh release upload "$tag" "$f" --clobber
+            done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
