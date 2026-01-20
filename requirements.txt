@@ -1,19 +1,12 @@
-# tqdmはlunalib依存のため追加
 tqdm
 flet
-flet-desktop
-flet-cli
+flet-desktop; platform_system != "Emscripten"
+flet-cli; platform_system != "Emscripten"
 requests
-cryptography
-lunalib
+cryptography; platform_system != "Emscripten"
+lunalib==2.0.5
 numpy
-fastrlock
-
-# CuPy - Choose ONE based on your CUDA version:
-# CUDA 12.x (RTX 40 series, newer GPUs)
-cupy-cuda12x
-# CUDA 11.x (RTX 30 series, older GPUs)
-# cupy-cuda11x
-# CUDA 10.2 (GTX 10/16 series, very old)
-# cupy-cuda102
-# CPU-only (no GPU)
+packaging>=24.2; platform_system == "Emscripten"
+sqlite3; platform_system == "Emscripten"
+pillow; platform_system == "Emscripten"
+fastrlock; platform_system != "Emscripten"

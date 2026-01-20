@@ -126,10 +126,14 @@ class MainPage:
             self.loading = True
             if hasattr(self, 'loading_ring'):
                 self.loading_ring.visible = True
-            if self.app.page:
-                self.app.page.update()
+            self.app.safe_page_update()
             return  # ここで必ずreturnし、status未定義で以降に進まない
         status = self.app.node.get_status()
+        if hasattr(self.app, "sidebar") and self.app.sidebar:
+            try:
+                self.app.sidebar.update_status(status)
+            except Exception:
+                pass
         # データ取得できたらローディング非表示
         if self.loading:
             self.loading = False
@@ -177,8 +181,7 @@ class MainPage:
             shadow=ft.BoxShadow(blur_radius=16, color="#00000044", offset=ft.Offset(0, 4)),
         )
         self.stats_panel.visible = True
-        if self.app.page:
-            self.app.page.update()
+        self.app.safe_page_update()
         status = self.app.node.get_status()
         # 必要な統計値をセット
         self.cpu_hashrate = status.get('cpu_hashrate', 0.0)

@@ -52,6 +52,8 @@ class Sidebar:
             while True:
                 import time
                 time.sleep(5)
+                if not getattr(self.app, "ui_active", True):
+                    break
                 if hasattr(self.app, 'sidebar_tab_open') and not self.app.sidebar_tab_open:
                     break
                 self.update_stats_tab()
@@ -71,8 +73,7 @@ class Sidebar:
         self.lbl_mining_method.value = f"Method: {mining_method}"
         self.lbl_current_hash.value = f"Current Hash: {current_hash}"
         self.lbl_nonce.value = f"Nonce: {nonce}"
-        if self.app.page:
-            self.app.page.update()
+        self.app.safe_page_update()
     def create_sidebar(self):
         # サイドバー表示時にstats自動更新タイマーを開始
         self._start_stats_update_timer()
@@ -100,18 +101,7 @@ class Sidebar:
             width=sidebar_width - 30
         )
         
-        quick_actions = ft.Container(
-            content=ft.Column([
-                ft.Text("Quick Actions", size=14, color="#e3f2fd"),
-                self.btn_start_mining,
-                self.btn_stop_mining,
-            ], spacing=8),
-            padding=10,
-            bgcolor="#1a2b3c",
-            border_radius=4,
-            margin=5,
-            width=sidebar_width - 30
-        )
+
         
         mining_stats = ft.Container(
             content=ft.Column([
@@ -189,7 +179,6 @@ class Sidebar:
             ft.Divider(height=1, color="#1e3a5c"),
             node_status,
             ft.Divider(height=1, color="#1e3a5c"),
-            quick_actions,
             mining_stats,
             ft.Container(expand=True),
             app_icon
@@ -238,7 +227,6 @@ class Sidebar:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
-        
         # Show mining method with color indicator
         if mining_method == 'CUDA':
             self.lbl_mining_method.value = f"Method: 🟢 {mining_method}"
@@ -263,3 +251,58 @@ class Sidebar:
         # Update button states
         self.btn_start_mining.disabled = is_mining
         self.btn_stop_mining.disabled = not is_mining
+
+    def refresh_non_balance(self, status: Dict):
+        """Refresh sidebar without balance-related fields."""
+        self.lbl_node_status.value = f"Status: {'🟢 Running' if status['connection_status'] == 'connected' else '🟡 Disconnected'}"
+        self.lbl_network_height.value = f"Network Height: {status['network_height']}"
+        self.lbl_difficulty.value = f"Network Difficulty: {status['network_difficulty']}"
+        self.lbl_mining_difficulty.value = f"Mining Difficulty: {status.get('mining_difficulty', '--')}"
+        self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
+        self.lbl_connection.value = f"Connection: {status['connection_status']}"
+
+        p2p_connected = status.get('p2p_connected', False)
+        p2p_peers = status.get('p2p_peers', 0)
+        if p2p_connected:
+            self.lbl_p2p_status.value = f"P2P: 🟢 {p2p_peers} peers"
+            self.lbl_p2p_status.color = "#00e676"
+        else:
+            self.lbl_p2p_status.value = "P2P: 🔴 Offline"
+            self.lbl_p2p_status.color = "#ff5252"
+
+        uptime_seconds = int(status['uptime'])
+        hours = uptime_seconds // 3600
+        minutes = (uptime_seconds % 3600) // 60
+        seconds = uptime_seconds % 60
+        self.lbl_uptime.value = f"Uptime: {hours:02d}:{minutes:02d}:{seconds:02d}"
+
+        hash_rate = status['current_hash_rate']
+        mining_method = status.get('mining_method', 'CPU')
+        if hash_rate > 1000000:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000000:.2f} MH/s"
+        elif hash_rate > 1000:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
+        else:
+            self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
+
+        if mining_method == 'CUDA':
+            self.lbl_mining_method.value = f"Method: 🟢 {mining_method}"
+            self.lbl_mining_method.color = "#00e676"
+        else:
+            self.lbl_mining_method.value = f"Method: 🔵 {mining_method}"
+            self.lbl_mining_method.color = "#00a1ff"
+
+        current_hash = status['current_hash']
+        if current_hash:
+            short_hash = current_hash[:16] + "..." if len(current_hash) > 16 else current_hash
+            self.lbl_current_hash.value = f"Current Hash: {short_hash}"
+        else:
+            self.lbl_current_hash.value = "Current Hash: --"
+
+        self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
+
+        is_mining = self.app.node.miner.is_mining if self.app.node else False
+        self.progress_mining.visible = is_mining
+        self.btn_start_mining.disabled = is_mining
+        self.btn_stop_mining.disabled = not is_mining
+        self.app.safe_page_update()

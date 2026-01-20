@@ -34,60 +34,23 @@ class MiningHistory:
         )
 
     def update_history_content(self):
-        import random
         self.stats_content.controls.clear()
 
-        # ダミーデータ生成
-        hashrate = round(random.uniform(1.2, 3.8), 2)
-        accepted = random.randint(120, 180)
-        rejected = random.randint(0, 10)
-        share_rate = round(random.uniform(95, 100), 2)
-        error_rate = round(random.uniform(0, 2), 2)
-        avg_hashrate = round(random.uniform(1.0, 3.5), 2)
+        history = []
+        if self.app and getattr(self.app, "node", None):
+            try:
+                history = self.app.node.get_mining_history()
+            except Exception:
+                history = []
 
-        def make_chart(title, value, unit, color, bar_color):
-            bar_data = [random.uniform(1.0, 4.0) for _ in range(50)]
-            max_bar = max(bar_data)
-            bar_chart = ft.Row([
-                ft.Container(
-                    bgcolor=bar_color,
-                    width=4,
-                    height=int(60 * (v / max_bar)),
-                    border_radius=2,
-                    margin=ft.Margin(1,0,1,0),
-                ) for v in bar_data
-            ], vertical_alignment="end", spacing=0)
-            return ft.Column([
-                ft.Row([
-                    ft.Text(title, size=15, color="#aeefff"),
-                    ft.Container(width=8),
-                    ft.Text(f"{value} {unit}", size=24, color=color, weight="bold"),
-                ], alignment="start", vertical_alignment="center"),
-                ft.Row([
-                    ft.Text(f"{title} (last 50 samples)", size=12, color="#aeefff"),
-                ], alignment="start"),
-                bar_chart
-            ], spacing=4)
+        session_stats = self._create_session_stats(history)
+        performance_charts = self._create_performance_charts(history)
+        history_table = self._create_compact_history_table(history)
 
-        charts = [
-            make_chart("Current Hashrate", hashrate, "MH/s", "#00e676", "#1976d2"),
-            make_chart("Accepted", accepted, "", "#ffd600", "#00b0ff"),
-            make_chart("Rejected", rejected, "", "#ff5252", "#ff5252"),
-            make_chart("Share Rate", share_rate, "%", "#00b0ff", "#00b0ff"),
-            make_chart("Error Rate", error_rate, "%", "#ff5252", "#ff5252"),
-            make_chart("Avg Hashrate", avg_hashrate, "MH/s", "#00e676", "#1976d2"),
-        ]
-        # 2カラムに分割
-        col1 = ft.Column(charts[:3], spacing=12)
-        col2 = ft.Column(charts[3:], spacing=12)
-        self.stats_content.controls.clear()
-        self.stats_content.controls.append(
-            ft.Row([
-                col1,
-                ft.Container(width=24),
-                col2
-            ], alignment="start", vertical_alignment="start")
-        )
+        self.stats_content.controls.append(session_stats)
+        self.stats_content.controls.append(performance_charts)
+        self.stats_content.controls.append(history_table)
+
         if self.app.page:
             self.app.page.update()
 

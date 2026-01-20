@@ -14,7 +14,7 @@ requires-python = ">=3.8"
 dependencies = [
     "flet>=0.10.0",
     "qrcode[pil]>=7.4.0",
-    "lunalib>=1.0.0",
+    "lunalib==2.0.2",
     "requests>=2.25.0",
     "cryptography>=3.4.0",
     "pillow",
@@ -27,6 +27,10 @@ Documentation = "https://bank.linglin.art"
 
 [project.scripts]
 LunaNode = "main:main"
+
+[tool.flet.web]
+wasm = true
+renderer = "auto"
 
 [tool.pyinstaller]
 main-file = "main.py"
@@ -50,12 +54,16 @@ hiddenimports = [
     "lunalib.core.wallet",
     "lunalib.transactions",
     "lunalib.transactions.transactions",
+    "lunalib.transactions.security",
+    "lunalib.transactions.validator",
     "lunalib.mining",
     "lunalib.mining.miner",
     "lunalib.mining.difficulty",
     "lunalib.mining.cuda_manager",
     "lunalib.mining.gpu_miner",
     "lunalib.core",
+    "lunalib.core.daemon",
+    "lunalib.core.daemon_server",
     "lunalib.storage",
     "lunalib.storage.cache",
     "lunalib.storage.database",
@@ -69,28 +77,6 @@ hiddenimports = [
     "certifi",
     "cryptography.hazmat.bindings._rust",
     "cryptography.hazmat.bindings._openssl",
-    "cupy",
-    "cupy.cuda",
-    "cupy.cuda.runtime",
-    "cupy.cuda.memory",
-    "cupy.cuda.device",
-    "cupy.cuda.compiler",
-    "cupy.cuda.stream",
-    "cupy.cuda.function",
-    "cupy.cuda.driver",
-    "cupy.cuda.pinned_memory",
-    "cupy._core",
-    "cupy._core.core",
-    "cupy._core._dtype",
-    "cupy._core._kernel",
-    "cupy._core._routines_manipulation",
-    "cupy._core._routines_math",
-    "cupy._core._scalar",
-    "cupy.fft",
-    "cupy.linalg",
-    "cupy.random",
-    "cupy_cuda12x",
-    "cupy_cuda12x.cuda",
     "fastrlock",
     "numpy",
     "numpy.core",

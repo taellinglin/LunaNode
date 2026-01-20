@@ -59,8 +59,10 @@ class LogPage:
     def add_log_message(self, message: str, msg_type: str = "info"):
         """Add message to log"""
         try:
-            message = message.encode('utf-8').decode('utf-8')  # Ensure UTF-8 encoding
-        except UnicodeEncodeError:
+            import sys
+            encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+            message = str(message).encode(encoding, errors="replace").decode(encoding, errors="replace")
+        except Exception:
             message = "[Invalid Unicode Character]"
 
         color_map = {

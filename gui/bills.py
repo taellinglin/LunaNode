@@ -1,4 +1,6 @@
 import flet as ft
+import os
+import threading
 
 # Compatibility shim for older Flet versions without HitTestBehavior
 if not hasattr(ft, "HitTestBehavior"):
@@ -14,8 +16,17 @@ class BillsPage:
         import os
         import json
         self.app = app
-        self.cache_file = os.path.join(os.path.dirname(__file__), '../data/bills_cache.json')
+        self._prefetching = set()
+        self.zoom = 1.0
+        try:
+            from utils import DataManager
+            self.cache_file = os.path.join(DataManager().data_dir, "bills_cache.json")
+        except Exception:
+            self.cache_file = os.path.join(os.path.dirname(__file__), '../data/bills_cache.json')
         self.bills_cache = self.load_bills_cache()
+        cached_transactions = self.bills_cache.get('transactions', [])
+        self._cached_transactions = cached_transactions if isinstance(cached_transactions, list) else []
+        self._scan_in_progress = False
         self.bills_content = ft.Column()
         self.bills_table = ft.DataTable(
             columns=[
@@ -40,11 +51,192 @@ class BillsPage:
             child_aspect_ratio=16/8,
             spacing=12,
             run_spacing=12,
-            controls=[]
+            controls=[],
+            on_scroll=self._on_banknotes_scroll,
         )
         self.tx_cards = ft.Column([], expand=True, spacing=8)
         # その後で内容を更新
         
+
+    def _get_block_for_index(self, block_index: int):
+        """Fetch block using lunalib 1.9.2-compatible methods with API fallback."""
+        if not self.app or not getattr(self.app, "node", None):
+            return None
+
+        # Check local submitted-block cache first
+        try:
+            from utils import DataManager
+            cached_blocks = DataManager().load_blockchain_cache()
+            if isinstance(cached_blocks, list):
+                for block in cached_blocks:
+                    if isinstance(block, dict) and block.get("index") == block_index:
+                        return block
+        except Exception:
+            pass
+
+        manager = getattr(self.app.node, "blockchain_manager", None)
+        if manager:
+            for method_name in ("get_block", "get_block_by_index", "get_block_by_height"):
+                method = getattr(manager, method_name, None)
+                if callable(method):
+                    try:
+                        block = method(block_index)
+                        if isinstance(block, dict) and "block" in block and isinstance(block.get("block"), dict):
+                            return block.get("block")
+                        if isinstance(block, dict):
+                            return block
+                    except Exception:
+                        pass
+
+        try:
+            import requests
+        except Exception:
+            return None
+
+        node_url = "https://bank.linglin.art"
+        try:
+            node_url = getattr(self.app.node, "config", None).node_url
+        except Exception:
+            pass
+
+        endpoints = [
+            f"{node_url}/blockchain/block/{block_index}",
+            f"{node_url}/block/{block_index}",
+            f"{node_url}/blockchain/blocks/{block_index}",
+            f"{node_url}/blockchain/range?start={block_index}&end={block_index}",
+        ]
+
+        for url in endpoints:
+            try:
+                response = requests.get(url, timeout=10)
+                if response.status_code != 200:
+                    continue
+                data = response.json()
+
+                if isinstance(data, dict) and "block" in data and isinstance(data.get("block"), dict):
+                    return data.get("block")
+
+                if isinstance(data, dict) and "blocks" in data and isinstance(data.get("blocks"), list):
+                    if data["blocks"]:
+                        return data["blocks"][0]
+
+                if isinstance(data, list) and data:
+                    return data[0]
+            except Exception:
+                continue
+
+        return None
+
+    def _get_blocks_for_indices(self, indices: List[int]) -> Dict[int, Dict]:
+        results: Dict[int, Dict] = {}
+        if not indices:
+            return results
+
+        unique_indices = sorted({int(i) for i in indices if isinstance(i, (int, str))})
+
+        # Local cache first
+        try:
+            from utils import DataManager
+            cached_blocks = DataManager().load_blockchain_cache()
+            if isinstance(cached_blocks, list):
+                for block in cached_blocks:
+                    if isinstance(block, dict):
+                        idx = block.get("index")
+                        if idx in unique_indices:
+                            results[idx] = block
+        except Exception:
+            pass
+
+        missing = [i for i in unique_indices if i not in results]
+        if not missing:
+            return results
+
+        manager = getattr(self.app.node, "blockchain_manager", None)
+        if not manager or not hasattr(manager, "get_blocks_range"):
+            return results
+
+        # Build contiguous ranges
+        ranges = []
+        start = prev = missing[0]
+        for idx in missing[1:]:
+            if idx == prev + 1:
+                prev = idx
+            else:
+                ranges.append((start, prev))
+                start = prev = idx
+        ranges.append((start, prev))
+
+        for start, end in ranges:
+            try:
+                blocks = manager.get_blocks_range(start, end)
+                for block in blocks or []:
+                    if isinstance(block, dict) and block.get("index") is not None:
+                        results[block.get("index")] = block
+            except Exception:
+                continue
+
+        return results
+
+    def _get_thumbnail_cache_dir(self):
+        try:
+            from utils import DataManager
+            base_dir = DataManager().data_dir
+        except Exception:
+            base_dir = os.path.join(os.path.dirname(__file__), "..", "data")
+        cache_dir = os.path.join(base_dir, "thumbnail_cache")
+        os.makedirs(cache_dir, exist_ok=True)
+        return cache_dir
+
+    def _prefetch_thumbnail_pair(self, tx_hash: str, front_url: str, back_url: str):
+        if tx_hash in self._prefetching:
+            return
+        self._prefetching.add(tx_hash)
+
+        def _download():
+            try:
+                import requests
+                import time
+                cache_dir = self._get_thumbnail_cache_dir()
+                front_path = os.path.join(cache_dir, f"{tx_hash}_front.png")
+                back_path = os.path.join(cache_dir, f"{tx_hash}_back.png")
+
+                if not os.path.exists(front_path):
+                    resp = requests.get(front_url, timeout=15)
+                    if resp.ok:
+                        with open(front_path, "wb") as f:
+                            f.write(resp.content)
+                    time.sleep(0.1)
+
+                if not os.path.exists(back_path):
+                    resp = requests.get(back_url, timeout=15)
+                    if resp.ok:
+                        with open(back_path, "wb") as f:
+                            f.write(resp.content)
+            except Exception:
+                pass
+            finally:
+                self._prefetching.discard(tx_hash)
+
+        import threading
+        threading.Thread(target=_download, daemon=True).start()
+
+    def _on_banknotes_scroll(self, e):
+        try:
+            delta = getattr(e, "delta_y", 0)
+        except Exception:
+            delta = 0
+
+        if delta == 0:
+            return
+
+        step = 0.05
+        if delta < 0:
+            self.zoom = min(2.0, self.zoom + step)
+        else:
+            self.zoom = max(0.6, self.zoom - step)
+
+        self.update_bills_content()
+
 
 
     def load_bills_cache(self):
@@ -104,7 +296,7 @@ class BillsPage:
             padding=10
         )
 
-    def update_bills_content(self):
+    def update_bills_content(self, defer_scan: bool = False):
         """Update bills/transactions content (tiles + cards)"""
         txs = []
         # ここでtxやtx_hashは未定義なので何もせず、以降のforループで処理する
@@ -119,45 +311,69 @@ class BillsPage:
         cached_blocks = set(self.bills_cache.get('mined_blocks', []))
         cached_thumbnails = self.bills_cache.get('thumbnails', {})
         cached_banknotes = self.bills_cache.get('banknotes', {})
+        cached_thumbnail_urls = self.bills_cache.get('thumbnail_urls', {})
+        missing_block_indices = []
         # 新規マイニング分だけ取得
         for record in mining_history:
             if record.get('status') == 'success' and record.get('block_index') is not None:
-                if record['block_index'] in cached_blocks:
-                    block_index = record['block_index']
+                block_index = record['block_index']
+                if block_index in cached_blocks:
                     # 既存キャッシュからGTXハッシュを追加
                     for tx_hash in cached_thumbnails.get(str(block_index), []):
                         gtx_hashes.append(tx_hash)
                 else:
-                    block = None
+                    missing_block_indices.append(block_index)
+
+        if missing_block_indices:
+            batch_blocks = self._get_blocks_for_indices(missing_block_indices)
+            for block_index in missing_block_indices:
+                block = batch_blocks.get(block_index)
+                if not block:
                     try:
-                        block = self.app.node.blockchain_manager.get_block(block_index)
+                        block = self._get_block_for_index(block_index)
                     except Exception as e:
                         print(f"[DEBUG] Failed to get block {block_index}: {e}")
-                    print(f"[DEBUG] block {block_index}: {block}")
-                    if block and 'transactions' in block:
-                        print(f"[DEBUG] block {block_index} transactions: {block['transactions']}")
-                        block_gtx_hashes = []
-                        for tx in block['transactions']:
-                            if isinstance(tx, dict) and tx.get('type') == 'GTX_Genesis' and tx.get('hash'):
-                                gtx_hashes.append(tx['hash'])
-                                block_gtx_hashes.append(tx['hash'])
-                                # banknote情報もキャッシュ
-                                cached_banknotes[tx['hash']] = tx
-                        # サムネイルキャッシュ
-                        cached_thumbnails[str(block_index)] = block_gtx_hashes
-                        new_blocks.append(block_index)
+                print(f"[DEBUG] block {block_index}: {block}")
+                if block and 'transactions' in block:
+                    print(f"[DEBUG] block {block_index} transactions: {block['transactions']}")
+                    block_gtx_hashes = []
+                    for tx in block['transactions']:
+                        if isinstance(tx, dict) and tx.get('type') == 'GTX_Genesis' and tx.get('hash'):
+                            gtx_hashes.append(tx['hash'])
+                            block_gtx_hashes.append(tx['hash'])
+                            # banknote情報もキャッシュ
+                            cached_banknotes[tx['hash']] = tx
+                            # サムネイルURLをキャッシュ
+                            serial_id = tx.get('serial_id') or tx.get('serial_number')
+                            img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=front"
+                            if serial_id:
+                                img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                            else:
+                                img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=back"
+                            cached_thumbnail_urls[tx['hash']] = {
+                                "front": f"{img_url_front}&flip=front",
+                                "back": f"{img_url_back}&flip=back",
+                            }
+                    # サムネイルキャッシュ
+                    cached_thumbnails[str(block_index)] = block_gtx_hashes
+                    new_blocks.append(block_index)
         # キャッシュ更新
         if new_blocks:
             self.bills_cache['mined_blocks'] = list(set(list(cached_blocks) + new_blocks))
             self.bills_cache['thumbnails'] = cached_thumbnails
             self.bills_cache['banknotes'] = cached_banknotes
+            self.bills_cache['thumbnail_urls'] = cached_thumbnail_urls
             self.save_bills_cache()
         print(f"[DEBUG] gtx_genesis hashes: {gtx_hashes}")
         # --- キャッシュからのサムネイル・ブロック情報が存在する場合、必ずUIに反映 ---
         # サムネイル描画
         self.bill_tiles.controls.clear()
+        zoom = getattr(self, "zoom", 1.0)
+        self.bill_tiles.max_extent = int(180 * zoom)
         cached_thumbnails = self.bills_cache.get('thumbnails', {})
         cached_banknotes = self.bills_cache.get('banknotes', {})
+        cached_thumbnail_urls = self.bills_cache.get('thumbnail_urls', {})
+        cache_dir = self._get_thumbnail_cache_dir()
         tiles = []
         for block_index, tx_hashes in cached_thumbnails.items():
             if not tx_hashes:
@@ -169,13 +385,23 @@ class BillsPage:
                 # front/back両方のサムネイルURLを用意
                 # frontは常にtransaction-thumbnailで確実に表示し、backはserial_idがあればmatchingを使う
                 serial_id = tx.get('serial_id') or tx.get('serial_number')
-                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
-                if serial_id:
-                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
-                else:
-                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
-                front_src = f"{img_url_front}&flip=front"
-                back_src = f"{img_url_back}&flip=back"
+                cached_urls = cached_thumbnail_urls.get(tx_hash, {})
+                front_src = cached_urls.get("front")
+                back_src = cached_urls.get("back")
+                if not front_src or not back_src:
+                    img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
+                    if serial_id:
+                        img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                    else:
+                        img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
+                    front_src = f"{img_url_front}&flip=front"
+                    back_src = f"{img_url_back}&flip=back"
+                    cached_thumbnail_urls[tx_hash] = {"front": front_src, "back": back_src}
+
+                local_front = os.path.join(cache_dir, f"{tx_hash}_front.png")
+                local_back = os.path.join(cache_dir, f"{tx_hash}_back.png")
+                display_front = local_front if os.path.exists(local_front) else front_src
+                display_back = local_back if os.path.exists(local_back) else back_src
                 owner = tx.get('issued_to', '')
                 amount = tx.get('denomination', '')
                 if not tx_hash:
@@ -184,17 +410,17 @@ class BillsPage:
                 # サムネイル下部にOwner/Amountラベル
                 label_row = ft.Container(
                     content=ft.Row([
-                        ft.Text(str(owner), size=8, color="#b0bec5", weight=ft.FontWeight.W_400),
-                        ft.Text(f"{amount}", size=8, color="#ffd600", weight=ft.FontWeight.W_400),
+                        ft.Text(str(owner), size=int(8 * zoom), color="#b0bec5", weight=ft.FontWeight.W_400),
+                        ft.Text(f"{amount}", size=int(8 * zoom), color="#ffd600", weight=ft.FontWeight.W_400),
                     ], spacing=4, alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     padding=ft.padding.only(top=2),
                 )
 
                 # 単一のImageのsrcを切り替える方法でホバー表示を更新
                 img_main = ft.Image(
-                    src=front_src,
-                    width=160,
-                    height=60,
+                    src=display_front,
+                    width=int(160 * zoom),
+                    height=int(60 * zoom),
                     fit="contain",
                     border_radius=8,
                     gapless_playback=False,
@@ -210,22 +436,25 @@ class BillsPage:
                 else:
                     fullview_url = f"https://bank.linglin.art/transaction/{tx_hash}"
 
-                def set_hover(hovered, img=img_main, _tx_hash=tx_hash):
-                    img.src = back_src if hovered else front_src
+                def set_hover(hovered, img=img_main, front=display_front, back=display_back, _tx_hash=tx_hash):
+                    img.src = back if hovered else front
                     img.update()
                     if self.bill_tiles:
                         self.bill_tiles.update()
 
-                def on_hover(e, _tx_hash=tx_hash):
+                def on_hover(e, _tx_hash=tx_hash, front=display_front, back=display_back, _set_hover=set_hover):
                     data = getattr(e, "data", None)
-                    data_str = str(data).lower()
+                    data_str = str(data).strip().lower()
                     print(
-                        f"[DEBUG] hover: tx={_tx_hash} data={data} front={front_src} back={back_src}"
+                        f"[DEBUG] hover: tx={_tx_hash} data={data} front={front} back={back}"
                     )
-                    if data_str == "true":
-                        set_hover(True)
-                    elif data_str == "false":
-                        set_hover(False)
+                    if data_str in ("true", "1", "enter", "over", "hover"):
+                        _set_hover(True, front=front, back=back)
+                    elif data_str in ("false", "0", "exit", "leave", "out"):
+                        _set_hover(False, front=front, back=back)
+                    else:
+                        # Fallback: treat any hover event as enter
+                        _set_hover(True, front=front, back=back)
 
                 def on_tap_open(e, url=fullview_url, _tx_hash=tx_hash):
                     has_page = bool(self.app.page)
@@ -237,6 +466,10 @@ class BillsPage:
                         webbrowser.open(url)
                     except Exception as ex:
                         print(f"[DEBUG] click banknote failed: {ex}")
+
+                self._prefetch_thumbnail_pair(tx_hash, front_src, back_src)
+
+                img_main.on_hover = on_hover
 
                 tile = ft.Container(
                     content=content,
@@ -251,6 +484,8 @@ class BillsPage:
                 tiles.append(tile)
         self.bill_tiles.controls.extend(tiles)
         self.bill_tiles.scroll = ft.ScrollMode.AUTO
+        self.bills_cache['thumbnail_urls'] = cached_thumbnail_urls
+        self.save_bills_cache()
         # Mined blocks履歴もキャッシュから
         txs = []
         cached_blocks = self.bills_cache.get('mined_blocks', [])
@@ -360,27 +595,51 @@ class BillsPage:
                 }
                 mined_bills.append(bill)
         
-        # Add any additional transactions from blockchain
-        try:
-            if self.app.node and self.app.node.miner:
-                # Get transactions for our address
-                address = self.app.node.config.miner_address
-                transactions = self.app.node.scan_transactions_for_address_cached(address)
-                
-                for tx in transactions:
-                    bill = {
-                        'type': tx.get('type', 'transaction'),
-                        'timestamp': tx.get('timestamp', time.time()),
-                        'amount': tx.get('amount', 0),
-                        'from_address': tx.get('from', 'Unknown'),
-                        'to_address': tx.get('to', 'Unknown'),
-                        'status': tx.get('status', 'confirmed'),
-                        'block_height': tx.get('block_height', 'N/A'),
-                        'hash': tx.get('hash', '')
-                    }
-                    mined_bills.append(bill)
-        except Exception as e:
-            print(f"Error loading transactions: {e}")
+        # Add any additional transactions from blockchain (use cached first, refresh async)
+        address = None
+        if self.app and self.app.node and self.app.node.miner:
+            address = self.app.node.config.miner_address
+        transactions = self._cached_transactions
+        if address and not defer_scan and not self._scan_in_progress:
+            self._scan_in_progress = True
+
+            def _scan():
+                new_txs = None
+                try:
+                    new_txs = self.app.node.scan_transactions_for_address_cached(address)
+                except Exception as e:
+                    print(f"Error loading transactions: {e}")
+
+                def _apply():
+                    if isinstance(new_txs, list):
+                        self._cached_transactions = new_txs
+                        self.bills_cache['transactions'] = new_txs
+                        self.save_bills_cache()
+                    self._scan_in_progress = False
+                    self.update_bills_content(defer_scan=True)
+
+                if self.app and hasattr(self.app, "safe_run_thread"):
+                    ok = self.app.safe_run_thread(_apply)
+                    if not ok:
+                        self._scan_in_progress = False
+                else:
+                    self._scan_in_progress = False
+
+            threading.Thread(target=_scan, daemon=True).start()
+
+        if isinstance(transactions, list):
+            for tx in transactions:
+                bill = {
+                    'type': tx.get('type', 'transaction'),
+                    'timestamp': tx.get('timestamp', time.time()),
+                    'amount': tx.get('amount', 0),
+                    'from_address': tx.get('from', 'Unknown'),
+                    'to_address': tx.get('to', 'Unknown'),
+                    'status': tx.get('status', 'confirmed'),
+                    'block_height': tx.get('block_height', 'N/A'),
+                    'hash': tx.get('hash', '')
+                }
+                mined_bills.append(bill)
         
         # Sort by timestamp (newest first)
         mined_bills.sort(key=lambda x: x['timestamp'], reverse=True)

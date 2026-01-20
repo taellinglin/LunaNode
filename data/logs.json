@@ -1,1165 +1,5 @@
 [
   {
-    "timestamp": "2026-01-16 04:20:22",
-    "message": "Block #6619 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:20:22",
-    "message": "Block #6619 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:20:45",
-    "message": "Block #6620 submitted: Block #6620 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:20:45",
-    "message": "Block #6620 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:20:45",
-    "message": "Block #6620 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:17",
-    "message": "Block #6621 submitted: Block #6621 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:17",
-    "message": "Block #6621 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:17",
-    "message": "Block #6621 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:33",
-    "message": "Block #6622 submitted: Block #6622 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:33",
-    "message": "Block #6622 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:21:33",
-    "message": "Block #6622 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:00",
-    "message": "Block #6623 submitted: Block #6623 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:00",
-    "message": "Block #6623 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:00",
-    "message": "Block #6623 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:20",
-    "message": "Block #6624 submitted: Block #6624 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:20",
-    "message": "Block #6624 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:20",
-    "message": "Block #6624 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:39",
-    "message": "Block #6625 submitted: Block #6625 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:39",
-    "message": "Block #6625 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:39",
-    "message": "Block #6625 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:58",
-    "message": "Block #6626 submitted: Block #6626 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:58",
-    "message": "Block #6626 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:22:58",
-    "message": "Block #6626 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:24",
-    "message": "Block #6627 submitted: Block #6627 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:24",
-    "message": "Block #6627 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:24",
-    "message": "Block #6627 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:53",
-    "message": "Block #6628 submitted: Block #6628 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:53",
-    "message": "Block #6628 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:23:53",
-    "message": "Block #6628 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:16",
-    "message": "Block #6629 submitted: Block #6629 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:17",
-    "message": "Block #6629 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:17",
-    "message": "Block #6629 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:35",
-    "message": "Block #6630 submitted: Block #6630 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:35",
-    "message": "Block #6630 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:35",
-    "message": "Block #6630 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:56",
-    "message": "Block #6631 submitted: Block #6631 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:57",
-    "message": "Block #6631 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:24:57",
-    "message": "Block #6631 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:19",
-    "message": "Block #6632 submitted: Block #6632 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:19",
-    "message": "Block #6632 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:19",
-    "message": "Block #6632 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:37",
-    "message": "Block #6633 submitted: Block #6633 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:37",
-    "message": "Block #6633 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:37",
-    "message": "Block #6633 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:58",
-    "message": "Block #6634 submitted: Block #6634 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:58",
-    "message": "Block #6634 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:25:59",
-    "message": "Block #6634 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:26:50",
-    "message": "Block #6635 submitted: Block #6635 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:26:50",
-    "message": "Block #6635 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:26:50",
-    "message": "Block #6635 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:10",
-    "message": "Block #6636 submitted: Block #6636 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:10",
-    "message": "Block #6636 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:10",
-    "message": "Block #6636 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:28",
-    "message": "Block #6637 submitted: Block #6637 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:28",
-    "message": "Block #6637 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:28",
-    "message": "Block #6637 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:57",
-    "message": "Block #6638 submitted: Block #6638 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:57",
-    "message": "Block #6638 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:27:57",
-    "message": "Block #6638 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:15",
-    "message": "Block #6639 submitted: Block #6639 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:15",
-    "message": "Block #6639 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:15",
-    "message": "Block #6639 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:31",
-    "message": "Block #6640 submitted: Block #6640 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:31",
-    "message": "Block #6640 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:31",
-    "message": "Block #6640 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:28:59",
-    "message": "Block #6641 submitted: Block #6641 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:29:00",
-    "message": "Block #6641 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:29:00",
-    "message": "Block #6641 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:29:37",
-    "message": "Block #6642 submitted: Block #6642 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:29:37",
-    "message": "Block #6642 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:29:37",
-    "message": "Block #6642 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:04",
-    "message": "Block #6643 submitted: Block #6643 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:04",
-    "message": "Block #6643 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:04",
-    "message": "Block #6643 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:36",
-    "message": "Block #6644 submitted: Block #6644 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:36",
-    "message": "Block #6644 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:30:36",
-    "message": "Block #6644 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:02",
-    "message": "Block #6645 submitted: Block #6645 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:03",
-    "message": "Block #6645 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:03",
-    "message": "Block #6645 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:56",
-    "message": "Block #6646 submitted: Block #6646 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:58",
-    "message": "Block #6646 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:32:59",
-    "message": "Block #6646 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:34:16",
-    "message": "Block #6647 submitted: Block #6647 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:34:16",
-    "message": "Block #6647 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:34:17",
-    "message": "Block #6647 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:35:39",
-    "message": "Block #6648 submitted: Block #6648 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:35:40",
-    "message": "Block #6648 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:35:40",
-    "message": "Block #6648 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:36:53",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:09",
-    "message": "Block #6649 submitted: Block #6649 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:09",
-    "message": "Block #6649 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:09",
-    "message": "Block #6649 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:40",
-    "message": "Block #6650 submitted: Block #6650 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:40",
-    "message": "Block #6650 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:40",
-    "message": "Block #6650 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:59",
-    "message": "Block #6651 submitted: Block #6651 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:59",
-    "message": "Block #6651 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:37:59",
-    "message": "Block #6651 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:25",
-    "message": "Block #6652 submitted: Block #6652 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:25",
-    "message": "Block #6652 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:25",
-    "message": "Block #6652 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:52",
-    "message": "Block #6653 submitted: Block #6653 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:52",
-    "message": "Block #6653 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:38:52",
-    "message": "Block #6653 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:10",
-    "message": "Block #6654 submitted: Block #6654 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:10",
-    "message": "Block #6654 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:10",
-    "message": "Block #6654 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:29",
-    "message": "Block #6655 submitted: Block #6655 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:29",
-    "message": "Block #6655 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:29",
-    "message": "Block #6655 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:55",
-    "message": "Block #6656 submitted: Block #6656 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:56",
-    "message": "Block #6656 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:39:56",
-    "message": "Block #6656 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:20",
-    "message": "Block #6657 submitted: Block #6657 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:20",
-    "message": "Block #6657 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:20",
-    "message": "Block #6657 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:36",
-    "message": "Block #6658 submitted: Block #6658 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:37",
-    "message": "Block #6658 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:40:37",
-    "message": "Block #6658 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:41:33",
-    "message": "Block #6659 submitted: Block #6659 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:41:34",
-    "message": "Block #6659 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:41:34",
-    "message": "Block #6659 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:42:36",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 04:42:50",
-    "message": "Block #6660 submitted: Block #6660 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:42:50",
-    "message": "Block #6660 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:42:50",
-    "message": "Block #6660 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:43:14",
-    "message": "Block #6661 submitted: Block #6661 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:43:15",
-    "message": "Block #6661 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:43:15",
-    "message": "Block #6661 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:08",
-    "message": "Block #6662 submitted: Block #6662 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:08",
-    "message": "Block #6662 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:08",
-    "message": "Block #6662 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:36",
-    "message": "Block #6663 submitted: Block #6663 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:36",
-    "message": "Block #6663 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:44:36",
-    "message": "Block #6663 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:45:51",
-    "message": "Block #6664 submitted: Block #6664 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:45:52",
-    "message": "Block #6664 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 04:45:52",
-    "message": "Block #6664 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:30",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:38",
-    "message": "Block #6665 submitted: Block #6665 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:38",
-    "message": "Block #6665 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:38",
-    "message": "Block #6665 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:50",
-    "message": "Block #6666 submitted: Block #6666 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:50",
-    "message": "Block #6666 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:55:50",
-    "message": "Block #6666 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:56:03",
-    "message": "Block #6667 submitted: Block #6667 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:56:03",
-    "message": "Block #6667 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 05:56:03",
-    "message": "Block #6667 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:04",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:18",
-    "message": "Block #6668 submitted: Block #6668 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:18",
-    "message": "Block #6668 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:18",
-    "message": "Block #6668 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:43",
-    "message": "Block #6669 submitted: Block #6669 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:43",
-    "message": "Block #6669 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:07:43",
-    "message": "Block #6669 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:07",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:17",
-    "message": "Block #6671 submitted: Block #6671 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:17",
-    "message": "Block #6671 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:17",
-    "message": "Block #6671 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:36",
-    "message": "Block #6672 submitted: Block #6672 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:36",
-    "message": "Block #6672 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:36",
-    "message": "Block #6672 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:56",
-    "message": "Block #6673 submitted: Block #6673 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:56",
-    "message": "Block #6673 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:08:56",
-    "message": "Block #6673 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:09:47",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:10:25",
-    "message": "Block #6674 submitted: Block #6674 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:10:25",
-    "message": "Block #6674 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:10:25",
-    "message": "Block #6674 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:10:46",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:11:20",
-    "message": "Block #6675 submitted: Block #6675 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:11:21",
-    "message": "Block #6675 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:11:21",
-    "message": "Block #6675 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:19",
-    "message": "Block #6676 submitted: Block #6676 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:19",
-    "message": "Block #6676 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:20",
-    "message": "Block #6676 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:47",
-    "message": "Block #6677 submitted: Block #6677 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:48",
-    "message": "Block #6677 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:12:48",
-    "message": "Block #6677 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:19",
-    "message": "Block #6678 submitted: Block #6678 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:19",
-    "message": "Block #6678 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:19",
-    "message": "Block #6678 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:33",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:49",
-    "message": "Block #6679 submitted: Block #6679 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:49",
-    "message": "Block #6679 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:13:50",
-    "message": "Block #6679 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:15",
-    "message": "Block #6680 submitted: Block #6680 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:16",
-    "message": "Block #6680 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:17",
-    "message": "Block #6680 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:33",
-    "message": "Block #6681 submitted: Block #6681 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:33",
-    "message": "Block #6681 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:33",
-    "message": "Block #6681 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:57",
-    "message": "Block #6682 submitted: Block #6682 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:57",
-    "message": "Block #6682 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:14:57",
-    "message": "Block #6682 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:15:38",
-    "message": "Block #6683 submitted: Block #6683 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:15:39",
-    "message": "Block #6683 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:15:40",
-    "message": "Block #6683 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:16:38",
-    "message": "Auto-mining started (GPU/CUDA enabled)",
-    "type": "info"
-  },
-  {
-    "timestamp": "2026-01-16 06:17:03",
-    "message": "Block #6684 submitted: Block #6684 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:17:04",
-    "message": "Block #6684 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:17:04",
-    "message": "Block #6684 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:18:43",
-    "message": "Block #6685 submitted: Block #6685 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:18:43",
-    "message": "Block #6685 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:18:43",
-    "message": "Block #6685 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:21:21",
-    "message": "Block #6686 submitted: Block #6686 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:21:21",
-    "message": "Block #6686 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:21:21",
-    "message": "Block #6686 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:02",
-    "message": "Block #6687 submitted: Block #6687 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:02",
-    "message": "Block #6687 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:02",
-    "message": "Block #6687 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:26",
-    "message": "Block #6688 submitted: Block #6688 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:26",
-    "message": "Block #6688 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:22:26",
-    "message": "Block #6688 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:23:06",
-    "message": "Block #6689 submitted: Block #6689 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:23:06",
-    "message": "Block #6689 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:23:06",
-    "message": "Block #6689 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:23:22",
-    "message": "Mining failed: Could not get latest block from server",
-    "type": "error"
-  },
-  {
-    "timestamp": "2026-01-16 06:23:22",
-    "message": "Mining failed: Could not get latest block from server",
-    "type": "warning"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:10",
-    "message": "Block #6690 submitted: Block #6690 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:11",
-    "message": "Block #6690 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:11",
-    "message": "Block #6690 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:39",
-    "message": "Block #6691 submitted: Block #6691 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:39",
-    "message": "Block #6691 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:24:39",
-    "message": "Block #6691 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:19",
-    "message": "Block #6692 submitted: Block #6692 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:19",
-    "message": "Block #6692 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:19",
-    "message": "Block #6692 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:50",
-    "message": "Block #6693 submitted: Block #6693 already exists in blockchain",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:50",
-    "message": "Block #6693 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
-    "timestamp": "2026-01-16 06:25:50",
-    "message": "Block #6693 mined & submitted (1 txs) - Reward: 10000.0",
-    "type": "success"
-  },
-  {
     "timestamp": "2026-01-16 06:26:14",
     "message": "Block #6694 submitted: Block #6694 already exists in blockchain",
     "type": "success"
@@ -4998,5 +3838,1165 @@
     "timestamp": "2026-01-16 14:29:44",
     "message": "Mining failed: Mining disabled or timeout - no solution found",
     "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-17 05:31:06",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-17 05:31:38",
+    "message": "Block #6938 submitted: Block #6938 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:31:39",
+    "message": "Block #6938 mined & submitted (6 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:31:40",
+    "message": "Block #6938 mined & submitted (6 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:34:51",
+    "message": "Block #6939 submitted: Block #6939 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:34:58",
+    "message": "Block #6939 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:35:03",
+    "message": "Block #6939 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:40:58",
+    "message": "Block #6940 submitted: Block #6940 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:41:08",
+    "message": "Block #6940 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:41:11",
+    "message": "Block #6940 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:46:18",
+    "message": "Block #6941 submitted: Block #6941 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:46:20",
+    "message": "Block #6941 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:46:21",
+    "message": "Block #6941 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:51:34",
+    "message": "Block #6942 submitted: Block #6942 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:51:35",
+    "message": "Block #6942 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:51:35",
+    "message": "Block #6942 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:56:40",
+    "message": "Block #6943 submitted: Block #6943 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:56:51",
+    "message": "Block #6943 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 05:57:00",
+    "message": "Block #6943 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:02:21",
+    "message": "Block #6944 submitted: Block #6944 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:02:22",
+    "message": "Block #6944 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:02:23",
+    "message": "Block #6944 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:06:38",
+    "message": "Block #6945 submitted: Block #6945 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:06:40",
+    "message": "Block #6945 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:06:42",
+    "message": "Block #6945 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:11:27",
+    "message": "Block #6946 submitted: Block #6946 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:11:28",
+    "message": "Block #6946 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:11:28",
+    "message": "Block #6946 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:14:33",
+    "message": "Block #6947 submitted: Block #6947 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:14:34",
+    "message": "Block #6947 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:14:34",
+    "message": "Block #6947 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:24:27",
+    "message": "Block #6948 submitted: Block #6948 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:24:35",
+    "message": "Block #6948 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:24:38",
+    "message": "Block #6948 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:29:50",
+    "message": "Block #6949 submitted: Block #6949 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:29:50",
+    "message": "Block #6949 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:29:50",
+    "message": "Block #6949 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:33:22",
+    "message": "Block #6950 submitted: Block #6950 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:33:23",
+    "message": "Block #6950 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:33:24",
+    "message": "Block #6950 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:42:27",
+    "message": "Block #6951 submitted: Block #6951 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:42:30",
+    "message": "Block #6951 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:42:32",
+    "message": "Block #6951 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:48:32",
+    "message": "Block #6952 submitted: Block #6952 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:48:38",
+    "message": "Block #6952 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:48:42",
+    "message": "Block #6952 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:52:39",
+    "message": "Block #6953 submitted: Block #6953 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:52:43",
+    "message": "Block #6953 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 06:52:46",
+    "message": "Block #6953 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:07:52",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-17 14:18:54",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-17 14:20:58",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-17 14:24:50",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-17 14:26:32",
+    "message": "Block #6954 submitted: Block #6954 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:26:32",
+    "message": "Block #6954 mined & submitted (97 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:26:32",
+    "message": "Block #6954 mined & submitted (97 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:31:05",
+    "message": "Block #6955 submitted: Block #6955 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:31:15",
+    "message": "Block #6955 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-17 14:31:19",
+    "message": "Block #6955 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 06:51:17",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 06:56:23",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 07:05:22",
+    "message": "Block #6956 submitted: Block #6956 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:05:22",
+    "message": "Block #6956 mined & submitted (75 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:05:22",
+    "message": "Block #6956 mined & submitted (75 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:09:55",
+    "message": "Block #6957 submitted: Block #6957 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:10:01",
+    "message": "Block #6957 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:10:04",
+    "message": "Block #6957 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:17:02",
+    "message": "Block #6958 submitted: Block #6958 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:17:06",
+    "message": "Block #6958 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:17:08",
+    "message": "Block #6958 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:25:11",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 07:26:03",
+    "message": "Block #6959 submitted: Block #6959 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:26:04",
+    "message": "Block #6959 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:26:04",
+    "message": "Block #6959 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:30:40",
+    "message": "Block #6960 submitted: Block #6960 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:30:40",
+    "message": "Block #6960 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:30:40",
+    "message": "Block #6960 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:34:28",
+    "message": "Block #6961 submitted: Block #6961 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:34:40",
+    "message": "Block #6961 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:34:42",
+    "message": "Block #6961 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:43:36",
+    "message": "Block #6962 submitted: Block #6962 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:43:39",
+    "message": "Block #6962 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:43:40",
+    "message": "Block #6962 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:48:09",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 07:56:07",
+    "message": "Block #6963 submitted: Block #6963 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:56:12",
+    "message": "Block #6963 mined & submitted (5 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 07:56:15",
+    "message": "Block #6963 mined & submitted (5 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:02:40",
+    "message": "Block #6964 submitted: Block #6964 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:02:40",
+    "message": "Block #6964 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:02:40",
+    "message": "Block #6964 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:08:26",
+    "message": "Block #6965 submitted: Block #6965 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:08:30",
+    "message": "Block #6965 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:08:32",
+    "message": "Block #6965 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:11:46",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:08",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:26",
+    "message": "Block #6966 submitted: Block #6966 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:26",
+    "message": "Block #6966 mined & submitted (4 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:26",
+    "message": "Block #6966 mined & submitted (4 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:33",
+    "message": "Wallet address updated to: LUN_C2CrQ9Re6JxKVq4cwaY8BCysGFWsfPTT3z",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:12:59",
+    "message": "Stopping mining... (aborting current block)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:06",
+    "message": "Block #6967 submitted: Block #6967 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:06",
+    "message": "Block #6967 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:06",
+    "message": "Block #6967 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:11",
+    "message": "Auto-mining stopped",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:13:54",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:14:20",
+    "message": "Block #6968 submitted: Block #6968 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:14:20",
+    "message": "Block #6968 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:14:20",
+    "message": "Block #6968 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:15:44",
+    "message": "Block #6969 submitted: Block #6969 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:15:44",
+    "message": "Block #6969 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:15:44",
+    "message": "Block #6969 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:17:10",
+    "message": "Block #6970 submitted: Block #6970 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:17:10",
+    "message": "Block #6970 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:17:10",
+    "message": "Block #6970 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:19:12",
+    "message": "Block #6971 submitted: Block #6971 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:19:12",
+    "message": "Block #6971 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:19:12",
+    "message": "Block #6971 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:21:17",
+    "message": "Block #6972 submitted: Block #6972 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:21:17",
+    "message": "Block #6972 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:21:17",
+    "message": "Block #6972 mined & submitted (2 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:22:53",
+    "message": "Block #6973 submitted: Block #6973 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:22:53",
+    "message": "Block #6973 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:22:53",
+    "message": "Block #6973 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:24:39",
+    "message": "Block #6974 submitted: Block #6974 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:24:39",
+    "message": "Block #6974 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:24:39",
+    "message": "Block #6974 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:26:16",
+    "message": "Block #6975 submitted: Block #6975 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:26:16",
+    "message": "Block #6975 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:26:16",
+    "message": "Block #6975 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:41:19",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:05",
+    "message": "Block #6976 submitted: Block #6976 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:05",
+    "message": "Block #6976 mined & submitted (6 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:05",
+    "message": "Block #6976 mined & submitted (6 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:44",
+    "message": "Block #6977 submitted: Block #6977 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:44",
+    "message": "Block #6977 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:42:44",
+    "message": "Block #6977 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:43:50",
+    "message": "Block #6978 submitted: Block #6978 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:43:50",
+    "message": "Block #6978 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:43:50",
+    "message": "Block #6978 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:45:33",
+    "message": "Block #6979 submitted: Block #6979 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:45:33",
+    "message": "Block #6979 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:45:33",
+    "message": "Block #6979 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:47:07",
+    "message": "Block #6980 submitted: Block #6980 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:47:07",
+    "message": "Block #6980 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:47:07",
+    "message": "Block #6980 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:48:18",
+    "message": "Block #6981 submitted: Block #6981 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:48:18",
+    "message": "Block #6981 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:48:18",
+    "message": "Block #6981 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:20",
+    "message": "Block #6982 submitted: Block #6982 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:20",
+    "message": "Block #6982 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:20",
+    "message": "Block #6982 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:51",
+    "message": "Block #6983 submitted: Block #6983 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:51",
+    "message": "Block #6983 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:49:51",
+    "message": "Block #6983 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:50:53",
+    "message": "Block #6984 submitted: Block #6984 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:50:53",
+    "message": "Block #6984 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:50:53",
+    "message": "Block #6984 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:52:16",
+    "message": "Block #6985 submitted: Block #6985 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:52:16",
+    "message": "Block #6985 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:52:16",
+    "message": "Block #6985 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:53:22",
+    "message": "Block #6986 submitted: Block #6986 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:53:22",
+    "message": "Block #6986 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:53:22",
+    "message": "Block #6986 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:54:52",
+    "message": "Block #6987 submitted: Block #6987 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:54:52",
+    "message": "Block #6987 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:54:52",
+    "message": "Block #6987 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:56:05",
+    "message": "Block #6988 submitted: Block #6988 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:56:05",
+    "message": "Block #6988 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:56:05",
+    "message": "Block #6988 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:57:50",
+    "message": "Block #6989 submitted: Block #6989 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:57:50",
+    "message": "Block #6989 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:57:50",
+    "message": "Block #6989 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:59:48",
+    "message": "Block #6990 submitted: Block #6990 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:59:48",
+    "message": "Block #6990 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 08:59:48",
+    "message": "Block #6990 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:25",
+    "message": "Block #6991 submitted: Block #6991 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:25",
+    "message": "Block #6991 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:25",
+    "message": "Block #6991 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:40",
+    "message": "Mining failed: Could not get latest block from server",
+    "type": "error"
+  },
+  {
+    "timestamp": "2026-01-18 09:00:40",
+    "message": "Mining failed: Could not get latest block from server",
+    "type": "warning"
+  },
+  {
+    "timestamp": "2026-01-18 09:01:39",
+    "message": "Block #6992 submitted: Block #6992 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:01:39",
+    "message": "Block #6992 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:01:39",
+    "message": "Block #6992 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:12",
+    "message": "Block #6993 submitted: Block #6993 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:12",
+    "message": "Block #6993 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:12",
+    "message": "Block #6993 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:35",
+    "message": "Block #6994 submitted: Block #6994 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:36",
+    "message": "Block #6994 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:02:36",
+    "message": "Block #6994 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:23",
+    "message": "Block #6995 submitted: Block #6995 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:23",
+    "message": "Block #6995 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:23",
+    "message": "Block #6995 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:37",
+    "message": "Block #6996 submitted: Block #6996 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:37",
+    "message": "Block #6996 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:03:37",
+    "message": "Block #6996 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:29",
+    "message": "Block #6997 submitted: Block #6997 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:29",
+    "message": "Block #6997 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:29",
+    "message": "Block #6997 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:45",
+    "message": "Block #6998 submitted: Block #6998 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:45",
+    "message": "Block #6998 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:04:45",
+    "message": "Block #6998 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:02",
+    "message": "Block #6999 submitted: Block #6999 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:02",
+    "message": "Block #6999 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:02",
+    "message": "Block #6999 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:40",
+    "message": "Block #7000 submitted: Block #7000 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:40",
+    "message": "Block #7000 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:40",
+    "message": "Block #7000 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:56",
+    "message": "Block #7001 submitted: Block #7001 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:56",
+    "message": "Block #7001 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:05:56",
+    "message": "Block #7001 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:06:35",
+    "message": "Block #7002 submitted: Block #7002 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:06:35",
+    "message": "Block #7002 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:06:35",
+    "message": "Block #7002 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:07:16",
+    "message": "Block #7003 submitted: Block #7003 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:07:16",
+    "message": "Block #7003 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:07:16",
+    "message": "Block #7003 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:08",
+    "message": "Block #7004 submitted: Block #7004 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:08",
+    "message": "Block #7004 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:08",
+    "message": "Block #7004 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:37",
+    "message": "Block #7005 submitted: Block #7005 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:37",
+    "message": "Block #7005 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:08:37",
+    "message": "Block #7005 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:18",
+    "message": "Block #7006 submitted: Block #7006 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:18",
+    "message": "Block #7006 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:18",
+    "message": "Block #7006 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:59",
+    "message": "Block #7007 submitted: Block #7007 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:59",
+    "message": "Block #7007 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:09:59",
+    "message": "Block #7007 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:10:17",
+    "message": "Auto-mining started (GPU/CUDA enabled)",
+    "type": "info"
+  },
+  {
+    "timestamp": "2026-01-18 09:10:37",
+    "message": "Block #7008 submitted: Block #7008 already exists in blockchain",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:10:37",
+    "message": "Block #7008 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
+  },
+  {
+    "timestamp": "2026-01-18 09:10:37",
+    "message": "Block #7008 mined & submitted (1 txs) - Reward: 10000.0",
+    "type": "success"
   }
 ]

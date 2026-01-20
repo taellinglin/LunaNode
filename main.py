@@ -10,23 +10,52 @@ from typing import Dict, List, Optional, Tuple
 import sqlite3
 from pathlib import Path
 import certifi
-import requests
 import PIL
-import lunalib
 import sys
-from lunalib.mining.miner import Miner as LunaLibMiner
-from lunalib.mining.cuda_manager import CUDAManager
-from lunalib.mining.difficulty import DifficultySystem
-from utils import DataManager, NodeConfig
+from utils import DataManager, NodeConfig, is_valid_luna_address
 
 # Import unified balance utilities (if needed)
 from utils import LunaNode
 
 # Ensure cache directory exists
-cache_dir = Path.home() / "AppData" / "Local" / "lunalib" / "cache"
+if sys.platform == "emscripten":
+    cache_dir = Path("/home/pyodide/.lunalib/cache")
+else:
+    if os.name == "nt":
+        base_cache = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
+    else:
+        base_cache = Path(os.environ.get("XDG_CACHE_HOME", Path.home() / ".cache"))
+    cache_dir = base_cache / "lunalib" / "cache"
 cache_dir.mkdir(parents=True, exist_ok=True)
-os.environ['LUNALIB_CACHE_DIR'] = str(cache_dir)
+os.environ["LUNALIB_CACHE_DIR"] = str(cache_dir)
 
+# Patch lunalib data dir for Pyodide (package path is read-only)
+if sys.platform == "emscripten":
+    try:
+        from lunalib.storage.cache import SecureDataManager as _LunaSecureDataManager
+        from lunalib.storage.cache import BlockchainCache as _LunaBlockchainCache
+
+        _pyodide_base_dir = cache_dir.parent
+
+        def _pyodide_data_dir():
+            _pyodide_base_dir.mkdir(parents=True, exist_ok=True)
+            return str(_pyodide_base_dir)
+
+        _LunaSecureDataManager.get_data_dir = staticmethod(_pyodide_data_dir)
+
+        _orig_cache_init = _LunaBlockchainCache.__init__
+
+        def _patched_cache_init(self, cache_dir_override=None):
+            if cache_dir_override is None:
+                cache_dir_override = str(cache_dir)
+            Path(cache_dir_override).mkdir(parents=True, exist_ok=True)
+            _orig_cache_init(self, cache_dir=cache_dir_override)
+
+        _LunaBlockchainCache.__init__ = _patched_cache_init
+    except Exception:
+        pass
+
+# Import lunalib after cache setup
 # Import GUI modules
 from gui.sidebar import Sidebar
 from gui.main_page import MainPage
@@ -35,17 +64,8 @@ from gui.bills import BillsPage
 from gui.log import LogPage
 from gui.settings import SettingsPage
 
-# Import lunalib components
-from lunalib.core.blockchain import BlockchainManager
-from lunalib.core.mempool import MempoolManager
-from lunalib.core.crypto import KeyManager
-from lunalib.core.wallet import LunaWallet
-from lunalib.storage.cache import BlockchainCache
-from lunalib.storage.database import WalletDatabase
-from lunalib.storage.encryption import EncryptionManager
-from lunalib.mining.difficulty import DifficultySystem
-from lunalib.mining.cuda_manager import CUDAManager
-from lunalib.gtx.digital_bill import DigitalBill
+# Import lunalib after cache setup
+import lunalib
 
 def resource_path(relative_path):
     """Get absolute path to resource, works for dev and for PyInstaller bundle."""
@@ -54,43 +74,267 @@ def resource_path(relative_path):
     return os.path.join(os.path.abspath("."), relative_path)
 
 class LunaNodeApp:
+    def show_first_boot_wizard(self):
+        if not self.page or not self.node:
+            return
+
+        config = self.node.config
+
+        wallet_field = ft.TextField(label="Wallet Address", value=getattr(config, "miner_address", ""), width=420)
+        node_url_field = ft.TextField(label="Node Endpoint", value=getattr(config, "node_url", "https://bank.linglin.art"), width=420)
+        difficulty_field = ft.TextField(label="Mining Difficulty", value=str(getattr(config, "difficulty", 2)), width=180)
+        mining_interval_field = ft.TextField(label="Mining Interval (seconds)", value=str(getattr(config, "mining_interval", 30)), width=220)
+        auto_mine_switch = ft.Switch(label="Auto Mining", value=getattr(config, "auto_mine", False))
+        gpu_switch = ft.Switch(label="GPU Acceleration", value=getattr(config, "use_gpu", False))
+        error_text = ft.Text("", color="#ff5252", size=12)
+
+        steps = []
+
+        def step_wallet():
+            return ft.Column([
+                ft.Text("Step 1 of 3: Wallet"),
+                wallet_field,
+                error_text,
+            ], tight=True, spacing=10)
+
+        def step_network():
+            return ft.Column([
+                ft.Text("Step 2 of 3: Network"),
+                node_url_field,
+            ], tight=True, spacing=10)
+
+        def step_mining():
+            return ft.Column([
+                ft.Text("Step 3 of 3: Mining"),
+                ft.Row([difficulty_field, mining_interval_field]),
+                ft.Row([auto_mine_switch, gpu_switch]),
+            ], tight=True, spacing=10)
+
+        steps[:] = [step_wallet, step_network, step_mining]
+        step_index = {"value": 0}
+
+        content = ft.Column([], tight=True, spacing=10)
+
+        def render_step():
+            content.controls.clear()
+            content.controls.append(steps[step_index["value"]]())
+            dialog.title = ft.Text("First-time Setup")
+            prev_btn.disabled = step_index["value"] == 0
+            next_btn.visible = step_index["value"] < len(steps) - 1
+            finish_btn.visible = step_index["value"] == len(steps) - 1
+            self.page.update()
+
+        def go_next(_):
+            if step_index["value"] == 0:
+                value = (wallet_field.value or "").strip()
+                if not is_valid_luna_address(value):
+                    error_text.value = "Invalid address format. Use LUN_..."
+                    self.page.update()
+                    return
+                error_text.value = ""
+            step_index["value"] += 1
+            render_step()
+
+        def go_prev(_):
+            step_index["value"] = max(0, step_index["value"] - 1)
+            render_step()
+
+        def finish(_):
+            value = (wallet_field.value or "").strip()
+            if not is_valid_luna_address(value):
+                error_text.value = "Invalid address format. Use LUN_..."
+                self.page.update()
+                return
+
+            config.miner_address = value
+            config.node_url = (node_url_field.value or "").strip() or config.node_url
+            try:
+                config.difficulty = int(difficulty_field.value or config.difficulty)
+            except Exception:
+                pass
+            try:
+                config.mining_interval = int(mining_interval_field.value or config.mining_interval)
+            except Exception:
+                pass
+            config.auto_mine = bool(auto_mine_switch.value)
+            config.use_gpu = bool(gpu_switch.value)
+            config.setup_complete = True
+            config.save_to_storage()
+
+            dialog.open = False
+            self.page.update()
+
+            if config.auto_mine:
+                threading.Thread(target=self.start_mining, daemon=True).start()
+
+        prev_btn = ft.TextButton("Back", on_click=go_prev)
+        next_btn = ft.TextButton("Next", on_click=go_next)
+        finish_btn = ft.TextButton("Finish", on_click=finish)
+
+        dialog = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("First-time Setup"),
+            content=content,
+            actions=[prev_btn, next_btn, finish_btn],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+
+        self.page.dialog = dialog
+        dialog.open = True
+        render_step()
+
+    def show_address_setup_dialog(self):
+        """Prompt for a valid wallet address on startup."""
+        if not self.page or not self.node:
+            return
+
+        address_field = ft.TextField(
+            label="Wallet Address",
+            hint_text="LUN_...",
+            width=420,
+        )
+        error_text = ft.Text("", color="#ff5252", size=12)
+
+        def save_address(_):
+            value = (address_field.value or "").strip()
+            if not is_valid_luna_address(value):
+                error_text.value = "Invalid address format. Use LUN_..."
+                self.page.update()
+                return
+            self.node.config.miner_address = value
+            self.node.config.save_to_storage()
+            dialog.open = False
+            self.page.update()
+            self.add_log_message("Wallet address updated", "success")
+            threading.Thread(target=self.start_mining, daemon=True).start()
+
+        dialog = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("Set Wallet Address"),
+            content=ft.Column([
+                ft.Text("Please enter a valid LUN_ wallet address to enable mining."),
+                address_field,
+                error_text,
+            ], tight=True),
+            actions=[
+                ft.TextButton("Save", on_click=save_address),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+
+        self.page.dialog = dialog
+        dialog.open = True
+        self.page.update()
+
+    def _set_mining_ui_state(self, is_mining: bool, pending: bool = False, status_text: str = None):
+        if hasattr(self, "main_page") and self.main_page:
+            try:
+                if pending:
+                    self.main_page.start_mining_btn.disabled = True
+                    self.main_page.stop_mining_btn.disabled = True
+                    if status_text:
+                        self.main_page.mining_status.content.controls[1].value = status_text
+                else:
+                    self.main_page.start_mining_btn.disabled = is_mining
+                    self.main_page.stop_mining_btn.disabled = not is_mining
+                    if status_text:
+                        self.main_page.mining_status.content.controls[1].value = status_text
+            except Exception:
+                pass
+
+        if hasattr(self, "sidebar") and self.sidebar:
+            try:
+                if pending:
+                    self.sidebar.btn_start_mining.disabled = True
+                    self.sidebar.btn_stop_mining.disabled = True
+                else:
+                    self.sidebar.btn_start_mining.disabled = is_mining
+                    self.sidebar.btn_stop_mining.disabled = not is_mining
+            except Exception:
+                pass
+
+        if self.page:
+            try:
+                self.page.update()
+            except Exception:
+                pass
+
     def on_mining_started(self):
         """Called when mining starts"""
-        self.page.run_thread(lambda: self.add_log_message("Mining started", "info"))
+        self.safe_run_thread(lambda: self.add_log_message("Mining started", "info"))
 
     def start_mining(self):
         """Start auto-mining"""
+        if getattr(self, "_mining_transition", False):
+            return
+        if not self.node:
+            self.add_log_message("Node is still initializing. Please wait...", "warning")
+            if self.page:
+                self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
+            return
+
+        if not is_valid_luna_address(getattr(self.node.config, "miner_address", "")):
+            self.add_log_message("Set a valid LUN_ address before mining.", "warning")
+            self.safe_run_thread(self.show_address_setup_dialog)
+            if self.page:
+                self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
+            return
+
         if self.node:
             try:
+                self._mining_transition = True
+                if self.page:
+                    self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=True, status_text="Starting..."))
                 def _start():
                     try:
+                        try:
+                            self.node.config.auto_mine = True
+                            self.node.config.save_to_storage()
+                        except Exception:
+                            pass
                         self.node.start_auto_mining()
-                        self.page.run_thread(lambda: self.add_log_message("Auto-mining started", "success"))
+                        self.safe_run_thread(lambda: self.add_log_message("Auto-mining started", "success"))
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=False, status_text="Mining Active"))
                     except Exception as e:
-                        self.page.run_thread(lambda: self.add_log_message(f"Failed to start mining: {e}", "error"))
+                        self.safe_run_thread(lambda: self.add_log_message(f"Failed to start mining: {e}", "error"))
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
+                    finally:
+                        self._mining_transition = False
                 threading.Thread(target=_start, daemon=True).start()
             except Exception as e:
                 self.add_log_message(f"Failed to start mining: {e}", "error")
+                self._mining_transition = False
 
     def stop_mining(self):
         """Stop auto-mining"""
+        if getattr(self, "_mining_transition", False):
+            return
         if self.node:
             try:
+                self._mining_transition = True
+                if self.page:
+                    self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=True, status_text="Stopping..."))
                 def _stop():
                     try:
                         self.node.stop_auto_mining()
-                        self.page.run_thread(lambda: self.add_log_message("Auto-mining stopped", "info"))
+                        self.safe_run_thread(lambda: self.add_log_message("Auto-mining stopped", "info"))
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     except Exception as e:
-                        self.page.run_thread(lambda: self.add_log_message(f"Failed to stop mining: {e}", "error"))
+                        self.safe_run_thread(lambda: self.add_log_message(f"Failed to stop mining: {e}", "error"))
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
+                    finally:
+                        self._mining_transition = False
                 threading.Thread(target=_stop, daemon=True).start()
             except Exception as e:
                 self.add_log_message(f"Failed to stop mining: {e}", "error")
+                self._mining_transition = False
    
     def __init__(self):
         self.node = None
         self.minimized_to_tray = False
         self.current_tab_index = 0
         self._stats_updater_started = False
+        self.ui_active = True
         try:
             from colorama import init as colorama_init
             stdout = getattr(sys, "stdout", None)
@@ -101,6 +345,7 @@ class LunaNodeApp:
         except Exception:
             pass
         self.page = None
+        self.data_manager = DataManager()
         
         # Initialize GUI components
         self.sidebar = Sidebar(self)
@@ -110,155 +355,13 @@ class LunaNodeApp:
         self.settings_page = SettingsPage(self)
         self.log_page = LogPage(self)
 
-        # アプリ起動時にキャッシュ内容をUIに即反映
-        self.bills_page.update_bills_content()
-
-
-        # Initialize LunaLib Miner with NodeConfig and DataManager
-        from utils import DataManager, NodeConfig
-
-        data_manager = DataManager()
-        config = NodeConfig(data_manager)
-
-        self.miner = LunaLibMiner(config, data_manager)
+        # Miner is managed by LunaNode
 
     def submit_mined_block(self, block_data: Dict) -> bool:
-        try:
-            import requests
-            import json
-            import hashlib
-            import time
-            
-            node_url = self.endpoint_url if hasattr(self, 'endpoint_url') else "https://bank.linglin.art"
-            
-            print("=" * 60)
-            print("🚀 SUBMITTING BLOCK (USING SERVER'S FORMAT)")
-            print("=" * 60)
-            
-            submission_data = block_data.copy()
-            
-            # Get block info
-            mined_hash = submission_data.get('hash', '')
-            nonce = submission_data.get('nonce', 0)
-            timestamp = submission_data.get('timestamp', time.time())
-            previous_hash = submission_data.get('previous_hash', '0' * 64)
-            index = submission_data.get('index', 0)
-            difficulty = submission_data.get('difficulty', 0)
-            miner = submission_data.get('miner', '')
-            
-            # Get original transactions
-            original_transactions = submission_data.get('transactions', [])
-            
-            # ====== STEP 1: Use the EXACT format the server expects ======
-            print(f"\n🔍 Using server's expected format for validation:")
-            
-            # From the debug output, server expects this EXACT structure:
-            mining_data = {
-                "difficulty": difficulty,
-                "index": index,
-                "miner": miner,
-                "nonce": nonce,
-                "previous_hash": previous_hash,
-                "timestamp": timestamp,
-                "transactions": [],  # EMPTY ARRAY - SERVER EXPECTS NO TRANSACTIONS!
-                "version": "1.0"
-            }
-            
-            # Calculate what the server will calculate
-            server_expected_hash = hashlib.sha256(
-                json.dumps(mining_data, sort_keys=True).encode()
-            ).hexdigest()
-            
-            print(f"  Mining data: {json.dumps(mining_data, indent=2)}")
-            print(f"\n  Server will calculate: {server_expected_hash}")
-            print(f"  Your provided hash:     {mined_hash}")
-            
-            # ====== STEP 2: Check if miner needs fixing ======
-            if mined_hash != server_expected_hash:
-                print(f"\n⚠️  YOUR MINER IS USING WRONG FORMAT!")
-                print(f"   You need to FIX your miner's calculate_block_hash() function.")
-                print(f"   It should use this EXACT format:")
-                print(f"   {json.dumps(mining_data, indent=2)}")
-                
-                # For now, we'll override the hash to match server's expectation
-                print(f"\n🔄 Overriding hash to match server's expectation...")
-                submission_data['hash'] = server_expected_hash
-                mined_hash = server_expected_hash
-            
-            # ====== STEP 3: Verify difficulty ======
-            print(f"\n🔐 Verifying difficulty {difficulty}...")
-            
-            if not mined_hash.startswith('0' * difficulty):
-                print(f"❌ Hash doesn't meet difficulty requirement")
-                return False
-            
-            print(f"✅ Difficulty requirement met")
-            
-            # ====== STEP 4: Prepare submission ======
-            print(f"\n📦 Preparing submission...")
-            
-            # Calculate merkleroot from NON-REWARD transactions (should be empty)
-            non_reward_txs = [tx for tx in original_transactions if tx.get('type') != 'reward']
-            
-            if non_reward_txs:
-                tx_hashes = []
-                for tx in non_reward_txs:
-                    print(ft.Colors.CYAN + ft.Style.BRIGHT + "\n🚀 SUBMITTING BLOCK (USING SERVER'S FORMAT)")
-                    tx_string = json.dumps(tx, sort_keys=True)
-                    tx_hashes.append(hashlib.sha256(tx_string.encode()).hexdigest())
-                
-                if tx_hashes:
-                    while len(tx_hashes) > 1:
-                        new_hashes = []
-                        for i in range(0, len(tx_hashes), 2):
-                            if i + 1 < len(tx_hashes):
-                                combined = tx_hashes[i] + tx_hashes[i + 1]
-                            else:
-                                combined = tx_hashes[i] + tx_hashes[i]
-                            new_hashes.append(hashlib.sha256(combined.encode()).hexdigest())
-                        tx_hashes = new_hashes
-                    merkleroot = tx_hashes[0]
-                else:
-                    merkleroot = "0" * 64
-                # No stray print or Fore usage here
-            
-            # Add required fields
-            submission_data['merkleroot'] = merkleroot
-            submission_data['transactions_hash'] = merkleroot
-            submission_data['transaction_count'] = len(original_transactions)
-            submission_data['version'] = "1.0"
-            
-            if 'reward' not in submission_data:
-                submission_data['reward'] = 1.0
-            
-            print(f"\n📤 Submitting block #{index}...")
-            print(f"  Final hash: {mined_hash}")
-            print(f"  Transactions: {len(original_transactions)}")
-            print(f"  Merkle root: {merkleroot[:16]}...")
-            
-            # ====== STEP 5: Submit ======
-            # Actually submit the block (example, adjust as needed)
-            try:
-                response = requests.post(
-                    f"{node_url}/submit-block",
-                    json=submission_data,
-                    timeout=30
-                )
-                print(f"[DEBUG] Response: HTTP {response.status_code}")
-                if response.status_code == 200:
-                    print("✅ Block accepted!")
-                    return True
-                else:
-                    error_msg = response.text
-                    print(f"❌ HTTP error: {error_msg}")
-                    return False
-            except Exception as e:
-                print(f"💥 Error: {e}")
-                return False
-        except Exception as e:
-            print(f"💥 Exception during block submission: {e}")
+        if not self.node:
             return False
-        # (The above try/except/finally block is now handled in the actual submission logic)
+        success, _message = self.node.submit_block(block_data)
+        return bool(success)
     def create_main_ui(self, page: ft.Page):
         """Create the main node interface"""
         self.page = page
@@ -282,11 +385,36 @@ class LunaNodeApp:
         page.window.min_height = 600
         page.window.center()
         page.on_window_event = self.on_window_event
+        page.on_disconnect = self.on_disconnect
         main_layout = self.create_main_layout()
         page.add(main_layout)
         self.start_stats_updater()
         self.initialize_node_async()
         print("[DEBUG] create_main_ui completed")
+
+    def on_disconnect(self, e=None):
+        """Handle session disconnect to stop UI updates"""
+        self.ui_active = False
+
+    def safe_page_update(self):
+        if not self.page or not self.ui_active:
+            return False
+        try:
+            self.page.update()
+            return True
+        except Exception:
+            self.ui_active = False
+            return False
+
+    def safe_run_thread(self, fn):
+        if not self.page or not self.ui_active:
+            return False
+        try:
+            self.page.run_thread(fn)
+            return True
+        except Exception:
+            self.ui_active = False
+            return False
 
     def start_stats_updater(self):
         if self._stats_updater_started:
@@ -296,11 +424,19 @@ class LunaNodeApp:
         def stats_loop():
             while True:
                 try:
-                    if self.page:
-                        self.page.run_thread(self.main_page.update_mining_stats)
+                    if self.page and self.ui_active:
+                        self.safe_run_thread(self.main_page.update_mining_stats)
+                    elif not self.ui_active:
+                        break
                 except Exception:
                     pass
-                time.sleep(2)
+                try:
+                    sleep_s = 5
+                    if self.node and not self.node.miner.is_mining:
+                        sleep_s = 15
+                except Exception:
+                    sleep_s = 5
+                time.sleep(sleep_s)
 
         threading.Thread(target=stats_loop, daemon=True).start()
         
@@ -353,6 +489,12 @@ class LunaNodeApp:
         if self.current_tab_index == 0:
             print("[DEBUG] Mining tab selected: updating mining stats")
             self.main_page.update_mining_stats()
+            if self.node:
+                try:
+                    status = self.node.get_status()
+                    self.sidebar.refresh_non_balance(status)
+                except Exception:
+                    pass
         elif self.current_tab_index == 1:
             print("[DEBUG] Bills tab selected: updating bills content")
             self.bills_page.update_bills_content()
@@ -416,21 +558,21 @@ class LunaNodeApp:
                     mining_started_callback=self.on_mining_started,
                     mining_completed_callback=self.on_mining_completed
                 )
-                self.page.run_thread(self.on_node_initialized)
+                self.safe_run_thread(self.on_node_initialized)
                 
             except Exception as e:
                 print(f"[ERROR] {e}")
-                self.page.run_thread(lambda: self.add_log_message(str(e), "error"))
+                self.safe_run_thread(lambda: self.add_log_message(str(e), "error"))
         threading.Thread(target=init_thread, daemon=True).start()
         
                 # concise: skip debug
         """Called when mining starts"""
-        self.page.run_thread(lambda: self.add_log_message("Mining started", "info"))
+        self.safe_run_thread(lambda: self.add_log_message("Mining started", "info"))
         
     def on_mining_completed(self, success, message):
         """Called when mining completes"""
         msg_type = "success" if success else "warning"
-        self.page.run_thread(lambda: self.add_log_message(message, msg_type))
+        self.safe_run_thread(lambda: self.add_log_message(message, msg_type))
         
     def on_node_initialized(self):
         """Called when node is successfully initialized"""
@@ -462,18 +604,24 @@ class LunaNodeApp:
                 self.main_page.update_mining_stats()
             except Exception as e:
                 print(f"[DEBUG] main_page.update_mining_stats() failed: {e}")
-        # 自動マイニングのみ即開始（シングルブロックマイニングは絶対に呼ばない）
+        # 初回起動ウィザード or 既存設定
         try:
-            threading.Thread(target=self.start_mining, daemon=True).start()
+            needs_setup = not getattr(self.node.config, "setup_complete", False)
+            invalid_address = not is_valid_luna_address(self.node.config.miner_address)
+
+            if needs_setup or invalid_address:
+                self.safe_run_thread(self.show_first_boot_wizard)
+            elif is_valid_luna_address(self.node.config.miner_address):
+                if getattr(self.node.config, "auto_mine", False):
+                    threading.Thread(target=self.start_mining, daemon=True).start()
+            else:
+                self.safe_run_thread(self.show_address_setup_dialog)
         except Exception as e:
             print(f"[DEBUG] start_mining() failed: {e}")
         print("[DEBUG] LunaNode instance after initialization:", self.node)
         print("[DEBUG] Type of self.node.data_manager:", type(self.node.data_manager))
                     # concise: skip debug
-        try:
-            self.bills_page.update_bills_content()
-        except Exception as e:
-            print(f"[DEBUG] bills_page.update_bills_content() failed: {e}")
+        # Bills content is loaded lazily when the Bills tab is opened
 
 
 
@@ -520,47 +668,14 @@ class LunaNodeApp:
             
     def mine_single_block(self):
         """Mine a single block using LunaLib"""
-        result = self.miner.mine_block()
-        if self.node:
-            # Create progress dialog
-            progress_bar = ft.ProgressBar(width=400, color="#00a1ff", bgcolor="#1e3f5c")
-            progress_text = ft.Text("Starting sync...", color="#e3f2fd")
-            progress_dialog = ft.AlertDialog(
-                title=ft.Text("Network Synchronization"),
-                content=ft.Column([
-                    progress_text,
-                    progress_bar
-                ], tight=True),
-                actions=[
-                    ft.TextButton("Cancel", on_click=lambda e: self.close_progress_dialog(progress_dialog))
-                ],
-                actions_alignment=ft.MainAxisAlignment.END,
-                on_dismiss=lambda e: None
-            )
-            progress_dialog.open = True
-            self.page.dialog = progress_dialog
-            self.page.update()
+        if not self.node:
+            self.add_log_message("Node not initialized", "error")
+            return
 
-            def sync_thread():
-                def progress_callback(progress, message):
-                    self.page.run_thread(lambda: self.update_progress(progress_bar, progress_text, progress, message))
-                try:
-                    # Simulate network sync (replace with real logic)
-                    import time
-                    for i in range(101):
-                        time.sleep(0.03)
-                        progress_callback(i, f"Syncing... {i}%")
-                    result = {"success": True}
-                except Exception as e:
-                    self.page.run_thread(lambda: self.close_progress_dialog(progress_dialog))
-                    self.page.run_thread(lambda: self.add_log_message(f"Sync failed: {str(e)}", "error"))
-                    return
-                self.page.run_thread(lambda: self.close_progress_dialog(progress_dialog))
-                if 'error' in result:
-                    self.page.run_thread(lambda: self.add_log_message(f"Sync failed: {result['error']}", "error"))
-                else:
-                    self.page.run_thread(lambda: self.add_log_message("Network sync completed", "success"))
-            threading.Thread(target=sync_thread, daemon=True).start()
+        success, message = self.node.mine_single_block()
+        msg_type = "success" if success else "warning"
+        self.add_log_message(message, msg_type)
+                
 
     def update_progress(self, progress_bar, progress_text, progress, message):
         progress_bar.value = progress / 100
@@ -666,8 +781,7 @@ def main(page: ft.Page):
         print("LunaNodeApp created")
         app.create_main_ui(page)
         print("[DEBUG] create_main_ui completed")
-        # ページがセットされた後にBills UIを確実に更新
-        app.bills_page.update_bills_content()
+        # Bills UI is loaded lazily on tab selection
     except Exception as e:
         import traceback
         traceback.print_exc()

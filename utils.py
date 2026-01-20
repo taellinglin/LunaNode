@@ -4,31 +4,94 @@ import time
 import hashlib
 import socket
 import requests
+import sys
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 import threading
+import re
 
-# Import lunalib components (1.6.6)
+def get_app_data_dir() -> str:
+    if os.name == "nt":
+        base_dir = os.environ.get("LOCALAPPDATA", os.path.join(os.path.expanduser("~"), "AppData", "Local"))
+    else:
+        base_dir = os.environ.get("XDG_DATA_HOME", os.path.join(os.path.expanduser("~"), ".local", "share"))
+    return os.path.join(base_dir, "LunaNode")
+
+def is_valid_luna_address(address: str) -> bool:
+    if not address or not isinstance(address, str):
+        return False
+    address = address.strip()
+    if not address.startswith("LUN_"):
+        return False
+    if len(address) < 10:
+        return False
+    if not re.match(r"^LUN_[A-Za-z0-9_]+$", address):
+        return False
+    return True
+
+def sanitize_for_console(message: str) -> str:
+    if not isinstance(message, str):
+        message = str(message)
+    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    return message.encode(encoding, errors="replace").decode(encoding, errors="replace")
+
+def safe_print(*args, **kwargs):
+    try:
+        print(*args, **kwargs)
+    except Exception:
+        pass
+
+# Import lunalib components (2.0.2 compatible with fallbacks)
 try:
+    import lunalib
+    LUNALIB_VERSION = getattr(lunalib, "__version__", "unknown")
+
     from lunalib.core.blockchain import BlockchainManager
     from lunalib.core.mempool import MempoolManager
-    from lunalib.core.p2p import HybridBlockchainClient
+
+    try:
+        from lunalib.core.p2p import HybridBlockchainClient
+        P2P_AVAILABLE = True
+    except Exception:
+        HybridBlockchainClient = None
+        P2P_AVAILABLE = False
+
     from lunalib.mining.difficulty import DifficultySystem
     from lunalib.mining.cuda_manager import CUDAManager
-    from lunalib.mining.miner import Miner as LunaLibMiner
+
+    try:
+        from lunalib.mining.miner import Miner as LunaLibMiner
+    except Exception:
+        try:
+            from lunalib.mining.miner import GenesisMiner as LunaLibMiner
+        except Exception:
+            LunaLibMiner = None
+
+    try:
+        from lunalib.transactions.transactions import TransactionManager
+    except Exception:
+        TransactionManager = None
+
     LUNA_LIB_AVAILABLE = True
-    P2P_AVAILABLE = True
 except ImportError as e:
     print(f"LunaLib import error: {e}")
+    LUNALIB_VERSION = "not-installed"
     LUNA_LIB_AVAILABLE = False
     P2P_AVAILABLE = False
+    BlockchainManager = None
+    MempoolManager = None
+    HybridBlockchainClient = None
+    DifficultySystem = None
+    CUDAManager = None
+    LunaLibMiner = None
+    TransactionManager = None
 
 def log_cpu_mining_event(event: str, data: dict = None):
     """追跡用: CPUマイニングの詳細イベントをlogs/cpu_mining.logへ追記"""
     import os
     import json
     from datetime import datetime
-    log_dir = "./logs"
+    log_dir = os.path.join(get_app_data_dir(), "logs")
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, "cpu_mining.log")
     entry = {
@@ -46,12 +109,13 @@ class DataManager:
     """Manages data storage in ./data/ directory"""
     
     def __init__(self):
-        self.data_dir = "./data"
+        self.data_dir = os.path.join(get_app_data_dir(), "data")
         self.settings_file = os.path.join(self.data_dir, "settings.json")
         self.mining_history_file = os.path.join(self.data_dir, "mining_history.json")
         self.blockchain_cache_file = os.path.join(self.data_dir, "blockchain_cache.json")
         self.mempool_cache_file = os.path.join(self.data_dir, "mempool_cache.json")
         self.logs_file = os.path.join(self.data_dir, "logs.json")
+        self.stats_cache_file = os.path.join(self.data_dir, "stats_cache.json")
         
         self.ensure_data_directory()
     
@@ -130,6 +194,21 @@ class DataManager:
         except Exception as e:
             print(f"Error loading blockchain cache: {e}")
         return []
+
+    def save_submitted_block(self, block_data: Dict) -> bool:
+        """Upsert a submitted block into blockchain cache"""
+        try:
+            cache = self.load_blockchain_cache()
+            if not isinstance(cache, list):
+                cache = []
+            index = block_data.get("index") if isinstance(block_data, dict) else None
+            if index is not None:
+                cache = [b for b in cache if not (isinstance(b, dict) and b.get("index") == index)]
+            cache.append(block_data)
+            return self.save_blockchain_cache(cache)
+        except Exception as e:
+            print(f"Error saving submitted block: {e}")
+            return False
     
     def save_mempool_cache(self, mempool: List[Dict]):
         """Save mempool cache to file"""
@@ -192,6 +271,27 @@ class DataManager:
             print(f"Error loading logs: {e}")
         return default_logs
 
+    def save_stats(self, stats: Dict) -> bool:
+        """Save latest stats snapshot to cache"""
+        try:
+            with open(self.stats_cache_file, 'w', encoding='utf-8') as f:
+                json.dump(stats, f, indent=2, default=str, ensure_ascii=False)
+            return True
+        except Exception as e:
+            print(f"Error saving stats cache: {e}")
+            return False
+
+    def load_stats(self) -> Dict:
+        """Load latest stats snapshot from cache"""
+        try:
+            if os.path.exists(self.stats_cache_file):
+                with open(self.stats_cache_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    return data if isinstance(data, dict) else {}
+        except Exception as e:
+            print(f"Error loading stats cache: {e}")
+        return {}
+
 class NodeConfig:
 
 
@@ -212,6 +312,7 @@ class NodeConfig:
         self.mining_interval = settings.get('mining_interval', 30)
         self.use_gpu = settings.get('use_gpu', False)
         self.last_scan_height = settings.get('last_scan_height', 0)
+        self.setup_complete = settings.get('setup_complete', False)
     
     def save_to_storage(self):
         """Save configuration to storage"""
@@ -222,7 +323,8 @@ class NodeConfig:
             'node_url': self.node_url,
             'mining_interval': self.mining_interval,
             'use_gpu': self.use_gpu,
-            'last_scan_height': self.last_scan_height
+            'last_scan_height': self.last_scan_height,
+            'setup_complete': self.setup_complete
         }
         return self.data_manager.save_settings(settings)
 
@@ -271,16 +373,84 @@ class LunaNode:
             'cuda_last_hash': '',
             'last_mining_method': 'cpu'
         }
+        self._cached_status = self.data_manager.load_stats()
+        self._prefer_cached_stats = True
+
+        # Prevent repeated submissions of the same block
+        self._last_submitted_hash = None
+        self._last_submitted_index = None
+        self._last_submitted_ts = 0.0
+        self._last_submitted_success = False
         
         self.is_running = True
+        self._stop_mining_event = threading.Event()
+
+        # Network polling throttling
+        self.net_poll_interval = float(os.getenv("LUNANODE_NET_POLL_INTERVAL", "8"))
+        self._net_cache_ts = 0.0
+        self._net_cache = {
+            "height": 0,
+            "latest_block": None,
+            "mempool": [],
+        }
         
-        # Peer list for P2P networking
+        # Peer list for P2P networking (disabled unless using lunalib P2P)
         self.peers = []
         
         # Use LunaLib managers for blockchain management
         self.blockchain_manager = BlockchainManager(endpoint_url=self.config.node_url)
         self.mempool_manager = MempoolManager([self.config.node_url])
-        
+
+        # Override LunaLib submission to use plain JSON (server rejects gzip)
+        try:
+            def _submit_mined_block_plain(block_data):
+                ok, _msg = self._submit_block_plain_json(block_data)
+                return bool(ok)
+
+            self.blockchain_manager.submit_mined_block = _submit_mined_block_plain
+        except Exception:
+            pass
+
+        # Patch get_latest_block to include retries + range fallback (quiet)
+        try:
+            def _get_latest_block_quiet():
+                # Retry a couple times to reduce transient disconnects
+                for _ in range(2):
+                    try:
+                        resp = self.blockchain_manager._session.get(
+                            f"{self.config.node_url}/blockchain/blocks",
+                            timeout=10,
+                        )
+                        if resp.status_code == 200:
+                            data = resp.json()
+                            blocks = data.get("blocks", [])
+                            if blocks:
+                                return blocks[-1]
+                    except Exception:
+                        time.sleep(0.5)
+                # Fallback to range by height
+                try:
+                    height = self.blockchain_manager.get_blockchain_height()
+                    if height > 0:
+                        blocks = self.blockchain_manager.get_blocks_range(height, height)
+                        if blocks:
+                            return blocks[0]
+                except Exception:
+                    pass
+                return None
+
+            self.blockchain_manager.get_latest_block = _get_latest_block_quiet
+        except Exception:
+            pass
+
+        # Transaction manager (lunalib 2.x)
+        self.tx_manager = None
+        if TransactionManager:
+            try:
+                self.tx_manager = TransactionManager([self.config.node_url])
+            except Exception:
+                self.tx_manager = None
+
         # Initialize DifficultySystem for reward calculation
         self.difficulty_system = DifficultySystem()
         
@@ -295,11 +465,8 @@ class LunaNode:
         if hasattr(self.miner, 'auto_submit'):
             self.miner.auto_submit = False
         
-        # Initialize HybridBlockchainClient for P2P networking (optional, non-blocking)
-        # NOTE: Disabled due to lunalib using incorrect endpoints
+        # Initialize HybridBlockchainClient for P2P networking (disabled in non-lunalib mode)
         self.p2p_client = None
-        # P2P functionality handled manually via _fetch_peers_from_daemon
-        threading.Thread(target=self._fetch_peers_from_daemon, daemon=True).start()
         
         # Set CUDA availability based on config and miner's CUDA status
         cuda_available = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
@@ -379,38 +546,146 @@ class LunaNode:
         self.config.last_scan_height = end_height
         self.config.save_to_storage()
         return transactions
+
+    def scan_transactions_for_addresses_cached(self, addresses: List[str]) -> Dict[str, List[Dict]]:
+        """Scan blockchain for multiple addresses using lunalib batch scanning."""
+        if not addresses:
+            return {}
+        try:
+            start_height = max(0, int(getattr(self.config, "last_scan_height", 0)))
+        except Exception:
+            start_height = 0
+        end_height = self.blockchain_manager.get_blockchain_height()
+        if end_height < start_height:
+            return {addr: [] for addr in addresses}
+        results = self.blockchain_manager.scan_transactions_for_addresses(
+            addresses,
+            start_height=start_height,
+            end_height=end_height,
+        )
+        self.config.last_scan_height = end_height
+        self.config.save_to_storage()
+        return results
+
+    def sync_blockchain_cache(self, progress_callback=None, batch_size: int = 200) -> Dict:
+        """Warm lunalib blockchain cache using range API."""
+        try:
+            latest_height = self.blockchain_manager.get_blockchain_height()
+            if latest_height <= 0:
+                return {"success": True, "height": latest_height}
+
+            start_height = max(0, int(getattr(self.config, "last_scan_height", 0)))
+            total = max(1, latest_height - start_height + 1)
+            downloaded = 0
+
+            for batch_start in range(start_height, latest_height + 1, batch_size):
+                batch_end = min(batch_start + batch_size - 1, latest_height)
+                try:
+                    self.blockchain_manager.get_blocks_range(batch_start, batch_end)
+                except Exception:
+                    pass
+                downloaded += (batch_end - batch_start + 1)
+                if progress_callback:
+                    progress = min(99, int((downloaded / total) * 100))
+                    progress_callback(progress, f"Caching blocks {batch_start}-{batch_end}")
+
+            if progress_callback:
+                progress_callback(100, "Blockchain cache updated")
+            return {"success": True, "height": latest_height}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
     
     def _log_message(self, message: str, msg_type: str = "info"):
         """Log message with callback and save to storage"""
-        try:
-            message = message.encode('utf-8').decode('utf-8')  # Ensure UTF-8 encoding
-        except UnicodeEncodeError:
-            print(f"DEBUG: UnicodeEncodeError encountered for message: {message}")
-            message = "[Invalid Unicode Character]"
+        message = sanitize_for_console(message)
 
         log_entry = {
             'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'message': message,
             'type': msg_type
         }
-        print(f"DEBUG: Log entry created: {log_entry}")
+        safe_print(f"DEBUG: Log entry created: {log_entry}")
         self.logs.append(log_entry)
         
         if len(self.logs) > 1000:
             self.logs.pop(0)
             
         self.data_manager.save_logs(self.logs)
-        print("DEBUG: Logs saved to storage.")
+        safe_print("DEBUG: Logs saved to storage.")
             
         if self.log_callback:
             self.log_callback(message, msg_type)
-            print("DEBUG: Log callback executed.")
+            safe_print("DEBUG: Log callback executed.")
+
+    def _default_status(self) -> Dict:
+        return {
+            'network_height': 0,
+            'network_difficulty': 1,
+            'mining_difficulty': self.config.difficulty,
+            'previous_hash': '0' * 64,
+            'miner_address': self.config.miner_address,
+            'blocks_mined': self.miner.blocks_mined,
+            'auto_mining': self.miner.is_mining,
+            'configured_difficulty': self.config.difficulty,
+            'total_reward': self.miner.total_reward,
+            'total_transactions': 0,
+            'reward_transactions': self.miner.blocks_mined,
+            'connection_status': 'disconnected',
+            'p2p_connected': False,
+            'p2p_peers': 0,
+            'uptime': time.time() - self.stats['start_time'],
+            'total_mining_attempts': len(self.miner.mining_history),
+            'success_rate': 0,
+            'avg_mining_time': 0,
+            'current_hash_rate': 0,
+            'current_hash': '',
+            'current_nonce': 0,
+            'cuda_available': False,
+            'mining_method': 'CPU'
+        }
+
+    def _merge_status(self, status: Dict) -> Dict:
+        defaults = self._default_status()
+        if not isinstance(status, dict):
+            return defaults
+        merged = {**defaults}
+        for key, value in status.items():
+            if value is not None:
+                merged[key] = value
+        return merged
+
+    def enable_live_stats(self):
+        """Switch from cached stats to live stats"""
+        self._prefer_cached_stats = False
     
     def get_status(self) -> Dict:
         """Get node status"""
         try:
-            current_height = self.blockchain_manager.get_blockchain_height()
-            latest_block = self.blockchain_manager.get_block(current_height) if current_height > 0 else None
+            if self._prefer_cached_stats and not self.miner.is_mining:
+                cached = self._cached_status or self.data_manager.load_stats()
+                if isinstance(cached, dict) and cached:
+                    return self._merge_status(cached)
+            now = time.time()
+            if now - self._net_cache_ts >= self.net_poll_interval:
+                current_height = self.blockchain_manager.get_blockchain_height()
+                latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
+                if not latest_block and current_height > 0:
+                    latest_block = self.blockchain_manager.get_block(current_height)
+                try:
+                    mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
+                except Exception:
+                    mempool = self.blockchain_manager.get_mempool() if self.blockchain_manager else []
+
+                self._net_cache_ts = now
+                self._net_cache = {
+                    "height": current_height,
+                    "latest_block": latest_block,
+                    "mempool": mempool,
+                }
+            else:
+                current_height = self._net_cache.get("height", 0)
+                latest_block = self._net_cache.get("latest_block")
+                mempool = self._net_cache.get("mempool", [])
             
             total_mining_time = sum(record.get('mining_time', 0) for record in self.miner.mining_history)
             avg_mining_time = total_mining_time / len(self.miner.mining_history) if self.miner.mining_history else 0
@@ -431,16 +706,10 @@ class LunaNode:
                 current_hash = mining_stats.get('current_hash', '')
                 current_nonce = mining_stats.get('current_nonce', 0)
             
-            # Get mempool
-            try:
-                mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
-            except:
-                mempool = self.blockchain_manager.get_mempool() if self.blockchain_manager else []
-            
             # Get P2P status
             p2p_status = self.get_p2p_status()
             
-            return {
+            status = {
                 'network_height': current_height,
                 'network_difficulty': latest_block.get('difficulty', 1) if latest_block else 1,
                 'mining_difficulty': self.config.difficulty,
@@ -465,6 +734,9 @@ class LunaNode:
                 'cuda_available': cuda_available,
                 'mining_method': 'CUDA' if using_cuda else 'CPU'
             }
+            self._cached_status = status
+            self.data_manager.save_stats(status)
+            return status
                 
         except Exception as e:
             return {
@@ -501,7 +773,7 @@ class LunaNode:
             # lunalib 1.8.7 Miner: mine_block()を使う
             mining_start = time.time()
             result = self.miner.mine_block()
-            print(f"[DEBUG] mine_block() result: {result}")
+            safe_print(f"[DEBUG] mine_block() result: {result}")
             log_cpu_mining_event("mine_block_result", {"result": str(result)})
             success, message, block_data = False, '', None
             if isinstance(result, tuple) and len(result) == 3:
@@ -514,8 +786,8 @@ class LunaNode:
                 success = bool(result)
                 message = ''
                 block_data = result if isinstance(result, dict) else None
-            print(f"[DEBUG] Parsed block_data: {block_data}")
-            print(f"[DEBUG] success: {success}, message: {message}")
+            safe_print(f"[DEBUG] Parsed block_data: {block_data}")
+            safe_print(f"[DEBUG] success: {success}, message: {message}")
             if success and block_data:
                 log_cpu_mining_event("block_mined", {"block_index": block_data.get('index'), "block_data": block_data})
                 block_index = block_data.get('index', 'unknown')
@@ -528,8 +800,8 @@ class LunaNode:
                 block_hash = block_data.get('hash', '')
                 mining_time = time.time() - mining_start
                 tx_count = len(block_data.get('transactions', []))
-                print(f"[DEBUG] Mined block keys: {list(block_data.keys())}")
-                print(f"[DEBUG] nonce: {nonce}, mining_time: {mining_time}, hash: {block_hash}, difficulty: {block_difficulty}")
+                safe_print(f"[DEBUG] Mined block keys: {list(block_data.keys())}")
+                safe_print(f"[DEBUG] nonce: {nonce}, mining_time: {mining_time}, hash: {block_hash}, difficulty: {block_difficulty}")
                 # --- 報酬トランザクションのself-transfer修正を必ず適用 ---
                 fixed_transactions = []
                 miner_addr = self.config.miner_address
@@ -562,17 +834,17 @@ class LunaNode:
                     self.stats['cuda_last_nonce'] = nonce
                     self.stats['cuda_last_hash'] = block_hash
                     self.stats['last_mining_method'] = 'cuda'
-                    print(f"[DEBUG] CUDA mining: cuda_hash_rate={self.stats['cuda_hash_rate']}")
+                    safe_print(f"[DEBUG] CUDA mining: cuda_hash_rate={self.stats['cuda_hash_rate']}")
                 else:
                     if hasattr(self.miner, 'get_mining_stats'):
                         mining_stats = self.miner.get_mining_stats()
-                        print(f"[DEBUG] mining_stats: {mining_stats}")
+                        safe_print(f"[DEBUG] mining_stats: {mining_stats}")
                         self.stats['cpu_hash_rate'] = mining_stats.get('hash_rate', 0)
-                        print(f"[DEBUG] CPU mining: cpu_hash_rate={self.stats['cpu_hash_rate']} (lunalib), nonce={nonce}, mining_time={mining_time}")
+                        safe_print(f"[DEBUG] CPU mining: cpu_hash_rate={self.stats['cpu_hash_rate']} (lunalib), nonce={nonce}, mining_time={mining_time}")
                     else:
                         if mining_time > 0:
                             self.stats['cpu_hash_rate'] = nonce / mining_time
-                            print(f"[DEBUG] CPU mining: cpu_hash_rate={self.stats['cpu_hash_rate']}, nonce={nonce}, mining_time={mining_time}")
+                            safe_print(f"[DEBUG] CPU mining: cpu_hash_rate={self.stats['cpu_hash_rate']}, nonce={nonce}, mining_time={mining_time}")
                     self.stats['last_mining_method'] = 'cpu'
                 submit_success, submit_message = self.submit_block(block_data)
                 log_cpu_mining_event("submit_block_result", {"success": submit_success, "message": submit_message, "block_index": block_data.get('index')})
@@ -598,7 +870,14 @@ class LunaNode:
         """Start auto-mining"""
         if self.miner.is_mining:
             return
-            
+
+        self.enable_live_stats()
+
+        if hasattr(self.miner, "should_stop_mining"):
+            self.miner.should_stop_mining = False
+
+        self._stop_mining_event.clear()
+
         self.miner.start_mining()
         
         # Log mining method being used
@@ -610,14 +889,20 @@ class LunaNode:
         
         def mining_loop():
             print("[DEBUG] mining_loop started")
+            self._log_message("Mining loop started", "info")
             while self.miner.is_mining and self.is_running:
-                print("[DEBUG] mining_loop tick")
+                if getattr(self.miner, "should_stop_mining", False):
+                    break
+                if self._stop_mining_event.is_set():
+                    break
+                self._log_message("Mining tick: starting block attempt", "info")
                 success, message = self.mine_single_block()
                 if success:
                     self._log_message(message, "success")
                     print("[DEBUG] Block mined successfully")
                     # After successful mining, wait longer to allow server to process
-                    time.sleep(5)
+                    if self._stop_mining_event.wait(5):
+                        break
                 else:
                     # Check if it's a CUDA error
                     if "CUDA" in message or "dtype" in message:
@@ -625,7 +910,9 @@ class LunaNode:
                         self.miner.use_cuda = False
                     self._log_message(message, "warning")
                     print(f"[DEBUG] Mining failed: {message}")
-                    time.sleep(self.config.mining_interval)
+                    if self._stop_mining_event.wait(self.config.mining_interval):
+                        break
+            self._log_message("Mining loop stopped", "info")
         
         self.miner.mining_thread = threading.Thread(target=mining_loop, daemon=True)
         self.miner.mining_thread.start()
@@ -635,14 +922,31 @@ class LunaNode:
         # Signal immediate stop
         self.miner.is_mining = False
         self.miner.should_stop_mining = True
+        self._stop_mining_event.set()
         
         self._log_message("Stopping mining... (aborting current block)", "info")
         
+        if hasattr(self.miner, "stop_mining"):
+            try:
+                self.miner.stop_mining()
+            except Exception:
+                pass
+
+        cuda_manager = getattr(self.miner, "cuda_manager", None)
+        if cuda_manager:
+            for method_name in ("stop_mining", "stop", "stop_cuda_mining", "shutdown"):
+                method = getattr(cuda_manager, method_name, None)
+                if callable(method):
+                    try:
+                        method()
+                    except Exception:
+                        pass
+
         # Call the miner's stop method (waits for thread to finish)
         # But don't wait too long - use a timeout approach
         if self.miner.mining_thread and self.miner.mining_thread.is_alive():
-            # Give it a short time to finish gracefully
-            self.miner.mining_thread.join(timeout=2.0)
+            # Give it a very short time to finish gracefully
+            self.miner.mining_thread.join(timeout=0.5)
             if self.miner.mining_thread.is_alive():
                 self._log_message("Mining thread still running, will terminate on next check", "warning")
             else:
@@ -665,6 +969,10 @@ class LunaNode:
             if progress_callback:
                 progress_callback(50, "Syncing blockchain status...")
             status = self.get_status()
+
+            if progress_callback:
+                progress_callback(65, "Updating blockchain cache...")
+            self.sync_blockchain_cache(progress_callback=progress_callback)
             
             # Sync mempool via P2P if available
             if progress_callback:
@@ -702,215 +1010,191 @@ class LunaNode:
         return self.logs
     
     def submit_block(self, block_data: Dict) -> Tuple[bool, str]:
-        """Submit mined block to network via direct HTTP POST"""
-        # --- LunaLibバリデーション追加 ---
-        is_valid, error_msg = self.difficulty_system.validate_block_structure(block_data)
-        if not is_valid:
-            err = f"Block validation failed: {error_msg}"
-            print(f"[VALIDATION ERROR] {err}")
-            log_cpu_mining_event("block_validation_failed", {"error": error_msg, "block_index": block_data.get('index')})
+        """Submit mined block using LunaLib blockchain manager"""
+        miner_address = getattr(self.config, "miner_address", "")
+        if not is_valid_luna_address(miner_address):
+            err = "Invalid miner address. Please set a valid LUN_ address before submitting blocks."
             self._log_message(err, "error")
             return False, err
         try:
             log_cpu_mining_event("submit_block_called", {"block_index": block_data.get('index'), "block_data": block_data})
-            # Normalize block field names for server compatibility
-            # Server expects 'previous_hash', lunalib may use 'prev_hash'
-            if 'previous_hash' not in block_data:
-                if 'prev_hash' in block_data:
-                    block_data['previous_hash'] = block_data['prev_hash']
-                else:
-                    # Fetch previous hash from chain
+            self._normalize_block_for_lunalib(block_data)
+
+            # Pre-validate with LunaLib's internal validator for clearer errors
+            try:
+                validation = self.blockchain_manager._validate_block_structure(block_data)
+                if not validation.get("valid", False):
+                    issues = validation.get("issues", [])
+                    err = f"Block validation failed: {issues}"
+                    log_cpu_mining_event("block_validation_failed", {"error": issues, "block_index": block_data.get('index')})
+                    self._log_message(err, "error")
+                    return False, err
+            except Exception:
+                pass
+
+            # Avoid re-submitting the exact same block repeatedly
+            try:
+                now_ts = time.time()
+                current_hash = block_data.get("hash")
+                current_index = block_data.get("index")
+                if current_hash and current_hash == self._last_submitted_hash:
+                    if (now_ts - self._last_submitted_ts) < 60 and self._last_submitted_success:
+                        msg = f"Duplicate block submission suppressed (index {current_index})"
+                        log_cpu_mining_event("block_submit_duplicate_suppressed", {
+                            "block_index": current_index,
+                            "hash": current_hash,
+                        })
+                        self._log_message(msg, "warning")
+                        return True, msg
+            except Exception:
+                pass
+            
+            try:
+                if self.blockchain_manager.submit_mined_block(block_data):
+                    self._log_message(f"Block #{block_data['index']} submitted", "success")
                     try:
-                        current_height = self.blockchain_manager.get_blockchain_height()
-                        if current_height > 0:
-                            prev_block = self.blockchain_manager.get_block(current_height)
-                            if prev_block:
-                                block_data['previous_hash'] = prev_block.get('hash', '0' * 64)
-                    except Exception as e:
-                        print(f"[DEBUG] Could not get previous hash: {e}")
-            
-            # Get difficulty - prefer block's difficulty, fall back to config
-            block_difficulty = block_data.get('difficulty')
-            if not block_difficulty or block_difficulty < 1:
-                block_difficulty = self.config.difficulty
-                block_data['difficulty'] = block_difficulty
-            
-            # Reward calculation: BASE_REWARD * 10^(difficulty-1)
-            # Difficulty 1 = 1, Difficulty 2 = 10, Difficulty 5 = 10000, Difficulty 9 = 100000000
-            BASE_REWARD = 1.0
-            expected_reward = BASE_REWARD * (10 ** (block_difficulty - 1))
-            
-            print(f"[DEBUG] Expected reward for difficulty {block_difficulty}: {expected_reward}")
-            
-            # CRITICAL: Set block-level reward field
-            block_data['reward'] = expected_reward
-            
-            # Ensure miner address is set
-            if 'miner' not in block_data:
-                block_data['miner'] = self.config.miner_address
-            
-            # Add version if missing
-            if 'version' not in block_data:
-                block_data['version'] = '1.0'
-            
-            # Debug: Log all block keys to find reward transaction location
-            print(f"[DEBUG] Block data keys: {list(block_data.keys())}")
-            
-            # FIX 1: Check for 'reward_transaction' field (separate from transactions list)
-            if 'reward_transaction' in block_data:
-                print(f"[DEBUG] Found 'reward_transaction' field, fixing amount...")
-                block_data['reward_transaction']['amount'] = expected_reward
-                block_data['reward_transaction']['to'] = self.config.miner_address
-            
-            # FIX 2: Check for 'reward_tx' field
-            if 'reward_tx' in block_data:
-                print(f"[DEBUG] Found 'reward_tx' field, fixing amount...")
-                block_data['reward_tx']['amount'] = expected_reward
-                block_data['reward_tx']['to'] = self.config.miner_address
-            
-            # FIX 3: Check for 'coinbase' or 'coinbase_tx' field
-            for field in ['coinbase', 'coinbase_tx', 'mining_reward']:
-                if field in block_data:
-                    print(f"[DEBUG] Found '{field}' field, fixing amount...")
-                    if isinstance(block_data[field], dict):
-                        block_data[field]['amount'] = expected_reward
-                        block_data[field]['to'] = self.config.miner_address
-            
-            # FIX 4: Process transactions list
-            transactions = block_data.get('transactions', [])
-            print(f"[DEBUG] Original transactions count: {len(transactions)}")
-            
-            # Find and fix reward transaction in list
-            fixed_transactions = []
-            found_reward_tx = False
-            
-            for i, tx in enumerate(transactions):
-                is_reward = (
-                    tx.get('type') == 'reward' or
-                    tx.get('type') == 'mining_reward' or
-                    tx.get('from') == 'network' or
-                    tx.get('from') == 'coinbase' or
-                    tx.get('from') == 'system' or
-                    tx.get('from') == '' or
-                    tx.get('from') is None or
-                    'reward' in str(tx.get('hash', '')).lower()
-                )
-                
-                if is_reward:
-                    # Create fixed reward transaction
-                    fixed_tx = tx.copy()
-                    fixed_tx['type'] = 'reward'
-                    fixed_tx['from'] = 'Ling Country Mines'
-                    fixed_tx['to'] = self.config.miner_address
-                    fixed_tx['amount'] = expected_reward
-                    fixed_transactions.append(fixed_tx)
-                    found_reward_tx = True
-                    print(f"[DEBUG] Fixed reward tx in transactions list: amount={expected_reward}")
-                else:
-                    fixed_transactions.append(tx)
-            
-            # If no reward tx found in list, create one
-            if not found_reward_tx:
-                print(f"[DEBUG] No reward tx in transactions list, creating one...")
-                reward_tx = {
-                    'type': 'reward',
-                    'from': 'Ling Country Mines',
-                    'to': self.config.miner_address,
-                    'amount': expected_reward,
-                    'timestamp': block_data.get('timestamp', time.time()),
-                    'block_height': block_data.get('index'),
-                    'hash': f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}",
-                    'description': 'Mining reward'
-                }
-                fixed_transactions.append(reward_tx)
-            
-            block_data['transactions'] = fixed_transactions
-            
-            # FIX 5: Also set reward_transaction field explicitly (server might expect it)
-            block_data['reward_transaction'] = {
-                'type': 'reward',
-                'from': 'Ling Country Mines',
-                'to': self.config.miner_address,
-                'amount': expected_reward,
-                'timestamp': block_data.get('timestamp', time.time()),
-                'block_height': block_data.get('index'),
-                'hash': f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}",
-                'description': 'Mining reward'
-            }
-            
-            # Debug: Verify all reward amounts are correct before submission
-            print(f"[DEBUG] Final verification:")
-            print(f"[DEBUG]   block_data['reward'] = {block_data.get('reward')}")
-            print(f"[DEBUG]   block_data['reward_transaction']['amount'] = {block_data.get('reward_transaction', {}).get('amount')}")
-            print(f"[DEBUG]   transactions count = {len(block_data.get('transactions', []))}")
-            for i, tx in enumerate(block_data.get('transactions', [])):
-                if tx.get('type') == 'reward' or tx.get('from') == 'network':
-                    print(f"[DEBUG]   transactions[{i}] reward amount = {tx.get('amount')}")
-            
-            # Debug: Log block structure before submission
-            print(f"[DEBUG] Submitting block #{block_data.get('index')}")
-            print(f"[DEBUG] difficulty: {block_difficulty}, reward: {block_data.get('reward')}")
-            
-            # Try multiple submission endpoints via direct HTTP
-            endpoints = [
-                f"{self.config.node_url}/blockchain/submit-block",
-                f"{self.config.node_url}/debug/validate-block-format",
-            ]
-            
-            for endpoint in endpoints:
-                try:
-                    response = requests.post(
-                        endpoint,
-                        json=block_data,
-                        headers={'Content-Type': 'application/json'},
-                        timeout=30
-                    )
-                    log_cpu_mining_event("block_submit_http_response", {"endpoint": endpoint, "status_code": response.status_code, "text": response.text[:200]})
-                    if response.status_code == 200:
-                        data = response.json()
-                        success = data.get('success', True)
-                        message = data.get('message', 'Block submitted')
-                        if success:
-                            log_cpu_mining_event("block_submit_success", {"endpoint": endpoint, "block_index": block_data.get('index'), "message": message})
-                            self._log_message(f"Block #{block_data['index']} submitted: {message}", "success")
-                            # Notify P2P peers about the new block
-                            if self.p2p_client and hasattr(self.p2p_client, 'broadcast_block'):
-                                try:
-                                    self.p2p_client.broadcast_block(block_data)
-                                except Exception as e:
-                                    print(f"[DEBUG] P2P broadcast failed: {e}")
-                            return True, message
-                        else:
-                            error_msg = data.get('error', message)
-                            log_cpu_mining_event("block_submit_rejected", {"endpoint": endpoint, "block_index": block_data.get('index'), "error": error_msg})
-                            print(f"[DEBUG] Submission rejected by {endpoint}: {error_msg}")
-                            continue
-                    elif response.status_code == 404:
-                        continue  # Try next endpoint
-                    else:
-                        log_cpu_mining_event("block_submit_http_error", {"endpoint": endpoint, "status_code": response.status_code})
-                        print(f"[DEBUG] HTTP {response.status_code} from {endpoint}")
-                        try:
-                            error_data = response.json()
-                            print(f"[DEBUG] Error response: {error_data}")
-                        except:
-                            print(f"[DEBUG] Error text: {response.text[:200]}")
-                        continue
-                except requests.exceptions.RequestException as e:
-                    log_cpu_mining_event("block_submit_request_exception", {"endpoint": endpoint, "error": str(e)})
-                    print(f"[DEBUG] Request to {endpoint} failed: {e}")
-                    continue
-            # All endpoints failed
-            log_cpu_mining_event("block_submit_all_failed", {"block_index": block_data.get('index')})
-            self._log_message(f"Block #{block_data['index']} submission failed - no valid endpoint", "warning")
+                        self.data_manager.save_submitted_block(block_data)
+                    except Exception:
+                        pass
+                    self._last_submitted_hash = block_data.get("hash")
+                    self._last_submitted_index = block_data.get("index")
+                    self._last_submitted_ts = time.time()
+                    self._last_submitted_success = True
+                    return True, "Block submitted"
+            except Exception as e:
+                print(f"[DEBUG] lunalib submit failed: {e}")
+
+            # Fallback: submit plain JSON (server rejects gzip payloads)
+            fallback_ok, fallback_msg = self._submit_block_plain_json(block_data)
+            if fallback_ok:
+                self._last_submitted_hash = block_data.get("hash")
+                self._last_submitted_index = block_data.get("index")
+                self._last_submitted_ts = time.time()
+                self._last_submitted_success = True
+                return True, fallback_msg
+
+            log_cpu_mining_event("block_submit_failed", {"block_index": block_data.get('index')})
+            self._log_message(f"Block #{block_data['index']} submission failed", "warning")
             self._save_block_locally(block_data)
-            return False, "No valid submission endpoint found"
+            return False, "Submission failed"
         except Exception as e:
             error_msg = f"Block submission error: {str(e)}"
             log_cpu_mining_event("block_submit_exception", {"block_index": block_data.get('index'), "error": str(e)})
             self._log_message(error_msg, "error")
             self._save_block_locally(block_data)
             return False, error_msg
+
+    def _normalize_block_for_lunalib(self, block_data: Dict) -> None:
+        """Ensure block structure matches LunaLib validator expectations."""
+        if not isinstance(block_data, dict):
+            return
+
+        # Basic field normalization
+        if "index" in block_data:
+            try:
+                block_data["index"] = int(block_data.get("index"))
+            except Exception:
+                pass
+        if "difficulty" in block_data:
+            try:
+                block_data["difficulty"] = int(block_data.get("difficulty"))
+            except Exception:
+                pass
+        if "nonce" in block_data:
+            try:
+                block_data["nonce"] = int(block_data.get("nonce"))
+            except Exception:
+                pass
+        if "timestamp" in block_data:
+            try:
+                block_data["timestamp"] = float(block_data.get("timestamp"))
+            except Exception:
+                pass
+
+        if not block_data.get("miner"):
+            block_data["miner"] = self.config.miner_address
+
+        # Ensure previous_hash is set
+        if not block_data.get("previous_hash"):
+            try:
+                latest = self.blockchain_manager.get_latest_block()
+                if latest and latest.get("hash"):
+                    block_data["previous_hash"] = latest.get("hash")
+            except Exception:
+                pass
+
+        if "version" not in block_data:
+            block_data["version"] = "1.0"
+
+        if not isinstance(block_data.get("transactions"), list):
+            block_data["transactions"] = []
+
+        # Ensure a reward transaction has required fields
+        reward_tx = None
+        for tx in block_data.get("transactions", []):
+            if isinstance(tx, dict) and (tx.get("type") == "reward" or tx.get("type") == "mining_reward"):
+                reward_tx = tx
+                break
+        if reward_tx:
+            reward_tx.setdefault("to", self.config.miner_address)
+            reward_tx.setdefault("amount", float(block_data.get("reward", 0) or 0))
+            reward_tx.setdefault("timestamp", block_data.get("timestamp", time.time()))
+            reward_tx.setdefault("hash", f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}")
+        elif block_data.get("reward") is not None:
+            block_data["transactions"].append({
+                "type": "reward",
+                "from": "network",
+                "to": self.config.miner_address,
+                "amount": float(block_data.get("reward", 0) or 0),
+                "timestamp": block_data.get("timestamp", time.time()),
+                "hash": f"reward_{block_data.get('index', 0)}_{int(block_data.get('timestamp', time.time()))}",
+            })
+
+        # Recalculate hash if missing/invalid or difficulty mismatch
+        try:
+            difficulty = int(block_data.get("difficulty") or 0)
+            block_hash = block_data.get("hash", "")
+            if (len(block_hash) != 64) or (difficulty > 0 and not block_hash.startswith("0" * difficulty)):
+                if hasattr(self.miner, "_calculate_block_hash"):
+                    block_data["hash"] = self.miner._calculate_block_hash(
+                        block_data.get("index", 0),
+                        block_data.get("previous_hash", "0" * 64),
+                        block_data.get("timestamp", time.time()),
+                        block_data.get("transactions", []),
+                        block_data.get("nonce", 0),
+                        block_data.get("miner", ""),
+                        difficulty,
+                    )
+        except Exception:
+            pass
+
+    def _submit_block_plain_json(self, block_data: Dict) -> Tuple[bool, str]:
+        """Fallback submission using plain JSON (no gzip)."""
+        try:
+            endpoint = f"{self.config.node_url}/blockchain/submit-block"
+            response = requests.post(
+                endpoint,
+                json=block_data,
+                headers={"Content-Type": "application/json", "Accept-Encoding": "identity"},
+                timeout=30,
+            )
+            if response.status_code in (200, 201):
+                try:
+                    data = response.json()
+                except Exception:
+                    data = {}
+                message = data.get("message", "Block submitted")
+                skipped = bool(data.get("skipped"))
+                already_exists = "already exists" in (message or "").lower()
+                if skipped or already_exists:
+                    warn_msg = f"Block #{block_data.get('index')} already exists on chain"
+                    self._log_message(warn_msg, "warning")
+                    return True, warn_msg
+                self._log_message(f"Block #{block_data.get('index')} submitted", "success")
+                return True, message
+            return False, f"HTTP {response.status_code}"
+        except Exception as e:
+            return False, f"Plain submit failed: {e}"
     
     def _save_block_locally(self, block_data: Dict) -> bool:
         """Save block locally when network submission fails"""
@@ -961,6 +1245,11 @@ class LunaNode:
         # Reinitialize managers with new URL (use LunaLib managers)
         self.blockchain_manager = BlockchainManager(endpoint_url=new_url)
         self.mempool_manager = MempoolManager([new_url])
+        if TransactionManager:
+            try:
+                self.tx_manager = TransactionManager([new_url])
+            except Exception:
+                self.tx_manager = None
         
         # Reinitialize miner and link managers
         self.miner = LunaLibMiner(self.config, self.data_manager)
@@ -971,7 +1260,6 @@ class LunaNode:
         
         # Reinitialize P2P (manual fetch only, no lunalib P2P)
         self.p2p_client = None
-        self._fetch_peers_from_daemon()
         self._log_message(f"Node URL updated to: {new_url}", "info")
     
     def update_mining_interval(self, new_interval: int):
@@ -1027,101 +1315,16 @@ class LunaNode:
     
     def get_p2p_status(self) -> Dict:
         """Get P2P network status"""
-        try:
-            # Get peer count from our local list (manually fetched from daemon)
-            peer_count = len(self.peers) if self.peers else 0
-            
-            # If we have peers, consider P2P as connected (even without p2p_client)
-            if peer_count > 0:
-                return {
-                    'connected': True,
-                    'peers': peer_count,
-                    'peer_list': self.peers[:10],
-                    'status': 'connected'
-                }
-            
-            # No peers but p2p_client exists
-            if self.p2p_client:
-                if hasattr(self.p2p_client, 'peers') and self.p2p_client.peers:
-                    peer_count = len(self.p2p_client.peers)
-                return {
-                    'connected': self.p2p_client.is_running if hasattr(self.p2p_client, 'is_running') else True,
-                    'peers': peer_count,
-                    'peer_list': self.peers[:10],
-                    'status': 'connected' if peer_count > 0 else 'no peers'
-                }
-            
-            # No p2p_client and no peers - show as offline
-            return {
-                'connected': False,
-                'peers': 0,
-                'peer_list': [],
-                'status': 'no peers available'
-            }
-            
-        except Exception as e:
-            return {
-                'connected': False,
-                'peers': 0,
-                'peer_list': [],
-                'status': f'Error: {e}'
-            }
+        return {
+            'connected': False,
+            'peers': 0,
+            'peer_list': [],
+            'status': 'p2p disabled'
+        }
     
     def _fetch_peers_from_daemon(self):
-        """Fetch peer list from the daemon running on node_url (non-blocking, failures OK)"""
-        try:
-            # Try common P2P daemon endpoints with short timeout
-            endpoints = [
-                f"{self.config.node_url}/api/peers",
-            ]
-            
-            for endpoint in endpoints:
-                try:
-                    response = requests.get(endpoint, timeout=5)
-                    if response.status_code == 200:
-                        data = response.json()
-                        
-                        # Handle different response formats
-                        if isinstance(data, list):
-                            self.peers = data
-                        elif isinstance(data, dict):
-                            self.peers = data.get('peers', data.get('nodes', data.get('data', [])))
-                        
-                        if self.peers:
-                            print(f"[DEBUG] Fetched {len(self.peers)} peers from {endpoint}")
-                            
-                            # Register peers with P2P client if available
-                            if self.p2p_client and hasattr(self.p2p_client, 'add_peers'):
-                                try:
-                                    self.p2p_client.add_peers(self.peers)
-                                except:
-                                    pass
-                            
-                            return True
-                except:
-                    try:
-                        log_cpu_mining_event("on_block_mined_called", {"block_index": block_data.get('index'), "block_data": block_data})
-                        success, message = self.submit_block(block_data)
-                        log_cpu_mining_event("on_block_mined_submit_result", {"success": success, "message": message, "block_index": block_data.get('index')})
-                        if success:
-                            self.stats['successful_blocks'] += 1
-                            reward_tx = self._create_reward_transaction(block_data)
-                            if self.new_reward_callback:
-                                self.new_reward_callback(reward_tx)
-                            if self.new_bill_callback:
-                                self.new_bill_callback(block_data)
-                            if self.history_updated_callback:
-                                self.history_updated_callback()
-                        else:
-                            log_cpu_mining_event("on_block_mined_rejected", {"block_index": block_data.get('index'), "message": message})
-                            self._log_message(f"Block #{block_data['index']} rejected: {message}", "warning")
-                            self.stats['failed_attempts'] += 1
-                    except Exception as e:
-                        log_cpu_mining_event("on_block_mined_exception", {"block_index": block_data.get('index'), "error": str(e)})
-                        self._log_message(f"Error processing mined block: {str(e)}", "error")
-                        self.stats['failed_attempts'] += 1
-        except:
-            print(f"[DEBUG] Failed to fetch peers from {endpoint}")
+        """P2P peer fetching disabled (use LunaLib P2P if needed)."""
+        return False
         
     def register_peer(self, peer_url: str) -> bool:
         """
@@ -1132,44 +1335,5 @@ class LunaNode:
         Returns:
             True if registration succeeded, False otherwise.
         """
-        if not peer_url:
-            print("[DEBUG] Peer registration skipped - no public URL provided")
-            print("[DEBUG] To register, provide a publicly accessible URL")
-            return False
-        try:
-            # Validate URL format
-            if not peer_url.startswith(('http://', 'https://')):
-                peer_url = f"https://{peer_url}"
-            # Try to register with daemon
-            endpoints = [
-                f"{self.config.node_url}/api/peers/register",
-            ]
-            registration_data = {
-                'peer_url': peer_url
-            }
-            for endpoint in endpoints:
-                try:
-                    response = requests.post(endpoint, json=registration_data, timeout=10)
-                    if response.status_code in [200, 201]:
-                        print(f"[DEBUG] Registered as peer: {peer_url}")
-                        self._log_message(f"Registered as peer: {peer_url}", "success")
-                        return True
-                    elif response.status_code == 400:
-                        try:
-                            error_data = response.json()
-                            error_msg = error_data.get('error', error_data.get('message', 'Unknown error'))
-                        except:
-                            error_msg = response.text or 'Bad request'
-                        print(f"[DEBUG] Registration rejected (400): {error_msg}")
-                        self._log_message(f"Peer registration failed: {error_msg}", "warning")
-                        # 400 means the server understood but rejected - don't try other endpoints
-                        return False
-                    else:
-                        print(f"[DEBUG] Registration HTTP {response.status_code}")
-                except requests.exceptions.RequestException as e:
-                    print(f"[DEBUG] Registration to {endpoint} failed: {e}")
-                    continue
-            return False
-        except Exception as e:
-            print(f"[DEBUG] Peer registration error: {e}")
-            return False
+        self._log_message("Peer registration disabled (non-lunalib operation)", "warning")
+        return False

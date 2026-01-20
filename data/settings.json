@@ -1,9 +1,0 @@
-{
-  "miner_address": "LUN_By5zh22EM9sZZqX3BNtPk7GkNh8aepg8Cd",
-  "difficulty": 5,
-  "auto_mine": true,
-  "node_url": "https://bank.linglin.art",
-  "mining_interval": 30,
-  "use_gpu": true,
-  "last_scan_height": 6937
-}

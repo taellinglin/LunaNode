@@ -1020,25 +1020,22 @@ class LunaLib:
         return new_txs_found
 
     def scan_blockchain(self, force_full_scan=False, progress_callback=None):
-        """Optimized blockchain scan - scan ALL blocks without limits"""
+        """Optimized blockchain scan - incremental by default, full scan on demand"""
         if not self.is_unlocked:
             return False
 
-        print("DEBUG: Starting FULL blockchain scan...")
-        self._update_sync_progress(0, "Starting full blockchain scan...")
-        
+        self._update_sync_progress(0, "Starting blockchain scan...")
+
         # DEBUG: Check height first
         self.debug_blockchain_height()
-        
+
         try:
-            # Get current blockchain height
             current_height = self._get_current_blockchain_height()
-            
-            # If height is 0 but we know there are blocks, force a manual check
+
             if current_height == 0:
                 print("DEBUG: Height returned 0, attempting manual block count...")
                 current_height = self._get_manual_block_count()
-            
+
             print(f"DEBUG: Final blockchain height: {current_height}")
 
             if current_height <= 0:
@@ -1046,16 +1043,19 @@ class LunaLib:
                 self._update_sync_progress(100, "No blocks to scan")
                 return True
 
-            # ALWAYS do full scan and scan ALL blocks
             updates = False
             valid_wallets = [w for w in self.wallets if isinstance(w, dict) and w.get("is_our_wallet", True)]
             total_wallets = len(valid_wallets)
-            
+
             if total_wallets == 0:
                 print("DEBUG: No valid wallets to scan")
                 return True
 
-            print(f"DEBUG: Scanning {current_height} blocks for {total_wallets} wallets")
+            now = time.time()
+            should_full_scan = force_full_scan or (now - self.last_full_scan) >= self.full_scan_interval
+            scan_mode = "full" if should_full_scan else "incremental"
+
+            print(f"DEBUG: Scanning {current_height} blocks for {total_wallets} wallets ({scan_mode})")
 
             for wallet_index, wallet in enumerate(valid_wallets):
                 try:
@@ -1063,61 +1063,83 @@ class LunaLib:
                     if not address:
                         continue
 
-                    print(f"DEBUG: [{wallet_index+1}/{total_wallets}] Scanning ALL blocks 0-{current_height-1} for {address}")
-
                     old_balance = wallet.get("balance", 0)
                     old_tx_count = len(wallet.get("transactions", []))
-                    
-                    # SCAN ALL BLOCKS in larger batches
-                    batch_size = 500  # Increased batch size
+
+                    wallet_state = self.scan_state.get("wallets", {}).get(address, {})
+                    last_scanned_height = int(wallet_state.get("last_scanned_height", -1))
+
+                    if should_full_scan:
+                        scan_start = 0
+                    else:
+                        scan_start = last_scanned_height + 1
+
+                    scan_end = current_height - 1
+
+                    if scan_start > scan_end:
+                        print(f"DEBUG: No new blocks for {address} (last={last_scanned_height}, current={scan_end})")
+                        continue
+
+                    print(
+                        f"DEBUG: [{wallet_index+1}/{total_wallets}] Scanning {scan_start}-{scan_end} for {address} ({scan_mode})"
+                    )
+
+                    batch_size = max(1, int(self.scan_batch_size))
                     total_blocks_scanned = 0
                     total_transactions_found = 0
-                    
-                    for batch_start in range(0, current_height, batch_size):
-                        batch_end = min(batch_start + batch_size - 1, current_height - 1)
-                        
-                        progress = int((batch_start / current_height) * 80) + int((wallet_index / total_wallets) * 20)
+                    known_tx_hashes = set()
+
+                    for batch_start in range(scan_start, scan_end + 1, batch_size):
+                        batch_end = min(batch_start + batch_size - 1, scan_end)
+
+                        progress_base = int((wallet_index / total_wallets) * 20)
+                        range_span = max(1, scan_end - scan_start + 1)
+                        range_progress = int(((batch_start - scan_start) / range_span) * 80)
                         self._update_sync_progress(
-                            progress, 
-                            f"Scanning {address}: blocks {batch_start}-{batch_end}/{current_height-1}"
+                            progress_base + range_progress,
+                            f"Scanning {address}: blocks {batch_start}-{batch_end}/{scan_end}"
                         )
-                        
-                        print(f"DEBUG: Scanning batch {batch_start}-{batch_end} for {address}")
-                        
-                        blocks_scanned, transactions_found = self._scan_wallet_blocks_batch(wallet, batch_start, batch_end)
+
+                        blocks_scanned, transactions_found = self._scan_wallet_blocks_batch(
+                            wallet, batch_start, batch_end, known_tx_hashes=known_tx_hashes
+                        )
                         total_blocks_scanned += blocks_scanned
                         total_transactions_found += transactions_found
-                        
-                        # Small delay to prevent overwhelming the API
-                        time.sleep(0.1)
-                    
-                    print(f"DEBUG: Scanned {total_blocks_scanned} blocks, found {total_transactions_found} transactions for {address}")
-                    
-                    # Update wallet balance
+
+                        time.sleep(0.05)
+
+                    print(
+                        f"DEBUG: Scanned {total_blocks_scanned} blocks, found {total_transactions_found} transactions for {address}"
+                    )
+
                     self._update_wallet_balance(wallet)
-                    
-                    # Update scan state
-                    self.scan_state['wallets'][address] = {
-                        'last_scanned_height': current_height - 1,
-                        'last_scan_time': time.time(),
-                        'scan_type': 'full',
-                        'blocks_scanned': total_blocks_scanned,
-                        'transactions_found': total_transactions_found
+
+                    self.scan_state.setdefault("wallets", {})[address] = {
+                        "last_scanned_height": scan_end,
+                        "last_scan_time": now,
+                        "scan_type": scan_mode,
+                        "blocks_scanned": total_blocks_scanned,
+                        "transactions_found": total_transactions_found,
                     }
-                    
-                    self.last_full_scan = time.time()
-                    self.scan_state['last_full_scan'] = self.last_full_scan
+
+                    if should_full_scan:
+                        self.last_full_scan = now
+                        self.scan_state["last_full_scan"] = self.last_full_scan
+
                     self._save_scan_state()
 
-                    # Check for updates
                     new_balance = wallet.get("balance", 0)
                     new_tx_count = len(wallet.get("transactions", []))
-                    
-                    if (new_balance != old_balance or new_tx_count != old_tx_count):
+
+                    if new_balance != old_balance or new_tx_count != old_tx_count:
                         updates = True
-                        print(f"DEBUG: Wallet {address} UPDATED - Balance: {old_balance} → {new_balance}, Transactions: {old_tx_count} → {new_tx_count}")
+                        print(
+                            f"DEBUG: Wallet {address} UPDATED - Balance: {old_balance} → {new_balance}, Transactions: {old_tx_count} → {new_tx_count}"
+                        )
                     else:
-                        print(f"DEBUG: No changes for {address} - Balance: {new_balance}, Transactions: {new_tx_count}")
+                        print(
+                            f"DEBUG: No changes for {address} - Balance: {new_balance}, Transactions: {new_tx_count}"
+                        )
 
                 except Exception as e:
                     print(f"ERROR scanning wallet {wallet.get('address', 'unknown')}: {e}")
@@ -1125,9 +1147,8 @@ class LunaLib:
                     print(f"Traceback: {traceback.format_exc()}")
                     continue
 
-            # Final updates
             self._update_sync_progress(95, "Saving wallet data...")
-            
+
             if updates:
                 self.save_wallet()
                 self._trigger_callback(self.on_balance_changed)
@@ -1136,10 +1157,9 @@ class LunaLib:
             else:
                 print("DEBUG: No updates found during scan")
 
-            self._update_sync_progress(100, "Full scan complete")
+            self._update_sync_progress(100, "Scan complete")
             self._trigger_callback(self.on_sync_complete)
-            
-            # Print final summary
+
             self._print_scan_summary(valid_wallets)
             return True
 
@@ -1150,7 +1170,7 @@ class LunaLib:
             self._update_sync_progress(0, f"Scan failed: {str(e)}")
             return False
 
-    def _scan_wallet_blocks_batch(self, wallet, start_height, end_height):
+    def _scan_wallet_blocks_batch(self, wallet, start_height, end_height, known_tx_hashes=None):
         """Scan a batch of blocks and return (blocks_scanned, transactions_found)"""
         try:
             if not isinstance(wallet, dict):
@@ -1167,7 +1187,8 @@ class LunaLib:
             
             blocks_scanned = 0
             transactions_found = 0
-            known_tx_hashes = set()
+            if known_tx_hashes is None:
+                known_tx_hashes = set()
             
             # Scan the available blocks
             for block_data in blockchain_data:

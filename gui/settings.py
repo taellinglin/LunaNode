@@ -100,9 +100,11 @@ class SettingsPage:
         )
         
         mining_card = stat_style_card("⛏️", "Mining Settings", [
-            self.auto_mining_switch,
             self.difficulty_field,
-            self.gpu_switch,
+            ft.Row([
+                self.gpu_switch,
+                self.auto_mining_switch,
+            ], spacing=12),
         ], "#00a1ff")
         network_card = stat_style_card("🌐", "Network Settings", [
             self.node_url_field,
@@ -110,19 +112,13 @@ class SettingsPage:
         ], "#17a2b8")
         wallet_card = stat_style_card("💰", "Wallet Settings", [
             self.wallet_field,
-            ft.TextField(label="Payout Threshold", value="20", width=120, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
         ], "#ffc107")
-        advanced_card = stat_style_card("🔧", "Advanced", [
-            ft.Switch(label="Developer Mode", value=False, active_color="#ff5252"),
-            ft.TextField(label="Custom Config Path", value="./config.json", width=220, bgcolor="#0a1423", color="#e3f2fd", border_color="#1e3a5c"),
-        ], "#6c757d")
 
         # Arrange cards in a ResponsiveRow grid, each card 100% width
         grid = ft.ResponsiveRow([
             mining_card,
             network_card,
             wallet_card,
-            advanced_card
         ], spacing=10)
         self.settings_content.controls.append(grid)
         if self.app.page:
@@ -648,7 +644,7 @@ class SettingsPage:
 
     def _on_reset_defaults_clicked(self):
         if self.app.node:
-            self.app.node.config.miner_address = "LUN_Node_Miner_Default"
+            self.app.node.config.miner_address = ""
             self.app.node.config.difficulty = 2
             self.app.node.config.auto_mine = False
             self.app.node.config.mining_interval = 30
