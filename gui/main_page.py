@@ -140,28 +140,29 @@ class MainPage:
             if hasattr(self, 'loading_ring'):
                 self.loading_ring.visible = False
             self.stats_panel.visible = True
+        total_reward_text = f"{status['total_reward']:.0f} LKC"
         # 2x4のテーブル状タイル（ラベル＋値）で統計を表示
         stat_items = [
-            ("Network Height", f"{status['network_height']}", "#00a1ff"),
-            ("Network Difficulty", f"{status['network_difficulty']}", "#17a2b8"),
-            ("Blocks Mined", f"{status['blocks_mined']}", "#28a745"),
-            ("Total Reward", f"{status['total_reward']:.2f} LKC", "#ffc107"),
-            ("Hash Rate", f"{self._format_hash_rate(status['current_hash_rate'])}", "#00a1ff"),
-            ("Success Rate", f"{status['success_rate']:.1f}%", "#28a745" if status['success_rate'] > 50 else "#ffc107"),
-            ("Avg Mining Time", f"{status['avg_mining_time']:.2f}s", "#17a2b8"),
-            ("Uptime", f"{self._format_uptime(status['uptime'])}", "#6c757d"),
+            ("Network Height", f"{status['network_height']}", "#00a1ff", 20),
+            ("Network Difficulty", f"{status['network_difficulty']}", "#17a2b8", 20),
+            ("Blocks Mined", f"{status['blocks_mined']}", "#28a745", 20),
+            ("Total Reward", total_reward_text, "#ffc107", 14),
+            ("Hash Rate", f"{self._format_hash_rate(status['current_hash_rate'])}", "#00a1ff", 20),
+            ("Success Rate", f"{status['success_rate']:.1f}%", "#28a745" if status['success_rate'] > 50 else "#ffc107", 20),
+            ("Avg Mining Time", f"{status['avg_mining_time']:.2f}s", "#17a2b8", 20),
+            ("Uptime", f"{self._format_uptime(status['uptime'])}", "#6c757d", 20),
         ]
         table_rows = []
         for i in range(2):
             row_cells = []
             for j in range(4):
                 idx = i * 4 + j
-                label, value, color = stat_items[idx]
+                label, value, color, value_size = stat_items[idx]
                 row_cells.append(
                     ft.Container(
                         content=ft.Column([
                             ft.Text(label, size=13, color="#e3f2fd"),
-                            ft.Text(value, size=20, weight=ft.FontWeight.BOLD, color=color),
+                            ft.Text(value, size=value_size, weight=ft.FontWeight.BOLD, color=color),
                         ], alignment=ft.MainAxisAlignment.CENTER),
                         padding=ft.padding.all(16),
                         bgcolor="#1a2b3c",
@@ -227,9 +228,10 @@ class MainPage:
             ),
             self._create_detailed_stat_card(
                 "💰 Total Reward", 
-                f"{status['total_reward']:.2f} LKC", 
+                f"{status['total_reward']:.0f} LKC", 
                 "Accumulated mining rewards",
-                "#ffc107"
+                "#ffc107",
+                value_size=10
             ),
             self._create_detailed_stat_card(
                 "⚡ Current Hash Rate", 
@@ -270,7 +272,7 @@ class MainPage:
         ])
         # duplicate stats panel rendering removed to keep style consistent
 
-    def _create_detailed_stat_card(self, title: str, value: str, description: str, color: str):
+    def _create_detailed_stat_card(self, title: str, value: str, description: str, color: str, value_size: int = 18):
         """Create a detailed statistics card with description"""
         return ft.Container(
             content=ft.Column([
@@ -278,7 +280,7 @@ class MainPage:
                     ft.Text(title.split(" ")[0], size=14, color=color),  # Emoji
                     ft.Text(" ".join(title.split(" ")[1:]), size=12, color="#e3f2fd", expand=True),
                 ], spacing=5),
-                ft.Text(value, size=18, weight=ft.FontWeight.BOLD, color=color),
+                ft.Text(value, size=value_size, weight=ft.FontWeight.BOLD, color=color),
                 ft.Container(height=2),
                 ft.Text(description, size=10, color="#6c757d"),
             ], spacing=2),

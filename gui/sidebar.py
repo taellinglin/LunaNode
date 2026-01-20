@@ -65,14 +65,10 @@ class Sidebar:
         if not hasattr(self.app, 'node') or not self.app.node:
             return
         status = self.app.node.get_status()
-        hash_rate = status['current_hash_rate']
-        mining_method = status.get('mining_method', 'CPU')
-        current_hash = status['current_hash']
-        nonce = status.get('nonce', '--')
-        self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.2f} H/s"
-        self.lbl_mining_method.value = f"Method: {mining_method}"
-        self.lbl_current_hash.value = f"Current Hash: {current_hash}"
-        self.lbl_nonce.value = f"Nonce: {nonce}"
+        try:
+            self.update_status(status)
+        except Exception:
+            pass
         self.app.safe_page_update()
     def create_sidebar(self):
         # サイドバー表示時にstats自動更新タイマーを開始
@@ -198,7 +194,7 @@ class Sidebar:
         self.lbl_difficulty.value = f"Network Difficulty: {status['network_difficulty']}"
         self.lbl_mining_difficulty.value = f"Mining Difficulty: {status.get('mining_difficulty', '--')}"
         self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
-        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.2f} LKC"
+        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.0f} LKC"
         self.lbl_connection.value = f"Connection: {status['connection_status']}"
         
         # Update P2P status

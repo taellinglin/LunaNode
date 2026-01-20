@@ -147,7 +147,8 @@ class DataManager:
             'difficulty': 2,
             'auto_mine': False,
             'node_url': "https://bank.linglin.art",
-            'mining_interval': 30
+            'mining_interval': 30,
+            'performance_level': 70
         }
     
     def save_mining_history(self, history: List[Dict]):
@@ -313,6 +314,7 @@ class NodeConfig:
         self.use_gpu = settings.get('use_gpu', False)
         self.last_scan_height = settings.get('last_scan_height', 0)
         self.setup_complete = settings.get('setup_complete', False)
+        self.performance_level = settings.get('performance_level', 70)
     
     def save_to_storage(self):
         """Save configuration to storage"""
@@ -324,7 +326,8 @@ class NodeConfig:
             'mining_interval': self.mining_interval,
             'use_gpu': self.use_gpu,
             'last_scan_height': self.last_scan_height,
-            'setup_complete': self.setup_complete
+            'setup_complete': self.setup_complete,
+            'performance_level': self.performance_level
         }
         return self.data_manager.save_settings(settings)
 
@@ -386,7 +389,7 @@ class LunaNode:
         self._stop_mining_event = threading.Event()
 
         # Network polling throttling
-        self.net_poll_interval = float(os.getenv("LUNANODE_NET_POLL_INTERVAL", "8"))
+        self.net_poll_interval = float(os.getenv("LUNANODE_NET_POLL_INTERVAL", "20"))
         self._net_cache_ts = 0.0
         self._net_cache = {
             "height": 0,
@@ -456,6 +459,15 @@ class LunaNode:
         
         # Initialize LunaLib Miner (uses config, data_manager signature)
         self.miner = LunaLibMiner(self.config, self.data_manager)
+
+        # Load cached mining history and compute reward stats on startup
+        try:
+            cached_history = self.data_manager.load_mining_history()
+            if isinstance(cached_history, list) and cached_history:
+                self.miner.mining_history = cached_history
+            self._recalculate_reward_stats()
+        except Exception:
+            pass
         
         # Link managers to miner
         self.miner.blockchain_manager = self.blockchain_manager
@@ -484,6 +496,76 @@ class LunaNode:
         # Debugging DataManager and NodeConfig initialization
         print("[DEBUG] DataManager initialized:", self.data_manager)
         print("[DEBUG] NodeConfig initialized:", self.config)
+
+        # Patch CPU mining loop to allow throttling based on performance_level
+        try:
+            if hasattr(self.miner, "_cpu_mine") and callable(getattr(self.miner, "_cpu_mine")):
+                self._original_cpu_mine = self.miner._cpu_mine
+
+                def _cpu_mine_throttled(block_data: Dict, difficulty: int):
+                    if not getattr(self.miner, "cpu_enabled", True):
+                        return None
+                    safe_print("Using CPU mining (throttled)...")
+                    start_time = time.time()
+                    target = "0" * difficulty
+                    nonce = 0
+                    hash_count = 0
+                    last_hash_update = start_time
+
+                    while not getattr(self.miner, "should_stop_mining", False) and nonce < 1000000:
+                        block_hash = self.miner._calculate_block_hash(
+                            block_data['index'],
+                            block_data['previous_hash'],
+                            block_data['timestamp'],
+                            block_data['transactions'],
+                            nonce,
+                            block_data['miner'],
+                            difficulty
+                        )
+
+                        if block_hash.startswith(target):
+                            block_data['hash'] = block_hash
+                            block_data['nonce'] = nonce
+                            elapsed = time.time() - start_time
+                            self.miner.last_cpu_attempts = nonce
+                            self.miner.last_cpu_duration = elapsed
+                            self.miner.last_cpu_hashrate = nonce / elapsed if elapsed > 0 else 0.0
+                            return block_data
+
+                        nonce += 1
+                        hash_count += 1
+                        self.miner.current_nonce = nonce
+                        self.miner.current_hash = block_hash
+
+                        current_time = time.time()
+                        if current_time - last_hash_update >= 1:
+                            self.miner.hash_rate = hash_count / (current_time - last_hash_update)
+                            hash_count = 0
+                            last_hash_update = current_time
+
+                        self.miner.last_cpu_hashrate = self.miner.hash_rate
+                        self.miner.last_cpu_attempts = nonce
+                        self.miner.last_cpu_duration = current_time - start_time
+
+                        # Throttle based on performance level
+                        level = int(getattr(self.config, "performance_level", 70))
+                        if level < 10:
+                            level = 10
+                        if level > 100:
+                            level = 100
+                        sleep_s = (100 - level) / 100.0 * 0.01  # up to 10ms
+                        yield_every = max(200, int(2000 * (level / 100.0)))
+                        if sleep_s > 0.0005 and nonce % yield_every == 0:
+                            time.sleep(sleep_s)
+
+                        if nonce % 1000 == 0 and not self.miner.is_mining:
+                            return None
+
+                    return None
+
+                self.miner._cpu_mine = _cpu_mine_throttled
+        except Exception:
+            pass
             
     def _on_block_mined(self, block_data: Dict):
         """Handle newly mined block"""
@@ -617,6 +699,25 @@ class LunaNode:
             self.log_callback(message, msg_type)
             safe_print("DEBUG: Log callback executed.")
 
+    def _recalculate_reward_stats(self):
+        try:
+            history = getattr(self.miner, "mining_history", []) or []
+            success_records = [r for r in history if isinstance(r, dict) and r.get("status") == "success"]
+            blocks_mined = len(success_records)
+            total_reward = 0.0
+            for record in success_records:
+                reward = record.get("reward")
+                if reward is None:
+                    reward = 50.0
+                try:
+                    total_reward += float(reward)
+                except Exception:
+                    pass
+            self.miner.blocks_mined = blocks_mined
+            self.miner.total_reward = total_reward
+        except Exception:
+            pass
+
     def _default_status(self) -> Dict:
         return {
             'network_height': 0,
@@ -705,6 +806,8 @@ class LunaNode:
                 current_hash_rate = mining_stats.get('hash_rate', 0)
                 current_hash = mining_stats.get('current_hash', '')
                 current_nonce = mining_stats.get('current_nonce', 0)
+                if not current_hash_rate:
+                    current_hash_rate = getattr(self.miner, 'last_cpu_hashrate', 0) or getattr(self.miner, 'hash_rate', 0) or self.stats.get('cpu_hash_rate', 0)
             
             # Get P2P status
             p2p_status = self.get_p2p_status()
@@ -851,7 +954,45 @@ class LunaNode:
                 if submit_success:
                     log_cpu_mining_event("block_submitted", {"block_index": block_data.get('index')})
                     self._log_message(f"Block #{block_index} mined & submitted ({tx_count} txs) - Reward: {reward}", "success")
-                    self._create_reward_transaction(block_data)
+                    reward_tx = self._create_reward_transaction(block_data)
+                    # Update local mining stats/history so rewards are detected immediately
+                    try:
+                        self.miner.blocks_mined = getattr(self.miner, "blocks_mined", 0) + 1
+                        self.miner.total_reward = getattr(self.miner, "total_reward", 0) + reward
+                    except Exception:
+                        pass
+                    try:
+                        history = getattr(self.miner, "mining_history", None)
+                        if history is None:
+                            history = []
+                            self.miner.mining_history = history
+                        record = {
+                            "timestamp": time.time(),
+                            "status": "success",
+                            "block_index": block_index,
+                            "hash": block_hash,
+                            "nonce": nonce,
+                            "difficulty": block_difficulty,
+                            "mining_time": mining_time,
+                            "transactions": block_data.get("transactions", []),
+                            "reward": reward,
+                            "method": "cuda" if cuda_used else "cpu",
+                        }
+                        history.append(record)
+                        self.data_manager.save_mining_history(history)
+                        self._recalculate_reward_stats()
+                    except Exception:
+                        pass
+                    if self.new_reward_callback:
+                        try:
+                            self.new_reward_callback(reward_tx)
+                        except Exception:
+                            pass
+                    if self.history_updated_callback:
+                        try:
+                            self.history_updated_callback()
+                        except Exception:
+                            pass
                     return True, f"Block #{block_index} mined & submitted ({tx_count} txs) - Reward: {reward}"
                 else:
                     log_cpu_mining_event("block_submission_failed", {"block_index": block_data.get('index'), "submit_message": submit_message})
@@ -953,6 +1094,23 @@ class LunaNode:
                 self._log_message("Mining stopped successfully", "info")
         else:
             self._log_message("Auto-mining stopped", "info")
+
+    def update_performance_level(self, level: int):
+        """Update CPU mining throttle level (10-100)."""
+        try:
+            level = int(level)
+        except Exception:
+            return
+        if level < 10:
+            level = 10
+        if level > 100:
+            level = 100
+        self.config.performance_level = level
+        try:
+            self.config.save_to_storage()
+        except Exception:
+            pass
+        self._log_message(f"Performance level set to {level}%", "info")
     
     def sync_network(self, progress_callback=None) -> Dict:
         """Sync with network and refresh P2P peers"""

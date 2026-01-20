@@ -27,6 +27,7 @@ class BillsPage:
         cached_transactions = self.bills_cache.get('transactions', [])
         self._cached_transactions = cached_transactions if isinstance(cached_transactions, list) else []
         self._scan_in_progress = False
+        self._last_tx_scan_ts = 0.0
         self.bills_content = ft.Column()
         self.bills_table = ft.DataTable(
             columns=[
@@ -467,7 +468,12 @@ class BillsPage:
                     except Exception as ex:
                         print(f"[DEBUG] click banknote failed: {ex}")
 
-                self._prefetch_thumbnail_pair(tx_hash, front_src, back_src)
+                try:
+                    is_mining = bool(self.app and self.app.node and self.app.node.miner and self.app.node.miner.is_mining)
+                except Exception:
+                    is_mining = False
+                if not is_mining:
+                    self._prefetch_thumbnail_pair(tx_hash, front_src, back_src)
 
                 img_main.on_hover = on_hover
 
@@ -600,8 +606,10 @@ class BillsPage:
         if self.app and self.app.node and self.app.node.miner:
             address = self.app.node.config.miner_address
         transactions = self._cached_transactions
-        if address and not defer_scan and not self._scan_in_progress:
+        now = time.time()
+        if address and not defer_scan and not self._scan_in_progress and (now - self._last_tx_scan_ts) > 60:
             self._scan_in_progress = True
+            self._last_tx_scan_ts = now
 
             def _scan():
                 new_txs = None

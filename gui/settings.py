@@ -74,6 +74,16 @@ class SettingsPage:
             border_color="#1e3a5c",
             on_change=lambda e: self._on_difficulty_changed(e.control.value)
         )
+        perf_level = int(getattr(config, "performance_level", 70)) if config else 70
+        self.performance_value = ft.Text(f"Performance Balance: {perf_level}%", size=12, color="#8b9cb5")
+        self.performance_slider = ft.Slider(
+            min=10,
+            max=100,
+            divisions=18,
+            value=perf_level,
+            label="{value}%",
+            on_change_end=lambda e: self._on_performance_level_changed(e.control.value)
+        )
         self.gpu_switch = ft.Switch(
             label="GPU Acceleration", 
             value=config.use_gpu if config else False, 
@@ -101,6 +111,8 @@ class SettingsPage:
         
         mining_card = stat_style_card("⛏️", "Mining Settings", [
             self.difficulty_field,
+            self.performance_value,
+            self.performance_slider,
             ft.Row([
                 self.gpu_switch,
                 self.auto_mining_switch,
@@ -587,6 +599,19 @@ class SettingsPage:
 
     def _on_performance_mode_changed(self, value: str):
         self.app.add_log_message(f"Performance mode set to {value}", "info")
+
+    def _on_performance_level_changed(self, value: float):
+        level = int(value)
+        if level < 10:
+            level = 10
+        if level > 100:
+            level = 100
+        if hasattr(self, "performance_value") and self.performance_value:
+            self.performance_value.value = f"Performance Balance: {level}%"
+        if self.app and self.app.node:
+            self.app.node.update_performance_level(level)
+        if self.app and self.app.page:
+            self.app.page.update()
 
     def _on_miner_address_changed(self, value: str):
         if self.app.node:
