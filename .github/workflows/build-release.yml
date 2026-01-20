@@ -81,7 +81,7 @@ jobs:
         run: |
           cd build
           tag="${GITHUB_REF_NAME}"
-          zip -r "LunaNode-${tag}-Macos.zip" macos
+          ditto -c -k --sequesterRsrc --keepParent "macos/LunaNode.app" "LunaNode-${tag}-Macos.zip"
       - name: Upload macOS Artifact
         uses: actions/upload-artifact@v4
         with:
