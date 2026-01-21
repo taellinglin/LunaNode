@@ -1373,6 +1373,12 @@ class LunaNode:
                 validation = self.blockchain_manager._validate_block_structure(block_data)
                 if not validation.get("valid", False):
                     issues = validation.get("issues", [])
+                    issues_text = " ".join([str(i) for i in issues])
+                    if "Previous hash mismatch" in issues_text:
+                        err = "Stale block detected (chain advanced)"
+                        log_cpu_mining_event("block_validation_stale", {"error": issues, "block_index": block_data.get('index')})
+                        self._log_message(err, "info")
+                        return False, err
                     err = f"Block validation failed: {issues}"
                     log_cpu_mining_event("block_validation_failed", {"error": issues, "block_index": block_data.get('index')})
                     self._log_message(err, "error")
