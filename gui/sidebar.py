@@ -15,6 +15,7 @@ class Sidebar:
         self.lbl_p2p_status = ft.Text("P2P: --", size=10, color="#e3f2fd")
         self.lbl_uptime = ft.Text("Uptime: --", size=10, color="#e3f2fd")
         self.lbl_hash_rate = ft.Text("Hash Rate: --", size=12, color="#e3f2fd")
+        self.lbl_hash_algo = ft.Text("Hash: --", size=10, color="#e3f2fd")
         self.lbl_mining_method = ft.Text("Method: --", size=10, color="#e3f2fd")
         self.lbl_current_hash = ft.Text("Current Hash: --", size=10, color="#e3f2fd")
         self.lbl_nonce = ft.Text("Nonce: --", size=10, color="#e3f2fd")
@@ -103,6 +104,7 @@ class Sidebar:
             content=ft.Column([
                 ft.Text("⛏️ Mining Stats", size=14, color="#e3f2fd"),
                 self.lbl_hash_rate,
+                self.lbl_hash_algo,
                 self.lbl_mining_method,
                 self.lbl_current_hash,
                 self.lbl_nonce,
@@ -216,6 +218,18 @@ class Sidebar:
         # Update mining stats
         hash_rate = status['current_hash_rate']
         mining_method = status.get('mining_method', 'CPU')
+        hash_algo = status.get("hash_algorithm")
+        if not hash_algo:
+            try:
+                if self.app and self.app.node and hasattr(self.app.node, "hash_algorithm"):
+                    hash_algo = self.app.node.hash_algorithm
+                elif self.app and self.app.node and hasattr(self.app.node, "config"):
+                    hash_algo = getattr(self.app.node.config, "hash_algorithm", None)
+            except Exception:
+                hash_algo = None
+        if not hash_algo:
+            hash_algo = "sha256"
+        self.lbl_hash_algo.value = f"Hash: {str(hash_algo).upper()}"
         
         if hash_rate > 1000000:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000000:.2f} MH/s"

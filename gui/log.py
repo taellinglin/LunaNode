@@ -89,5 +89,12 @@ class LogPage:
     def clear_log(self):
         """Clear log output"""
         self.log_output.controls.clear()
+        try:
+            if self.app and hasattr(self.app, "node") and self.app.node:
+                self.app.node.logs = []
+            if self.app and hasattr(self.app, "data_manager"):
+                self.app.data_manager.save_logs([])
+        except Exception:
+            pass
         if self.app.page:
             self.app.page.update()

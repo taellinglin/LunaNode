@@ -108,11 +108,36 @@ class SettingsPage:
             border_color="#1e3a5c",
             on_change=lambda e: self._on_wallet_address_changed(e.control.value)
         )
+
+        sm3_workers_value = int(getattr(config, "sm3_workers", 0) or 0) if config else 0
+        cuda_batch_value = int(getattr(config, "cuda_batch_size", 100000) or 100000) if config else 100000
+        self.sm3_workers_field = ft.TextField(
+            label="SM3 Workers",
+            value=str(sm3_workers_value),
+            width=180,
+            bgcolor="#0a1423",
+            color="#e3f2fd",
+            border_color="#1e3a5c",
+            on_change=lambda e: self._on_sm3_workers_changed(e.control.value)
+        )
+        self.cuda_batch_field = ft.TextField(
+            label="CUDA Batch Size",
+            value=str(cuda_batch_value),
+            width=180,
+            bgcolor="#0a1423",
+            color="#e3f2fd",
+            border_color="#1e3a5c",
+            on_change=lambda e: self._on_cuda_batch_changed(e.control.value)
+        )
         
         mining_card = stat_style_card("⛏️", "Mining Settings", [
             self.difficulty_field,
             self.performance_value,
             self.performance_slider,
+            ft.Row([
+                self.sm3_workers_field,
+                self.cuda_batch_field,
+            ], spacing=12),
             ft.Row([
                 self.gpu_switch,
                 self.auto_mining_switch,
@@ -576,6 +601,24 @@ class SettingsPage:
         if self.app.node and value:
             self.app.node.update_wallet_address(value)
             self.app.add_log_message(f"Wallet address updated and saved", "info")
+
+    def _on_sm3_workers_changed(self, value: str):
+        if self.app.node and value.isdigit():
+            self.app.node.config.sm3_workers = int(value)
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            self.app.add_log_message(f"SM3 workers set to {value}", "info")
+
+    def _on_cuda_batch_changed(self, value: str):
+        if self.app.node and value.isdigit():
+            self.app.node.config.cuda_batch_size = int(value)
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            self.app.add_log_message(f"CUDA batch size set to {value}", "info")
 
     def _on_network_timeout_changed(self, value: str):
         if value.isdigit():

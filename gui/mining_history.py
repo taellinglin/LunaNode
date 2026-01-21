@@ -296,7 +296,7 @@ class MiningHistory:
                 ft.Container(
                     content=ft.Row(chart_points, spacing=2),
                     height=80,
-                    alignment=ft.alignment.bottom_center
+                    alignment=ft.Alignment(0, 1)
                 ),
                 ft.Container(height=5),
                 ft.Text(f"Min: {min_value:.1f} | Max: {max_value:.1f}", size=10, color="#6c757d")

@@ -20,6 +20,14 @@ import base64
 from typing import Dict, List, Optional, Tuple, Set
 from dataclasses import dataclass
 try:
+    from gmssl.sm4 import CryptSM4, SM4_ENCRYPT, SM4_DECRYPT
+    SM4_AVAILABLE = True
+except Exception:
+    CryptSM4 = None
+    SM4_ENCRYPT = None
+    SM4_DECRYPT = None
+    SM4_AVAILABLE = False
+try:
     import cupy as cp
     CUDA_AVAILABLE = True
 except ImportError:
@@ -215,12 +223,77 @@ class SecureDataManager:
         return base64.urlsafe_b64encode(hashlib.sha256(password.encode()).digest())
 
     @staticmethod
+    def _get_encryption_algorithm() -> str:
+        algo = (os.getenv("LUNANODE_WALLET_ENCRYPTION") or os.getenv("LUNANODE_ENCRYPTION_ALGO") or "").strip().lower()
+        if algo == "fernet":
+            return "fernet"
+        if SM4_AVAILABLE:
+            return "sm4"
+        return "fernet"
+
+    @staticmethod
+    def _sm4_key_from_password(password: str) -> bytes:
+        return hashlib.sha256(password.encode()).digest()[:16]
+
+    @staticmethod
+    def _pkcs7_pad(data: bytes, block_size: int = 16) -> bytes:
+        pad_len = block_size - (len(data) % block_size)
+        return data + bytes([pad_len]) * pad_len
+
+    @staticmethod
+    def _pkcs7_unpad(data: bytes) -> bytes:
+        if not data:
+            return data
+        pad_len = data[-1]
+        if pad_len < 1 or pad_len > 16:
+            return data
+        return data[:-pad_len]
+
+    @staticmethod
+    def _sm4_encrypt(plaintext: bytes, password: str) -> Optional[bytes]:
+        if not SM4_AVAILABLE:
+            return None
+        try:
+            key = SecureDataManager._sm4_key_from_password(password)
+            iv = os.urandom(16)
+            crypt_sm4 = CryptSM4()
+            crypt_sm4.set_key(key, SM4_ENCRYPT)
+            padded = SecureDataManager._pkcs7_pad(plaintext, 16)
+            cipher = crypt_sm4.crypt_cbc(iv, padded)
+            return b"SM4:" + iv + cipher
+        except Exception:
+            return None
+
+    @staticmethod
+    def _sm4_decrypt(ciphertext: bytes, password: str) -> Optional[bytes]:
+        if not SM4_AVAILABLE:
+            return None
+        try:
+            if not ciphertext.startswith(b"SM4:"):
+                return None
+            iv = ciphertext[4:20]
+            data = ciphertext[20:]
+            key = SecureDataManager._sm4_key_from_password(password)
+            crypt_sm4 = CryptSM4()
+            crypt_sm4.set_key(key, SM4_DECRYPT)
+            padded = crypt_sm4.crypt_cbc(iv, data)
+            return SecureDataManager._pkcs7_unpad(padded)
+        except Exception:
+            return None
+
+    @staticmethod
     def save_encrypted_wallet(filename, data, password):
         """Save wallet with encryption"""
         try:
-            key = SecureDataManager.generate_key_from_password(password)
-            fernet = Fernet(key)
-            encrypted_data = fernet.encrypt(json.dumps(data).encode())
+            algo = SecureDataManager._get_encryption_algorithm()
+            plaintext = json.dumps(data).encode()
+            encrypted_data = None
+            if algo == "sm4":
+                encrypted_data = SecureDataManager._sm4_encrypt(plaintext, password)
+            if not encrypted_data:
+                key = SecureDataManager.generate_key_from_password(password)
+                fernet = Fernet(key)
+                encrypted_data = fernet.encrypt(plaintext)
 
             filepath = os.path.join(SecureDataManager.get_data_dir(), filename)
             with open(filepath, "wb") as f:
@@ -240,6 +313,10 @@ class SecureDataManager:
 
             with open(filepath, "rb") as f:
                 encrypted_data = f.read()
+
+            sm4_plain = SecureDataManager._sm4_decrypt(encrypted_data, password)
+            if sm4_plain is not None:
+                return json.loads(sm4_plain.decode())
 
             key = SecureDataManager.generate_key_from_password(password)
             fernet = Fernet(key)

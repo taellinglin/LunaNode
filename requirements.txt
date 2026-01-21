@@ -4,9 +4,10 @@ flet-desktop; platform_system != "Emscripten"
 flet-cli; platform_system != "Emscripten"
 requests
 cryptography; platform_system != "Emscripten"
-lunalib==2.0.8
+lunalib==2.1.2
 numpy
 packaging>=24.2; platform_system == "Emscripten"
 sqlite3; platform_system == "Emscripten"
 pillow; platform_system == "Emscripten"
 fastrlock; platform_system != "Emscripten"
+gmssl; platform_system != "Emscripten"

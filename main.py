@@ -267,6 +267,7 @@ class LunaNodeApp:
         """Start auto-mining"""
         if getattr(self, "_mining_transition", False):
             return
+        self.add_log_message("Start Mining clicked", "info")
         if not self.node:
             self.add_log_message("Node is still initializing. Please wait...", "warning")
             if self.page:
@@ -292,9 +293,13 @@ class LunaNodeApp:
                             self.node.config.save_to_storage()
                         except Exception:
                             pass
-                        self.node.start_auto_mining()
-                        self.safe_run_thread(lambda: self.add_log_message("Auto-mining started", "success"))
-                        self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=False, status_text="Mining Active"))
+                        started = self.node.start_auto_mining()
+                        if started:
+                            self.safe_run_thread(lambda: self.add_log_message("Auto-mining started", "success"))
+                            self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=False, status_text="Mining Active"))
+                        else:
+                            self.safe_run_thread(lambda: self.add_log_message("Auto-mining could not start. Check logs for details.", "error"))
+                            self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     except Exception as e:
                         self.safe_run_thread(lambda: self.add_log_message(f"Failed to start mining: {e}", "error"))
                         self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
@@ -651,20 +656,7 @@ class LunaNodeApp:
         self.log_page.add_log_message(message, msg_type)
         
     def clear_log(self):
-            # concise: skip debug
         self.log_page.clear_log()
-            # concise: skip debug
-            # concise: skip debug
-        """Start auto-mining"""
-            # concise: skip debug
-            # concise: skip debug
-            # concise: skip debug
-            # concise: skip debug
-            # concise: skip debug
-        """Stop auto-mining"""
-        if self.node:
-            self.node.stop_auto_mining()
-            self.add_log_message("Auto-mining stopped", "info")
             
     def mine_single_block(self):
         """Mine a single block using LunaLib"""
