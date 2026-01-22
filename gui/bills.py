@@ -383,26 +383,16 @@ class BillsPage:
                 tx = cached_banknotes.get(tx_hash)
                 if not tx:
                     continue  # banknote情報がなければスキップ
-                # front/back両方のサムネイルURLを用意
-                # frontは常にtransaction-thumbnailで確実に表示し、backはserial_idがあればmatchingを使う
-                serial_id = tx.get('serial_id') or tx.get('serial_number')
+                # フロントのみ表示
                 cached_urls = cached_thumbnail_urls.get(tx_hash, {})
                 front_src = cached_urls.get("front")
-                back_src = cached_urls.get("back")
-                if not front_src or not back_src:
+                if not front_src:
                     img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
-                    if serial_id:
-                        img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
-                    else:
-                        img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
                     front_src = f"{img_url_front}&flip=front"
-                    back_src = f"{img_url_back}&flip=back"
-                    cached_thumbnail_urls[tx_hash] = {"front": front_src, "back": back_src}
+                    cached_thumbnail_urls[tx_hash] = {"front": front_src}
 
                 local_front = os.path.join(cache_dir, f"{tx_hash}_front.png")
-                local_back = os.path.join(cache_dir, f"{tx_hash}_back.png")
                 display_front = local_front if os.path.exists(local_front) else front_src
-                display_back = local_back if os.path.exists(local_back) else back_src
                 owner = tx.get('issued_to', '')
                 amount = tx.get('denomination', '')
                 if not tx_hash:
@@ -417,7 +407,7 @@ class BillsPage:
                     padding=ft.padding.only(top=2),
                 )
 
-                # 単一のImageのsrcを切り替える方法でホバー表示を更新
+                # フロントのみ表示
                 img_main = ft.Image(
                     src=display_front,
                     width=int(160 * zoom),

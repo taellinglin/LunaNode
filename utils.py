@@ -1144,6 +1144,10 @@ class LunaNode:
                     except Exception:
                         pass
                     try:
+                        self._update_bills_cache_from_block(block_data)
+                    except Exception:
+                        pass
+                    try:
                         # Update cached status snapshot so UI reflects new totals
                         status = self.get_status()
                         if isinstance(status, dict):
@@ -1628,6 +1632,62 @@ class LunaNode:
         except Exception as e:
             self._log_message(f"Failed to save block locally: {str(e)}", "error")
             return False
+
+    def _update_bills_cache_from_block(self, block_data: Dict) -> None:
+        """Update bills cache with a newly mined block."""
+        if not isinstance(block_data, dict):
+            return
+        block_index = block_data.get("index")
+        transactions = block_data.get("transactions", [])
+        if block_index is None:
+            return
+        cache_file = os.path.join(self.data_manager.data_dir, "bills_cache.json")
+        try:
+            if os.path.exists(cache_file):
+                with open(cache_file, "r", encoding="utf-8") as f:
+                    cache = json.load(f)
+            else:
+                cache = {}
+        except Exception:
+            cache = {}
+
+        mined_blocks = set(cache.get("mined_blocks", []))
+        thumbnails = cache.get("thumbnails", {})
+        banknotes = cache.get("banknotes", {})
+        thumbnail_urls = cache.get("thumbnail_urls", {})
+
+        mined_blocks.add(block_index)
+        block_gtx_hashes = []
+        for tx in transactions:
+            if isinstance(tx, dict) and tx.get("type") == "GTX_Genesis" and tx.get("hash"):
+                tx_hash = tx.get("hash")
+                block_gtx_hashes.append(tx_hash)
+                banknotes[tx_hash] = tx
+                serial_id = tx.get("serial_id") or tx.get("serial_number")
+                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
+                if serial_id:
+                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                else:
+                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
+                thumbnail_urls[tx_hash] = {
+                    "front": f"{img_url_front}&flip=front",
+                    "back": f"{img_url_back}&flip=back",
+                }
+
+        if block_gtx_hashes:
+            existing = thumbnails.get(str(block_index), []) or []
+            thumbnails[str(block_index)] = list({*existing, *block_gtx_hashes})
+
+        cache["mined_blocks"] = list(mined_blocks)
+        cache["thumbnails"] = thumbnails
+        cache["banknotes"] = banknotes
+        cache["thumbnail_urls"] = thumbnail_urls
+
+        try:
+            with open(cache_file, "w", encoding="utf-8") as f:
+                json.dump(cache, f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
     
     def update_wallet_address(self, new_address: str):
         """Update miner wallet address"""
