@@ -612,12 +612,17 @@ class LunaNode:
                 def on_transaction(tx):
                     self._log_message(f"P2P new transaction received", "info")
                 self.p2p_client = HybridBlockchainClient(
-                    node_url=self.config.node_url,
-                    on_peer_update=on_peer_update,
-                    on_block=on_block,
-                    on_transaction=on_transaction
+                    self.config.node_url,
+                    self.blockchain_manager,
+                    self.mempool_manager,
                 )
-                self.p2p_client.connect()
+                if hasattr(self.p2p_client, "p2p"):
+                    self.p2p_client.p2p.set_callbacks(
+                        on_new_block=on_block,
+                        on_new_transaction=on_transaction,
+                        on_peer_update=on_peer_update
+                    )
+                self.p2p_client.start()
                 self._log_message("P2P client initialized and connected", "success")
             except Exception as e:
                 self._log_message(f"P2P client init failed: {e}", "error")
@@ -1133,6 +1138,18 @@ class LunaNode:
                 if submit_success:
                     log_cpu_mining_event("block_submitted", {"block_index": block_data.get('index')})
                     self._log_message(f"Block #{block_index} mined & submitted ({tx_count} txs) - Reward: {reward}", "success")
+                    # Refresh local cache/stats immediately
+                    try:
+                        self.data_manager.save_submitted_block(block_data)
+                    except Exception:
+                        pass
+                    try:
+                        # Update cached status snapshot so UI reflects new totals
+                        status = self.get_status()
+                        if isinstance(status, dict):
+                            self.data_manager.save_stats(status)
+                    except Exception:
+                        pass
                     reward_tx = self._create_reward_transaction(block_data)
                     # Update local mining stats/history so rewards are detected immediately
                     try:
@@ -1204,20 +1221,19 @@ class LunaNode:
             return False, f"Genesis mining error: {str(e)}", None
     
     def start_auto_mining(self):
-        """Start auto-mining (CPU:従来通り, GPU:lunalib 2.3.8仕様)"""
+        """Start auto-mining (CPU:従来通り, GPU:lunalib 2.4.0仕様)"""
         self.stop_auto_mining()
         if self.config.use_gpu:
-            # lunalib 2.3.8: use_cuda + start_mining
+            # lunalib 2.4.0: use_cuda + start_mining
             self.miner.use_cuda = True
             if hasattr(self.miner, "use_cpu"):
                 self.miner.use_cpu = False
             cuda_available = self.miner.cuda_manager.cuda_available if self.miner and self.miner.cuda_manager else False
             if not cuda_available:
-                self._log_message("CUDA not available - cannot start GPU mining", "error")
-                return False
+                self._log_message("CUDA not available - starting mining with fallback", "warning")
             try:
                 self.miner.start_mining()
-                self._log_message("Auto-mining started (GPU/CUDA, lunalib 2.3.8)", "info")
+                self._log_message("Auto-mining started (GPU/CUDA, lunalib 2.4.0)", "info")
                 return True
             except Exception as e:
                 self._log_message(f"Failed to start CUDA mining: {e}", "error")
@@ -1271,10 +1287,10 @@ class LunaNode:
             return True
     
     def stop_auto_mining(self):
-        """Stop auto-mining (lunalib 2.3.8仕様: stop_miningのみ)"""
+        """Stop auto-mining (lunalib 2.4.0仕様: stop_miningのみ)"""
         try:
             self.miner.stop_mining()
-            self._log_message("Stopped mining (lunalib 2.3.8)", "info")
+            self._log_message("Stopped mining (lunalib 2.4.0)", "info")
         except Exception as e:
             self._log_message(f"Failed to stop mining: {e}", "error")
 
@@ -1431,14 +1447,14 @@ class LunaNode:
                     # 直近でindex一致かつminer一致も許容（P2P遅延対策）
                     if latest_block and str(latest_block.get("index")) == str(block_data.get("index")) and str(latest_block.get("miner")) == str(self.config.miner_address):
                         return True, submit_msg + " (confirmed by index/miner)"
-                    # 反映されていない場合は警告
-                    warn_msg = submit_msg + " (not found on chain after submit)"
+                    # 反映されていない場合は確認待ちとして成功扱い
+                    warn_msg = submit_msg + " (confirmation pending)"
                     self._log_message(warn_msg, "warning")
-                    return False, warn_msg
+                    return True, warn_msg
                 except Exception as e:
                     err_msg = submit_msg + f" (confirmation error: {e})"
                     self._log_message(err_msg, "error")
-                    return False, err_msg
+                    return True, err_msg
             return False, submit_msg
 
             log_cpu_mining_event("block_submit_failed", {"block_index": block_data.get('index')})
@@ -1669,14 +1685,14 @@ class LunaNode:
         self._log_message(f"Mining interval updated to: {new_interval} seconds", "info")
     
     def toggle_gpu_acceleration(self, enabled: bool):
-        """Toggle GPU/CUDA acceleration for mining (lunalib 2.3.8仕様)"""
+        """Toggle GPU/CUDA acceleration for mining (lunalib 2.4.0仕様)"""
         self.config.use_gpu = enabled
         self.config.save_to_storage()
         if self.miner:
             self.miner.use_cuda = bool(enabled)
             if hasattr(self.miner, "use_cpu"):
                 self.miner.use_cpu = not bool(enabled)
-        self._log_message(f"GPU acceleration {'enabled' if enabled else 'disabled'} (lunalib 2.3.8)", "info")
+        self._log_message(f"GPU acceleration {'enabled' if enabled else 'disabled'} (lunalib 2.4.0)", "info")
     
     def toggle_auto_mining(self, enabled: bool):
         """Toggle auto-mining"""

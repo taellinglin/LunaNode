@@ -698,7 +698,25 @@ class LunaNodeApp:
         
     def update_history_content(self):
         """Update history content"""
-        self.mining_history.update_history_content()
+        def _refresh():
+            self.mining_history.update_history_content()
+            if self.node and self.main_page:
+                try:
+                    self.main_page.update_mining_stats()
+                except Exception:
+                    pass
+            if self.node and self.sidebar:
+                try:
+                    status = self.node.get_status()
+                    self.sidebar.update_status(status)
+                except Exception:
+                    pass
+            if self.bills_page:
+                try:
+                    self.bills_page.update_bills_content()
+                except Exception:
+                    pass
+        self.safe_run_thread(_refresh)
         
     def show_about_dialog(self):
         """Show about dialog using sliding overlay"""
