@@ -16,6 +16,7 @@ hiddenimports.extend([
     'lunalib.core.blockchain',
     'lunalib.core.mempool',
     'lunalib.core.p2p',
+    'lunalib.core.sm3_cuda',
     'lunalib.core.wallet',
     
     # Mining modules (critical for CUDA)

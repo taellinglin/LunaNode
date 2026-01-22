@@ -12,6 +12,9 @@ from pathlib import Path
 import certifi
 import PIL
 import sys
+# Lunalib backend selection (SM2). Use env override if provided.
+os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
+
 from utils import DataManager, NodeConfig, is_valid_luna_address
 
 # Import unified balance utilities (if needed)
