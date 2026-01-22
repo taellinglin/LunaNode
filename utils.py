@@ -193,6 +193,7 @@ class DataManager:
             'hash_algorithm': "sm3",
             'sm3_workers': max(1, (os.cpu_count() or 4) - 1),
             'cuda_batch_size': 100000,
+            'gpu_batch_dynamic': False,
             'cpu_threads': 1,
             'gpu_batch_size': 100000
         }
@@ -364,6 +365,7 @@ class NodeConfig:
         self.hash_algorithm = settings.get('hash_algorithm', "sm3")
         self.sm3_workers = settings.get('sm3_workers', max(1, (os.cpu_count() or 4) - 1))
         self.cuda_batch_size = settings.get('cuda_batch_size', 100000)
+        self.gpu_batch_dynamic = settings.get('gpu_batch_dynamic', False)
         self.cpu_threads = settings.get('cpu_threads', 1)
         self.gpu_batch_size = settings.get('gpu_batch_size', 100000)
     
@@ -382,6 +384,7 @@ class NodeConfig:
             'hash_algorithm': self.hash_algorithm,
             'sm3_workers': self.sm3_workers,
             'cuda_batch_size': self.cuda_batch_size,
+            'gpu_batch_dynamic': getattr(self, 'gpu_batch_dynamic', False),
             'cpu_threads': getattr(self, 'cpu_threads', 1),
             'gpu_batch_size': getattr(self, 'gpu_batch_size', 100000),
         }
@@ -532,6 +535,10 @@ class LunaNode:
         
         # Initialize LunaLib Miner (uses config, data_manager signature)
         self.miner = LunaLibMiner(self.config, self.data_manager) if LunaLibMiner else None
+        self.cpu_miner = self.miner
+        self.gpu_miner = None
+        self.cpu_mining_thread = None
+        self.gpu_mining_thread = None
 
         # Initialize LunaLib GenesisMiner for GTX Genesis bills (optional)
         self.genesis_miner = None
@@ -559,9 +566,7 @@ class LunaNode:
                 original_cuda_mine = self.miner._cuda_mine
 
                 def _cuda_mine_with_batch(block_data: Dict, difficulty: int):
-                    batch_size = int(getattr(self.config, "cuda_batch_size", 100000) or 100000)
-                    if batch_size < 1000:
-                        batch_size = 1000
+                    batch_size = self._resolve_cuda_batch_size()
                     try:
                         result = self.miner.cuda_manager.cuda_mine_batch(block_data, difficulty, batch_size=batch_size)
                         if isinstance(result, dict):
@@ -588,6 +593,13 @@ class LunaNode:
             cached_history = self.data_manager.load_mining_history()
             if isinstance(cached_history, list) and cached_history:
                 self.miner.mining_history = cached_history
+            if self.gpu_miner is None and LunaLibMiner is not None:
+                try:
+                    self.gpu_miner = LunaLibMiner(self.config, self.data_manager)
+                except Exception:
+                    self.gpu_miner = None
+            if self.gpu_miner is not None:
+                self.gpu_miner.mining_history = getattr(self.miner, "mining_history", cached_history if isinstance(cached_history, list) else [])
             self._recalculate_reward_stats()
         except Exception:
             pass
@@ -595,37 +607,19 @@ class LunaNode:
         # Link managers to miner
         self.miner.blockchain_manager = self.blockchain_manager
         self.miner.mempool_manager = self.mempool_manager
+        if self.gpu_miner is not None:
+            self.gpu_miner.blockchain_manager = self.blockchain_manager
+            self.gpu_miner.mempool_manager = self.mempool_manager
+            self.gpu_miner.use_cuda = True
+            if hasattr(self.gpu_miner, "use_cpu"):
+                self.gpu_miner.use_cpu = False
         
         # Disable auto-submission so we can handle it ourselves
         if hasattr(self.miner, 'auto_submit'):
             self.miner.auto_submit = False
         
         # Initialize HybridBlockchainClient for P2P networking (always enabled if available)
-        self.p2p_client = None
-        if P2P_AVAILABLE and HybridBlockchainClient is not None:
-            try:
-                def on_peer_update(peers):
-                    self.peers = peers or []
-                    self._log_message(f"P2P peers updated: {len(self.peers)} peers", "info")
-                def on_block(block):
-                    self._log_message(f"P2P new block received: {block.get('index', '?')}", "info")
-                def on_transaction(tx):
-                    self._log_message(f"P2P new transaction received", "info")
-                self.p2p_client = HybridBlockchainClient(
-                    self.config.node_url,
-                    self.blockchain_manager,
-                    self.mempool_manager,
-                )
-                if hasattr(self.p2p_client, "p2p"):
-                    self.p2p_client.p2p.set_callbacks(
-                        on_new_block=on_block,
-                        on_new_transaction=on_transaction,
-                        on_peer_update=on_peer_update
-                    )
-                self.p2p_client.start()
-                self._log_message("P2P client initialized and connected", "success")
-            except Exception as e:
-                self._log_message(f"P2P client init failed: {e}", "error")
+        self._init_p2p_client()
         
         # Set CUDA availability based on config and miner's CUDA status
         cuda_available = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
@@ -645,6 +639,91 @@ class LunaNode:
         print("[DEBUG] NodeConfig initialized:", self.config)
 
         # Use LunaLib CPU mining implementation without overrides
+
+    def _init_p2p_client(self):
+        """Initialize LunaLib P2P client with compatible constructor + callbacks."""
+        self.p2p_client = None
+        if not P2P_AVAILABLE or HybridBlockchainClient is None:
+            return
+
+        try:
+            def on_peer_update(peers):
+                self.peers = peers or []
+                self._log_message(f"P2P peers updated: {len(self.peers)} peers", "info")
+
+            def on_block(block):
+                self._log_message(f"P2P new block received: {block.get('index', '?')}", "info")
+
+            def on_transaction(tx):
+                self._log_message("P2P new transaction received", "info")
+
+            try:
+                self.p2p_client = HybridBlockchainClient(
+                    self.config.node_url,
+                    self.blockchain_manager,
+                    self.mempool_manager,
+                )
+            except TypeError:
+                try:
+                    self.p2p_client = HybridBlockchainClient(
+                        self.config.node_url,
+                        self.blockchain_manager,
+                    )
+                except TypeError:
+                    self.p2p_client = HybridBlockchainClient(self.config.node_url)
+
+            if hasattr(self.p2p_client, "p2p") and hasattr(self.p2p_client.p2p, "set_callbacks"):
+                self.p2p_client.p2p.set_callbacks(
+                    on_new_block=on_block,
+                    on_new_transaction=on_transaction,
+                    on_peer_update=on_peer_update,
+                )
+            elif hasattr(self.p2p_client, "set_callbacks"):
+                self.p2p_client.set_callbacks(
+                    on_new_block=on_block,
+                    on_new_transaction=on_transaction,
+                    on_peer_update=on_peer_update,
+                )
+
+            if hasattr(self.p2p_client, "start"):
+                self.p2p_client.start()
+            self._log_message("P2P client initialized and connected", "success")
+        except Exception as e:
+            self._log_message(f"P2P client init failed: {e}", "error")
+
+    def _resolve_cuda_batch_size(self) -> int:
+        """Resolve GPU batch size (static or dynamic max based on mempool size)."""
+        base = int(getattr(self.config, "cuda_batch_size", 100000) or 100000)
+        if base < 1000:
+            base = 1000
+        dynamic = bool(getattr(self.config, "gpu_batch_dynamic", False))
+
+        mempool_len = 0
+        try:
+            cached = getattr(self, "_net_cache", {}).get("mempool", [])
+            if isinstance(cached, list):
+                mempool_len = len(cached)
+        except Exception:
+            mempool_len = 0
+
+        if mempool_len <= 0:
+            try:
+                mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
+                mempool_len = len(mempool) if isinstance(mempool, list) else 0
+            except Exception:
+                mempool_len = 0
+
+        if not dynamic:
+            return base
+
+        if mempool_len > 0:
+            scaled = mempool_len * 1000
+            if scaled > 1_000_000:
+                scaled = 1_000_000
+            if scaled < 1000:
+                scaled = 1000
+            return min(base, scaled)
+        return base
 
     def _apply_hash_algorithm(self):
         algo = str(self.hash_algorithm or "sha256").lower().strip()
@@ -1042,15 +1121,16 @@ class LunaNode:
                 'error': str(e)
             }
     
-    def mine_single_block(self) -> Tuple[bool, str]:
+    def mine_single_block(self, miner=None, force_cuda: Optional[bool] = None) -> Tuple[bool, str]:
         """Mine a single block (lunalib 1.8.7 GenesisMiner対応)"""
         try:
             if not self._ensure_sm3_available():
                 return False, "SM3 unavailable"
+            target_miner = miner or self.miner
             log_cpu_mining_event("mine_single_block_called", {})
             # lunalib 1.8.7 Miner: mine_block()を使う
             mining_start = time.time()
-            result = self.miner.mine_block()
+            result = target_miner.mine_block()
             safe_print(f"[DEBUG] mine_block() result: {result}")
             log_cpu_mining_event("mine_block_result", {"result": str(result)})
             success, message, block_data = False, '', None
@@ -1115,7 +1195,10 @@ class LunaNode:
                         fixed_transactions.append(tx)
                 block_data['transactions'] = fixed_transactions
                 # --- ここまで ---
-                cuda_used = hasattr(self.miner, 'cuda_manager') and self.miner.cuda_manager and getattr(self.miner.cuda_manager, 'cuda_available', False) and self.config.use_gpu
+                if force_cuda is None:
+                    cuda_used = hasattr(target_miner, 'cuda_manager') and target_miner.cuda_manager and getattr(target_miner.cuda_manager, 'cuda_available', False) and self.config.use_gpu
+                else:
+                    cuda_used = bool(force_cuda)
                 if cuda_used and mining_time > 0:
                     self.stats['cuda_hash_rate'] = nonce / mining_time
                     self.stats['cuda_last_nonce'] = nonce
@@ -1123,8 +1206,8 @@ class LunaNode:
                     self.stats['last_mining_method'] = 'cuda'
                     safe_print(f"[DEBUG] CUDA mining: cuda_hash_rate={self.stats['cuda_hash_rate']}")
                 else:
-                    if hasattr(self.miner, 'get_mining_stats'):
-                        mining_stats = self.miner.get_mining_stats()
+                    if hasattr(target_miner, 'get_mining_stats'):
+                        mining_stats = target_miner.get_mining_stats()
                         safe_print(f"[DEBUG] mining_stats: {mining_stats}")
                         self.stats['cpu_hash_rate'] = mining_stats.get('hash_rate', 0)
                         safe_print(f"[DEBUG] CPU mining: cpu_hash_rate={self.stats['cpu_hash_rate']} (lunalib), nonce={nonce}, mining_time={mining_time}")
@@ -1159,13 +1242,16 @@ class LunaNode:
                     try:
                         self.miner.blocks_mined = getattr(self.miner, "blocks_mined", 0) + 1
                         self.miner.total_reward = getattr(self.miner, "total_reward", 0) + reward
+                        if target_miner is not self.miner:
+                            target_miner.blocks_mined = getattr(target_miner, "blocks_mined", 0) + 1
+                            target_miner.total_reward = getattr(target_miner, "total_reward", 0) + reward
                     except Exception:
                         pass
                     try:
-                        history = getattr(self.miner, "mining_history", None)
+                        history = getattr(target_miner, "mining_history", None)
                         if history is None:
                             history = []
-                            self.miner.mining_history = history
+                            target_miner.mining_history = history
                         record = {
                             "timestamp": time.time(),
                             "status": "success",
@@ -1227,74 +1313,91 @@ class LunaNode:
     def start_auto_mining(self):
         """Start auto-mining (CPU:従来通り, GPU:lunalib 2.4.0仕様)"""
         self.stop_auto_mining()
-        if self.config.use_gpu:
-            # lunalib 2.4.0: use_cuda + start_mining
-            self.miner.use_cuda = True
-            if hasattr(self.miner, "use_cpu"):
-                self.miner.use_cpu = False
-            cuda_available = self.miner.cuda_manager.cuda_available if self.miner and self.miner.cuda_manager else False
-            if not cuda_available:
-                self._log_message("CUDA not available - starting mining with fallback", "warning")
-            try:
-                self.miner.start_mining()
-                self._log_message("Auto-mining started (GPU/CUDA, lunalib 2.4.0)", "info")
-                return True
-            except Exception as e:
-                self._log_message(f"Failed to start CUDA mining: {e}", "error")
-                return False
-        else:
-            # CPUマイニングは従来通り
-            self._log_message("Auto-mining invoked (CPU)", "info")
-            if not self._ensure_sm3_available():
-                self._log_message("Auto-mining blocked (SM3 unavailable)", "error")
-                return False
-            self.enable_live_stats()
-            if hasattr(self.miner, "should_stop_mining"):
-                self.miner.should_stop_mining = False
-            self._stop_mining_event.clear()
-            if getattr(self.miner, 'mining_thread', None) and self.miner.mining_thread.is_alive():
-                self._log_message("Mining thread already running, not starting another.", "warning")
-                return True
-            try:
-                self.miner.start_mining()
-            except Exception:
-                self.miner.is_mining = False
-                return False
+        self._log_message("Auto-mining invoked", "info")
+        if not self._ensure_sm3_available():
+            self._log_message("Auto-mining blocked (SM3 unavailable)", "error")
+            return False
+        self.enable_live_stats()
+        if hasattr(self.miner, "should_stop_mining"):
+            self.miner.should_stop_mining = False
+        self._stop_mining_event.clear()
+
+        def cpu_loop():
+            print("[DEBUG] CPU mining loop started")
+            self._log_message("CPU mining loop started", "info")
             self.miner.is_mining = True
-            self._log_message("Auto-mining started (CPU)", "info")
-            def mining_loop():
-                print("[DEBUG] mining_loop started")
-                self._log_message("Mining loop started", "info")
-                while self.miner.is_mining and self.is_running:
-                    if getattr(self.miner, "should_stop_mining", False):
+            while self.miner.is_mining and self.is_running:
+                if getattr(self.miner, "should_stop_mining", False):
+                    break
+                if self._stop_mining_event.is_set():
+                    break
+                self._log_message("CPU mining tick: starting block attempt", "info")
+                success, message = self.mine_single_block(miner=self.cpu_miner, force_cuda=False)
+                if success:
+                    self._log_message(message, "success")
+                    if self._stop_mining_event.wait(5):
                         break
-                    if self._stop_mining_event.is_set():
-                        break
-                    self._log_message("Mining tick: starting block attempt", "info")
-                    success, message = self.mine_single_block()
-                    if success:
-                        self._log_message(message, "success")
-                        print("[DEBUG] Block mined successfully")
-                        if self._stop_mining_event.wait(5):
-                            break
+                else:
+                    if "Stale block detected" in message:
+                        self._log_message(message, "info")
                     else:
-                        if "Stale block detected" in message:
-                            self._log_message(message, "info")
-                        else:
-                            self._log_message(message, "warning")
-                        print(f"[DEBUG] Mining failed: {message}")
-                        if self._stop_mining_event.wait(self.config.mining_interval):
-                            break
-                self._log_message("Mining loop stopped", "info")
-            self.miner.mining_thread = threading.Thread(target=mining_loop, daemon=True)
-            self.miner.mining_thread.start()
-            return True
+                        self._log_message(message, "warning")
+                    if self._stop_mining_event.wait(self.config.mining_interval):
+                        break
+            self._log_message("CPU mining loop stopped", "info")
+
+        def gpu_loop():
+            print("[DEBUG] GPU mining loop started")
+            self._log_message("GPU mining loop started", "info")
+            if self.gpu_miner is None:
+                return
+            if hasattr(self.gpu_miner, "should_stop_mining"):
+                self.gpu_miner.should_stop_mining = False
+            self.gpu_miner.is_mining = True
+            while self.gpu_miner.is_mining and self.is_running:
+                if getattr(self.gpu_miner, "should_stop_mining", False):
+                    break
+                if self._stop_mining_event.is_set():
+                    break
+                self._log_message("GPU mining tick: starting block attempt", "info")
+                success, message = self.mine_single_block(miner=self.gpu_miner, force_cuda=True)
+                if success:
+                    self._log_message(message, "success")
+                    if self._stop_mining_event.wait(5):
+                        break
+                else:
+                    if "Stale block detected" in message:
+                        self._log_message(message, "info")
+                    else:
+                        self._log_message(message, "warning")
+                    if self._stop_mining_event.wait(self.config.mining_interval):
+                        break
+            self._log_message("GPU mining loop stopped", "info")
+
+        if not self.cpu_mining_thread or not self.cpu_mining_thread.is_alive():
+            self.cpu_mining_thread = threading.Thread(target=cpu_loop, daemon=True)
+            self.cpu_mining_thread.start()
+
+        if self.config.use_gpu and self.gpu_miner and getattr(self.gpu_miner, "cuda_manager", None) and getattr(self.gpu_miner.cuda_manager, "cuda_available", False):
+            if not self.gpu_mining_thread or not self.gpu_mining_thread.is_alive():
+                self.gpu_mining_thread = threading.Thread(target=gpu_loop, daemon=True)
+                self.gpu_mining_thread.start()
+            self._log_message("Auto-mining started (GPU+CPU)", "info")
+        else:
+            self._log_message("Auto-mining started (CPU)", "info")
+        return True
     
     def stop_auto_mining(self):
         """Stop auto-mining (lunalib 2.4.0仕様: stop_miningのみ)"""
+        self._stop_mining_event.set()
         try:
-            self.miner.stop_mining()
-            self._log_message("Stopped mining (lunalib 2.4.0)", "info")
+            if self.miner:
+                self.miner.is_mining = False
+                self.miner.stop_mining()
+            if self.gpu_miner:
+                self.gpu_miner.is_mining = False
+                self.gpu_miner.stop_mining()
+            self._log_message("Stopped mining (CPU/GPU)", "info")
         except Exception as e:
             self._log_message(f"Failed to stop mining: {e}", "error")
 
@@ -1664,11 +1767,11 @@ class LunaNode:
                 block_gtx_hashes.append(tx_hash)
                 banknotes[tx_hash] = tx
                 serial_id = tx.get("serial_id") or tx.get("serial_number")
-                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
+                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front&scale=2"
                 if serial_id:
-                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match&scale=2"
                 else:
-                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back"
+                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back&scale=2"
                 thumbnail_urls[tx_hash] = {
                     "front": f"{img_url_front}&flip=front",
                     "back": f"{img_url_back}&flip=back",
@@ -1734,8 +1837,8 @@ class LunaNode:
         if hasattr(self.miner, 'auto_submit'):
             self.miner.auto_submit = False
         
-        # Reinitialize P2P (manual fetch only, no lunalib P2P)
-        self.p2p_client = None
+        # Reinitialize P2P with LunaLib client
+        self._init_p2p_client()
         self._log_message(f"Node URL updated to: {new_url}", "info")
     
     def update_mining_interval(self, new_interval: int):
@@ -1777,11 +1880,30 @@ class LunaNode:
                 self._log_message("P2P client stopped", "info")
             except Exception as e:
                 print(f"[DEBUG] Error stopping P2P client: {e}")
+
+    def _resolve_p2p_connected(self) -> bool:
+        """Best-effort P2P connection state across lunalib versions."""
+        if not self.p2p_client:
+            return False
+        peer_list = getattr(self, 'peers', None)
+        if isinstance(peer_list, list) and len(peer_list) > 0:
+            return True
+        for obj in (self.p2p_client, getattr(self.p2p_client, 'p2p', None)):
+            if not obj:
+                continue
+            for attr in ("is_connected", "connected", "is_running", "running", "started"):
+                if hasattr(obj, attr):
+                    try:
+                        value = getattr(obj, attr)
+                        return bool(value() if callable(value) else value)
+                    except Exception:
+                        continue
+        return False
     
     def get_p2p_status(self) -> Dict:
         """Get P2P network status (real if P2P enabled)"""
-        if self.p2p_client and hasattr(self.p2p_client, 'is_connected'):
-            connected = self.p2p_client.is_connected()
+        if self.p2p_client:
+            connected = self._resolve_p2p_connected()
             peer_list = getattr(self, 'peers', [])
             return {
                 'connected': connected,

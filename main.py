@@ -59,7 +59,7 @@ if sys.platform == "emscripten":
 # Import GUI modules
 from gui.sidebar import Sidebar
 from gui.main_page import MainPage
-from gui.mining_history import MiningHistory
+from gui.history import MiningHistory
 from gui.bills import BillsPage
 from gui.log import LogPage
 from gui.settings import SettingsPage
@@ -465,11 +465,13 @@ class LunaNodeApp:
         tab_labels = [
             ft.Tab(label="⛏️ Mining"),
             ft.Tab(label="⌚ History"),
+            ft.Tab(label="💵 Bills"),
             ft.Tab(label="⚙️ Settings"),
             ft.Tab(label="📋 Log"),
         ]
         tab_contents = [
             self.main_page.create_mining_tab(),
+            self.mining_history.create_history_tab(),
             self.bills_page.create_bills_tab(),
             self.settings_page.create_settings_tab(),
             self.log_page.create_log_tab(),
@@ -501,14 +503,16 @@ class LunaNodeApp:
                 except Exception:
                     pass
         elif self.current_tab_index == 1:
+            print("[DEBUG] History tab selected: updating history content")
+            self.mining_history.update_history_content()
+        elif self.current_tab_index == 2:
             print("[DEBUG] Bills tab selected: updating bills content")
             self.bills_page.update_bills_content()
-        elif self.current_tab_index == 2:
-            print("[DEBUG] Stats tab selected: updating history content")
-            self.mining_history.update_history_content()
         elif self.current_tab_index == 3:  # Settings tab
             print("[DEBUG] Settings tab selected: updating settings content")
             self.settings_page.update_settings_content()
+        elif self.current_tab_index == 4:  # Log tab
+            print("[DEBUG] Log tab selected")
             
     def on_window_event(self, e):
         """Handle window events"""

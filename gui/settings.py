@@ -111,8 +111,8 @@ class SettingsPage:
 
         sm3_workers_value = int(getattr(config, "sm3_workers", 0) or 0) if config else 0
         cuda_batch_value = int(getattr(config, "cuda_batch_size", 100000) or 100000) if config else 100000
+        gpu_batch_dynamic_value = bool(getattr(config, "gpu_batch_dynamic", False)) if config else False
         cpu_threads_value = int(getattr(config, "cpu_threads", 1) or 1) if config else 1
-        gpu_batch_value = int(getattr(config, "gpu_batch_size", 100000) or 100000) if config else 100000
 
         self.sm3_workers_field = ft.TextField(
             label="SM3 Workers",
@@ -124,13 +124,18 @@ class SettingsPage:
             on_change=lambda e: self._on_sm3_workers_changed(e.control.value)
         )
         self.cuda_batch_field = ft.TextField(
-            label="CUDA Batch Size",
+            label="GPU Batch",
             value=str(cuda_batch_value),
             width=120,
             bgcolor="#0a1423",
             color="#e3f2fd",
             border_color="#1e3a5c",
             on_change=lambda e: self._on_cuda_batch_changed(e.control.value)
+        )
+        self.gpu_batch_dynamic_check = ft.Checkbox(
+            label="Dynamic",
+            value=gpu_batch_dynamic_value,
+            on_change=lambda e: self._on_gpu_batch_dynamic_changed(e.control.value)
         )
         self.cpu_threads_field = ft.TextField(
             label="CPU Threads",
@@ -142,16 +147,6 @@ class SettingsPage:
             keyboard_type=ft.KeyboardType.NUMBER,
             on_change=lambda e: self._on_cpu_threads_changed(e.control.value)
         )
-        self.gpu_batch_field = ft.TextField(
-            label="GPU Batch Size",
-            value=str(gpu_batch_value),
-            width=120,
-            bgcolor="#0a1423",
-            color="#e3f2fd",
-            border_color="#1e3a5c",
-            keyboard_type=ft.KeyboardType.NUMBER,
-            on_change=lambda e: self._on_gpu_batch_changed(e.control.value)
-        )
 
         mining_card = stat_style_card("⛏️", "Mining Settings", [
             self.difficulty_field,
@@ -159,9 +154,9 @@ class SettingsPage:
             self.performance_slider,
             ft.Row([
                 self.sm3_workers_field,
-                self.cuda_batch_field,
                 self.cpu_threads_field,
-                self.gpu_batch_field,
+                self.cuda_batch_field,
+                self.gpu_batch_dynamic_check,
             ], spacing=12),
             ft.Row([
                 self.gpu_switch,
@@ -197,16 +192,6 @@ class SettingsPage:
             self.app.node.config.cpu_threads = v
             self.app.node.config.save_to_storage()
 
-    def _on_gpu_batch_changed(self, value):
-        try:
-            v = int(value)
-            if v < 1:
-                v = 1
-        except Exception:
-            v = 100000
-        if self.app.node:
-            self.app.node.config.gpu_batch_size = v
-            self.app.node.config.save_to_storage()
     def _create_mining_settings(self):
         """Create mining-related settings"""
         self.auto_mining_switch = ft.Switch(
@@ -664,7 +649,19 @@ class SettingsPage:
                 self.app.node.config.save_to_storage()
             except Exception:
                 pass
-            self.app.add_log_message(f"CUDA batch size set to {value}", "info")
+            self.app.add_log_message(f"GPU batch set to {value}", "info")
+
+    def _on_gpu_batch_dynamic_changed(self, value: bool):
+        if self.app.node:
+            self.app.node.config.gpu_batch_dynamic = bool(value)
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            self.app.add_log_message(
+                f"GPU batch dynamic {'enabled' if value else 'disabled'}",
+                "info",
+            )
 
     def _on_network_timeout_changed(self, value: str):
         if value.isdigit():

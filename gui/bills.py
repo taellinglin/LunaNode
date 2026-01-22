@@ -17,7 +17,7 @@ class BillsPage:
         import json
         self.app = app
         self._prefetching = set()
-        self.zoom = 1.0
+        self.zoom = 2.0
         try:
             from utils import DataManager
             self.cache_file = os.path.join(DataManager().data_dir, "bills_cache.json")
@@ -198,8 +198,8 @@ class BillsPage:
                 import requests
                 import time
                 cache_dir = self._get_thumbnail_cache_dir()
-                front_path = os.path.join(cache_dir, f"{tx_hash}_front.png")
-                back_path = os.path.join(cache_dir, f"{tx_hash}_back.png")
+                front_path = os.path.join(cache_dir, f"{tx_hash}_front_2x.png")
+                back_path = os.path.join(cache_dir, f"{tx_hash}_back_2x.png")
 
                 if not os.path.exists(front_path):
                     resp = requests.get(front_url, timeout=15)
@@ -261,40 +261,23 @@ class BillsPage:
             print(f"[DEBUG] Failed to save bills cache: {e}")
 
     def create_bills_tab(self):
-        """Create bills/transactions management tab (split view)"""
-        # 上部: PNGサムネイルタイル（16:6アスペクト比）
-        # レイアウト（上下分割、各50%）
+        """Create bills tab (banknotes only, full height)"""
         return ft.Container(
             content=ft.Column([
                 ft.Row([
                     ft.Text("Banknotes", size=16, color="#e3f2fd"),
                 ]),
                 ft.Divider(height=8, color="#1e3a5c"),
-                ft.Row([
-                    ft.Container(
-                        content=self.bill_tiles,
-                        bgcolor="#0f1a2a",
-                        border_radius=6,
-                        padding=10,
-                        expand=True,
-                        height=None,
-                        width=None,
-                    ),
-                    # 右側に何も置かない
-                ], expand=True),
-                ft.Divider(height=12, color="#1e3a5c"),
-                ft.Text("Mined Blocks", size=14, color="#e3f2fd"),
                 ft.Container(
-                    content=self.tx_cards,
+                    content=self.bill_tiles,
                     bgcolor="#0f1a2a",
                     border_radius=6,
                     padding=10,
                     expand=True,
-                    width=float('inf'),
-                    height=None,
                 ),
             ], expand=True),
-            padding=10
+            padding=10,
+            expand=True
         )
 
     def update_bills_content(self, defer_scan: bool = False):
@@ -346,11 +329,11 @@ class BillsPage:
                             cached_banknotes[tx['hash']] = tx
                             # サムネイルURLをキャッシュ
                             serial_id = tx.get('serial_id') or tx.get('serial_number')
-                            img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=front"
+                            img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=front&scale=2"
                             if serial_id:
-                                img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match"
+                                img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match&scale=2"
                             else:
-                                img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=back"
+                                img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx['hash']}?side=back&scale=2"
                             cached_thumbnail_urls[tx['hash']] = {
                                 "front": f"{img_url_front}&flip=front",
                                 "back": f"{img_url_back}&flip=back",
@@ -386,13 +369,22 @@ class BillsPage:
                 # フロントのみ表示
                 cached_urls = cached_thumbnail_urls.get(tx_hash, {})
                 front_src = cached_urls.get("front")
-                if not front_src:
-                    img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front"
+                back_src = cached_urls.get("back")
+                if not front_src or not back_src:
+                    serial_id = tx.get('serial_id') or tx.get('serial_number')
+                    img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front&scale=2"
+                    if serial_id:
+                        img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match&scale=2"
+                    else:
+                        img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back&scale=2"
                     front_src = f"{img_url_front}&flip=front"
-                    cached_thumbnail_urls[tx_hash] = {"front": front_src}
+                    back_src = f"{img_url_back}&flip=back"
+                    cached_thumbnail_urls[tx_hash] = {"front": front_src, "back": back_src}
 
-                local_front = os.path.join(cache_dir, f"{tx_hash}_front.png")
+                local_front = os.path.join(cache_dir, f"{tx_hash}_front_2x.png")
+                local_back = os.path.join(cache_dir, f"{tx_hash}_back_2x.png")
                 display_front = local_front if os.path.exists(local_front) else front_src
+                display_back = local_back if os.path.exists(local_back) else back_src
                 owner = tx.get('issued_to', '')
                 amount = tx.get('denomination', '')
                 if not tx_hash:
@@ -404,14 +396,17 @@ class BillsPage:
                         ft.Text(str(owner), size=int(8 * zoom), color="#b0bec5", weight=ft.FontWeight.W_400),
                         ft.Text(f"{amount}", size=int(8 * zoom), color="#ffd600", weight=ft.FontWeight.W_400),
                     ], spacing=4, alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-                    padding=ft.padding.only(top=2),
+                    padding=ft.Padding.only(top=2),
                 )
 
-                # フロントのみ表示
+                # 1枚だけ表示（front優先、なければback）
+                bill_width = int(160 * zoom)
+                bill_height = int(60 * zoom)
+                thumb_src = display_front if display_front else display_back
                 img_main = ft.Image(
-                    src=display_front,
-                    width=int(160 * zoom),
-                    height=int(60 * zoom),
+                    src=thumb_src,
+                    width=bill_width,
+                    height=bill_height,
                     fit="contain",
                     border_radius=8,
                     gapless_playback=False,
@@ -422,30 +417,11 @@ class BillsPage:
                     label_row
                 ], spacing=2)
 
+                serial_id = tx.get('serial_id') or tx.get('serial_number')
                 if serial_id:
                     fullview_url = f"https://bank.linglin.art/banknote-viewer/{serial_id}"
                 else:
                     fullview_url = f"https://bank.linglin.art/transaction/{tx_hash}"
-
-                def set_hover(hovered, img=img_main, front=display_front, back=display_back, _tx_hash=tx_hash):
-                    img.src = back if hovered else front
-                    img.update()
-                    if self.bill_tiles:
-                        self.bill_tiles.update()
-
-                def on_hover(e, _tx_hash=tx_hash, front=display_front, back=display_back, _set_hover=set_hover):
-                    data = getattr(e, "data", None)
-                    data_str = str(data).strip().lower()
-                    print(
-                        f"[DEBUG] hover: tx={_tx_hash} data={data} front={front} back={back}"
-                    )
-                    if data_str in ("true", "1", "enter", "over", "hover"):
-                        _set_hover(True, front=front, back=back)
-                    elif data_str in ("false", "0", "exit", "leave", "out"):
-                        _set_hover(False, front=front, back=back)
-                    else:
-                        # Fallback: treat any hover event as enter
-                        _set_hover(True, front=front, back=back)
 
                 def on_tap_open(e, url=fullview_url, _tx_hash=tx_hash):
                     has_page = bool(self.app.page)
@@ -465,15 +441,12 @@ class BillsPage:
                 if not is_mining:
                     self._prefetch_thumbnail_pair(tx_hash, front_src, back_src)
 
-                img_main.on_hover = on_hover
-
                 tile = ft.Container(
                     content=content,
                     bgcolor="#162a3a",
                     border_radius=8,
                     padding=4,
                     on_click=on_tap_open,
-                    on_hover=on_hover,
                     url=fullview_url,
                     ink=True,
                 )
@@ -519,7 +492,14 @@ class BillsPage:
             base_url = "https://bank.linglin.art"
             block_url = f"{base_url}/block/{block_index}"
             reward = info.get('reward', None)
-            reward_text = ft.Text(f"Reward: {reward}", size=10, color="#ffd600") if reward else None
+            reward_text = None
+            if reward is not None:
+                reward_text = ft.Container(
+                    content=ft.Text(f"Reward: {reward}", size=10, color="#ffd600"),
+                    bgcolor="#1a2b3c",
+                    border_radius=4,
+                    padding=ft.Padding(6, 2, 6, 2)
+                )
             block_details = [
                 ft.Text(f"Block: {block_index}", size=12, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Text(f"Hash: {block_hash}", size=10, color="#00ff37"),
