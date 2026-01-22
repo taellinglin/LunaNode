@@ -111,10 +111,13 @@ class SettingsPage:
 
         sm3_workers_value = int(getattr(config, "sm3_workers", 0) or 0) if config else 0
         cuda_batch_value = int(getattr(config, "cuda_batch_size", 100000) or 100000) if config else 100000
+        cpu_threads_value = int(getattr(config, "cpu_threads", 1) or 1) if config else 1
+        gpu_batch_value = int(getattr(config, "gpu_batch_size", 100000) or 100000) if config else 100000
+
         self.sm3_workers_field = ft.TextField(
             label="SM3 Workers",
             value=str(sm3_workers_value),
-            width=180,
+            width=120,
             bgcolor="#0a1423",
             color="#e3f2fd",
             border_color="#1e3a5c",
@@ -123,13 +126,33 @@ class SettingsPage:
         self.cuda_batch_field = ft.TextField(
             label="CUDA Batch Size",
             value=str(cuda_batch_value),
-            width=180,
+            width=120,
             bgcolor="#0a1423",
             color="#e3f2fd",
             border_color="#1e3a5c",
             on_change=lambda e: self._on_cuda_batch_changed(e.control.value)
         )
-        
+        self.cpu_threads_field = ft.TextField(
+            label="CPU Threads",
+            value=str(cpu_threads_value),
+            width=120,
+            bgcolor="#0a1423",
+            color="#e3f2fd",
+            border_color="#1e3a5c",
+            keyboard_type=ft.KeyboardType.NUMBER,
+            on_change=lambda e: self._on_cpu_threads_changed(e.control.value)
+        )
+        self.gpu_batch_field = ft.TextField(
+            label="GPU Batch Size",
+            value=str(gpu_batch_value),
+            width=120,
+            bgcolor="#0a1423",
+            color="#e3f2fd",
+            border_color="#1e3a5c",
+            keyboard_type=ft.KeyboardType.NUMBER,
+            on_change=lambda e: self._on_gpu_batch_changed(e.control.value)
+        )
+
         mining_card = stat_style_card("⛏️", "Mining Settings", [
             self.difficulty_field,
             self.performance_value,
@@ -137,12 +160,15 @@ class SettingsPage:
             ft.Row([
                 self.sm3_workers_field,
                 self.cuda_batch_field,
+                self.cpu_threads_field,
+                self.gpu_batch_field,
             ], spacing=12),
             ft.Row([
                 self.gpu_switch,
                 self.auto_mining_switch,
             ], spacing=12),
         ], "#00a1ff")
+    
         network_card = stat_style_card("🌐", "Network Settings", [
             self.node_url_field,
             ft.Switch(label="Use SSL", value=True, active_color="#ffd600"),
@@ -160,7 +186,27 @@ class SettingsPage:
         self.settings_content.controls.append(grid)
         if self.app.page:
             self.app.page.update()
+    def _on_cpu_threads_changed(self, value):
+        try:
+            v = int(value)
+            if v < 1:
+                v = 1
+        except Exception:
+            v = 1
+        if self.app.node:
+            self.app.node.config.cpu_threads = v
+            self.app.node.config.save_to_storage()
 
+    def _on_gpu_batch_changed(self, value):
+        try:
+            v = int(value)
+            if v < 1:
+                v = 1
+        except Exception:
+            v = 100000
+        if self.app.node:
+            self.app.node.config.gpu_batch_size = v
+            self.app.node.config.save_to_storage()
     def _create_mining_settings(self):
         """Create mining-related settings"""
         self.auto_mining_switch = ft.Switch(

@@ -18,7 +18,76 @@ except Exception:
     func = None
     SM3_AVAILABLE = False
 
+try:
+    from lunalib.core.blockchain import BlockchainManager
+    from lunalib.core.mempool import MempoolManager
+    from lunalib.core.p2p import HybridBlockchainClient
+    from lunalib.mining.difficulty import DifficultySystem
+    from lunalib.mining.miner import Miner as LunaLibMiner
+    from lunalib.mining.miner import GenesisMiner as LunaLibGenesisMiner
+    from lunalib.mining.cuda_manager import CUDAManager
+    from lunalib.transactions.transactions import TransactionManager
+except ImportError as e:
+    print(f"LunaLib import error: {e}")
+    BlockchainManager = None
+    MempoolManager = None
+    HybridBlockchainClient = None
+    DifficultySystem = None
+    LunaLibMiner = None
+    LunaLibGenesisMiner = None
+    CUDAManager = None
+    TransactionManager = None
+
 LUNALIB_SM3_FUNC = None
+LUNALIB_SM3_BATCH = None
+def _load_sm3_impl() -> bool:
+    """SM3実装を遅延ロード（lunalib優先、gmsslフォールバック）"""
+    global LUNALIB_SM3_FUNC, LUNALIB_SM3_BATCH
+    if LUNALIB_SM3_FUNC:
+        return True
+    try:
+        from lunalib.core.sm3 import sm3_hex as _sm3_hex
+        from lunalib.core.sm3 import sm3_batch as _sm3_batch
+        LUNALIB_SM3_FUNC = _sm3_hex
+        LUNALIB_SM3_BATCH = _sm3_batch
+        return True
+    except Exception:
+        try:
+            from lunalib.utils.hash import sm3_hex as _sm3_hex
+            LUNALIB_SM3_FUNC = _sm3_hex
+            return True
+        except Exception:
+            pass
+    if SM3_AVAILABLE and sm3 and func:
+        def _gmssl_sm3_hex(data: bytes) -> str:
+            return sm3.sm3_hash(func.bytes_to_list(data))
+        LUNALIB_SM3_FUNC = _gmssl_sm3_hex
+        return True
+    return False
+
+_load_sm3_impl()
+
+P2P_AVAILABLE = HybridBlockchainClient is not None
+
+# --- 安全なprintラッパー ---
+def safe_print(*args, **kwargs):
+    """例外を握りつぶして安全にprintする"""
+    try:
+        print(*args, **kwargs)
+    except Exception:
+        pass
+
+# --- ハッシュアルゴリズム名の正規化 ---
+def _normalize_hash_algo(algo: str) -> str:
+    """ハッシュアルゴリズム名を正規化（例: 'SHA256', 'sha256', 'SM3' → 'sha256' or 'sm3'）"""
+    if not isinstance(algo, str):
+        return "sha256"
+    a = algo.strip().lower()
+    if a in ("sha256", "sha-256", "256", "default", ""):
+        return "sha256"
+    if a in ("sm3", "sm-3"):
+        return "sm3"
+    return a
 
 def get_app_data_dir() -> str:
     if os.name == "nt":
@@ -39,101 +108,21 @@ def is_valid_luna_address(address: str) -> bool:
         return False
     return True
 
+# --- ユーティリティ関数 ---
 def sanitize_for_console(message: str) -> str:
+    """コンソール出力用に文字列をサニタイズ"""
     if not isinstance(message, str):
-        message = str(message)
-    encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
-    return message.encode(encoding, errors="replace").decode(encoding, errors="replace")
-
-def safe_print(*args, **kwargs):
-    try:
-        print(*args, **kwargs)
-    except Exception:
-        pass
+        return str(message)
+    # 制御文字や危険な文字を除去（必要に応じて拡張）
+    return message.replace("\r", "").replace("\x1b", "").replace("\x00", "")
 
 def compute_sm3_hexdigest(data: bytes) -> str:
+    """SM3ハッシュの16進ダイジェストを計算（lunalib依存）"""
+    if not LUNALIB_SM3_FUNC:
+        _load_sm3_impl()
     if LUNALIB_SM3_FUNC:
-        try:
-            result = LUNALIB_SM3_FUNC(data)
-            if isinstance(result, bytes):
-                return result.hex()
-            if isinstance(result, str):
-                return result
-        except Exception:
-            pass
-    raise RuntimeError("LunaLib SM3 is not available")
-
-def _normalize_hash_algo(value: str) -> str:
-    if not isinstance(value, str):
-        return ""
-    return "".join(ch for ch in value.lower() if ch.isalnum())
-
-# Import lunalib components (2.0.2 compatible with fallbacks)
-try:
-    import lunalib
-    LUNALIB_VERSION = getattr(lunalib, "__version__", "unknown")
-
-    from lunalib.core.blockchain import BlockchainManager
-    from lunalib.core.mempool import MempoolManager
-
-    try:
-        from lunalib.core.p2p import HybridBlockchainClient
-        P2P_AVAILABLE = True
-    except Exception:
-        HybridBlockchainClient = None
-        P2P_AVAILABLE = False
-
-    from lunalib.mining.difficulty import DifficultySystem
-    from lunalib.mining.cuda_manager import CUDAManager
-
-    LUNALIB_SM3_FUNC = None
-    try:
-        from lunalib.utils.hash import sm3_hex as _sm3_hex
-        LUNALIB_SM3_FUNC = _sm3_hex
-    except Exception:
-        try:
-            from lunalib.core.sm3 import sm3_hex as _sm3_hex
-            LUNALIB_SM3_FUNC = _sm3_hex
-        except Exception:
-            LUNALIB_SM3_FUNC = None
-    LUNALIB_SM3_BATCH = None
-    try:
-        from lunalib.core.sm3 import sm3_batch as _sm3_batch
-        LUNALIB_SM3_BATCH = _sm3_batch
-    except Exception:
-        LUNALIB_SM3_BATCH = None
-
-    try:
-        from lunalib.mining.miner import Miner as LunaLibMiner
-    except Exception:
-        LunaLibMiner = None
-
-    try:
-        from lunalib.mining.miner import GenesisMiner as LunaLibGenesisMiner
-    except Exception:
-        LunaLibGenesisMiner = None
-
-    try:
-        from lunalib.transactions.transactions import TransactionManager
-    except Exception:
-        TransactionManager = None
-
-    LUNA_LIB_AVAILABLE = True
-except ImportError as e:
-    print(f"LunaLib import error: {e}")
-    LUNALIB_VERSION = "not-installed"
-    LUNA_LIB_AVAILABLE = False
-    P2P_AVAILABLE = False
-    BlockchainManager = None
-    MempoolManager = None
-    HybridBlockchainClient = None
-    DifficultySystem = None
-    CUDAManager = None
-    LunaLibMiner = None
-    LunaLibGenesisMiner = None
-    TransactionManager = None
-    LUNALIB_SM3_FUNC = None
-    LUNALIB_SM3_BATCH = None
+        return LUNALIB_SM3_FUNC(data)
+    raise RuntimeError("SM3 hash function is not available in this LunaLib version.")
 
 def log_cpu_mining_event(event: str, data: dict = None):
     """追跡用: CPUマイニングの詳細イベントをlogs/cpu_mining.logへ追記"""
@@ -143,11 +132,14 @@ def log_cpu_mining_event(event: str, data: dict = None):
     log_dir = os.path.join(get_app_data_dir(), "logs")
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, "cpu_mining.log")
-    entry = {
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "event": event,
-        "data": data or {}
-    }
+    try:
+        entry = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "event": event,
+            "data": data or {}
+        }
+    except Exception as e:
+        print(f"[LOGGING ERROR] Could not create log entry: {e}")
     try:
         with open(log_file, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
@@ -200,7 +192,9 @@ class DataManager:
             'performance_level': 70,
             'hash_algorithm': "sm3",
             'sm3_workers': max(1, (os.cpu_count() or 4) - 1),
-            'cuda_batch_size': 100000
+            'cuda_batch_size': 100000,
+            'cpu_threads': 1,
+            'gpu_batch_size': 100000
         }
     
     def save_mining_history(self, history: List[Dict]):
@@ -370,6 +364,8 @@ class NodeConfig:
         self.hash_algorithm = settings.get('hash_algorithm', "sm3")
         self.sm3_workers = settings.get('sm3_workers', max(1, (os.cpu_count() or 4) - 1))
         self.cuda_batch_size = settings.get('cuda_batch_size', 100000)
+        self.cpu_threads = settings.get('cpu_threads', 1)
+        self.gpu_batch_size = settings.get('gpu_batch_size', 100000)
     
     def save_to_storage(self):
         """Save configuration to storage"""
@@ -385,7 +381,9 @@ class NodeConfig:
             'performance_level': self.performance_level,
             'hash_algorithm': self.hash_algorithm,
             'sm3_workers': self.sm3_workers,
-            'cuda_batch_size': self.cuda_batch_size
+            'cuda_batch_size': self.cuda_batch_size,
+            'cpu_threads': getattr(self, 'cpu_threads', 1),
+            'gpu_batch_size': getattr(self, 'gpu_batch_size', 100000),
         }
         return self.data_manager.save_settings(settings)
 
@@ -602,8 +600,27 @@ class LunaNode:
         if hasattr(self.miner, 'auto_submit'):
             self.miner.auto_submit = False
         
-        # Initialize HybridBlockchainClient for P2P networking (disabled in non-lunalib mode)
+        # Initialize HybridBlockchainClient for P2P networking (always enabled if available)
         self.p2p_client = None
+        if P2P_AVAILABLE and HybridBlockchainClient is not None:
+            try:
+                def on_peer_update(peers):
+                    self.peers = peers or []
+                    self._log_message(f"P2P peers updated: {len(self.peers)} peers", "info")
+                def on_block(block):
+                    self._log_message(f"P2P new block received: {block.get('index', '?')}", "info")
+                def on_transaction(tx):
+                    self._log_message(f"P2P new transaction received", "info")
+                self.p2p_client = HybridBlockchainClient(
+                    node_url=self.config.node_url,
+                    on_peer_update=on_peer_update,
+                    on_block=on_block,
+                    on_transaction=on_transaction
+                )
+                self.p2p_client.connect()
+                self._log_message("P2P client initialized and connected", "success")
+            except Exception as e:
+                self._log_message(f"P2P client init failed: {e}", "error")
         
         # Set CUDA availability based on config and miner's CUDA status
         cuda_available = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
@@ -634,7 +651,7 @@ class LunaNode:
         else:
             algo = "sha256"
 
-        if algo == "sm3" and not LUNALIB_SM3_FUNC:
+        if algo == "sm3" and not _load_sm3_impl():
             self._log_message("SM3 selected but LunaLib SM3 is unavailable; mining will be blocked", "error")
 
         self.hash_algorithm = algo
@@ -712,33 +729,35 @@ class LunaNode:
         self._log_message(f"Hash algorithm set to: {self.hash_algorithm.upper()}", "info")
 
     def _ensure_sm3_available(self) -> bool:
-        if self.hash_algorithm == "sm3" and not LUNALIB_SM3_FUNC:
+        if self.hash_algorithm == "sm3" and not _load_sm3_impl():
             self._log_message("SM3 is required but LunaLib SM3 is unavailable. Please update LunaLib.", "error")
             return False
         return True
             
     def _on_block_mined(self, block_data: Dict):
-        """Handle newly mined block"""
+        """Handle newly mined block and trigger UI/stat updates"""
         try:
             success, message = self.submit_block(block_data)
             if success:
                 self.stats['successful_blocks'] += 1
-                
                 reward_tx = self._create_reward_transaction(block_data)
-                
                 if self.new_reward_callback:
                     self.new_reward_callback(reward_tx)
-                
                 if self.new_bill_callback:
                     self.new_bill_callback(block_data)
-                
                 if self.history_updated_callback:
                     self.history_updated_callback()
-                    
+                # Force UI/stat update after mining
+                try:
+                    if hasattr(self, 'main_page') and hasattr(self.main_page, 'update_mining_stats'):
+                        self.main_page.update_mining_stats()
+                    if hasattr(self, 'sidebar') and hasattr(self.sidebar, 'update_status'):
+                        self.sidebar.update_status(self.get_status())
+                except Exception:
+                    pass
             else:
                 self._log_message(f"Block #{block_data['index']} rejected: {message}", "warning")
                 self.stats['failed_attempts'] += 1
-                
         except Exception as e:
             self._log_message(f"Error processing mined block: {str(e)}", "error")
             self.stats['failed_attempts'] += 1
@@ -910,7 +929,7 @@ class LunaNode:
         self._prefer_cached_stats = False
     
     def get_status(self) -> Dict:
-        """Get node status"""
+        """Get node status, preferring P2P for blocks/mempool if peers are available"""
         try:
             if self._prefer_cached_stats and not self.miner.is_mining:
                 cached = self._cached_status or self.data_manager.load_stats()
@@ -918,16 +937,22 @@ class LunaNode:
                     cached['hash_algorithm'] = self.hash_algorithm
                     return self._merge_status(cached)
             now = time.time()
+            use_p2p = self.p2p_client and hasattr(self.p2p_client, 'is_connected') and self.p2p_client.is_connected() and len(self.peers) > 0
             if now - self._net_cache_ts >= self.net_poll_interval:
-                current_height = self.blockchain_manager.get_blockchain_height()
-                latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
-                if not latest_block and current_height > 0:
-                    latest_block = self.blockchain_manager.get_block(current_height)
-                try:
+                if use_p2p:
+                    # Prefer P2P for blocks and mempool
+                    try:
+                        current_height = self.p2p_client.get_blockchain_height()
+                        latest_block = self.p2p_client.get_latest_block() if current_height > 0 else None
+                        mempool = self.p2p_client.get_pending_transactions() if hasattr(self.p2p_client, 'get_pending_transactions') else []
+                    except Exception:
+                        current_height = self.blockchain_manager.get_blockchain_height()
+                        latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
+                        mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
+                else:
+                    current_height = self.blockchain_manager.get_blockchain_height()
+                    latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
                     mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
-                except Exception:
-                    mempool = self.blockchain_manager.get_mempool() if self.blockchain_manager else []
-
                 self._net_cache_ts = now
                 self._net_cache = {
                     "height": current_height,
@@ -938,31 +963,22 @@ class LunaNode:
                 current_height = self._net_cache.get("height", 0)
                 latest_block = self._net_cache.get("latest_block")
                 mempool = self._net_cache.get("mempool", [])
-            
             total_mining_time = sum(record.get('mining_time', 0) for record in self.miner.mining_history)
             avg_mining_time = total_mining_time / len(self.miner.mining_history) if self.miner.mining_history else 0
-            
-            # Check CUDA status
             cuda_available = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
             using_cuda = cuda_available and self.config.use_gpu
-            
-            # Get hashrate - use CUDA stats if GPU mining
             if using_cuda and self.stats.get('cuda_hash_rate', 0) > 0:
                 current_hash_rate = self.stats['cuda_hash_rate']
                 current_hash = self.stats.get('cuda_last_hash', '')
                 current_nonce = self.stats.get('cuda_last_nonce', 0)
             else:
-                # Miner.get_mining_stats()のhash_rateを直接参照
                 mining_stats = self.miner.get_mining_stats() if hasattr(self.miner, 'get_mining_stats') else {}
                 current_hash_rate = mining_stats.get('hash_rate', 0)
                 current_hash = mining_stats.get('current_hash', '')
                 current_nonce = mining_stats.get('current_nonce', 0)
                 if not current_hash_rate:
                     current_hash_rate = getattr(self.miner, 'last_cpu_hashrate', 0) or getattr(self.miner, 'hash_rate', 0) or self.stats.get('cpu_hash_rate', 0)
-            
-            # Get P2P status
             p2p_status = self.get_p2p_status()
-            
             status = {
                 'network_height': current_height,
                 'network_difficulty': latest_block.get('difficulty', 1) if latest_block else 1,
@@ -992,7 +1008,6 @@ class LunaNode:
             self.data_manager.save_stats(status)
             status['hash_algorithm'] = self.hash_algorithm
             return status
-                
         except Exception as e:
             return {
                 'network_height': 0,
@@ -1054,7 +1069,13 @@ class LunaNode:
                 block_difficulty = block_data.get('difficulty', self.config.difficulty)
                 if not block_difficulty or block_difficulty < 1:
                     block_difficulty = self.config.difficulty
-                reward = 1.0 * (10 ** (block_difficulty - 1))
+                # Reward: non-empty = exponential, empty = linear
+                non_reward_txs = [tx for tx in block_data.get('transactions', []) if isinstance(tx, dict) and tx.get('type') not in ('reward', 'mining_reward')]
+                is_empty_block = len(non_reward_txs) == 0
+                if is_empty_block:
+                    reward = 1.0 * float(block_difficulty)
+                else:
+                    reward = 1.0 * (10 ** (block_difficulty - 1))
                 block_data['reward'] = reward
                 nonce = block_data.get('nonce', 0)
                 block_hash = block_data.get('hash', '')
@@ -1083,6 +1104,7 @@ class LunaNode:
                         fixed_tx['from'] = 'Ling Country Mines'
                         fixed_tx['to'] = miner_addr
                         fixed_tx['amount'] = reward
+                        fixed_tx['is_empty_block'] = is_empty_block
                         fixed_transactions.append(fixed_tx)
                     else:
                         fixed_transactions.append(tx)
@@ -1182,108 +1204,79 @@ class LunaNode:
             return False, f"Genesis mining error: {str(e)}", None
     
     def start_auto_mining(self):
-        """Start auto-mining"""
-        if self.miner.is_mining:
-            return True
-
-        self._log_message("Auto-mining invoked", "info")
-
-        if not self._ensure_sm3_available():
-            self._log_message("Auto-mining blocked (SM3 unavailable)", "error")
-            return False
-
-        self.enable_live_stats()
-
-        if hasattr(self.miner, "should_stop_mining"):
-            self.miner.should_stop_mining = False
-
-        self._stop_mining_event.clear()
-
-        try:
-            self.miner.start_mining()
-        except Exception:
-            self.miner.is_mining = False
-            return False
-        # Ensure mining flag is set
-        self.miner.is_mining = True
-        
-        # Log mining method being used
-        cuda_status = self.miner.cuda_manager.cuda_available if self.miner.cuda_manager else False
-        if cuda_status and self.config.use_gpu:
-            self._log_message("Auto-mining started (GPU/CUDA enabled)", "info")
+        """Start auto-mining (CPU:従来通り, GPU:lunalib 2.3.8仕様)"""
+        self.stop_auto_mining()
+        if self.config.use_gpu:
+            # lunalib 2.3.8: use_cuda + start_mining
+            self.miner.use_cuda = True
+            if hasattr(self.miner, "use_cpu"):
+                self.miner.use_cpu = False
+            cuda_available = self.miner.cuda_manager.cuda_available if self.miner and self.miner.cuda_manager else False
+            if not cuda_available:
+                self._log_message("CUDA not available - cannot start GPU mining", "error")
+                return False
+            try:
+                self.miner.start_mining()
+                self._log_message("Auto-mining started (GPU/CUDA, lunalib 2.3.8)", "info")
+                return True
+            except Exception as e:
+                self._log_message(f"Failed to start CUDA mining: {e}", "error")
+                return False
         else:
+            # CPUマイニングは従来通り
+            self._log_message("Auto-mining invoked (CPU)", "info")
+            if not self._ensure_sm3_available():
+                self._log_message("Auto-mining blocked (SM3 unavailable)", "error")
+                return False
+            self.enable_live_stats()
+            if hasattr(self.miner, "should_stop_mining"):
+                self.miner.should_stop_mining = False
+            self._stop_mining_event.clear()
+            if getattr(self.miner, 'mining_thread', None) and self.miner.mining_thread.is_alive():
+                self._log_message("Mining thread already running, not starting another.", "warning")
+                return True
+            try:
+                self.miner.start_mining()
+            except Exception:
+                self.miner.is_mining = False
+                return False
+            self.miner.is_mining = True
             self._log_message("Auto-mining started (CPU)", "info")
-        
-        def mining_loop():
-            print("[DEBUG] mining_loop started")
-            self._log_message("Mining loop started", "info")
-            while self.miner.is_mining and self.is_running:
-                if getattr(self.miner, "should_stop_mining", False):
-                    break
-                if self._stop_mining_event.is_set():
-                    break
-                self._log_message("Mining tick: starting block attempt", "info")
-                success, message = self.mine_single_block()
-                if success:
-                    self._log_message(message, "success")
-                    print("[DEBUG] Block mined successfully")
-                    # After successful mining, wait longer to allow server to process
-                    if self._stop_mining_event.wait(5):
+            def mining_loop():
+                print("[DEBUG] mining_loop started")
+                self._log_message("Mining loop started", "info")
+                while self.miner.is_mining and self.is_running:
+                    if getattr(self.miner, "should_stop_mining", False):
                         break
-                else:
-                    # Check if it's a CUDA error
-                    if "CUDA" in message or "dtype" in message:
-                        self._log_message("CUDA mining error - falling back to CPU", "warning")
-                        self.miner.use_cuda = False
-                    if "Stale block detected" in message:
-                        self._log_message(message, "info")
+                    if self._stop_mining_event.is_set():
+                        break
+                    self._log_message("Mining tick: starting block attempt", "info")
+                    success, message = self.mine_single_block()
+                    if success:
+                        self._log_message(message, "success")
+                        print("[DEBUG] Block mined successfully")
+                        if self._stop_mining_event.wait(5):
+                            break
                     else:
-                        self._log_message(message, "warning")
-                    print(f"[DEBUG] Mining failed: {message}")
-                    if self._stop_mining_event.wait(self.config.mining_interval):
-                        break
-            self._log_message("Mining loop stopped", "info")
-        
-        self.miner.mining_thread = threading.Thread(target=mining_loop, daemon=True)
-        self.miner.mining_thread.start()
-        return True
+                        if "Stale block detected" in message:
+                            self._log_message(message, "info")
+                        else:
+                            self._log_message(message, "warning")
+                        print(f"[DEBUG] Mining failed: {message}")
+                        if self._stop_mining_event.wait(self.config.mining_interval):
+                            break
+                self._log_message("Mining loop stopped", "info")
+            self.miner.mining_thread = threading.Thread(target=mining_loop, daemon=True)
+            self.miner.mining_thread.start()
+            return True
     
     def stop_auto_mining(self):
-        """Stop auto-mining and abort current block"""
-        # Signal immediate stop
-        self.miner.is_mining = False
-        self.miner.should_stop_mining = True
-        self._stop_mining_event.set()
-        
-        self._log_message("Stopping mining... (aborting current block)", "info")
-        
-        if hasattr(self.miner, "stop_mining"):
-            try:
-                self.miner.stop_mining()
-            except Exception:
-                pass
-
-        cuda_manager = getattr(self.miner, "cuda_manager", None)
-        if cuda_manager:
-            for method_name in ("stop_mining", "stop", "stop_cuda_mining", "shutdown"):
-                method = getattr(cuda_manager, method_name, None)
-                if callable(method):
-                    try:
-                        method()
-                    except Exception:
-                        pass
-
-        # Call the miner's stop method (waits for thread to finish)
-        # But don't wait too long - use a timeout approach
-        if self.miner.mining_thread and self.miner.mining_thread.is_alive():
-            # Give it a very short time to finish gracefully
-            self.miner.mining_thread.join(timeout=0.5)
-            if self.miner.mining_thread.is_alive():
-                self._log_message("Mining thread still running, will terminate on next check", "warning")
-            else:
-                self._log_message("Mining stopped successfully", "info")
-        else:
-            self._log_message("Auto-mining stopped", "info")
+        """Stop auto-mining (lunalib 2.3.8仕様: stop_miningのみ)"""
+        try:
+            self.miner.stop_mining()
+            self._log_message("Stopped mining (lunalib 2.3.8)", "info")
+        except Exception as e:
+            self._log_message(f"Failed to stop mining: {e}", "error")
 
     def update_performance_level(self, level: int):
         """Update CPU mining throttle level (10-100)."""
@@ -1403,14 +1396,49 @@ class LunaNode:
             except Exception:
                 pass
             
-            # Submit plain JSON (server rejects gzip payloads)
-            submit_ok, submit_msg = self._submit_block_plain_json(block_data)
+            # Submit using LunaLib BlockchainManager if available (preferred)
+            submit_ok, submit_msg = False, ""
+            if self.blockchain_manager and hasattr(self.blockchain_manager, "submit_block"):
+                try:
+                    result = self.blockchain_manager.submit_block(block_data)
+                    if isinstance(result, dict):
+                        submit_ok = bool(result.get("success", False))
+                        submit_msg = result.get("message") or result.get("error") or "Block submitted"
+                    elif isinstance(result, tuple) and len(result) >= 2:
+                        submit_ok = bool(result[0])
+                        submit_msg = str(result[1])
+                    else:
+                        submit_ok = bool(result)
+                        submit_msg = "Block submitted" if submit_ok else "Submission failed"
+                except Exception as e:
+                    submit_ok = False
+                    submit_msg = f"LunaLib submit failed: {e}"
+
+            # Fallback: Submit plain JSON (server rejects gzip payloads)
+            if not submit_ok:
+                submit_ok, submit_msg = self._submit_block_plain_json(block_data)
             if submit_ok:
                 self._last_submitted_hash = block_data.get("hash")
                 self._last_submitted_index = block_data.get("index")
                 self._last_submitted_ts = time.time()
                 self._last_submitted_success = True
-                return True, submit_msg
+                # --- ここで本当にチェーンに載ったか即時確認 ---
+                try:
+                    latest_block = self.blockchain_manager.get_latest_block()
+                    # index, hash, miner で自分のブロックか判定
+                    if latest_block and str(latest_block.get("hash")) == str(block_data.get("hash")) and str(latest_block.get("miner")) == str(self.config.miner_address):
+                        return True, submit_msg + " (confirmed on chain)"
+                    # 直近でindex一致かつminer一致も許容（P2P遅延対策）
+                    if latest_block and str(latest_block.get("index")) == str(block_data.get("index")) and str(latest_block.get("miner")) == str(self.config.miner_address):
+                        return True, submit_msg + " (confirmed by index/miner)"
+                    # 反映されていない場合は警告
+                    warn_msg = submit_msg + " (not found on chain after submit)"
+                    self._log_message(warn_msg, "warning")
+                    return False, warn_msg
+                except Exception as e:
+                    err_msg = submit_msg + f" (confirmation error: {e})"
+                    self._log_message(err_msg, "error")
+                    return False, err_msg
             return False, submit_msg
 
             log_cpu_mining_event("block_submit_failed", {"block_index": block_data.get('index')})
@@ -1452,11 +1480,15 @@ class LunaNode:
                 block_data["nonce"] = int(block_data.get("nonce"))
             except Exception:
                 pass
+        else:
+            block_data["nonce"] = 0
         if "timestamp" in block_data:
             try:
                 block_data["timestamp"] = float(block_data.get("timestamp"))
             except Exception:
                 pass
+        else:
+            block_data["timestamp"] = time.time()
 
         if not block_data.get("miner"):
             block_data["miner"] = self.config.miner_address
@@ -1637,47 +1669,14 @@ class LunaNode:
         self._log_message(f"Mining interval updated to: {new_interval} seconds", "info")
     
     def toggle_gpu_acceleration(self, enabled: bool):
-        """Toggle GPU/CUDA acceleration for mining"""
+        """Toggle GPU/CUDA acceleration for mining (lunalib 2.3.8仕様)"""
         self.config.use_gpu = enabled
         self.config.save_to_storage()
-        
-        # Refresh miner to apply GPU flag changes (lunalib reads flags at init)
-        if self.miner is None:
-            self.cuda_available = False
-            if enabled:
-                self._log_message("GPU acceleration enabled but miner is unavailable", "warning")
-            else:
-                self._log_message("GPU acceleration disabled", "info")
-            return
-
-        if enabled:
-            try:
-                self.miner = LunaLibMiner(self.config, self.data_manager)
-                self.miner.blockchain_manager = self.blockchain_manager
-                self.miner.mempool_manager = self.mempool_manager
-                if hasattr(self.miner, 'auto_submit'):
-                    self.miner.auto_submit = False
-            except Exception:
-                pass
-
-        # Update miner's CUDA state
-        if self.miner and getattr(self.miner, "cuda_manager", None):
-            cuda_available = self.miner.cuda_manager.cuda_available
-            if enabled and cuda_available:
-                self.cuda_available = True
-                self._log_message("GPU acceleration enabled - CUDA available", "success")
-            elif enabled and not cuda_available:
-                self.cuda_available = False
-                self._log_message("GPU acceleration enabled but CUDA not available - falling back to CPU", "warning")
-            else:
-                self.cuda_available = False
-                self._log_message("GPU acceleration disabled - using CPU mining", "info")
-        else:
-            self.cuda_available = False
-            if enabled:
-                self._log_message("GPU acceleration enabled but CUDA manager unavailable - using CPU mining", "warning")
-            else:
-                self._log_message("GPU acceleration disabled", "info")
+        if self.miner:
+            self.miner.use_cuda = bool(enabled)
+            if hasattr(self.miner, "use_cpu"):
+                self.miner.use_cpu = not bool(enabled)
+        self._log_message(f"GPU acceleration {'enabled' if enabled else 'disabled'} (lunalib 2.3.8)", "info")
     
     def toggle_auto_mining(self, enabled: bool):
         """Toggle auto-mining"""
@@ -1704,7 +1703,16 @@ class LunaNode:
                 print(f"[DEBUG] Error stopping P2P client: {e}")
     
     def get_p2p_status(self) -> Dict:
-        """Get P2P network status"""
+        """Get P2P network status (real if P2P enabled)"""
+        if self.p2p_client and hasattr(self.p2p_client, 'is_connected'):
+            connected = self.p2p_client.is_connected()
+            peer_list = getattr(self, 'peers', [])
+            return {
+                'connected': connected,
+                'peers': len(peer_list),
+                'peer_list': peer_list,
+                'status': 'p2p enabled' if connected else 'p2p offline'
+            }
         return {
             'connected': False,
             'peers': 0,

@@ -567,7 +567,7 @@ class LunaNodeApp:
                 
             except Exception as e:
                 print(f"[ERROR] {e}")
-                self.safe_run_thread(lambda: self.add_log_message(str(e), "error"))
+                self.safe_run_thread(lambda e=e: self.add_log_message(str(e), "error"))
         threading.Thread(target=init_thread, daemon=True).start()
         
                 # concise: skip debug
