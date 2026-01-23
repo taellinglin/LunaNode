@@ -14,6 +14,7 @@ import PIL
 import sys
 # Lunalib backend selection (SM2). Use env override if provided.
 os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
+os.environ.setdefault("LUNALIB_MINING_HASH_MODE", "compact")
 
 from utils import DataManager, NodeConfig, is_valid_luna_address
 
@@ -233,13 +234,13 @@ class LunaNodeApp:
         if hasattr(self, "main_page") and self.main_page:
             try:
                 if pending:
-                    self.main_page.start_mining_btn.disabled = True
-                    self.main_page.stop_mining_btn.disabled = True
+                    if hasattr(self.main_page, "cpu_toggle_btn"):
+                        self.main_page.cpu_toggle_btn.disabled = True
+                    if hasattr(self.main_page, "gpu_toggle_btn"):
+                        self.main_page.gpu_toggle_btn.disabled = True
                     if status_text:
                         self.main_page.mining_status.content.controls[1].value = status_text
                 else:
-                    self.main_page.start_mining_btn.disabled = is_mining
-                    self.main_page.stop_mining_btn.disabled = not is_mining
                     if status_text:
                         self.main_page.mining_status.content.controls[1].value = status_text
             except Exception:
@@ -248,11 +249,10 @@ class LunaNodeApp:
         if hasattr(self, "sidebar") and self.sidebar:
             try:
                 if pending:
-                    self.sidebar.btn_start_mining.disabled = True
-                    self.sidebar.btn_stop_mining.disabled = True
-                else:
-                    self.sidebar.btn_start_mining.disabled = is_mining
-                    self.sidebar.btn_stop_mining.disabled = not is_mining
+                    if hasattr(self.sidebar, "btn_cpu_mining"):
+                        self.sidebar.btn_cpu_mining.disabled = True
+                    if hasattr(self.sidebar, "btn_gpu_mining"):
+                        self.sidebar.btn_gpu_mining.disabled = True
             except Exception:
                 pass
 
@@ -289,6 +289,7 @@ class LunaNodeApp:
                 self._mining_transition = True
                 if self.page:
                     self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=True, status_text="Starting..."))
+
                 def _start():
                     try:
                         try:
@@ -299,15 +300,14 @@ class LunaNodeApp:
                         started = self.node.start_auto_mining()
                         if started:
                             self.safe_run_thread(lambda: self.add_log_message("Auto-mining started", "success"))
-                            self.safe_run_thread(lambda: self._set_mining_ui_state(True, pending=False, status_text="Mining Active"))
                         else:
                             self.safe_run_thread(lambda: self.add_log_message("Auto-mining could not start. Check logs for details.", "error"))
-                            self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     except Exception as e:
                         self.safe_run_thread(lambda: self.add_log_message(f"Failed to start mining: {e}", "error"))
-                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     finally:
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text=None))
                         self._mining_transition = False
+
                 threading.Thread(target=_start, daemon=True).start()
             except Exception as e:
                 self.add_log_message(f"Failed to start mining: {e}", "error")
@@ -326,16 +326,69 @@ class LunaNodeApp:
                     try:
                         self.node.stop_auto_mining()
                         self.safe_run_thread(lambda: self.add_log_message("Auto-mining stopped", "info"))
-                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     except Exception as e:
                         self.safe_run_thread(lambda: self.add_log_message(f"Failed to stop mining: {e}", "error"))
-                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text="Mining Stopped"))
                     finally:
+                        self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text=None))
                         self._mining_transition = False
                 threading.Thread(target=_stop, daemon=True).start()
             except Exception as e:
                 self.add_log_message(f"Failed to stop mining: {e}", "error")
                 self._mining_transition = False
+
+    def toggle_cpu_mining(self):
+        """Toggle CPU mining on/off."""
+        if getattr(self, "_mining_transition", False):
+            return
+        if not self.node:
+            self.add_log_message("Node is still initializing. Please wait...", "warning")
+            return
+        self._mining_transition = True
+        if self.page:
+            self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=True, status_text="CPU: Switching..."))
+
+        def _toggle():
+            try:
+                status = self.node.get_status() if self.node else {}
+                is_active = bool(status.get("cpu_mining_active"))
+                if is_active:
+                    self.node.stop_cpu_mining()
+                else:
+                    self.node.start_cpu_mining()
+            except Exception as e:
+                self.safe_run_thread(lambda: self.add_log_message(f"CPU mining toggle failed: {e}", "error"))
+            finally:
+                self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text=None))
+                self._mining_transition = False
+
+        threading.Thread(target=_toggle, daemon=True).start()
+
+    def toggle_gpu_mining(self):
+        """Toggle GPU mining on/off."""
+        if getattr(self, "_mining_transition", False):
+            return
+        if not self.node:
+            self.add_log_message("Node is still initializing. Please wait...", "warning")
+            return
+        self._mining_transition = True
+        if self.page:
+            self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=True, status_text="GPU: Switching..."))
+
+        def _toggle():
+            try:
+                status = self.node.get_status() if self.node else {}
+                is_active = bool(status.get("gpu_mining_active"))
+                if is_active:
+                    self.node.stop_gpu_mining()
+                else:
+                    self.node.start_gpu_mining()
+            except Exception as e:
+                self.safe_run_thread(lambda: self.add_log_message(f"GPU mining toggle failed: {e}", "error"))
+            finally:
+                self.safe_run_thread(lambda: self._set_mining_ui_state(False, pending=False, status_text=None))
+                self._mining_transition = False
+
+        threading.Thread(target=_toggle, daemon=True).start()
    
     def __init__(self):
         self.node = None

@@ -296,6 +296,41 @@ class BillsPage:
         cached_thumbnails = self.bills_cache.get('thumbnails', {})
         cached_banknotes = self.bills_cache.get('banknotes', {})
         cached_thumbnail_urls = self.bills_cache.get('thumbnail_urls', {})
+        cache_dirty = False
+        # lunalib mined_bills から先に反映
+        try:
+            mined_bills = self.app.node.get_mined_bills()
+        except Exception:
+            mined_bills = []
+        if mined_bills:
+            for tx in mined_bills:
+                if not isinstance(tx, dict):
+                    continue
+                tx_hash = tx.get("hash")
+                if not tx_hash:
+                    continue
+                if cached_banknotes.get(tx_hash) != tx:
+                    cache_dirty = True
+                cached_banknotes[tx_hash] = tx
+                block_index = tx.get("block_height") or tx.get("block_index")
+                block_key = str(block_index) if block_index is not None else "pending"
+                serial_id = tx.get("serial_id") or tx.get("serial_number")
+                img_url_front = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=front&scale=2"
+                if serial_id:
+                    img_url_back = f"https://bank.linglin.art/banknote-matching-thumbnail/{serial_id}?side=match&scale=2"
+                else:
+                    img_url_back = f"https://bank.linglin.art/transaction-thumbnail/{tx_hash}?side=back&scale=2"
+                cached_thumbnail_urls[tx_hash] = {
+                    "front": f"{img_url_front}&flip=front",
+                    "back": f"{img_url_back}&flip=back",
+                }
+                existing = cached_thumbnails.get(block_key, []) or []
+                if tx_hash not in existing:
+                    cached_thumbnails[block_key] = list({*existing, tx_hash})
+                    cache_dirty = True
+                if block_index is not None:
+                    cached_blocks.add(block_index)
+                    cache_dirty = True
         missing_block_indices = []
         # 新規マイニング分だけ取得
         for record in mining_history:
@@ -342,7 +377,7 @@ class BillsPage:
                     cached_thumbnails[str(block_index)] = block_gtx_hashes
                     new_blocks.append(block_index)
         # キャッシュ更新
-        if new_blocks:
+        if new_blocks or cache_dirty:
             self.bills_cache['mined_blocks'] = list(set(list(cached_blocks) + new_blocks))
             self.bills_cache['thumbnails'] = cached_thumbnails
             self.bills_cache['banknotes'] = cached_banknotes
@@ -457,13 +492,14 @@ class BillsPage:
         self.save_bills_cache()
         # Mined blocks履歴もキャッシュから
         txs = []
-        cached_blocks = self.bills_cache.get('mined_blocks', [])
         mining_history = self.app.node.get_mining_history() if self.app.node else []
-        history_by_block = {r.get('block_index'): r for r in mining_history if r.get('status') == 'success'}
-        for block_index in cached_blocks:
-            info = history_by_block.get(block_index)
-            if not info:
-                continue
+        history_by_block = [r for r in mining_history if r.get('status') == 'success' and r.get('block_index') is not None]
+        try:
+            history_by_block.sort(key=lambda r: float(r.get('timestamp', 0) or 0), reverse=True)
+        except Exception:
+            pass
+        for info in history_by_block:
+            block_index = info.get('block_index')
             block_hash = info.get('hash', '')
             nonce = info.get('nonce', '')
             mine_time = info.get('timestamp', 0)

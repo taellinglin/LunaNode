@@ -60,21 +60,20 @@ class MainPage:
             shape=ft.RoundedRectangleBorder(radius=4)
         )
         
-        self.start_mining_btn = ft.Button(
-            "⛏️ Start Mining",
-            on_click=lambda e: self.app.start_mining(),
+        self.cpu_toggle_btn = ft.Button(
+            "🖥️ Start CPU",
+            on_click=lambda e: self.app.toggle_cpu_mining(),
             style=button_style,
             bgcolor="#28a745",
             height=40
         )
-        
-        self.stop_mining_btn = ft.Button(
-            "⏹️ Stop Mining",
-            on_click=lambda e: self.app.stop_mining(),
+
+        self.gpu_toggle_btn = ft.Button(
+            "🎮 Start GPU",
+            on_click=lambda e: self.app.toggle_gpu_mining(),
             style=button_style,
-            bgcolor="#dc3545",
-            height=40,
-            disabled=True
+            bgcolor="#28a745",
+            height=40
         )
         
         
@@ -100,8 +99,8 @@ class MainPage:
                     content=ft.Column([
                         ft.Text("Quick Actions", size=14, color="#e3f2fd"),
                         ft.Row([
-                            self.start_mining_btn,
-                            self.stop_mining_btn
+                            self.cpu_toggle_btn,
+                            self.gpu_toggle_btn
                         ])
                         # Mine Single BlockとSync Networkボタンは削除
                     ]),
@@ -141,22 +140,54 @@ class MainPage:
                 self.loading_ring.visible = False
             self.stats_panel.visible = True
         total_reward_text = f"{status['total_reward']:.0f} LKC"
-        # 2x4のテーブル状タイル（ラベル＋値）で統計を表示
+        # 3x4のテーブル状タイル（ラベル＋値）で統計を表示
+        avg_reward = 0.0
+        try:
+            if status.get("blocks_mined"):
+                avg_reward = float(status.get("total_reward", 0) or 0) / float(status.get("blocks_mined") or 1)
+        except Exception:
+            avg_reward = 0.0
+        try:
+            difficulty = float(status.get("mining_difficulty", 1) or 1)
+        except Exception:
+            difficulty = 1.0
+        if not avg_reward and difficulty >= 1:
+            avg_reward = 10 ** max(0, int(difficulty) - 1)
+        try:
+            cpu_rate = float(status.get("cpu_hash_rate", 0) or 0)
+        except Exception:
+            cpu_rate = 0.0
+        try:
+            gpu_rate = float(status.get("gpu_hash_rate", 0) or 0)
+        except Exception:
+            gpu_rate = 0.0
+        hashrate = cpu_rate + gpu_rate
+        expected_blocks_per_sec = 0.0
+        if difficulty > 0:
+            expected_blocks_per_sec = hashrate / (10 ** int(difficulty))
+        lkc_per_hr = expected_blocks_per_sec * avg_reward * 3600
+
         stat_items = [
             ("Network Height", f"{status['network_height']}", "#00a1ff", 20),
             ("Network Difficulty", f"{status['network_difficulty']}", "#17a2b8", 20),
             ("Blocks Mined", f"{status['blocks_mined']}", "#28a745", 20),
             ("Total Reward", total_reward_text, "#ffc107", 14),
-            ("Hash Rate", f"{self._format_hash_rate(status['current_hash_rate'])}", "#00a1ff", 20),
+            ("Empty Blocks", f"{status.get('empty_blocks_mined', 0)}", "#00a1ff", 20),
             ("Success Rate", f"{status['success_rate']:.1f}%", "#28a745" if status['success_rate'] > 50 else "#ffc107", 20),
             ("Avg Mining Time", f"{status['avg_mining_time']:.2f}s", "#17a2b8", 20),
             ("Uptime", f"{self._format_uptime(status['uptime'])}", "#6c757d", 20),
+            ("Mempool Txs", f"{status.get('total_transactions', 0)}", "#17a2b8", 20),
+            ("LKC / hr", f"{lkc_per_hr:,.2f}", "#ffc107", 18),
+            ("CPU Hashrate", f"{self._format_hash_rate(status.get('cpu_hash_rate', 0) or 0)}", "#00a1ff", 18),
+            ("GPU Hashrate", f"{self._format_hash_rate(status.get('gpu_hash_rate', 0) or 0)}", "#00a1ff", 18),
         ]
         table_rows = []
-        for i in range(2):
+        for i in range((len(stat_items) + 3) // 4):
             row_cells = []
             for j in range(4):
                 idx = i * 4 + j
+                if idx >= len(stat_items):
+                    break
                 label, value, color, value_size = stat_items[idx]
                 row_cells.append(
                     ft.Container(
@@ -190,16 +221,33 @@ class MainPage:
         self.mined_blocks = status.get('blocks_mined', 0)
         self.rejected_blocks = status.get('rejected_blocks', 0)
         # Update mining status indicator
-        if self.app.node.miner.is_mining:
+        is_mining = bool(status.get('auto_mining'))
+        auto_mining = bool(status.get('auto_mining'))
+        cpu_active = bool(status.get('cpu_mining_active'))
+        gpu_active = bool(status.get('gpu_mining_active'))
+        if auto_mining:
+            cpu_active = cpu_active or bool(getattr(self.app.node.config, "enable_cpu_mining", True))
+            gpu_active = gpu_active or bool(getattr(self.app.node.config, "enable_gpu_mining", True))
+        if is_mining:
             self.mining_status.content.controls[0].bgcolor = "#28a745"  # Green
-            self.mining_status.content.controls[1].value = "Mining Active"
-            self.start_mining_btn.disabled = True
-            self.stop_mining_btn.disabled = False
+            if cpu_active and gpu_active:
+                self.mining_status.content.controls[1].value = "Mining Active (CPU + GPU)"
+            elif cpu_active:
+                self.mining_status.content.controls[1].value = "Mining Active (CPU)"
+            elif gpu_active:
+                self.mining_status.content.controls[1].value = "Mining Active (GPU)"
+            else:
+                self.mining_status.content.controls[1].value = "Mining Active"
         else:
             self.mining_status.content.controls[0].bgcolor = "#dc3545"  # Red
             self.mining_status.content.controls[1].value = "Mining Stopped"
-            self.start_mining_btn.disabled = False
-            self.stop_mining_btn.disabled = True
+        if not getattr(self.app, "_mining_transition", False):
+            cpu_enabled = bool(getattr(self.app.node.config, "enable_cpu_mining", True)) if self.app.node else True
+            gpu_enabled = bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else True
+            self.cpu_toggle_btn.disabled = not cpu_enabled
+            self.gpu_toggle_btn.disabled = not gpu_enabled
+            self.cpu_toggle_btn.text = "🛑 Stop CPU" if cpu_active else "🖥️ Start CPU"
+            self.gpu_toggle_btn.text = "🛑 Stop GPU" if gpu_active else "🎮 Start GPU"
         # Create detailed stats cards
         stats_grid = ft.ResponsiveRow([
             self._create_detailed_stat_card(

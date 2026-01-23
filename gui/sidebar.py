@@ -16,7 +16,9 @@ class Sidebar:
         self.lbl_uptime = ft.Text("Uptime: --", size=10, color="#e3f2fd")
         self.lbl_hash_rate = ft.Text("Hash Rate: --", size=12, color="#e3f2fd")
         self.lbl_hash_algo = ft.Text("Hash: --", size=10, color="#e3f2fd")
-        self.lbl_mining_method = ft.Text("Method: --", size=10, color="#e3f2fd")
+        self.lbl_method_label = ft.Text("Method:", size=10, color="#ffffff")
+        self.lbl_method_tags = ft.Row(spacing=6)
+        self.lbl_mining_method = ft.Row([self.lbl_method_label, self.lbl_method_tags], spacing=6)
         self.lbl_current_hash = ft.Text("Current Hash: --", size=10, color="#e3f2fd")
         self.lbl_nonce = ft.Text("Nonce: --", size=10, color="#e3f2fd")
         self.progress_mining = ft.ProgressBar(visible=False, color="#00a1ff", bgcolor="#1e3a5c")
@@ -29,19 +31,18 @@ class Sidebar:
             shape=ft.RoundedRectangleBorder(radius=2)
         )
         
-        self.btn_start_mining = ft.Button(
-            "⛏️ Start Mining",
-            on_click=lambda e: self.app.start_mining(),
+        self.btn_cpu_mining = ft.Button(
+            "🖥️ Start CPU",
+            on_click=lambda e: self.app.toggle_cpu_mining(),
             style=button_style,
             height=32
         )
-        
-        self.btn_stop_mining = ft.Button(
-            "⏹️ Stop Mining",
-            on_click=lambda e: self.app.stop_mining(),
+
+        self.btn_gpu_mining = ft.Button(
+            "🎮 Start GPU",
+            on_click=lambda e: self.app.toggle_gpu_mining(),
             style=button_style,
-            height=32,
-            disabled=True
+            height=32
         )
     
     def _start_stats_update_timer(self):
@@ -149,8 +150,8 @@ class Sidebar:
                             ft.PopupMenuItem(content=ft.Text("Restore"), on_click=lambda e: self.app.restore_from_tray()),
                             ft.PopupMenuItem(content=ft.Text("Minimize to Tray"), on_click=lambda e: self.app.minimize_to_tray()),
                             ft.PopupMenuItem(),
-                            ft.PopupMenuItem(content=ft.Text("Start Mining"), on_click=lambda e: self.app.start_mining()),
-                            ft.PopupMenuItem(content=ft.Text("Stop Mining"), on_click=lambda e: self.app.stop_mining()),
+                            ft.PopupMenuItem(content=ft.Text("Start/Stop CPU Mining"), on_click=lambda e: self.app.toggle_cpu_mining()),
+                            ft.PopupMenuItem(content=ft.Text("Start/Stop GPU Mining"), on_click=lambda e: self.app.toggle_gpu_mining()),
                             ft.PopupMenuItem(content=ft.Text("Sync Network"), on_click=lambda e: self.app.sync_network()),
                             ft.PopupMenuItem(),
                             ft.PopupMenuItem(content=ft.Text("About"), on_click=lambda e: self.app.show_about_dialog()),
@@ -216,7 +217,9 @@ class Sidebar:
         self.lbl_uptime.value = f"Uptime: {hours:02d}:{minutes:02d}:{seconds:02d}"
 
         # Update mining stats
-        hash_rate = status['current_hash_rate']
+        cpu_rate = status.get('cpu_hash_rate', 0) or 0
+        gpu_rate = status.get('gpu_hash_rate', 0) or 0
+        hash_rate = cpu_rate + gpu_rate
         mining_method = status.get('mining_method', 'CPU')
         hash_algo = status.get("hash_algorithm")
         if not hash_algo:
@@ -237,13 +240,49 @@ class Sidebar:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
-        # Show mining method with color indicator
-        if mining_method == 'CUDA':
-            self.lbl_mining_method.value = f"Method: 🟢 {mining_method}"
-            self.lbl_mining_method.color = "#00e676"
-        else:
-            self.lbl_mining_method.value = f"Method: 🔵 {mining_method}"
-            self.lbl_mining_method.color = "#00a1ff"
+        # Show mining method tags
+        try:
+            self.lbl_method_tags.controls.clear()
+        except Exception:
+            pass
+        cpu_active = bool(status.get("cpu_mining_active"))
+        gpu_active = bool(status.get("gpu_mining_active"))
+        cpu_threads = 0
+        try:
+            cpu_threads = int(getattr(self.app.node.config, "cpu_threads", 0) or getattr(self.app.node.config, "sm3_workers", 0) or 0)
+        except Exception:
+            cpu_threads = 0
+        multi_gpu = False
+        try:
+            multi_gpu = bool(getattr(self.app.node.config, "multi_gpu_enabled", False))
+        except Exception:
+            multi_gpu = False
+        if cpu_active:
+            cpu_tag = ft.Container(
+                content=ft.Text(f"CPU({cpu_threads if cpu_threads > 0 else '?'})", size=9, color="#ffffff"),
+                bgcolor="#1e88e5",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(cpu_tag)
+        if gpu_active:
+            gpu_count = "x2" if multi_gpu else "x1"
+            gpu_tag = ft.Container(
+                content=ft.Text(f"GPU({gpu_count})", size=9, color="#ffffff"),
+                bgcolor="#2e7d32",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(gpu_tag)
+        if cpu_active and gpu_active:
+            difficulty_val = status.get("mining_difficulty")
+            difficulty_tag = ft.Container(
+                content=ft.Text(f"Diff {difficulty_val}", size=9, color="#ffffff"),
+                bgcolor="#9c27b0",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(difficulty_tag)
 
         current_hash = status['current_hash']
         if current_hash:
@@ -254,13 +293,23 @@ class Sidebar:
 
         self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
 
-        # Update mining progress
-        is_mining = self.app.node.miner.is_mining if self.app.node else False
-        self.progress_mining.visible = is_mining
+        if not getattr(self.app, "_mining_transition", False):
+            auto_mining = bool(status.get("auto_mining"))
+            cpu_active = bool(status.get("cpu_mining_active"))
+            gpu_active = bool(status.get("gpu_mining_active"))
+            cpu_enabled = bool(getattr(self.app.node.config, "enable_cpu_mining", True)) if self.app.node else True
+            gpu_enabled = bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else True
+            if auto_mining:
+                cpu_active = cpu_active or cpu_enabled
+                gpu_active = gpu_active or gpu_enabled
+            self.btn_cpu_mining.disabled = not cpu_enabled
+            self.btn_gpu_mining.disabled = not gpu_enabled
+            self.btn_cpu_mining.text = "🛑 Stop CPU" if cpu_active else "🖥️ Start CPU"
+            self.btn_gpu_mining.text = "🛑 Stop GPU" if gpu_active else "🎮 Start GPU"
 
-        # Update button states
-        self.btn_start_mining.disabled = is_mining
-        self.btn_stop_mining.disabled = not is_mining
+        # Update mining progress
+        is_mining = bool(status.get("auto_mining"))
+        self.progress_mining.visible = is_mining
 
     def refresh_non_balance(self, status: Dict):
         """Refresh sidebar without balance-related fields."""
@@ -286,7 +335,9 @@ class Sidebar:
         seconds = uptime_seconds % 60
         self.lbl_uptime.value = f"Uptime: {hours:02d}:{minutes:02d}:{seconds:02d}"
 
-        hash_rate = status['current_hash_rate']
+        cpu_rate = status.get('cpu_hash_rate', 0) or 0
+        gpu_rate = status.get('gpu_hash_rate', 0) or 0
+        hash_rate = cpu_rate + gpu_rate
         mining_method = status.get('mining_method', 'CPU')
         if hash_rate > 1000000:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000000:.2f} MH/s"
@@ -295,12 +346,48 @@ class Sidebar:
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
 
-        if mining_method == 'CUDA':
-            self.lbl_mining_method.value = f"Method: 🟢 {mining_method}"
-            self.lbl_mining_method.color = "#00e676"
-        else:
-            self.lbl_mining_method.value = f"Method: 🔵 {mining_method}"
-            self.lbl_mining_method.color = "#00a1ff"
+        try:
+            self.lbl_method_tags.controls.clear()
+        except Exception:
+            pass
+        cpu_active = bool(status.get("cpu_mining_active"))
+        gpu_active = bool(status.get("gpu_mining_active"))
+        cpu_threads = 0
+        try:
+            cpu_threads = int(getattr(self.app.node.config, "cpu_threads", 0) or getattr(self.app.node.config, "sm3_workers", 0) or 0)
+        except Exception:
+            cpu_threads = 0
+        multi_gpu = False
+        try:
+            multi_gpu = bool(getattr(self.app.node.config, "multi_gpu_enabled", False))
+        except Exception:
+            multi_gpu = False
+        if cpu_active:
+            cpu_tag = ft.Container(
+                content=ft.Text(f"CPU({cpu_threads if cpu_threads > 0 else '?'})", size=9, color="#ffffff"),
+                bgcolor="#1e88e5",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(cpu_tag)
+        if gpu_active:
+            gpu_count = "x2" if multi_gpu else "x1"
+            gpu_tag = ft.Container(
+                content=ft.Text(f"GPU({gpu_count})", size=9, color="#ffffff"),
+                bgcolor="#2e7d32",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(gpu_tag)
+        if cpu_active and gpu_active:
+            difficulty_val = status.get("mining_difficulty")
+            difficulty_tag = ft.Container(
+                content=ft.Text(f"Diff {difficulty_val}", size=9, color="#ffffff"),
+                bgcolor="#9c27b0",
+                padding=ft.Padding(6, 2, 6, 2),
+                border_radius=12,
+            )
+            self.lbl_method_tags.controls.append(difficulty_tag)
 
         current_hash = status['current_hash']
         if current_hash:
@@ -311,8 +398,6 @@ class Sidebar:
 
         self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
 
-        is_mining = self.app.node.miner.is_mining if self.app.node else False
+        is_mining = bool(status.get("auto_mining"))
         self.progress_mining.visible = is_mining
-        self.btn_start_mining.disabled = is_mining
-        self.btn_stop_mining.disabled = not is_mining
         self.app.safe_page_update()

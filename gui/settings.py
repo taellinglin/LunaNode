@@ -1,6 +1,7 @@
 import flet as ft
 from typing import Dict, Callable
 import threading
+import os
 
 class SettingsPage:
     def __init__(self, app):
@@ -113,6 +114,9 @@ class SettingsPage:
         cuda_batch_value = int(getattr(config, "cuda_batch_size", 100000) or 100000) if config else 100000
         gpu_batch_dynamic_value = bool(getattr(config, "gpu_batch_dynamic", False)) if config else False
         cpu_threads_value = int(getattr(config, "cpu_threads", 1) or 1) if config else 1
+        multi_gpu_value = bool(getattr(config, "multi_gpu_enabled", False)) if config else False
+        adapt_value = bool(getattr(config, "adapt_load_balance", False)) if config else False
+        parallel_value = bool(getattr(config, "parallel_mining", False)) if config else False
 
         self.sm3_workers_field = ft.TextField(
             label="SM3 Workers",
@@ -132,10 +136,23 @@ class SettingsPage:
             border_color="#1e3a5c",
             on_change=lambda e: self._on_cuda_batch_changed(e.control.value)
         )
-        self.gpu_batch_dynamic_check = ft.Checkbox(
+        self.gpu_batch_dynamic_check = ft.Switch(
             label="Dynamic",
             value=gpu_batch_dynamic_value,
+            active_color="#00b0ff",
             on_change=lambda e: self._on_gpu_batch_dynamic_changed(e.control.value)
+        )
+        self.multi_gpu_check = ft.Switch(
+            label="Dual",
+            value=multi_gpu_value,
+            active_color="#b388ff",
+            on_change=lambda e: self._on_multi_gpu_changed(e.control.value)
+        )
+        self.parallel_switch = ft.Switch(
+            label="Parallel",
+            value=parallel_value,
+            active_color="#b388ff",
+            on_change=lambda e: self._on_parallel_mining_changed(e.control.value)
         )
         self.cpu_threads_field = ft.TextField(
             label="CPU Threads",
@@ -157,10 +174,12 @@ class SettingsPage:
                 self.cpu_threads_field,
                 self.cuda_batch_field,
                 self.gpu_batch_dynamic_check,
+                self.multi_gpu_check,
             ], spacing=12),
             ft.Row([
                 self.gpu_switch,
                 self.auto_mining_switch,
+                self.parallel_switch,
             ], spacing=12),
         ], "#00a1ff")
     
@@ -660,6 +679,67 @@ class SettingsPage:
                 pass
             self.app.add_log_message(
                 f"GPU batch dynamic {'enabled' if value else 'disabled'}",
+                "info",
+            )
+
+    def _on_adapt_changed(self, value: bool):
+        if self.app.node:
+            self.app.node.config.adapt_load_balance = bool(value)
+            if value:
+                try:
+                    self.app.node.config.enable_cpu_mining = True
+                    self.app.node.config.enable_gpu_mining = True
+                    self.app.node.config.gpu_batch_dynamic = True
+                    self.app.node.config.cpu_threads = max(1, (os.cpu_count() or 4) - 1)
+                except Exception:
+                    pass
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            self.app.add_log_message(
+                f"Adapt {'enabled' if value else 'disabled'}",
+                "info",
+            )
+
+    def _on_parallel_mining_changed(self, value: bool):
+        if self.app.node:
+            self.app.node.config.parallel_mining = bool(value)
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            try:
+                if getattr(self.app.node, "cpu_miner", None) is not None:
+                    self.app.node._apply_parallel_mining(self.app.node.cpu_miner)
+                if getattr(self.app.node, "gpu_miner", None) is not None:
+                    self.app.node._apply_parallel_mining(self.app.node.gpu_miner)
+            except Exception:
+                pass
+            self.app.add_log_message(
+                f"Parallel CPU+GPU {'enabled' if value else 'disabled'}",
+                "info",
+            )
+
+    def _on_multi_gpu_changed(self, value: bool):
+        if self.app.node:
+            self.app.node.config.multi_gpu_enabled = bool(value)
+            try:
+                self.app.node.config.save_to_storage()
+            except Exception:
+                pass
+            try:
+                import os
+                os.environ["LUNALIB_MULTI_GPU"] = "1" if value else "0"
+            except Exception:
+                pass
+            try:
+                if getattr(self.app.node, "gpu_miner", None) is not None:
+                    self.app.node.gpu_miner.multi_gpu_enabled = bool(value)
+            except Exception:
+                pass
+            self.app.add_log_message(
+                f"Multi-GPU {'enabled' if value else 'disabled'}",
                 "info",
             )
 
