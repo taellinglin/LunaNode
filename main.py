@@ -16,6 +16,19 @@ import sys
 os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
 os.environ.setdefault("LUNALIB_MINING_HASH_MODE", "compact")
 
+# Preconfigure data dirs to avoid MissingPlatformDirectoryException on Linux
+if sys.platform != "emscripten":
+    if os.name == "nt":
+        base_data = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local")) / "LunaNode"
+    else:
+        base_data = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share")) / "LunaNode"
+    try:
+        base_data.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
+    os.environ.setdefault("LUNALIB_DATA_DIR", str(base_data))
+    os.environ.setdefault("XDG_DOCUMENTS_DIR", str(base_data))
+
 from utils import DataManager, NodeConfig, is_valid_luna_address
 
 # Import unified balance utilities (if needed)
