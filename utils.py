@@ -10,12 +10,23 @@ from datetime import datetime
 import threading
 import re
 
+# Force UTF-8 console to avoid charmap errors from emoji output
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+try:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 def _is_frozen_like() -> bool:
     try:
         if bool(getattr(sys, "frozen", False)):
             return True
         exe = str(getattr(sys, "executable", "") or "").lower()
-        if exe.endswith("lunanode.exe") and "\\build\\windows\\" in exe:
+        if exe.endswith("lunanode.exe"):
             return True
         return False
     except Exception:

@@ -12,6 +12,16 @@ from pathlib import Path
 import certifi
 import PIL
 import sys
+# Force UTF-8 console to avoid charmap errors from emoji output
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+try:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
 # Lunalib backend selection (SM2). Use env override if provided.
 os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
 os.environ.setdefault("LUNALIB_MINING_HASH_MODE", "compact")
@@ -23,7 +33,7 @@ def _is_frozen_like() -> bool:
         if bool(getattr(sys, "frozen", False)):
             return True
         exe = str(getattr(sys, "executable", "") or "").lower()
-        if exe.endswith("lunanode.exe") and "\\build\\windows\\" in exe:
+        if exe.endswith("lunanode.exe"):
             return True
         return False
     except Exception:
