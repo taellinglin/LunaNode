@@ -275,8 +275,8 @@ class MainPage:
         self.app.safe_page_update()
         status = self.app.node.get_status()
         # 必要な統計値をセット
-        self.cpu_hashrate = status.get('cpu_hashrate', 0.0)
-        self.gpu_hashrate = status.get('gpu_hashrate', 0.0)
+        self.cpu_hashrate = status.get('cpu_hash_rate', 0.0)
+        self.gpu_hashrate = status.get('gpu_hash_rate', 0.0)
         self.mined_blocks = status.get('blocks_mined', 0)
         self.rejected_blocks = status.get('rejected_blocks', 0)
         # Update mining status indicator
@@ -302,7 +302,8 @@ class MainPage:
             self.mining_status.content.controls[1].value = "Mining Stopped"
         if not getattr(self.app, "_mining_transition", False):
             cpu_enabled = bool(getattr(self.app.node.config, "enable_cpu_mining", True)) if self.app.node else True
-            gpu_enabled = bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else True
+            cuda_available = bool(status.get("cuda_available", False))
+            gpu_enabled = cuda_available or bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else cuda_available
             self.cpu_toggle_btn.disabled = not cpu_enabled
             self.gpu_toggle_btn.disabled = not gpu_enabled
             self.cpu_toggle_btn.text = "🛑 Stop CPU" if cpu_active else "🖥️ Start CPU"

@@ -274,7 +274,7 @@ class Sidebar:
                 border_radius=12,
             )
             self.lbl_method_tags.controls.append(gpu_tag)
-        if cpu_active and gpu_active:
+        if cpu_active or gpu_active:
             difficulty_val = status.get("mining_difficulty")
             difficulty_tag = ft.Container(
                 content=ft.Text(f"Diff {difficulty_val}", size=9, color="#ffffff"),
@@ -291,14 +291,17 @@ class Sidebar:
         else:
             self.lbl_current_hash.value = "Current Hash: --"
 
-        self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
+        cpu_nonce = status.get('cpu_nonce', 0)
+        gpu_nonce = status.get('gpu_nonce', 0)
+        self.lbl_nonce.value = f"Nonce: CPU {cpu_nonce} | GPU {gpu_nonce}"
 
         if not getattr(self.app, "_mining_transition", False):
             auto_mining = bool(status.get("auto_mining"))
             cpu_active = bool(status.get("cpu_mining_active"))
             gpu_active = bool(status.get("gpu_mining_active"))
             cpu_enabled = bool(getattr(self.app.node.config, "enable_cpu_mining", True)) if self.app.node else True
-            gpu_enabled = bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else True
+            cuda_available = bool(status.get("cuda_available", False))
+            gpu_enabled = cuda_available or bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else cuda_available
             if auto_mining:
                 cpu_active = cpu_active or cpu_enabled
                 gpu_active = gpu_active or gpu_enabled
@@ -379,7 +382,7 @@ class Sidebar:
                 border_radius=12,
             )
             self.lbl_method_tags.controls.append(gpu_tag)
-        if cpu_active and gpu_active:
+        if cpu_active or gpu_active:
             difficulty_val = status.get("mining_difficulty")
             difficulty_tag = ft.Container(
                 content=ft.Text(f"Diff {difficulty_val}", size=9, color="#ffffff"),
@@ -396,7 +399,9 @@ class Sidebar:
         else:
             self.lbl_current_hash.value = "Current Hash: --"
 
-        self.lbl_nonce.value = f"Nonce: {status['current_nonce']}"
+        cpu_nonce = status.get('cpu_nonce', 0)
+        gpu_nonce = status.get('gpu_nonce', 0)
+        self.lbl_nonce.value = f"Nonce: CPU {cpu_nonce} | GPU {gpu_nonce}"
 
         is_mining = bool(status.get("auto_mining"))
         self.progress_mining.visible = is_mining

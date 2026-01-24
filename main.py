@@ -16,6 +16,65 @@ import sys
 os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
 os.environ.setdefault("LUNALIB_MINING_HASH_MODE", "compact")
 os.environ.setdefault("LUNALIB_BLOCK_REWARD_MODE", "linear")
+os.environ.setdefault("LUNALIB_CUDA_SM3", "1")
+
+def _is_frozen_like() -> bool:
+    try:
+        if bool(getattr(sys, "frozen", False)):
+            return True
+        exe = str(getattr(sys, "executable", "") or "").lower()
+        if exe.endswith("lunanode.exe") and "\\build\\windows\\" in exe:
+            return True
+        return False
+    except Exception:
+        return False
+
+if _is_frozen_like():
+    os.environ.setdefault("LUNALIB_DISABLE_P2P", "1")
+    os.environ.setdefault("LUNANODE_FAST_STARTUP", "1")
+    os.environ.setdefault("LUNANODE_STARTUP_SYNC_DELAY", "30")
+    os.environ.setdefault("LUNANODE_DISABLE_GPU_INIT", "0")
+os.environ.setdefault("REQUESTS_CA_BUNDLE", certifi.where())
+os.environ.setdefault("SSL_CERT_FILE", certifi.where())
+
+def _ensure_cuda_env():
+    """Best-effort CUDA env normalization for packaged builds."""
+    try:
+        if os.name != "nt":
+            return
+
+        if "CUDA_VISIBLE_DEVICES" in os.environ and not os.environ.get("CUDA_VISIBLE_DEVICES"):
+            os.environ.pop("CUDA_VISIBLE_DEVICES", None)
+        os.environ.setdefault("CUDA_VISIBLE_DEVICES", "0")
+
+        cuda_path = os.environ.get("CUDA_PATH")
+        if not cuda_path:
+            candidates = [
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.3",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.0",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.7",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6",
+                r"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2",
+            ]
+            for candidate in candidates:
+                if os.path.isdir(candidate):
+                    cuda_path = candidate
+                    os.environ["CUDA_PATH"] = candidate
+                    break
+
+        if cuda_path:
+            cuda_bin = os.path.join(cuda_path, "bin")
+            current_path = os.environ.get("PATH", "")
+            if cuda_bin and cuda_bin not in current_path:
+                os.environ["PATH"] = cuda_bin + os.pathsep + current_path
+    except Exception:
+        pass
+
+_ensure_cuda_env()
 
 # Preconfigure data dirs to avoid MissingPlatformDirectoryException on Linux
 if sys.platform != "emscripten":
@@ -30,10 +89,24 @@ if sys.platform != "emscripten":
     os.environ.setdefault("LUNALIB_DATA_DIR", str(base_data))
     os.environ.setdefault("XDG_DOCUMENTS_DIR", str(base_data))
 
-from utils import DataManager, NodeConfig, is_valid_luna_address
+from utils import DataManager, NodeConfig, is_valid_luna_address, log_mining_debug_event
 
 # Import unified balance utilities (if needed)
 from utils import LunaNode
+
+try:
+    log_mining_debug_event(
+        "app_start",
+        {
+            "frozen": bool(getattr(sys, "frozen", False)),
+            "frozen_like": _is_frozen_like(),
+            "executable": sys.executable,
+            "meipass": getattr(sys, "_MEIPASS", None),
+        },
+        scope="app",
+    )
+except Exception:
+    pass
 
 # Ensure cache directory exists
 if sys.platform == "emscripten":
@@ -711,7 +784,6 @@ class LunaNodeApp:
             return
             
         status = self.node.get_status()
-        print(ft.Color.RED + status.error_message)
         # Update sidebar
         self.sidebar.update_status(status)
             
@@ -744,13 +816,6 @@ class LunaNodeApp:
                 
 
     def update_progress(self, progress_bar, progress_text, progress, message):
-        progress_bar.value = progress / 100
-        progress_text.value = message
-        self.page.update()
-                    
-        threading.Thread(target=sync_thread, daemon=True).start()
-            
-            # concise: skip debug
         """Update progress dialog"""
         progress_bar.value = progress / 100
         progress_text.value = message

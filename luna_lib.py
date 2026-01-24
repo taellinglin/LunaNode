@@ -353,13 +353,13 @@ def setup_cuda():
             print("✅ CUDA is available")
             return True
         else:
-            print("❌ CUDA drivers found but no GPU available")
+            print("[ERROR] CUDA drivers found but no GPU available")
             return False
     except ImportError:
-        print("❌ CuPy not installed - CUDA unavailable")
+        print("[ERROR] CuPy not installed - CUDA unavailable")
         return False
     except Exception as e:
-        print(f"❌ CUDA check failed: {e}")
+        print(f"[ERROR] CUDA check failed: {e}")
         return False
 
 
