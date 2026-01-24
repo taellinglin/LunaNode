@@ -1,6 +1,7 @@
 # build.spec
 import os
 import subprocess
+from PyInstaller.utils.hooks import collect_dynamic_libs
 
 block_cipher = None
 
@@ -43,6 +44,10 @@ hidden_imports = [
     'tqdm',
     'tqdm.auto',
     'tqdm.std',
+    'lunalib.core.sm3',
+    'lunalib.core.sm3_cuda',
+    'lunalib.mining.sm3_cuda',
+    'lunalib.utils.hash',
 ]
 
 # Add cupy imports based on CUDA version
@@ -54,18 +59,26 @@ cupy_imports = [
 ]
 hidden_imports.extend(cupy_imports)
 
+# Collect native binaries for lunalib/cupy/numpy when available
+binary_deps = []
+for pkg in ('lunalib', 'cupy', 'numpy'):
+    try:
+        binary_deps.extend(collect_dynamic_libs(pkg))
+    except Exception:
+        pass
+
 print(f"[BUILD] Hidden imports: {hidden_imports}")
 
 a = Analysis(
     ['main.py'],
     pathex=[],
-    binaries=[],
+    binaries=binary_deps,
     datadesc=[],
     hiddenimports=hidden_imports,
     hookspath=['.'],
     hooksconfig={},
     runtime_hooks=['encoding_hook.py'],
-    excludes=['pystray', '_ctypes', 'ctypes', 'infi.systray'],  # ADD sqlite3 HERE
+    excludes=['pystray', 'infi.systray'],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,
     cipher=block_cipher,

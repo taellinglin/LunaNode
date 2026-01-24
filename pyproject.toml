@@ -48,6 +48,10 @@ datas = [
 ]
 hiddenimports = [
     "lunalib",
+    "lunalib.core.sm3",
+    "lunalib.core.sm3_cuda",
+    "lunalib.mining.sm3_cuda",
+    "lunalib.utils.hash",
     "lunalib.core.blockchain",
     "lunalib.core.mempool",
     "lunalib.core.p2p",
@@ -84,7 +88,14 @@ hiddenimports = [
     "numpy._core",
     "numpy._core._multiarray_umath",
     "tqdm",
-    "rich"
+    "rich",
+    "cupy",
+    "cupy.cuda",
+    "cupy.cuda.runtime",
+    "cupy._core",
+    "cupy_cuda12x",
+    "cupy_cuda11x",
+    "cupy_cuda102"
 ]
 excludes = [
     "tkinter",
