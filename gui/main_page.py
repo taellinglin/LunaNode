@@ -1,5 +1,11 @@
 import flet as ft
+import os
 from typing import Dict
+
+try:
+    from lunalib.mining.difficulty import DifficultySystem
+except Exception:
+    DifficultySystem = None
 
 class MainPage:
     def __init__(self, app):
@@ -141,18 +147,71 @@ class MainPage:
             self.stats_panel.visible = True
         total_reward_text = f"{status['total_reward']:.0f} LKC"
         # 3x4のテーブル状タイル（ラベル＋値）で統計を表示
-        avg_reward = 0.0
-        try:
-            if status.get("blocks_mined"):
-                avg_reward = float(status.get("total_reward", 0) or 0) / float(status.get("blocks_mined") or 1)
-        except Exception:
-            avg_reward = 0.0
         try:
             difficulty = float(status.get("mining_difficulty", 1) or 1)
         except Exception:
             difficulty = 1.0
-        if not avg_reward and difficulty >= 1:
-            avg_reward = 10 ** max(0, int(difficulty) - 1)
+        expected_reward = 0.0
+        try:
+            ds = getattr(self.app.node, "difficulty_system", None)
+            if ds is None and DifficultySystem:
+                ds = DifficultySystem()
+            mempool = []
+            try:
+                mempool_mgr = getattr(self.app.node, "mempool_manager", None)
+                if mempool_mgr:
+                    mempool = mempool_mgr.get_pending_transactions() or []
+            except Exception:
+                mempool = []
+
+            non_reward_txs = [
+                tx
+                for tx in mempool
+                if isinstance(tx, dict) and str(tx.get("type") or "").lower() not in ("reward", "mining_reward")
+            ]
+            is_empty_block = len(non_reward_txs) == 0
+            tx_count = len(non_reward_txs)
+            fees_total = sum(
+                float(tx.get("fee", 0) or 0)
+                for tx in non_reward_txs
+                if str(tx.get("type") or "").lower() == "transaction"
+            )
+            gtx_denom_total = 0.0
+            for tx in non_reward_txs:
+                if str(tx.get("type") or "").lower() in {"gtx_genesis", "genesis_bill"}:
+                    try:
+                        denom = float(tx.get("amount", tx.get("denomination", 0)) or 0)
+                    except Exception:
+                        denom = 0.0
+                    try:
+                        gtx_denom_total += float(ds.gtx_reward_units(denom))
+                    except Exception:
+                        gtx_denom_total += 0.0
+
+            reward_mode = os.getenv("LUNALIB_BLOCK_REWARD_MODE", "linear").lower().strip()
+            base_reward = None
+            if is_empty_block or reward_mode == "linear":
+                base_reward = float(difficulty or 0)
+
+            next_height = int(status.get("network_height", 0) or 0) + 1
+            expected_reward = float(
+                ds.calculate_block_reward(
+                    int(difficulty),
+                    block_height=next_height,
+                    tx_count=0 if is_empty_block else tx_count,
+                    fees_total=0.0 if is_empty_block else fees_total,
+                    gtx_denom_total=0.0 if is_empty_block else gtx_denom_total,
+                    base_reward=base_reward,
+                )
+            )
+            if is_empty_block:
+                try:
+                    empty_mult = float(os.getenv("LUNALIB_EMPTY_BLOCK_MULT", "0.0001"))
+                except Exception:
+                    empty_mult = 0.0001
+                expected_reward = max(0.0, expected_reward * empty_mult)
+        except Exception:
+            expected_reward = 0.0
         try:
             cpu_rate = float(status.get("cpu_hash_rate", 0) or 0)
         except Exception:
@@ -165,7 +224,7 @@ class MainPage:
         expected_blocks_per_sec = 0.0
         if difficulty > 0:
             expected_blocks_per_sec = hashrate / (10 ** int(difficulty))
-        lkc_per_hr = expected_blocks_per_sec * avg_reward * 3600
+        lkc_per_hr = expected_blocks_per_sec * expected_reward * 3600
 
         stat_items = [
             ("Network Height", f"{status['network_height']}", "#00a1ff", 20),

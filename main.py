@@ -15,6 +15,7 @@ import sys
 # Lunalib backend selection (SM2). Use env override if provided.
 os.environ.setdefault("LUNALIB_SM2_BACKEND", "phos")
 os.environ.setdefault("LUNALIB_MINING_HASH_MODE", "compact")
+os.environ.setdefault("LUNALIB_BLOCK_REWARD_MODE", "linear")
 
 # Preconfigure data dirs to avoid MissingPlatformDirectoryException on Linux
 if sys.platform != "emscripten":

@@ -1203,6 +1203,71 @@ class LunaNode:
         }
         return reward_tx
 
+    def _calculate_expected_block_reward(self, block_data: Dict) -> Tuple[float, bool]:
+        """Calculate block reward using LunaLib daemon formula (linear/exponential + bonuses)."""
+        try:
+            difficulty = int(block_data.get("difficulty") or getattr(self.config, "difficulty", 1) or 1)
+        except Exception:
+            difficulty = 1
+
+        transactions = block_data.get("transactions", [])
+        if not isinstance(transactions, list):
+            transactions = []
+
+        non_reward_txs = [
+            tx
+            for tx in transactions
+            if isinstance(tx, dict) and str(tx.get("type") or "").lower() not in ("reward", "mining_reward")
+        ]
+        is_empty_block = len(non_reward_txs) == 0
+        tx_count = len(non_reward_txs)
+
+        fees_total = sum(
+            float(tx.get("fee", 0) or 0)
+            for tx in non_reward_txs
+            if str(tx.get("type") or "").lower() == "transaction"
+        )
+
+        gtx_denom_total = 0.0
+        for tx in non_reward_txs:
+            if str(tx.get("type") or "").lower() in {"gtx_genesis", "genesis_bill"}:
+                try:
+                    denom = float(tx.get("amount", tx.get("denomination", 0)) or 0)
+                except Exception:
+                    denom = 0.0
+                try:
+                    gtx_denom_total += float(self.difficulty_system.gtx_reward_units(denom))
+                except Exception:
+                    gtx_denom_total += 0.0
+
+        reward_mode = os.getenv("LUNALIB_BLOCK_REWARD_MODE", "linear").lower().strip()
+        base_reward = None
+        if is_empty_block or reward_mode == "linear":
+            base_reward = float(difficulty or 0)
+
+        try:
+            reward = float(
+                self.difficulty_system.calculate_block_reward(
+                    difficulty,
+                    block_height=block_data.get("index"),
+                    tx_count=0 if is_empty_block else tx_count,
+                    fees_total=0.0 if is_empty_block else fees_total,
+                    gtx_denom_total=0.0 if is_empty_block else gtx_denom_total,
+                    base_reward=base_reward,
+                )
+            )
+        except Exception:
+            reward = float(base_reward or 0)
+
+        if is_empty_block:
+            try:
+                empty_mult = float(os.getenv("LUNALIB_EMPTY_BLOCK_MULT", "0.0001"))
+            except Exception:
+                empty_mult = 0.0001
+            reward = max(0.0, reward * empty_mult)
+
+        return reward, is_empty_block
+
     def scan_transactions_for_address_cached(self, address: str) -> List[Dict]:
         """Scan blockchain for address transactions starting from last cached height."""
         try:
@@ -1585,13 +1650,7 @@ class LunaNode:
                 block_difficulty = block_data.get('difficulty', self.config.difficulty)
                 if not block_difficulty or block_difficulty < 1:
                     block_difficulty = self.config.difficulty
-                # Reward: non-empty = exponential, empty = linear
-                non_reward_txs = [tx for tx in block_data.get('transactions', []) if isinstance(tx, dict) and tx.get('type') not in ('reward', 'mining_reward')]
-                is_empty_block = len(non_reward_txs) == 0
-                if is_empty_block:
-                    reward = 1.0 * float(block_difficulty)
-                else:
-                    reward = 1.0 * (10 ** (block_difficulty - 1))
+                reward, is_empty_block = self._calculate_expected_block_reward(block_data)
                 block_data['reward'] = reward
                 nonce = block_data.get('nonce', 0)
                 block_hash = block_data.get('hash', '')
