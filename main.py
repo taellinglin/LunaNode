@@ -1,4 +1,3 @@
-import flet as ft
 import threading
 import time
 import os
@@ -88,6 +87,8 @@ _ensure_cuda_env()
 
 # Preconfigure data dirs to avoid MissingPlatformDirectoryException on Linux
 if sys.platform != "emscripten":
+    if os.name != "nt":
+        os.environ.setdefault("HOME", os.path.expanduser("~"))
     if os.name == "nt":
         base_data = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local")) / "LunaNode"
     else:
@@ -97,7 +98,12 @@ if sys.platform != "emscripten":
     except Exception:
         pass
     os.environ.setdefault("LUNALIB_DATA_DIR", str(base_data))
+    os.environ.setdefault("XDG_DATA_HOME", str(base_data))
+    os.environ.setdefault("XDG_CONFIG_HOME", str(base_data))
+    os.environ.setdefault("XDG_CACHE_HOME", str(base_data))
     os.environ.setdefault("XDG_DOCUMENTS_DIR", str(base_data))
+
+import flet as ft
 
 from utils import DataManager, NodeConfig, is_valid_luna_address, log_mining_debug_event
 
