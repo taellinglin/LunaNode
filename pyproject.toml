@@ -14,7 +14,8 @@ requires-python = ">=3.8"
 dependencies = [
     "flet>=0.10.0",
     "qrcode[pil]>=7.4.0",
-    "lunalib[gpu]==2.5.2",
+    "lunalib[gpu]==2.5.2; platform_system == 'Windows'",
+    "lunalib==2.5.2; platform_system != 'Windows'",
     "requests>=2.25.0",
     "cryptography>=3.4.0",
     "pillow",
