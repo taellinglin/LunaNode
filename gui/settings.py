@@ -38,11 +38,17 @@ class SettingsPage:
         self.settings_content.controls.clear()
 
 
-        def stat_style_card(icon, title, controls, color):
+        def stat_style_card(icon_name, title, controls, color):
             return ft.Container(
                 content=ft.Column([
                     ft.Row([
-                        ft.Text(icon, size=18, color=color),
+                        ft.Image(
+                            src=f"assets/icons/feather/{icon_name}.svg",
+                            width=18,
+                            height=18,
+                            color=color,
+                            color_blend_mode=ft.BlendMode.SRC_IN,
+                        ),
                         ft.Text(title, size=14, color="#e3f2fd", weight=ft.FontWeight.BOLD, expand=True),
                     ], spacing=5),
                     ft.Container(height=8),
@@ -165,7 +171,7 @@ class SettingsPage:
             on_change=lambda e: self._on_cpu_threads_changed(e.control.value)
         )
 
-        mining_card = stat_style_card("⛏️", "Mining Settings", [
+        mining_card = stat_style_card("cpu", "Mining Settings", [
             self.difficulty_field,
             self.performance_value,
             self.performance_slider,
@@ -183,11 +189,11 @@ class SettingsPage:
             ], spacing=12),
         ], "#00a1ff")
     
-        network_card = stat_style_card("🌐", "Network Settings", [
+        network_card = stat_style_card("server", "Network Settings", [
             self.node_url_field,
             ft.Switch(label="Use SSL", value=True, active_color="#ffd600"),
         ], "#17a2b8")
-        wallet_card = stat_style_card("💰", "Wallet Settings", [
+        wallet_card = stat_style_card("dollar-sign", "Wallet Settings", [
             self.wallet_field,
         ], "#ffc107")
 
@@ -251,7 +257,7 @@ class SettingsPage:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("⛏️ Mining Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text("Mining Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Container(height=15),
                 ft.Row([
                     self.auto_mining_switch,
@@ -316,7 +322,7 @@ class SettingsPage:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("🌐 Network Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text("Network Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Container(height=15),
                 self.node_url_field,
                 ft.Container(height=15),
@@ -393,7 +399,7 @@ class SettingsPage:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("⚡ Performance Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text("Performance Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Container(height=15),
                 ft.Row([
                     self.thread_count_field,
@@ -433,7 +439,7 @@ class SettingsPage:
         )
         
         self.rewards_address_field = ft.TextField(
-            label="🎯 Rewards Address",
+            label="Rewards Address",
             hint_text="Enter your Luna wallet address for receiving rewards",
             value=getattr(self.app.node.config, 'rewards_address', '') if self.app.node else "",
             on_change=lambda e: self._on_rewards_address_changed(e.control.value),
@@ -459,7 +465,7 @@ class SettingsPage:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("💰 Wallet Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text("Wallet Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Container(height=15),
                 self.miner_address_field,
                 ft.Container(height=15),
@@ -532,7 +538,7 @@ class SettingsPage:
         
         return ft.Container(
             content=ft.Column([
-                ft.Text("🔧 Advanced Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                ft.Text("Advanced Settings", size=18, color="#00a1ff", weight=ft.FontWeight.BOLD),
                 ft.Container(height=15),
                 ft.Row([
                     self.log_level_dropdown,

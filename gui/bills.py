@@ -10,6 +10,10 @@ if not hasattr(ft, "HitTestBehavior"):
 from typing import Dict, List
 from datetime import datetime
 import time
+try:
+    from lunalib.utils.formatting import format_amount as lunalib_format_amount
+except Exception:
+    lunalib_format_amount = None
 
 class BillsPage:
     def __init__(self, app):
@@ -57,6 +61,18 @@ class BillsPage:
         )
         self.tx_cards = ft.Column([], expand=True, spacing=8)
         # その後で内容を更新
+
+    def _format_lkc(self, amount: float) -> str:
+        if lunalib_format_amount:
+            try:
+                return lunalib_format_amount(amount, "LKC")
+            except Exception:
+                pass
+        try:
+            value = float(amount)
+        except Exception:
+            value = 0.0
+        return f"{value:,.2f} LKC"
         
 
     def _get_block_for_index(self, block_index: int):
@@ -661,17 +677,17 @@ class BillsPage:
         # Add to table
         for bill in mined_bills[:50]:  # Show last 50 bills
             timestamp = datetime.fromtimestamp(bill['timestamp']).strftime("%Y-%m-%d %H:%M:%S")
-            amount = f"{bill['amount']:.2f} LKC"
+            amount = self._format_lkc(bill.get('amount', 0))
             
             # Determine type color and icon
             if bill['type'] == 'mining_reward':
-                type_display = "💰 Mining Reward"
+                type_display = "Mining Reward"
                 type_color = "#28a745"
             elif bill['type'] == 'reward':
-                type_display = "🎁 Block Reward"
+                type_display = "Block Reward"
                 type_color = "#17a2b8"
             else:
-                type_display = "🔄 Transaction"
+                type_display = "Transaction"
                 type_color = "#6c757d"
             
             # Status color
@@ -699,7 +715,7 @@ class BillsPage:
                 ft.Container(
                     content=ft.Column([
                         ft.Text("Total Mined", size=12, color="#e3f2fd"),
-                        ft.Text(f"{total_reward:.2f} LKC", size=16, color="#00a1ff", weight=ft.FontWeight.BOLD),
+                        ft.Text(self._format_lkc(total_reward), size=16, color="#00a1ff", weight=ft.FontWeight.BOLD),
                     ]),
                     padding=15,
                     bgcolor="#1a2b3c",

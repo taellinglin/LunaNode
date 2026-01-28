@@ -583,6 +583,7 @@ class LunaNode:
         self._prefer_cached_stats = True
         self._gpu_batch_warmup = True
         self._startup_ts = time.time()
+        self._last_mined_ts = 0.0
 
         # Prevent repeated submissions of the same block
         self._last_submitted_hash = None
@@ -1407,6 +1408,10 @@ class LunaNode:
             success, message = self.submit_block(block_data)
             if success:
                 self.stats['successful_blocks'] += 1
+                try:
+                    self._last_mined_ts = time.time()
+                except Exception:
+                    pass
                 reward_tx = self._create_reward_transaction(block_data)
                 if self.new_reward_callback:
                     self.new_reward_callback(reward_tx)
@@ -1433,6 +1438,10 @@ class LunaNode:
         """Handle newly mined block from lunalib miner (already submitted)."""
         try:
             self.stats['successful_blocks'] += 1
+            try:
+                self._last_mined_ts = time.time()
+            except Exception:
+                pass
             # Persist mining history so blocks/rewards update immediately
             try:
                 block_index = block_data.get("index") if isinstance(block_data, dict) else None
@@ -1482,6 +1491,11 @@ class LunaNode:
                     pass
                 self.data_manager.save_mining_history(history)
                 self._recalculate_reward_stats()
+                try:
+                    status = self._apply_mining_totals_to_status(self._cached_status or {}, save_cache=True)
+                    self.data_manager.save_stats(status)
+                except Exception:
+                    pass
             except Exception:
                 pass
             reward_tx = self._create_reward_transaction(block_data)
@@ -1677,6 +1691,66 @@ class LunaNode:
         self.config.save_to_storage()
         return transactions
 
+    def _sync_mining_history_from_chain(self, force: bool = False) -> None:
+        """Backfill mining history from on-chain reward transactions when local cache is empty."""
+        try:
+            now_ts = time.time()
+            if not force and (now_ts - getattr(self, "_last_reward_sync_ts", 0)) < 60:
+                return
+            self._last_reward_sync_ts = now_ts
+            if not self.blockchain_manager:
+                return
+            address = getattr(self.config, "miner_address", None)
+            if not address:
+                return
+            history = self.get_mining_history()
+            if history and not force:
+                return
+            txs = self.blockchain_manager.scan_transactions_for_address(address, start_height=0, end_height=self.blockchain_manager.get_blockchain_height())
+            if not isinstance(txs, list) or not txs:
+                return
+            records = []
+            for tx in txs:
+                if not isinstance(tx, dict):
+                    continue
+                tx_type = str(tx.get("type", "")).lower()
+                if tx_type not in ("reward", "mining_reward") and str(tx.get("from", "")).lower() not in ("network", "ling country mines", "coinbase", "system"):
+                    continue
+                if str(tx.get("to", "")) != str(address):
+                    continue
+                block_index = tx.get("block_height") or tx.get("block_index") or tx.get("index")
+                block_hash = tx.get("block_hash") or tx.get("hash")
+                try:
+                    reward_amount = float(tx.get("amount", 0) or 0)
+                except Exception:
+                    reward_amount = 0.0
+                records.append({
+                    "timestamp": tx.get("timestamp", time.time()),
+                    "status": "success",
+                    "block_index": block_index,
+                    "hash": block_hash,
+                    "nonce": tx.get("nonce", 0) if isinstance(tx.get("nonce", 0), (int, float, str)) else 0,
+                    "difficulty": tx.get("difficulty", self.config.difficulty),
+                    "mining_time": tx.get("mining_time", 0),
+                    "transactions": [tx],
+                    "reward": reward_amount,
+                    "method": "chain",
+                    "is_empty_block": True,
+                })
+            if not records:
+                return
+            records.sort(key=lambda r: float(r.get("timestamp", 0) or 0), reverse=True)
+            self.data_manager.save_mining_history(records)
+            self._recalculate_reward_stats()
+            try:
+                status = self.get_status()
+                if isinstance(status, dict):
+                    self.data_manager.save_stats(status)
+            except Exception:
+                pass
+        except Exception:
+            pass
+
     def scan_transactions_for_addresses_cached(self, addresses: List[str]) -> Dict[str, List[Dict]]:
         """Scan blockchain for multiple addresses using lunalib batch scanning."""
         if not addresses:
@@ -1749,22 +1823,86 @@ class LunaNode:
 
     def _recalculate_reward_stats(self):
         try:
+            blocks_mined, _empty_blocks_mined, total_reward = self._calculate_mining_totals()
+            self.miner.blocks_mined = blocks_mined
+            self.miner.total_reward = total_reward
+            try:
+                if isinstance(self._cached_status, dict):
+                    self._apply_mining_totals_to_status(self._cached_status, save_cache=True)
+            except Exception:
+                pass
+        except Exception:
+            pass
+
+    def _is_success_record(self, record: Dict) -> bool:
+        if not isinstance(record, dict):
+            return False
+        status = str(record.get("status", "")).lower()
+        if status == "success":
+            return True
+        if record.get("success") is True or record.get("valid") is True:
+            return True
+        if record.get("hash") and (record.get("block_index") is not None or record.get("index") is not None):
+            return True
+        return False
+
+    def _calculate_mining_totals(self) -> Tuple[int, int, float]:
+        """Calculate blocks mined, empty blocks, and total rewards from mining history."""
+        try:
             history = self.get_mining_history()
-            success_records = [r for r in history if isinstance(r, dict) and r.get("status") == "success"]
-            blocks_mined = len(success_records)
+            success_records = [r for r in history if self._is_success_record(r)]
+            empty_blocks_mined = 0
+            for record in success_records:
+                if record.get("is_empty_block") is True:
+                    empty_blocks_mined += 1
+                    continue
+                txs = record.get("transactions")
+                if isinstance(txs, list):
+                    non_reward = [
+                        tx
+                        for tx in txs
+                        if isinstance(tx, dict) and str(tx.get("type", "")).lower() not in ("reward", "mining_reward")
+                    ]
+                    if len(non_reward) == 0:
+                        empty_blocks_mined += 1
             total_reward = 0.0
             for record in success_records:
                 reward = record.get("reward")
+                if reward is None and isinstance(record.get("transactions"), list):
+                    try:
+                        reward = next(
+                            (tx.get("amount") for tx in record.get("transactions", [])
+                             if isinstance(tx, dict) and str(tx.get("type", "")).lower() in ("reward", "mining_reward")),
+                            0.0,
+                        )
+                    except Exception:
+                        reward = 0.0
                 if reward is None:
-                    reward = 50.0
+                    reward = 0.0
                 try:
                     total_reward += float(reward)
                 except Exception:
                     pass
-            self.miner.blocks_mined = blocks_mined
-            self.miner.total_reward = total_reward
+            return len(success_records), empty_blocks_mined, total_reward
         except Exception:
-            pass
+            return 0, 0, 0.0
+
+    def _apply_mining_totals_to_status(self, status: Dict, save_cache: bool = False) -> Dict:
+        """Ensure cached status includes correct mined totals."""
+        if not isinstance(status, dict):
+            return status
+        blocks_mined, empty_blocks_mined, total_reward = self._calculate_mining_totals()
+        status["blocks_mined"] = blocks_mined
+        status["empty_blocks_mined"] = empty_blocks_mined
+        status["total_reward"] = total_reward
+        status["reward_transactions"] = blocks_mined
+        if save_cache:
+            self._cached_status = status
+            try:
+                self.data_manager.save_stats(status)
+            except Exception:
+                pass
+        return status
 
     def _default_status(self) -> Dict:
         return {
@@ -1830,17 +1968,21 @@ class LunaNode:
         try:
             disable_cache = os.getenv("LUNANODE_DISABLE_STATS_CACHE", "0") == "1"
             fast_startup = os.getenv("LUNANODE_FAST_STARTUP", "0") == "1"
-            if not disable_cache and fast_startup and (time.time() - getattr(self, "_startup_ts", 0)) < 30:
+            now_ts = time.time()
+            recent_mine = (now_ts - getattr(self, "_last_mined_ts", 0)) < 30
+            if not disable_cache and fast_startup and (time.time() - getattr(self, "_startup_ts", 0)) < 30 and not recent_mine:
                 cached = self._cached_status or self.data_manager.load_stats()
                 if isinstance(cached, dict) and cached:
+                    cached = self._apply_mining_totals_to_status(cached, save_cache=True)
                     cached['hash_algorithm'] = self.hash_algorithm
                     return self._merge_status(cached)
                 status = self._default_status()
                 status['hash_algorithm'] = self.hash_algorithm
                 return status
-            if not disable_cache and self._prefer_cached_stats and not self._is_mining_active():
+            if not disable_cache and self._prefer_cached_stats and not self._is_mining_active() and not recent_mine:
                 cached = self._cached_status or self.data_manager.load_stats()
                 if isinstance(cached, dict) and cached:
+                    cached = self._apply_mining_totals_to_status(cached, save_cache=True)
                     cached['hash_algorithm'] = self.hash_algorithm
                     return self._merge_status(cached)
             now = time.time()
@@ -1870,8 +2012,13 @@ class LunaNode:
                 current_height = self._net_cache.get("height", 0)
                 latest_block = self._net_cache.get("latest_block")
                 mempool = self._net_cache.get("mempool", [])
+            # Backfill mining history from chain if local cache is empty
+            try:
+                self._sync_mining_history_from_chain()
+            except Exception:
+                pass
             merged_history = self.get_mining_history()
-            success_records = [r for r in merged_history if isinstance(r, dict) and r.get("status") == "success"]
+            success_records = [r for r in merged_history if self._is_success_record(r)]
             empty_blocks_mined = 0
             for record in success_records:
                 if record.get("is_empty_block") is True:
@@ -1888,6 +2035,15 @@ class LunaNode:
             total_reward = 0.0
             for record in success_records:
                 reward = record.get("reward")
+                if reward is None and isinstance(record.get("transactions"), list):
+                    try:
+                        reward = next(
+                            (tx.get("amount") for tx in record.get("transactions", [])
+                             if isinstance(tx, dict) and str(tx.get("type", "")).lower() in ("reward", "mining_reward")),
+                            0.0,
+                        )
+                    except Exception:
+                        reward = 0.0
                 if reward is None:
                     reward = 0.0
                 try:
@@ -2253,6 +2409,10 @@ class LunaNode:
                 if submit_success:
                     log_cpu_mining_event("block_submitted", {"block_index": block_data.get('index')})
                     self._log_message(f"Block #{block_index} mined & submitted ({tx_count} txs) - Reward: {reward}", "success")
+                    try:
+                        self._last_mined_ts = time.time()
+                    except Exception:
+                        pass
                     # Refresh local cache/stats immediately
                     try:
                         self.data_manager.save_submitted_block(block_data)
@@ -2266,6 +2426,7 @@ class LunaNode:
                         # Update cached status snapshot so UI reflects new totals
                         status = self.get_status()
                         if isinstance(status, dict):
+                            status = self._apply_mining_totals_to_status(status)
                             self.data_manager.save_stats(status)
                     except Exception:
                         pass
@@ -2299,6 +2460,11 @@ class LunaNode:
                         history.append(record)
                         self.data_manager.save_mining_history(history)
                         self._recalculate_reward_stats()
+                        try:
+                            status = self._apply_mining_totals_to_status(self._cached_status or {}, save_cache=True)
+                            self.data_manager.save_stats(status)
+                        except Exception:
+                            pass
                     except Exception:
                         pass
                     if self.new_reward_callback:
@@ -2685,6 +2851,7 @@ class LunaNode:
         try:
             status = self.get_status()
             if isinstance(status, dict):
+                status = self._apply_mining_totals_to_status(status)
                 self.data_manager.save_stats(status)
         except Exception:
             pass
@@ -2803,6 +2970,99 @@ class LunaNode:
                 scope="submit",
             )
             self._normalize_block_for_lunalib(block_data)
+
+            # Validate block hash against local fields (avoid submitting mutated/stale data)
+            try:
+                if hasattr(self.miner, "_calculate_block_hash") and isinstance(block_data, dict):
+                    computed_hash = self.miner._calculate_block_hash(
+                        block_data.get("index", 0),
+                        block_data.get("previous_hash", ""),
+                        block_data.get("timestamp", time.time()),
+                        block_data.get("transactions", []),
+                        block_data.get("nonce", 0),
+                        block_data.get("miner", ""),
+                        block_data.get("difficulty", self.config.difficulty),
+                    )
+                    if computed_hash and block_data.get("hash") and str(computed_hash) != str(block_data.get("hash")):
+                        err = "Stale block detected (local hash mismatch)"
+                        log_mining_debug_event("block_validation_stale", {"computed": computed_hash, "provided": block_data.get("hash")}, scope="validation")
+                        self._log_message(err, "info")
+                        return False, err
+            except Exception:
+                pass
+
+            # Early stale-block detection using latest chain tip
+            try:
+                latest_block = None
+                latest_height = None
+                if self.blockchain_manager and hasattr(self.blockchain_manager, "get_blockchain_height"):
+                    latest_height = self.blockchain_manager.get_blockchain_height()
+                if self.blockchain_manager and hasattr(self.blockchain_manager, "get_latest_block"):
+                    latest_block = self.blockchain_manager.get_latest_block()
+
+                if latest_height is not None and (not isinstance(latest_block, dict) or str(latest_block.get("index")) != str(latest_height)):
+                    for method_name in ("get_block", "get_block_by_index", "get_block_by_height"):
+                        method = getattr(self.blockchain_manager, method_name, None)
+                        if callable(method):
+                            try:
+                                latest_block = method(int(latest_height))
+                                if isinstance(latest_block, dict):
+                                    break
+                            except Exception:
+                                pass
+
+                if latest_height is None or not isinstance(latest_block, dict):
+                    try:
+                        import requests
+                        node_url = getattr(self.config, "node_url", "https://bank.linglin.art")
+                        height_resp = requests.get(f"{node_url}/blockchain/height", timeout=10)
+                        if height_resp.ok:
+                            height_data = height_resp.json()
+                            latest_height = height_data.get("height", latest_height)
+                        if latest_height is not None:
+                            latest_resp = requests.get(f"{node_url}/blockchain/block/{int(latest_height)}", timeout=10)
+                            if latest_resp.ok:
+                                latest_data = latest_resp.json()
+                                if isinstance(latest_data, dict) and isinstance(latest_data.get("block"), dict):
+                                    latest_block = latest_data.get("block")
+                                elif isinstance(latest_data, dict):
+                                    latest_block = latest_data
+                    except Exception:
+                        pass
+
+                if latest_height is None and isinstance(latest_block, dict):
+                    try:
+                        latest_height = int(latest_block.get("index"))
+                    except Exception:
+                        pass
+
+                if latest_height is not None:
+                    expected_index = int(latest_height) + 1
+                    current_index = block_data.get("index")
+                    if current_index is not None:
+                        try:
+                            current_index = int(current_index)
+                            if current_index != expected_index:
+                                err = f"Stale block detected (chain advanced; expected {expected_index}, got {current_index})"
+                                log_mining_debug_event("block_validation_stale", {"expected": expected_index, "got": current_index}, scope="validation")
+                                self._log_message(err, "info")
+                                return False, err
+                        except Exception:
+                            pass
+                if isinstance(latest_block, dict):
+                    latest_hash = latest_block.get("hash")
+                    if latest_hash and block_data.get("previous_hash") and str(block_data.get("previous_hash")) != str(latest_hash):
+                        err = "Stale block detected (chain advanced)"
+                        log_mining_debug_event("block_validation_stale", {"expected_hash": latest_hash, "got": block_data.get("previous_hash")}, scope="validation")
+                        self._log_message(err, "info")
+                        return False, err
+                    if latest_hash and not block_data.get("previous_hash"):
+                        err = "Stale block detected (missing previous hash)"
+                        log_mining_debug_event("block_validation_stale", {"expected_hash": latest_hash, "got": None}, scope="validation")
+                        self._log_message(err, "info")
+                        return False, err
+            except Exception:
+                pass
 
             # Pre-validate with LunaLib's internal validator for clearer errors
             try:
@@ -2932,36 +3192,6 @@ class LunaNode:
         if not isinstance(block_data, dict):
             return
 
-    def _confirm_block_by_id(self, block_data: Dict) -> bool:
-        """Confirm block on chain via /get_block/{id}."""
-        try:
-            import requests
-        except Exception:
-            return False
-
-        try:
-            node_url = getattr(self.config, "node_url", "https://bank.linglin.art")
-            block_id = block_data.get("index")
-            if block_id is None:
-                return False
-            url = f"{node_url}/get_block/{block_id}"
-            resp = requests.get(url, timeout=10)
-            if not resp.ok:
-                return False
-            data = resp.json()
-            block = data.get("block") if isinstance(data, dict) else data
-            if not isinstance(block, dict):
-                return False
-            if str(block.get("hash")) == str(block_data.get("hash")) and str(block.get("miner")) == str(self.config.miner_address):
-                try:
-                    self.data_manager.save_submitted_block(block)
-                except Exception:
-                    pass
-                return True
-        except Exception:
-            return False
-        return False
-
         # Basic field normalization
         if "index" in block_data and block_data.get("index") not in (None, ""):
             try:
@@ -2998,8 +3228,42 @@ class LunaNode:
         if not block_data.get("miner"):
             block_data["miner"] = self.config.miner_address
 
+    def _confirm_block_by_id(self, block_data: Dict) -> bool:
+        """Confirm block on chain via /get_block/{id}."""
+        try:
+            import requests
+        except Exception:
+            return False
+
+        try:
+            node_url = getattr(self.config, "node_url", "https://bank.linglin.art")
+            block_id = block_data.get("index")
+            if block_id is None:
+                return False
+            url = f"{node_url}/get_block/{block_id}"
+            resp = requests.get(url, timeout=10)
+            if not resp.ok:
+                return False
+            data = resp.json()
+            block = data.get("block") if isinstance(data, dict) else data
+            if not isinstance(block, dict):
+                return False
+            if str(block.get("hash")) == str(block_data.get("hash")) and str(block.get("miner")) == str(self.config.miner_address):
+                try:
+                    self.data_manager.save_submitted_block(block)
+                except Exception:
+                    pass
+                return True
+        except Exception:
+            return False
+        return False
+
     def _post_submit_refresh(self, block_data: Dict) -> None:
         """Update caches and UI after a successful submit."""
+        try:
+            self._last_mined_ts = time.time()
+        except Exception:
+            pass
         try:
             self.data_manager.save_submitted_block(block_data)
         except Exception:
@@ -3010,6 +3274,77 @@ class LunaNode:
             pass
         try:
             self._update_bills_cache_from_mined_bills()
+        except Exception:
+            pass
+        # Ensure mining history reflects the submitted block so stats update immediately
+        try:
+            history = self.get_mining_history()
+        except Exception:
+            history = []
+        try:
+            if not isinstance(history, list):
+                history = []
+            block_index = block_data.get("index") if isinstance(block_data, dict) else None
+            block_hash = block_data.get("hash") if isinstance(block_data, dict) else None
+            already_exists = False
+            for record in history:
+                if not isinstance(record, dict):
+                    continue
+                if record.get("status") != "success":
+                    continue
+                if block_hash and record.get("hash") == block_hash:
+                    already_exists = True
+                    break
+                if block_index is not None and record.get("block_index") == block_index:
+                    already_exists = True
+                    break
+            if not already_exists:
+                reward = block_data.get("reward") if isinstance(block_data, dict) else None
+                is_empty_block = bool(block_data.get("is_empty_block")) if isinstance(block_data, dict) else False
+                if reward is None:
+                    try:
+                        reward, is_empty_block = self._calculate_expected_block_reward(block_data if isinstance(block_data, dict) else {})
+                        if isinstance(block_data, dict):
+                            block_data["reward"] = reward
+                            block_data["is_empty_block"] = is_empty_block
+                    except Exception:
+                        reward = 0.0
+                method = "submit"
+                try:
+                    if self.gpu_miner and (getattr(self.gpu_miner, "is_mining", False) or getattr(self.gpu_miner, "mining_active", False)):
+                        method = "cuda"
+                    elif self.miner and (getattr(self.miner, "is_mining", False) or getattr(self.miner, "mining_active", False)):
+                        method = "cpu"
+                except Exception:
+                    pass
+                record = {
+                    "timestamp": time.time(),
+                    "status": "success",
+                    "block_index": block_index,
+                    "hash": block_hash,
+                    "nonce": block_data.get("nonce", 0) if isinstance(block_data, dict) else 0,
+                    "difficulty": block_data.get("difficulty", self.config.difficulty) if isinstance(block_data, dict) else self.config.difficulty,
+                    "mining_time": block_data.get("mining_time", 0) if isinstance(block_data, dict) else 0,
+                    "transactions": block_data.get("transactions", []) if isinstance(block_data, dict) else [],
+                    "reward": reward,
+                    "method": method,
+                    "is_empty_block": is_empty_block,
+                }
+                history.append(record)
+                try:
+                    if self.miner and isinstance(getattr(self.miner, "mining_history", None), list):
+                        self.miner.mining_history.append(record)
+                except Exception:
+                    pass
+                try:
+                    if self.gpu_miner and isinstance(getattr(self.gpu_miner, "mining_history", None), list):
+                        self.gpu_miner.mining_history.append(record)
+                except Exception:
+                    pass
+                try:
+                    self.data_manager.save_mining_history(history)
+                except Exception:
+                    pass
         except Exception:
             pass
         try:
@@ -3027,6 +3362,13 @@ class LunaNode:
                 self.history_updated_callback()
             except Exception:
                 pass
+        try:
+            if hasattr(self, "main_page") and hasattr(self.main_page, "update_mining_stats"):
+                self.main_page.update_mining_stats()
+            if hasattr(self, "sidebar") and hasattr(self.sidebar, "update_status"):
+                self.sidebar.update_status(self.get_status())
+        except Exception:
+            pass
 
         # Ensure previous_hash is set
         if not block_data.get("previous_hash"):

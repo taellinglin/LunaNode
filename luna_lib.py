@@ -350,7 +350,7 @@ def setup_cuda():
     try:
         import cupy as cp
         if cp.cuda.runtime.getDeviceCount() > 0:
-            print("✅ CUDA is available")
+            print("[OK] CUDA is available")
             return True
         else:
             print("[ERROR] CUDA drivers found but no GPU available")

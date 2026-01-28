@@ -6,6 +6,10 @@ try:
     from lunalib.mining.difficulty import DifficultySystem
 except Exception:
     DifficultySystem = None
+try:
+    from lunalib.utils.formatting import format_amount as lunalib_format_amount
+except Exception:
+    lunalib_format_amount = None
 
 class MainPage:
     def __init__(self, app):
@@ -26,6 +30,25 @@ class MainPage:
         self.mined_blocks = 0
         self.rejected_blocks = 0
         print(f"[DEBUG] __init__: stats_panel.content={self.stats_panel.content}")
+
+    def _icon_label(self, icon_name: str, text: str, color: str = "#e3f2fd", icon_size: int = 16, text_size: int = 12):
+        return ft.Row(
+            [
+                ft.Image(
+                    src=f"assets/icons/feather/{icon_name}.svg",
+                    width=icon_size,
+                    height=icon_size,
+                    color="#ffffff",
+                    color_blend_mode=ft.BlendMode.SRC_IN,
+                ),
+                ft.Text(text, size=text_size, color=color),
+            ],
+            spacing=6,
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+
+    def _set_button_label(self, button: ft.Button, icon_name: str, text: str):
+        button.content = self._icon_label(icon_name, text, color="#ffffff", icon_size=16, text_size=12)
     def update_settings_content(self):
         """Update settings content - delegate to settings page"""
         if hasattr(self, 'settings_page') and self.settings_page:
@@ -67,7 +90,7 @@ class MainPage:
         )
         
         self.cpu_toggle_btn = ft.Button(
-            "🖥️ Start CPU",
+            content=self._icon_label("cpu", "Start CPU", color="#ffffff", icon_size=16, text_size=12),
             on_click=lambda e: self.app.toggle_cpu_mining(),
             style=button_style,
             bgcolor="#28a745",
@@ -75,7 +98,7 @@ class MainPage:
         )
 
         self.gpu_toggle_btn = ft.Button(
-            "🎮 Start GPU",
+            content=self._icon_label("monitor", "Start GPU", color="#ffffff", icon_size=16, text_size=12),
             on_click=lambda e: self.app.toggle_gpu_mining(),
             style=button_style,
             bgcolor="#28a745",
@@ -145,7 +168,7 @@ class MainPage:
             if hasattr(self, 'loading_ring'):
                 self.loading_ring.visible = False
             self.stats_panel.visible = True
-        total_reward_text = f"{status['total_reward']:.0f} LKC"
+        total_reward_text = self._format_lkc(status.get("total_reward", 0))
         # 3x4のテーブル状タイル（ラベル＋値）で統計を表示
         try:
             difficulty = float(status.get("mining_difficulty", 1) or 1)
@@ -236,7 +259,7 @@ class MainPage:
             ("Avg Mining Time", f"{status['avg_mining_time']:.2f}s", "#17a2b8", 20),
             ("Uptime", f"{self._format_uptime(status['uptime'])}", "#6c757d", 20),
             ("Mempool Txs", f"{status.get('total_transactions', 0)}", "#17a2b8", 20),
-            ("LKC / hr", f"{lkc_per_hr:,.2f}", "#ffc107", 18),
+            ("LKC / hr", f"{self._format_lkc(lkc_per_hr)} / hr", "#ffc107", 18),
             ("CPU Hashrate", f"{self._format_hash_rate(status.get('cpu_hash_rate', 0) or 0)}", "#00a1ff", 18),
             ("GPU Hashrate", f"{self._format_hash_rate(status.get('gpu_hash_rate', 0) or 0)}", "#00a1ff", 18),
         ]
@@ -306,8 +329,8 @@ class MainPage:
             gpu_enabled = cuda_available or bool(getattr(self.app.node.config, "enable_gpu_mining", True)) if self.app.node else cuda_available
             self.cpu_toggle_btn.disabled = not cpu_enabled
             self.gpu_toggle_btn.disabled = not gpu_enabled
-            self.cpu_toggle_btn.text = "🛑 Stop CPU" if cpu_active else "🖥️ Start CPU"
-            self.gpu_toggle_btn.text = "🛑 Stop GPU" if gpu_active else "🎮 Start GPU"
+            self._set_button_label(self.cpu_toggle_btn, "cpu", "Stop CPU" if cpu_active else "Start CPU")
+            self._set_button_label(self.gpu_toggle_btn, "monitor", "Stop GPU" if gpu_active else "Start GPU")
         # Create detailed stats cards
         stats_grid = ft.ResponsiveRow([
             self._create_detailed_stat_card(
@@ -317,32 +340,32 @@ class MainPage:
                 "#00a1ff"
             ),
             self._create_detailed_stat_card(
-                "🎯 Network Difficulty", 
+                "Network Difficulty", 
                 f"{status['network_difficulty']}", 
                 "Network's current difficulty",
                 "#17a2b8"
             ),
             self._create_detailed_stat_card(
-                "⚙️ Mining Difficulty", 
+                "Mining Difficulty", 
                 f"{status.get('mining_difficulty', '--')}", 
                 "Your configured difficulty",
                 "#00e676"
             ),
             self._create_detailed_stat_card(
-                "⛏️ Blocks Mined", 
+                "Blocks Mined", 
                 f"{status['blocks_mined']}", 
                 "Total successful blocks",
                 "#28a745"
             ),
             self._create_detailed_stat_card(
                 "💰 Total Reward", 
-                f"{status['total_reward']:.0f} LKC", 
+                self._format_lkc(status.get("total_reward", 0)),
                 "Accumulated mining rewards",
                 "#ffc107",
                 value_size=10
             ),
             self._create_detailed_stat_card(
-                "⚡ Current Hash Rate", 
+                "Current Hash Rate", 
                 f"{self._format_hash_rate(status['current_hash_rate'])}", 
                 "Real-time hashing speed",
                 "#00a1ff"
@@ -408,6 +431,18 @@ class MainPage:
             return f"{hash_rate/1000:.2f} kH/s"
         else:
             return f"{hash_rate:.0f} H/s"
+
+    def _format_lkc(self, amount: float) -> str:
+        if lunalib_format_amount:
+            try:
+                return lunalib_format_amount(amount, "LKC")
+            except Exception:
+                pass
+        try:
+            value = float(amount)
+        except Exception:
+            value = 0.0
+        return f"{value:,.2f} LKC"
 
     def _format_uptime(self, seconds: float) -> str:
         """Format uptime for display"""

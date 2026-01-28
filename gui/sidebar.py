@@ -1,5 +1,9 @@
 import flet as ft
 from typing import Dict
+try:
+    from lunalib.utils.formatting import format_amount as lunalib_format_amount
+except Exception:
+    lunalib_format_amount = None
 
 class Sidebar:
     def __init__(self, app):
@@ -22,6 +26,24 @@ class Sidebar:
         self.lbl_current_hash = ft.Text("Current Hash: --", size=10, color="#e3f2fd")
         self.lbl_nonce = ft.Text("Nonce: --", size=10, color="#e3f2fd")
         self.progress_mining = ft.ProgressBar(visible=False, color="#00a1ff", bgcolor="#1e3a5c")
+
+    def _icon_label(self, icon_name: str, text: str, color: str = "#e3f2fd", icon_size: int = 14, text_size: int = 10):
+        return ft.Row(
+            [
+                ft.Image(
+                    src=f"assets/icons/feather/{icon_name}.svg",
+                    width=icon_size,
+                    height=icon_size,
+                    color="#ffffff",
+                    color_blend_mode=ft.BlendMode.SRC_IN,
+                ),
+                ft.Text(text, size=text_size, color=color),
+            ],
+            spacing=6,
+        )
+
+    def _set_button_label(self, button: ft.Button, icon_name: str, text: str):
+        button.content = self._icon_label(icon_name, text, color="#ffffff", icon_size=14, text_size=10)
         
         # Quick action buttons
         button_style = ft.ButtonStyle(
@@ -32,14 +54,14 @@ class Sidebar:
         )
         
         self.btn_cpu_mining = ft.Button(
-            "🖥️ Start CPU",
+            content=self._icon_label("cpu", "Start CPU", color="#ffffff", icon_size=14, text_size=10),
             on_click=lambda e: self.app.toggle_cpu_mining(),
             style=button_style,
             height=32
         )
 
         self.btn_gpu_mining = ft.Button(
-            "🎮 Start GPU",
+            content=self._icon_label("monitor", "Start GPU", color="#ffffff", icon_size=14, text_size=10),
             on_click=lambda e: self.app.toggle_gpu_mining(),
             style=button_style,
             height=32
@@ -81,7 +103,7 @@ class Sidebar:
         
         node_status = ft.Container(
             content=ft.Column([
-                ft.Text("🖥️ Node Status", size=14, color="#e3f2fd"),
+                self._icon_label("server", "Node Status", color="#e3f2fd", icon_size=16, text_size=14),
                 self.lbl_node_status,
                 self.lbl_network_height,
                 self.lbl_difficulty,
@@ -103,7 +125,7 @@ class Sidebar:
         
         mining_stats = ft.Container(
             content=ft.Column([
-                ft.Text("⛏️ Mining Stats", size=14, color="#e3f2fd"),
+                self._icon_label("activity", "Mining Stats", color="#e3f2fd", icon_size=16, text_size=14),
                 self.lbl_hash_rate,
                 self.lbl_hash_algo,
                 self.lbl_mining_method,
@@ -128,7 +150,7 @@ class Sidebar:
                         fit="contain",
                         color="#00a1ff",
                         color_blend_mode=ft.BlendMode.SRC_IN,
-                        error_content=ft.Text("🔵", size=24)
+                        error_content=ft.Text("LN", size=24)
                     ),
                     padding=10,
                     bgcolor="#00000000",
@@ -166,7 +188,7 @@ class Sidebar:
                             fit="contain",
                             color="#00a1ff",
                             color_blend_mode=ft.BlendMode.SRC_IN,
-                            error_content=ft.Text("🔵", size=16)
+                            error_content=ft.Text("LN", size=16)
                         ),
                         margin=ft.Margin.only(right=8),
                     ),
@@ -192,22 +214,22 @@ class Sidebar:
 
     def update_status(self, status: Dict):
         """Update sidebar status displays"""
-        self.lbl_node_status.value = f"Status: {'🟢 Running' if status['connection_status'] == 'connected' else '🟡 Disconnected'}"
+        self.lbl_node_status.value = f"Status: {'Running' if status['connection_status'] == 'connected' else 'Disconnected'}"
         self.lbl_network_height.value = f"Network Height: {status['network_height']}"
         self.lbl_difficulty.value = f"Network Difficulty: {status['network_difficulty']}"
         self.lbl_mining_difficulty.value = f"Mining Difficulty: {status.get('mining_difficulty', '--')}"
         self.lbl_blocks_mined.value = f"Blocks Mined: {status['blocks_mined']}"
-        self.lbl_total_reward.value = f"Total Reward: {status['total_reward']:.0f} LKC"
+        self.lbl_total_reward.value = f"Total Reward: {self._format_lkc(status.get('total_reward', 0))}"
         self.lbl_connection.value = f"Connection: {status['connection_status']}"
         
         # Update P2P status
         p2p_connected = status.get('p2p_connected', False)
         p2p_peers = status.get('p2p_peers', 0)
         if p2p_connected:
-            self.lbl_p2p_status.value = f"P2P: 🟢 {p2p_peers} peers"
+            self.lbl_p2p_status.value = f"P2P: {p2p_peers} peers"
             self.lbl_p2p_status.color = "#00e676"
         else:
-            self.lbl_p2p_status.value = "P2P: 🔴 Offline"
+            self.lbl_p2p_status.value = "P2P: Offline"
             self.lbl_p2p_status.color = "#ff5252"
 
         uptime_seconds = int(status['uptime'])
@@ -240,6 +262,18 @@ class Sidebar:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate/1000:.2f} kH/s"
         else:
             self.lbl_hash_rate.value = f"Hash Rate: {hash_rate:.0f} H/s"
+
+    def _format_lkc(self, amount: float) -> str:
+        if lunalib_format_amount:
+            try:
+                return lunalib_format_amount(amount, "LKC")
+            except Exception:
+                pass
+        try:
+            value = float(amount)
+        except Exception:
+            value = 0.0
+        return f"{value:,.2f} LKC"
         # Show mining method tags
         try:
             self.lbl_method_tags.controls.clear()
@@ -307,8 +341,8 @@ class Sidebar:
                 gpu_active = gpu_active or gpu_enabled
             self.btn_cpu_mining.disabled = not cpu_enabled
             self.btn_gpu_mining.disabled = not gpu_enabled
-            self.btn_cpu_mining.text = "🛑 Stop CPU" if cpu_active else "🖥️ Start CPU"
-            self.btn_gpu_mining.text = "🛑 Stop GPU" if gpu_active else "🎮 Start GPU"
+            self._set_button_label(self.btn_cpu_mining, "cpu", "Stop CPU" if cpu_active else "Start CPU")
+            self._set_button_label(self.btn_gpu_mining, "monitor", "Stop GPU" if gpu_active else "Start GPU")
 
         # Update mining progress
         is_mining = bool(status.get("auto_mining"))
@@ -316,7 +350,7 @@ class Sidebar:
 
     def refresh_non_balance(self, status: Dict):
         """Refresh sidebar without balance-related fields."""
-        self.lbl_node_status.value = f"Status: {'🟢 Running' if status['connection_status'] == 'connected' else '🟡 Disconnected'}"
+        self.lbl_node_status.value = f"Status: {'Running' if status['connection_status'] == 'connected' else 'Disconnected'}"
         self.lbl_network_height.value = f"Network Height: {status['network_height']}"
         self.lbl_difficulty.value = f"Network Difficulty: {status['network_difficulty']}"
         self.lbl_mining_difficulty.value = f"Mining Difficulty: {status.get('mining_difficulty', '--')}"
@@ -326,10 +360,10 @@ class Sidebar:
         p2p_connected = status.get('p2p_connected', False)
         p2p_peers = status.get('p2p_peers', 0)
         if p2p_connected:
-            self.lbl_p2p_status.value = f"P2P: 🟢 {p2p_peers} peers"
+            self.lbl_p2p_status.value = f"P2P: {p2p_peers} peers"
             self.lbl_p2p_status.color = "#00e676"
         else:
-            self.lbl_p2p_status.value = "P2P: 🔴 Offline"
+            self.lbl_p2p_status.value = "P2P: Offline"
             self.lbl_p2p_status.color = "#ff5252"
 
         uptime_seconds = int(status['uptime'])

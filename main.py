@@ -530,7 +530,7 @@ class LunaNodeApp:
         """Create the main node interface"""
         self.page = page
         # Page setup with blue theme
-        page.title = "🔵 Luna Node"
+        page.title = "Luna Node"
         page.theme_mode = ft.ThemeMode.DARK
         page.fonts = {
             "Custom": "./font.ttf"
@@ -621,12 +621,30 @@ class LunaNodeApp:
         return layout
         
     def create_main_content(self):
+        def _tab_label(icon_name: str, text: str):
+            return ft.Tab(
+                label=ft.Row(
+                    [
+                        ft.Image(
+                            src=f"assets/icons/feather/{icon_name}.svg",
+                            width=16,
+                            height=16,
+                            color="#e3f2fd",
+                            color_blend_mode=ft.BlendMode.SRC_IN,
+                        ),
+                        ft.Text(text, size=12, color="#e3f2fd"),
+                    ],
+                    spacing=6,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                )
+            )
+
         tab_labels = [
-            ft.Tab(label="⛏️ Mining"),
-            ft.Tab(label="⌚ History"),
-            ft.Tab(label="💵 Bills"),
-            ft.Tab(label="⚙️ Settings"),
-            ft.Tab(label="📋 Log"),
+            _tab_label("activity", "Mining"),
+            _tab_label("clock", "History"),
+            _tab_label("dollar-sign", "Bills"),
+            _tab_label("settings", "Settings"),
+            _tab_label("file-text", "Log"),
         ]
         tab_contents = [
             self.main_page.create_mining_tab(),
@@ -903,7 +921,7 @@ class LunaNodeApp:
                         fit=ft.ImageFit.CONTAIN,
                         color="#00a1ff",
                         color_blend_mode=ft.BlendMode.SRC_IN,
-                        error_content=ft.Text("🔵", size=20)
+                        error_content=ft.Text("LN", size=20)
                     ),
                     margin=ft.margin.only(right=12),
                 ),
