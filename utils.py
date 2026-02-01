@@ -4,6 +4,10 @@ import time
 import hashlib
 import socket
 import requests
+try:
+    import certifi
+except Exception:
+    certifi = None
 import sys
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
@@ -20,6 +24,13 @@ try:
         sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 except Exception:
     pass
+
+if certifi:
+    try:
+        os.environ.setdefault("REQUESTS_CA_BUNDLE", certifi.where())
+        os.environ.setdefault("SSL_CERT_FILE", certifi.where())
+    except Exception:
+        pass
 
 def _is_frozen_like() -> bool:
     try:
@@ -72,6 +83,163 @@ except ImportError as e:
 
 LUNALIB_SM3_FUNC = None
 LUNALIB_SM3_BATCH = None
+
+def _requests_verify_value():
+    if str(os.getenv("LUNANODE_SSL_NO_VERIFY", "0")).strip() == "1":
+        return False
+    if os.getenv("REQUESTS_CA_BUNDLE"):
+        return os.getenv("REQUESTS_CA_BUNDLE")
+    if certifi:
+        return certifi.where()
+    return True
+
+def _build_requests_session():
+    session = requests.Session()
+    try:
+        session.verify = _requests_verify_value()
+    except Exception:
+        pass
+    return session
+
+class _HTTPBlockchainManager:
+    def __init__(self, endpoint_url: str):
+        self.endpoint_url = (endpoint_url or "").rstrip("/")
+        self._session = _build_requests_session()
+
+    def _get_json(self, path: str, params: Optional[Dict] = None, timeout: int = 10):
+        if not self.endpoint_url:
+            return None
+        try:
+            resp = self._session.get(f"{self.endpoint_url}{path}", params=params, timeout=timeout)
+            if resp.ok:
+                return resp.json()
+        except Exception:
+            pass
+        return None
+
+    def get_blockchain_height(self) -> int:
+        data = self._get_json("/blockchain/height")
+        if isinstance(data, dict):
+            for key in ("height", "block_height", "value"):
+                if key in data:
+                    try:
+                        return int(data.get(key) or 0)
+                    except Exception:
+                        return 0
+        return 0
+
+    def get_block(self, height: int):
+        data = self._get_json(f"/blockchain/block/{int(height)}")
+        if isinstance(data, dict) and isinstance(data.get("block"), dict):
+            return data.get("block")
+        return data if isinstance(data, dict) else None
+
+    def get_block_by_index(self, height: int):
+        return self.get_block(height)
+
+    def get_block_by_height(self, height: int):
+        return self.get_block(height)
+
+    def get_blocks_range(self, start: int, end: int) -> List[Dict]:
+        start = int(start)
+        end = int(end)
+        for path, params in (
+            ("/blockchain/range", {"start": start, "end": end}),
+            ("/blockchain/blocks", {"start": start, "end": end}),
+        ):
+            data = self._get_json(path, params=params)
+            if isinstance(data, dict):
+                blocks = data.get("blocks") or data.get("chain")
+                if isinstance(blocks, list):
+                    return blocks
+            if isinstance(data, list):
+                return data
+        blocks = []
+        for height in range(start, end + 1):
+            block = self.get_block(height)
+            if isinstance(block, dict):
+                blocks.append(block)
+        return blocks
+
+    def get_latest_block(self):
+        data = self._get_json("/blockchain/blocks")
+        if isinstance(data, dict):
+            blocks = data.get("blocks") or data.get("chain")
+            if isinstance(blocks, list) and blocks:
+                return blocks[-1]
+        if isinstance(data, list) and data:
+            return data[-1]
+        height = self.get_blockchain_height()
+        if height > 0:
+            return self.get_block(height)
+        return None
+
+    def scan_transactions_for_address(self, address: str, start_height: int = 0, end_height: Optional[int] = None) -> List[Dict]:
+        if not address:
+            return []
+        params = {"address": address, "start": int(start_height)}
+        if end_height is not None:
+            params["end"] = int(end_height)
+        for path in (
+            f"/blockchain/transactions/{address}",
+            "/blockchain/transactions",
+            "/blockchain/scan",
+        ):
+            data = self._get_json(path, params=params)
+            if isinstance(data, dict):
+                txs = data.get("transactions") or data.get("txs")
+                if isinstance(txs, list):
+                    return txs
+            if isinstance(data, list):
+                return data
+        return []
+
+    def submit_mined_block(self, block_data: Dict) -> bool:
+        try:
+            resp = self._session.post(
+                f"{self.endpoint_url}/blockchain/submit-block",
+                json=block_data,
+                headers={"Content-Type": "application/json", "Accept-Encoding": "identity"},
+                timeout=30,
+            )
+            return bool(resp.ok)
+        except Exception:
+            return False
+
+class _HTTPMempoolManager:
+    def __init__(self, endpoints: List[str]):
+        self.endpoints = [str(e).rstrip("/") for e in (endpoints or []) if e]
+        self._session = _build_requests_session()
+        self._local_cache: List[Dict] = []
+
+    def _get_json(self, endpoint: str, path: str, params: Optional[Dict] = None, timeout: int = 10):
+        try:
+            resp = self._session.get(f"{endpoint}{path}", params=params, timeout=timeout)
+            if resp.ok:
+                return resp.json()
+        except Exception:
+            pass
+        return None
+
+    def get_pending_transactions(self, fetch_remote: bool = False) -> List[Dict]:
+        if fetch_remote and self.endpoints:
+            for endpoint in self.endpoints:
+                for path in ("/mempool/pending", "/mempool", "/transactions/pending"):
+                    data = self._get_json(endpoint, path)
+                    if isinstance(data, dict):
+                        txs = data.get("transactions") or data.get("txs") or data.get("mempool")
+                        if isinstance(txs, list):
+                            return txs
+                    if isinstance(data, list):
+                        return data
+        return list(self._local_cache)
+
+    def add_transactions_batch(self, txs: List[Dict]):
+        if isinstance(txs, list):
+            self._local_cache.extend([tx for tx in txs if isinstance(tx, dict)])
+
+    def clear_mempool(self):
+        self._local_cache = []
 def _load_sm3_impl() -> bool:
     """SM3実装を遅延ロード（lunalib優先、gmsslフォールバック）"""
     global LUNALIB_SM3_FUNC, LUNALIB_SM3_BATCH
@@ -613,12 +781,27 @@ class LunaNode:
         # Peer list for P2P networking (disabled unless using lunalib P2P)
         self.peers = []
         
-        # Use LunaLib managers for blockchain management
+        # Use LunaLib managers for blockchain management (fallback to HTTP when unavailable)
         try:
             log_mining_debug_event("init_step", {"step": "blockchain_manager_init"}, scope="app")
         except Exception:
             pass
-        self.blockchain_manager = BlockchainManager(endpoint_url=self.config.node_url)
+        self.blockchain_manager = None
+        if BlockchainManager:
+            try:
+                self.blockchain_manager = BlockchainManager(endpoint_url=self.config.node_url)
+            except Exception as e:
+                self.blockchain_manager = None
+                try:
+                    log_mining_debug_event("blockchain_manager_error", {"error": str(e)}, scope="app")
+                except Exception:
+                    pass
+        if not self.blockchain_manager:
+            try:
+                self.blockchain_manager = _HTTPBlockchainManager(self.config.node_url)
+                log_mining_debug_event("blockchain_manager_fallback", {"endpoint": self.config.node_url}, scope="app")
+            except Exception:
+                self.blockchain_manager = None
         try:
             log_mining_debug_event("init_step", {"step": "blockchain_manager_ready"}, scope="app")
         except Exception:
@@ -627,7 +810,22 @@ class LunaNode:
             log_mining_debug_event("init_step", {"step": "mempool_manager_init"}, scope="app")
         except Exception:
             pass
-        self.mempool_manager = MempoolManager([self.config.node_url])
+        self.mempool_manager = None
+        if MempoolManager:
+            try:
+                self.mempool_manager = MempoolManager([self.config.node_url])
+            except Exception as e:
+                self.mempool_manager = None
+                try:
+                    log_mining_debug_event("mempool_manager_error", {"error": str(e)}, scope="app")
+                except Exception:
+                    pass
+        if not self.mempool_manager:
+            try:
+                self.mempool_manager = _HTTPMempoolManager([self.config.node_url])
+                log_mining_debug_event("mempool_manager_fallback", {"endpoint": self.config.node_url}, scope="app")
+            except Exception:
+                self.mempool_manager = None
         try:
             log_mining_debug_event("init_step", {"step": "mempool_manager_ready"}, scope="app")
         except Exception:
@@ -1743,6 +1941,8 @@ class LunaNode:
             start_height = max(0, int(getattr(self.config, "last_scan_height", 0)))
         except Exception:
             start_height = 0
+        if not self.blockchain_manager:
+            return []
         end_height = self.blockchain_manager.get_blockchain_height()
         if end_height < start_height:
             return []
@@ -3966,7 +4166,10 @@ class LunaNode:
             from lunalib.core.mempool import MempoolManager
             self.mempool_manager = MempoolManager([self.config.node_url])
         except Exception:
-            pass
+            try:
+                self.mempool_manager = _HTTPMempoolManager([self.config.node_url])
+            except Exception:
+                pass
         try:
             if self.mempool_manager:
                 self.mempool_manager.clear_mempool()
