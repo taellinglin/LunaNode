@@ -585,6 +585,10 @@ class LunaNode:
         self._startup_ts = time.time()
         self._last_mined_ts = 0.0
 
+        # Fast-start mining (temporary difficulty override for first block)
+        self._fast_start_applied = False
+        self._fast_start_original_difficulty = None
+
         # Prevent repeated submissions of the same block
         self._last_submitted_hash = None
         self._last_submitted_index = None
@@ -1437,6 +1441,7 @@ class LunaNode:
     def _on_block_mined_ui(self, block_data: Dict):
         """Handle newly mined block from lunalib miner (already submitted)."""
         try:
+            self._maybe_restore_difficulty_after_first_block()
             self.stats['successful_blocks'] += 1
             try:
                 self._last_mined_ts = time.time()
@@ -1534,6 +1539,65 @@ class LunaNode:
         try:
             if hasattr(miner, "on_gpu_hashrate"):
                 miner.on_gpu_hashrate(lambda rate, _engine="gpu": self._on_hashrate_update(rate, _engine))
+        except Exception:
+            pass
+
+    def _has_local_mined_blocks(self) -> bool:
+        """Check if this node has successfully mined any blocks."""
+        try:
+            if int(self.stats.get("successful_blocks", 0) or 0) > 0:
+                return True
+        except Exception:
+            pass
+        try:
+            history = self.data_manager.load_mining_history()
+            if isinstance(history, list) and len(history) > 0:
+                return True
+        except Exception:
+            pass
+        return False
+
+    def _maybe_apply_fast_start_difficulty(self) -> None:
+        """Temporarily lower difficulty for the first block to reduce initial wait time."""
+        try:
+            if getattr(self, "_fast_start_applied", False):
+                return
+            current = int(getattr(self.config, "difficulty", 0) or 0)
+            if current <= 1:
+                return
+            if self._has_local_mined_blocks():
+                return
+            self._fast_start_applied = True
+            self._fast_start_original_difficulty = current
+            self.config.difficulty = 1
+            for miner_obj in (self.miner, self.cpu_miner, self.gpu_miner):
+                try:
+                    if miner_obj and hasattr(miner_obj, "config"):
+                        miner_obj.config.difficulty = 1
+                except Exception:
+                    pass
+            self._log_message("Fast-start: difficulty temporarily set to 1 for the first block.", "info")
+        except Exception:
+            pass
+
+    def _maybe_restore_difficulty_after_first_block(self) -> None:
+        """Restore configured difficulty after the first successful block."""
+        try:
+            if not getattr(self, "_fast_start_applied", False):
+                return
+            original = getattr(self, "_fast_start_original_difficulty", None)
+            if original is None:
+                return
+            self.config.difficulty = int(original)
+            for miner_obj in (self.miner, self.cpu_miner, self.gpu_miner):
+                try:
+                    if miner_obj and hasattr(miner_obj, "config"):
+                        miner_obj.config.difficulty = int(original)
+                except Exception:
+                    pass
+            self._fast_start_applied = False
+            self._fast_start_original_difficulty = None
+            self._log_message(f"Fast-start complete. Difficulty restored to {self.config.difficulty}.", "info")
         except Exception:
             pass
 
@@ -1986,6 +2050,8 @@ class LunaNode:
                     cached['hash_algorithm'] = self.hash_algorithm
                     return self._merge_status(cached)
             now = time.time()
+            miner_address = getattr(self.config, "miner_address", "")
+            has_valid_miner = is_valid_luna_address(miner_address)
             use_p2p = self.p2p_client and hasattr(self.p2p_client, 'is_connected') and self.p2p_client.is_connected() and len(self.peers) > 0
             if now - self._net_cache_ts >= self.net_poll_interval:
                 if use_p2p:
@@ -1993,15 +2059,24 @@ class LunaNode:
                     try:
                         current_height = self.p2p_client.get_blockchain_height()
                         latest_block = self.p2p_client.get_latest_block() if current_height > 0 else None
-                        mempool = self.p2p_client.get_pending_transactions() if hasattr(self.p2p_client, 'get_pending_transactions') else []
+                        if has_valid_miner and hasattr(self.p2p_client, 'get_pending_transactions'):
+                            mempool = self.p2p_client.get_pending_transactions()
+                        else:
+                            mempool = []
                     except Exception:
                         current_height = self.blockchain_manager.get_blockchain_height()
                         latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
-                        mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
+                        if has_valid_miner and self.mempool_manager:
+                            mempool = self.mempool_manager.get_pending_transactions()
+                        else:
+                            mempool = []
                 else:
                     current_height = self.blockchain_manager.get_blockchain_height()
                     latest_block = self.blockchain_manager.get_latest_block() if current_height > 0 else None
-                    mempool = self.mempool_manager.get_pending_transactions() if self.mempool_manager else []
+                    if has_valid_miner and self.mempool_manager:
+                        mempool = self.mempool_manager.get_pending_transactions()
+                    else:
+                        mempool = []
                 self._net_cache_ts = now
                 self._net_cache = {
                     "height": current_height,
@@ -2310,6 +2385,7 @@ class LunaNode:
         try:
             if not self._ensure_sm3_available():
                 return False, "SM3 unavailable"
+            self._maybe_apply_fast_start_difficulty()
             target_miner = miner or self.miner
             log_cpu_mining_event("mine_single_block_called", {})
             # lunalib 1.8.7 Miner: mine_block()を使う
@@ -2407,6 +2483,7 @@ class LunaNode:
                 submit_success, submit_message = self.submit_block(block_data)
                 log_cpu_mining_event("submit_block_result", {"success": submit_success, "message": submit_message, "block_index": block_data.get('index')})
                 if submit_success:
+                    self._maybe_restore_difficulty_after_first_block()
                     log_cpu_mining_event("block_submitted", {"block_index": block_data.get('index')})
                     self._log_message(f"Block #{block_index} mined & submitted ({tx_count} txs) - Reward: {reward}", "success")
                     try:
@@ -2518,6 +2595,7 @@ class LunaNode:
         if not self._ensure_cpu_miner_ready():
             self._log_message("CPU miner unavailable", "error")
             return False
+        self._maybe_apply_fast_start_difficulty()
         self.enable_live_stats()
         self._stop_mining_event.clear()
 
@@ -2594,6 +2672,7 @@ class LunaNode:
         if not self._ensure_cpu_miner_ready() or not self.cpu_miner:
             self._log_message("CPU miner unavailable", "error")
             return False
+        self._maybe_apply_fast_start_difficulty()
         self.enable_live_stats()
         try:
             self._configure_cpu_backend(self.cpu_miner)
@@ -2627,6 +2706,8 @@ class LunaNode:
             self._log_message("CPU mining stopped", "info")
         except Exception as e:
             self._log_message(f"Failed to stop CPU mining: {e}", "error")
+        finally:
+            self._maybe_restore_difficulty_after_first_block()
 
     def start_gpu_mining(self) -> bool:
         """Start GPU mining only."""
@@ -2653,6 +2734,7 @@ class LunaNode:
         if not gpu_ready:
             self._log_message("GPU mining not available (CUDA not ready)", "error")
             return False
+        self._maybe_apply_fast_start_difficulty()
         self.enable_live_stats()
         try:
             self._gpu_batch_warmup = True
@@ -2738,6 +2820,8 @@ class LunaNode:
             self._log_message("GPU mining stopped", "info")
         except Exception as e:
             self._log_message(f"Failed to stop GPU mining: {e}", "error")
+        finally:
+            self._maybe_restore_difficulty_after_first_block()
     
     def stop_auto_mining(self):
         """Stop auto-mining (lunalib 2.4.0仕様: stop_miningのみ)"""
@@ -2769,6 +2853,8 @@ class LunaNode:
             self._log_message("Stopped mining (CPU/GPU)", "info")
         except Exception as e:
             self._log_message(f"Failed to stop mining: {e}", "error")
+        finally:
+            self._maybe_restore_difficulty_after_first_block()
 
     def update_performance_level(self, level: int):
         """Update CPU mining throttle level (10-100)."""
@@ -2987,6 +3073,7 @@ class LunaNode:
                         err = "Stale block detected (local hash mismatch)"
                         log_mining_debug_event("block_validation_stale", {"computed": computed_hash, "provided": block_data.get("hash")}, scope="validation")
                         self._log_message(err, "info")
+                        self._flush_and_resync_mempool()
                         return False, err
             except Exception:
                 pass
@@ -3046,6 +3133,7 @@ class LunaNode:
                                 err = f"Stale block detected (chain advanced; expected {expected_index}, got {current_index})"
                                 log_mining_debug_event("block_validation_stale", {"expected": expected_index, "got": current_index}, scope="validation")
                                 self._log_message(err, "info")
+                                self._flush_and_resync_mempool()
                                 return False, err
                         except Exception:
                             pass
@@ -3055,11 +3143,13 @@ class LunaNode:
                         err = "Stale block detected (chain advanced)"
                         log_mining_debug_event("block_validation_stale", {"expected_hash": latest_hash, "got": block_data.get("previous_hash")}, scope="validation")
                         self._log_message(err, "info")
+                        self._flush_and_resync_mempool()
                         return False, err
                     if latest_hash and not block_data.get("previous_hash"):
                         err = "Stale block detected (missing previous hash)"
                         log_mining_debug_event("block_validation_stale", {"expected_hash": latest_hash, "got": None}, scope="validation")
                         self._log_message(err, "info")
+                        self._flush_and_resync_mempool()
                         return False, err
             except Exception:
                 pass
@@ -3080,11 +3170,13 @@ class LunaNode:
                         log_cpu_mining_event("block_validation_stale", {"error": issues, "block_index": block_data.get('index')})
                         log_mining_debug_event("block_validation_stale", {"issues": issues}, scope="validation")
                         self._log_message(err, "info")
+                        self._flush_and_resync_mempool()
                         return False, err
                     err = f"Block validation failed: {issues}"
                     log_cpu_mining_event("block_validation_failed", {"error": issues, "block_index": block_data.get('index')})
                     log_mining_debug_event("block_validation_failed", {"issues": issues}, scope="validation")
                     self._log_message(err, "error")
+                    self._flush_and_resync_mempool()
                     return False, err
             except Exception:
                 pass
@@ -3169,6 +3261,8 @@ class LunaNode:
                     self._log_message(err_msg, "error")
                     log_mining_debug_event("block_confirmation_error", {"error": str(e)}, scope="submit")
                     return True, err_msg
+            # 失敗時もmempool再同期
+            self._post_submit_refresh(block_data)
             return False, submit_msg
 
             log_cpu_mining_event("block_submit_failed", {"block_index": block_data.get('index')})
@@ -3260,6 +3354,37 @@ class LunaNode:
 
     def _post_submit_refresh(self, block_data: Dict) -> None:
         """Update caches and UI after a successful submit."""
+        # 完全なmempoolリセット: キャッシュ削除＋マネージャ再初期化＋リロード
+        try:
+            # mempoolキャッシュファイル削除
+            if hasattr(self.data_manager, 'mempool_cache_file') and os.path.exists(self.data_manager.mempool_cache_file):
+                os.remove(self.data_manager.mempool_cache_file)
+        except Exception:
+            pass
+        try:
+            # mempool_manager再初期化
+            from lunalib.core.mempool import MempoolManager
+            self.mempool_manager = MempoolManager([self.config.node_url])
+        except Exception:
+            pass
+        try:
+            if self.mempool_manager:
+                self.mempool_manager.clear_mempool()
+        except Exception:
+            pass
+        # 強制ネットワーク同期・キャッシュ/統計/UI更新
+        try:
+            self.sync_network()
+        except Exception:
+            pass
+        # 再同期後にmempoolを再取得して反映
+        try:
+            if self.mempool_manager:
+                fetched = self.mempool_manager.get_pending_transactions(fetch_remote=True)
+                if fetched and isinstance(fetched, list):
+                    self.mempool_manager.add_transactions_batch(fetched)
+        except Exception:
+            pass
         try:
             self._last_mined_ts = time.time()
         except Exception:
@@ -3829,3 +3954,33 @@ class LunaNode:
         """
         self._log_message("Peer registration disabled (non-lunalib operation)", "warning")
         return False
+
+    def _flush_and_resync_mempool(self) -> None:
+        """Flush local mempool cache and resync from the network."""
+        try:
+            if hasattr(self.data_manager, "mempool_cache_file") and os.path.exists(self.data_manager.mempool_cache_file):
+                os.remove(self.data_manager.mempool_cache_file)
+        except Exception:
+            pass
+        try:
+            from lunalib.core.mempool import MempoolManager
+            self.mempool_manager = MempoolManager([self.config.node_url])
+        except Exception:
+            pass
+        try:
+            if self.mempool_manager:
+                self.mempool_manager.clear_mempool()
+        except Exception:
+            pass
+        try:
+            if self.p2p_client and hasattr(self.p2p_client, "sync_mempool"):
+                self.p2p_client.sync_mempool()
+        except Exception:
+            pass
+        try:
+            if self.mempool_manager:
+                fetched = self.mempool_manager.get_pending_transactions(fetch_remote=True)
+                if fetched and isinstance(fetched, list):
+                    self.mempool_manager.add_transactions_batch(fetched)
+        except Exception:
+            pass

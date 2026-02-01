@@ -2,6 +2,8 @@ import flet as ft
 import os
 from typing import Dict
 
+from utils import is_valid_luna_address
+
 try:
     from lunalib.mining.difficulty import DifficultySystem
 except Exception:
@@ -182,8 +184,11 @@ class MainPage:
             mempool = []
             try:
                 mempool_mgr = getattr(self.app.node, "mempool_manager", None)
-                if mempool_mgr:
+                miner_address = getattr(self.app.node.config, "miner_address", "") if self.app.node else ""
+                if mempool_mgr and is_valid_luna_address(miner_address):
                     mempool = mempool_mgr.get_pending_transactions() or []
+                else:
+                    mempool = []
             except Exception:
                 mempool = []
 
