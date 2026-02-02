@@ -36,3 +36,6 @@ storage/data/temp/
 .vscode/
 .idea/
 *.iml
+
+# Ignore git metadata
+.git/
