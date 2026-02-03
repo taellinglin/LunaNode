@@ -81,6 +81,12 @@ except ImportError as e:
     CUDAManager = None
     TransactionManager = None
 
+if MempoolManager is not None and not hasattr(MempoolManager, "verbose"):
+    try:
+        setattr(MempoolManager, "verbose", False)
+    except Exception:
+        pass
+
 LUNALIB_SM3_FUNC = None
 LUNALIB_SM3_BATCH = None
 
@@ -2786,7 +2792,7 @@ class LunaNode:
             return False, f"Genesis mining error: {str(e)}", None
     
     def start_auto_mining(self):
-        """Start auto-mining (CPU:従来通り, GPU:lunalib 2.4.0仕様)"""
+        """Start auto-mining using LunaLib CPU/GPU miners directly."""
         self.stop_auto_mining()
         self._log_message("Auto-mining invoked", "info")
         if not self._ensure_sm3_available():
@@ -2809,13 +2815,16 @@ class LunaNode:
             except Exception:
                 pass
 
-        # Keep lunalib-style separate CPU/GPU miners
+        # Keep LunaLib CPU/GPU miners
         self._configure_cpu_backend(self.cpu_miner)
         self._apply_parallel_mining(self.cpu_miner)
-        self._apply_parallel_mining(self.gpu_miner)
 
         cpu_enabled = bool(getattr(self.config, "enable_cpu_mining", True))
         gpu_enabled = bool(getattr(self.config, "enable_gpu_mining", self.config.use_gpu))
+        if gpu_enabled and not self.gpu_miner:
+            self._ensure_gpu_miner_ready()
+        if self.gpu_miner:
+            self._apply_parallel_mining(self.gpu_miner)
         gpu_ready = bool(
             gpu_enabled
             and self.gpu_miner
@@ -2832,9 +2841,11 @@ class LunaNode:
             try:
                 self.cpu_miner.cpu_enabled = True
                 self.cpu_miner.gpu_enabled = False
-                if hasattr(self.cpu_miner, "cuda_manager"):
-                    self.cpu_miner.cuda_manager = None
                 self.cpu_miner.start_mining()
+                try:
+                    self.cpu_miner.is_mining = True
+                except Exception:
+                    pass
                 started_any = True
                 started_cpu = True
             except Exception as e:
@@ -2842,9 +2853,14 @@ class LunaNode:
 
         if gpu_ready:
             try:
+                self.config.use_gpu = True
                 self._configure_cuda_sm3(self.gpu_miner)
                 self.gpu_miner.gpu_enabled = True
                 self.gpu_miner.cpu_enabled = False
+                if hasattr(self.gpu_miner, "use_cuda"):
+                    self.gpu_miner.use_cuda = True
+                if hasattr(self.gpu_miner, "use_cpu"):
+                    self.gpu_miner.use_cpu = False
                 self.gpu_miner.start_mining()
                 try:
                     self.gpu_miner.is_mining = True
@@ -2866,6 +2882,11 @@ class LunaNode:
 
     def start_cpu_mining(self) -> bool:
         """Start CPU mining only."""
+        try:
+            self.config.enable_cpu_mining = True
+            self.config.save_to_storage()
+        except Exception:
+            pass
         if not self._ensure_sm3_available():
             self._log_message("CPU mining blocked (SM3 unavailable)", "error")
             return False
@@ -2879,9 +2900,11 @@ class LunaNode:
             self._apply_parallel_mining(self.cpu_miner)
             self.cpu_miner.cpu_enabled = True
             self.cpu_miner.gpu_enabled = False
-            if hasattr(self.cpu_miner, "cuda_manager"):
-                self.cpu_miner.cuda_manager = None
             self.cpu_miner.start_mining()
+            try:
+                self.cpu_miner.is_mining = True
+            except Exception:
+                pass
             self._log_message("CPU mining started", "info")
             return True
         except Exception as e:
@@ -2911,11 +2934,21 @@ class LunaNode:
 
     def start_gpu_mining(self) -> bool:
         """Start GPU mining only."""
+        try:
+            self.config.enable_gpu_mining = True
+            self.config.use_gpu = True
+            self.config.save_to_storage()
+        except Exception:
+            pass
         if not self._ensure_sm3_available():
             self._log_message("GPU mining blocked (SM3 unavailable)", "error")
             return False
         if not self.gpu_miner or not getattr(self.gpu_miner, "cuda_manager", None):
             if not self._ensure_gpu_miner_ready():
+                if LUNALIB_IMPORT_ERROR:
+                    self._log_message(f"GPU miner unavailable (LunaLib import error: {LUNALIB_IMPORT_ERROR})", "error")
+                if getattr(self, "_gpu_init_deferred", False):
+                    self._log_message("GPU miner unavailable (GPU init deferred)", "error")
                 self._log_message("GPU miner unavailable", "error")
                 return False
         gpu_ready = bool(
@@ -2932,6 +2965,26 @@ class LunaNode:
             scope="cuda",
         )
         if not gpu_ready:
+            try:
+                self._probe_cuda_runtime()
+            except Exception:
+                pass
+            try:
+                log_mining_debug_event(
+                    "gpu_mining_unavailable",
+                    {
+                        "gpu_ready": gpu_ready,
+                        "cuda_available": bool(getattr(getattr(self.gpu_miner, "cuda_manager", None), "cuda_available", False)) if self.gpu_miner else False,
+                        "device_name": getattr(getattr(self.gpu_miner, "cuda_manager", None), "device_name", None) if self.gpu_miner else None,
+                        "use_gpu": bool(getattr(self.config, "use_gpu", False)),
+                        "enable_gpu_mining": bool(getattr(self.config, "enable_gpu_mining", False)),
+                        "gpu_init_deferred": bool(getattr(self, "_gpu_init_deferred", False)),
+                        "lunalib_import_error": LUNALIB_IMPORT_ERROR,
+                    },
+                    scope="cuda",
+                )
+            except Exception:
+                pass
             self._log_message("GPU mining not available (CUDA not ready)", "error")
             return False
         self._maybe_apply_fast_start_difficulty()
@@ -2942,6 +2995,10 @@ class LunaNode:
             self._apply_parallel_mining(self.gpu_miner)
             self.gpu_miner.gpu_enabled = True
             self.gpu_miner.cpu_enabled = False
+            if hasattr(self.gpu_miner, "use_cuda"):
+                self.gpu_miner.use_cuda = True
+            if hasattr(self.gpu_miner, "use_cpu"):
+                self.gpu_miner.use_cpu = False
             self.gpu_miner.start_mining()
             try:
                 self.gpu_miner.is_mining = True
@@ -2959,6 +3016,24 @@ class LunaNode:
         """Lazy-create GPU miner when GPU init was deferred at startup."""
         if not LunaLibMiner:
             return False
+        if getattr(self, "_gpu_init_deferred", False):
+            try:
+                self._gpu_init_deferred = False
+            except Exception:
+                pass
+        try:
+            if self.gpu_miner and getattr(self.gpu_miner, "cuda_manager", None):
+                if bool(getattr(self.gpu_miner.cuda_manager, "cuda_available", False)):
+                    return True
+        except Exception:
+            pass
+        try:
+            if self.miner and getattr(self.miner, "cuda_manager", None):
+                if bool(getattr(self.miner.cuda_manager, "cuda_available", False)):
+                    self.gpu_miner = self.miner
+                    return True
+        except Exception:
+            pass
         try:
             self.config.enable_gpu_mining = True
             self.config.use_gpu = True
@@ -2992,6 +3067,18 @@ class LunaNode:
                 getattr(self.gpu_miner, "cuda_manager", None)
                 and getattr(self.gpu_miner.cuda_manager, "cuda_available", False)
             )
+            if not available:
+                try:
+                    self._probe_cuda_runtime()
+                except Exception:
+                    pass
+                try:
+                    if self.miner and getattr(self.miner, "cuda_manager", None):
+                        if bool(getattr(self.miner.cuda_manager, "cuda_available", False)):
+                            self.gpu_miner = self.miner
+                            available = True
+                except Exception:
+                    pass
             log_mining_debug_event(
                 "gpu_miner_lazy_init",
                 {"cuda_available": available, "device_name": getattr(getattr(self.gpu_miner, "cuda_manager", None), "device_name", None)},
