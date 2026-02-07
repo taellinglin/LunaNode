@@ -837,6 +837,13 @@ class LunaNode:
         except Exception:
             pass
 
+        # Link blockchain manager to mempool manager (if supported)
+        try:
+            if self.blockchain_manager and self.mempool_manager:
+                setattr(self.blockchain_manager, "mempool_manager", self.mempool_manager)
+        except Exception:
+            pass
+
         # Tolerate incomplete mempool txs from remote nodes
         try:
             if self.mempool_manager and hasattr(self.mempool_manager, "_validate_transaction_basic"):
@@ -2208,6 +2215,48 @@ class LunaNode:
             'mining_method': 'CPU'
         }
 
+    def _normalize_mempool(self, mempool: List[Dict], latest_block: Optional[Dict] = None) -> List[Dict]:
+        """De-dup mempool entries and drop txs already included in latest block."""
+        if not isinstance(mempool, list):
+            return []
+
+        included_hashes = set()
+        if isinstance(latest_block, dict):
+            block_txs = latest_block.get("transactions")
+            if isinstance(block_txs, list):
+                for tx in block_txs:
+                    if not isinstance(tx, dict):
+                        continue
+                    tx_hash = tx.get("hash")
+                    if tx_hash:
+                        included_hashes.add(str(tx_hash))
+
+        seen = set()
+        normalized = []
+        for tx in mempool:
+            if not isinstance(tx, dict):
+                continue
+            tx_hash = tx.get("hash")
+            if tx_hash:
+                key = f"h:{tx_hash}"
+            else:
+                key = "k:{from}|{to}|{amount}|{timestamp}|{type}".format(
+                    **{
+                        "from": str(tx.get("from")),
+                        "to": str(tx.get("to")),
+                        "amount": str(tx.get("amount")),
+                        "timestamp": str(tx.get("timestamp")),
+                        "type": str(tx.get("type")),
+                    }
+                )
+            if key in seen:
+                continue
+            seen.add(key)
+            if tx_hash and str(tx_hash) in included_hashes:
+                continue
+            normalized.append(tx)
+        return normalized
+
     def _is_mining_active(self) -> bool:
         """Return True if any miner (CPU/GPU) is actively mining."""
         try:
@@ -2283,6 +2332,7 @@ class LunaNode:
                         mempool = self.mempool_manager.get_pending_transactions()
                     else:
                         mempool = []
+                mempool = self._normalize_mempool(mempool, latest_block)
                 self._net_cache_ts = now
                 self._net_cache = {
                     "height": current_height,
@@ -2526,7 +2576,11 @@ class LunaNode:
                 'configured_difficulty': self.config.difficulty,
                 'total_reward': total_reward,
                 'empty_blocks_mined': empty_blocks_mined,
-                'total_transactions': len(mempool),
+                'total_transactions': len([
+                    tx
+                    for tx in mempool
+                    if isinstance(tx, dict) and str(tx.get("type") or "").lower() not in ("reward", "mining_reward")
+                ]),
                 'reward_transactions': blocks_mined,
                 'connection_status': 'connected' if current_height >= 0 else 'disconnected',
                 'p2p_connected': p2p_status.get('connected', False),
@@ -3641,35 +3695,18 @@ class LunaNode:
 
     def _post_submit_refresh(self, block_data: Dict) -> None:
         """Update caches and UI after a successful submit."""
-        # 完全なmempoolリセット: キャッシュ削除＋マネージャ再初期化＋リロード
+        # 完全なmempoolリセット: キャッシュ削除＋再同期
         try:
-            # mempoolキャッシュファイル削除
-            if hasattr(self.data_manager, 'mempool_cache_file') and os.path.exists(self.data_manager.mempool_cache_file):
-                os.remove(self.data_manager.mempool_cache_file)
-        except Exception:
-            pass
-        try:
-            # mempool_manager再初期化
-            from lunalib.core.mempool import MempoolManager
-            self.mempool_manager = MempoolManager([self.config.node_url])
-        except Exception:
-            pass
-        try:
-            if self.mempool_manager:
-                self.mempool_manager.clear_mempool()
+            self._flush_and_resync_mempool()
         except Exception:
             pass
         # 強制ネットワーク同期・キャッシュ/統計/UI更新
         try:
-            self.sync_network()
+            self._net_cache_ts = 0.0
         except Exception:
             pass
-        # 再同期後にmempoolを再取得して反映
         try:
-            if self.mempool_manager:
-                fetched = self.mempool_manager.get_pending_transactions(fetch_remote=True)
-                if fetched and isinstance(fetched, list):
-                    self.mempool_manager.add_transactions_batch(fetched)
+            self.sync_network()
         except Exception:
             pass
         try:
@@ -4095,6 +4132,11 @@ class LunaNode:
         # Reinitialize managers with new URL (use LunaLib managers)
         self.blockchain_manager = BlockchainManager(endpoint_url=new_url)
         self.mempool_manager = MempoolManager([new_url])
+        try:
+            if self.blockchain_manager and self.mempool_manager:
+                setattr(self.blockchain_manager, "mempool_manager", self.mempool_manager)
+        except Exception:
+            pass
         if TransactionManager:
             try:
                 self.tx_manager = TransactionManager([new_url])
@@ -4242,16 +4284,18 @@ class LunaNode:
         self._log_message("Peer registration disabled (non-lunalib operation)", "warning")
         return False
 
-    def _flush_and_resync_mempool(self) -> None:
+    def _flush_and_resync_mempool(self) -> List[Dict]:
         """Flush local mempool cache and resync from the network."""
+        fetched: List[Dict] = []
         try:
             if hasattr(self.data_manager, "mempool_cache_file") and os.path.exists(self.data_manager.mempool_cache_file):
                 os.remove(self.data_manager.mempool_cache_file)
         except Exception:
             pass
         try:
-            from lunalib.core.mempool import MempoolManager
-            self.mempool_manager = MempoolManager([self.config.node_url])
+            if not self.mempool_manager:
+                from lunalib.core.mempool import MempoolManager
+                self.mempool_manager = MempoolManager([self.config.node_url])
         except Exception:
             try:
                 self.mempool_manager = _HTTPMempoolManager([self.config.node_url])
@@ -4263,14 +4307,38 @@ class LunaNode:
         except Exception:
             pass
         try:
+            if self.blockchain_manager and self.mempool_manager:
+                setattr(self.blockchain_manager, "mempool_manager", self.mempool_manager)
+        except Exception:
+            pass
+        try:
+            if self.miner:
+                self.miner.mempool_manager = self.mempool_manager
+            if self.cpu_miner:
+                self.cpu_miner.mempool_manager = self.mempool_manager
+            if self.gpu_miner:
+                self.gpu_miner.mempool_manager = self.mempool_manager
+        except Exception:
+            pass
+        try:
             if self.p2p_client and hasattr(self.p2p_client, "sync_mempool"):
                 self.p2p_client.sync_mempool()
         except Exception:
             pass
         try:
             if self.mempool_manager:
-                fetched = self.mempool_manager.get_pending_transactions(fetch_remote=True)
-                if fetched and isinstance(fetched, list):
+                try:
+                    fetched = self.mempool_manager.get_pending_transactions(fetch_remote=True)
+                except TypeError:
+                    fetched = self.mempool_manager.get_pending_transactions()
+                if fetched and isinstance(fetched, list) and hasattr(self.mempool_manager, "add_transactions_batch"):
                     self.mempool_manager.add_transactions_batch(fetched)
         except Exception:
             pass
+        try:
+            if isinstance(self._net_cache, dict):
+                self._net_cache["mempool"] = fetched if isinstance(fetched, list) else []
+                self._net_cache_ts = 0.0
+        except Exception:
+            pass
+        return fetched
